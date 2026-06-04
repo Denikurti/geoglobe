@@ -1,0 +1,50 @@
+{
+  "country": "Yemen",
+  "summary": "The Arab world's poorest country, engulfed in the world's worst humanitarian crisis since 2015, when a Saudi-led coalition intervened against Houthi rebels backed by Iran — making it the centrepiece of the Saudi-Iran proxy war.",
+  "history": [
+    { "year": 1918, "event": "North Yemen independent", "detail": "Ottoman defeat; Zaydi Imamate rules north." },
+    { "year": 1967, "event": "South Yemen independent", "detail": "Britain leaves Aden; Marxist state established in south." },
+    { "year": 1990, "event": "Unification", "detail": "North and South Yemen unite; brief civil war 1994." },
+    { "year": 2004, "event": "Houthi rebellion begins", "detail": "Zaydi Shia Houthi movement rises against Sanaa government." },
+    { "year": 2011, "event": "Arab Spring / Saleh falls", "detail": "Protests force long-time president Saleh from power." },
+    { "year": 2015, "event": "Saudi-led intervention", "detail": "Houthis seize Sanaa; Saudi coalition bombs Yemen; conflict becomes proxy war." },
+    { "year": 2023, "event": "Houthis attack Israel/Red Sea shipping", "detail": "In solidarity with Gaza; Houthi missiles and drones disrupt 15% of global trade through Red Sea." }
+  ],
+  "geopolitics": {
+    "allies": ["Iran (Houthis)", "Saudi Arabia (recognised government)"],
+    "enemies_rivals": ["Saudi Arabia (Houthis)"],
+    "alliances": ["Arab League"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Houthi resistance axis", "Saudi containment of Iran"]
+  },
+  "finance": {
+    "currency_role": "Yemeni Rial (YER) — collapsed; two separate currencies in north/south",
+    "central_bank": "Central Bank of Yemen (split)",
+    "national_debt_usd_trillions": 0.08,
+    "key_institutions": ["None functional"],
+    "leverage_tools": ["Bab el-Mandeb Strait (Red Sea chokepoint)", "Houthi missile/drone capability"]
+  },
+  "tech_startups": {
+    "hubs": [],
+    "big_tech": [],
+    "vc_ecosystem": "Non-existent",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Declining oil; war has destroyed production",
+    "water": "Among world's most water-scarce; Sana'a may be first capital to run dry",
+    "agriculture": "Qat (mild stimulant) uses 40% of water; subsistence farming"
+  },
+  "follow_the_money": [
+    { "flow": "Saudi military spending in Yemen", "detail": "Saudi Arabia spent $100B+ on Yemen war using US and UK weapons" },
+    { "flow": "Houthi Red Sea extortion", "detail": "Shipping companies pay diversion costs; some vessels targeted regardless" }
+  ],
+  "theories_disputed": [
+    { "topic": "Western arms to Saudi Arabia for Yemen", "status": "CONFIRMED", "detail": "US and UK sold billions in arms to Saudi Arabia used in Yemen despite documented civilian strikes. UK courts confirmed exports were unlawful.", "tags": ["Saudi Arabia", "UK", "USA", "arms"] }
+  ],
+  "connections": [
+    { "to": "Saudi Arabia", "type": "war", "detail": "Saudi-led coalition vs Houthi rebels since 2015", "year": 2015 },
+    { "to": "Iran", "type": "military", "detail": "Iran arms and advises Houthis; drones, missiles, intelligence", "year": 2015 }
+  ]
+}

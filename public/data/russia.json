@@ -1,0 +1,66 @@
+{
+  "country": "Russia",
+  "summary": "The world's largest country by land mass, a nuclear superpower, and permanent UN Security Council member whose invasion of Ukraine in 2022 fractured the post-Cold War order and triggered the largest European land war since 1945.",
+  "history": [
+    { "year": 1721, "event": "Russian Empire proclaimed", "detail": "Peter the Great formalises the empire after victories over Sweden." },
+    { "year": 1812, "event": "Napoleon invades Russia", "detail": "Catastrophic French defeat; Russia confirmed as major European power." },
+    { "year": 1905, "event": "Revolution of 1905", "detail": "Failed uprising; Tsar creates Duma (parliament)." },
+    { "year": 1917, "event": "Bolshevik Revolution", "detail": "Lenin seizes power; Romanov dynasty ends; USSR founded 1922." },
+    { "year": 1939, "event": "Molotov-Ribbentrop Pact", "detail": "Secret non-aggression pact with Nazi Germany; divides Eastern Europe." },
+    { "year": 1941, "event": "Germany invades (Operation Barbarossa)", "detail": "27 million Soviet citizens die; Soviets ultimately defeat Germany." },
+    { "year": 1945, "event": "WWII victory; Cold War begins", "detail": "USSR occupies Eastern Europe; nuclear weapons developed by 1949." },
+    { "year": 1957, "event": "Sputnik launched", "detail": "First satellite shocks the West; space race begins." },
+    { "year": 1962, "event": "Cuban Missile Crisis", "detail": "Closest point to nuclear war; Khrushchev backs down." },
+    { "year": 1979, "event": "Invasion of Afghanistan", "detail": "Soviet-Afghan War (1979-1989); catastrophic defeat." },
+    { "year": 1991, "event": "Soviet collapse", "detail": "USSR dissolves into 15 republics; Russia inherits nuclear arsenal." },
+    { "year": 1999, "event": "Putin comes to power", "detail": "First as PM, then President; Second Chechen War launched." },
+    { "year": 2008, "event": "Georgia War", "detail": "Russia invades Georgia; annexes South Ossetia." },
+    { "year": 2014, "event": "Crimea annexation", "detail": "Russia seizes Crimea from Ukraine; Donbas war begins." },
+    { "year": 2022, "event": "Full-scale invasion of Ukraine", "detail": "Largest European land war since 1945; massive Western sanctions." }
+  ],
+  "geopolitics": {
+    "allies": ["China", "Belarus", "Iran", "North Korea", "Syria"],
+    "enemies_rivals": ["USA", "UK", "EU", "Ukraine", "NATO"],
+    "alliances": ["CSTO (Collective Security Treaty Org)", "SCO", "BRICS", "UN Security Council (P5)"],
+    "military_bases_abroad": 21,
+    "key_doctrines": ["Monroe Doctrine equivalent (near-abroad)", "Nuclear deterrence", "Hybrid warfare", "Gerasimov Doctrine"]
+  },
+  "finance": {
+    "currency_role": "Ruble — heavily sanctioned; partially backed by gold and commodities",
+    "central_bank": "Bank of Russia (1860) — $600B reserves mostly frozen by West since 2022",
+    "national_debt_usd_trillions": 0.35,
+    "key_institutions": ["Gazprom", "Rosneft", "Sberbank (sanctioned)"],
+    "leverage_tools": ["Energy (gas/oil) as weapon", "Grain exports", "SWIFT alternative (SPFS)"]
+  },
+  "tech_startups": {
+    "hubs": ["Moscow", "Saint Petersburg", "Novosibirsk"],
+    "big_tech": ["Yandex", "VK (VKontakte)", "Kaspersky Lab"],
+    "vc_ecosystem": "Heavily restricted by sanctions; significant brain drain post-2022",
+    "gov_tech_links": ["FSB cyber operations", "GRU hacking units (APT28, Sandworm)", "FAPSI (signals intelligence)"],
+    "ai_leaders": ["Sber AI", "Yandex (AI search)"]
+  },
+  "resources": {
+    "oil_gas": "World's second-largest oil exporter; largest natural gas reserves",
+    "coal": "Major producer and exporter",
+    "rare_earths": "Significant deposits; major palladium producer (40% of world supply)",
+    "water": "Baikal holds 20% of world's unfrozen freshwater",
+    "agriculture": "World's largest wheat exporter; grain as geopolitical leverage"
+  },
+  "follow_the_money": [
+    { "flow": "Energy exports", "detail": "Oil and gas historically ~40% of state revenue; redirected to China/India post-2022 sanctions" },
+    { "flow": "Oligarch wealth", "detail": "Estimated $1T+ in offshore assets; UK/Cyprus hubs targeted by sanctions" },
+    { "flow": "BRICS payment system", "detail": "Building USD-alternative settlement system with China, India, Brazil" }
+  ],
+  "theories_disputed": [
+    { "topic": "MH17 shootdown", "status": "CONFIRMED", "detail": "JIT investigation confirmed Russian military BUK missile shot down MH17 over Ukraine 2014.", "tags": ["military", "Ukraine"] },
+    { "topic": "Novichok poisonings (Skripal, Navalny)", "status": "CONFIRMED", "detail": "UK and EU confirmed Russian GRU/FSB used Novichok nerve agent.", "tags": ["GRU", "FSB", "assassination"] },
+    { "topic": "Election interference (US 2016)", "status": "PARTIALLY CONFIRMED", "detail": "Mueller Report confirmed Russian IRA social media ops; direct vote manipulation unproven.", "tags": ["GRU", "elections"] }
+  ],
+  "connections": [
+    { "to": "China", "type": "trade", "detail": "No-limits partnership; China buys sanctioned Russian oil/gas", "year": 2022 },
+    { "to": "Ukraine", "type": "war", "detail": "Full-scale invasion since Feb 2022", "year": 2022 },
+    { "to": "USA", "type": "rivalry", "detail": "Cold War legacy; sanctions regime post-2022", "year": 1947 },
+    { "to": "Germany", "type": "trade", "detail": "Nord Stream gas (defunct since 2022)", "year": 1970 },
+    { "to": "Iran", "type": "military", "detail": "Iran supplies Shaheed drones for Ukraine war", "year": 2022 }
+  ]
+}

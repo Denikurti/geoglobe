@@ -1,0 +1,50 @@
+{
+  "country": "UAE",
+  "summary": "A federation of seven emirates that transformed desert into a global financial and tourism hub in 50 years, using oil wealth, liberal social policies (by Gulf standards), and aggressive state capitalism via sovereign wealth funds.",
+  "history": [
+    { "year": 1820, "event": "British Trucial States", "detail": "Britain signs treaties with coastal sheikhs; protectorate begins." },
+    { "year": 1958, "event": "Oil discovered in Abu Dhabi", "detail": "Transforms the region; development begins." },
+    { "year": 1971, "event": "UAE founded", "detail": "Seven emirates federate after British withdrawal; Sheikh Zayed leads." },
+    { "year": 2020, "event": "Abraham Accords", "detail": "UAE normalises with Israel; first Gulf state to do so." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Israel", "Saudi Arabia", "UK"],
+    "enemies_rivals": ["Iran", "Qatar (2017-2021)", "Muslim Brotherhood"],
+    "alliances": ["GCC", "Arab League", "Abraham Accords"],
+    "military_bases_abroad": 1,
+    "key_doctrines": ["Post-oil diversification", "Pragmatic foreign policy", "Counter-Islamism"]
+  },
+  "finance": {
+    "currency_role": "Dirham (AED) pegged to USD; Dubai is a major offshore finance centre",
+    "central_bank": "Central Bank of the UAE (1980)",
+    "national_debt_usd_trillions": 0.1,
+    "key_institutions": ["ADIA (Abu Dhabi Investment Authority — $700B+)", "Mubadala", "DP World", "Emirates airline"],
+    "leverage_tools": ["ADIA sovereign wealth", "Dubai as global financial hub", "Port and logistics network (DP World)", "Gold and crypto hub"]
+  },
+  "tech_startups": {
+    "hubs": ["Dubai (DIFC)", "Abu Dhabi (Hub71)"],
+    "big_tech": ["Noon", "Careem (acquired by Uber)", "Kitopi"],
+    "vc_ecosystem": "Fastest-growing in MENA; tax-free attracts global founders",
+    "gov_tech_links": ["Group 42 (G42) — AI company linked to UAE government and Abu Dhabi", "Palantir partnership"],
+    "ai_leaders": ["G42", "Core42", "TII (Falcon LLM — open source)"]
+  },
+  "resources": {
+    "oil_gas": "Abu Dhabi: world's 7th largest oil reserves; UAE diversifying rapidly",
+    "water": "Extreme scarcity; desalination dependent",
+    "agriculture": "Minimal; food import dependent"
+  },
+  "follow_the_money": [
+    { "flow": "ADIA sovereign wealth", "detail": "$700B+ fund investing globally in real estate, equities, infrastructure" },
+    { "flow": "Dubai as sanctions hub", "detail": "Russian oligarchs, Iranian businessmen, others use Dubai for wealth preservation despite Western sanctions" },
+    { "flow": "Gold trade", "detail": "Dubai processes ~25% of global gold trade; some linked to conflict minerals" }
+  ],
+  "theories_disputed": [
+    { "topic": "UAE-Russia sanctions evasion", "status": "PARTIALLY CONFIRMED", "detail": "Reports and US Treasury warnings confirm UAE is a major hub for Russian capital fleeing sanctions; UAE denies systematic evasion.", "tags": ["Russia", "sanctions", "Dubai"] }
+  ],
+  "connections": [
+    { "to": "Israel", "type": "trade", "detail": "Abraham Accords normalisation; tech, tourism, intelligence ties", "year": 2020 },
+    { "to": "USA", "type": "military", "detail": "US military base in UAE; major arms customer", "year": 1991 },
+    { "to": "Iran", "type": "trade", "detail": "Dubai is major hub for Iran sanctions-busting trade", "year": 1971 },
+    { "to": "China", "type": "trade", "detail": "Huawei infrastructure; Belt and Road investments; G42-Huawei AI deal (controversial)", "year": 2015 }
+  ]
+}

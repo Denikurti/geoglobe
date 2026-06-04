@@ -1,0 +1,70 @@
+{
+  "country": "USA",
+  "summary": "The world's largest economy and foremost military power, anchoring the post-1945 Western order. Its dollar, alliances, and tech sector give it global leverage few states can match.",
+  "history": [
+    { "year": 1776, "event": "Declaration of Independence", "detail": "Thirteen colonies declared independence from Britain; war ended 1783." },
+    { "year": 1803, "event": "Louisiana Purchase", "detail": "Bought ~828,000 sq mi from France, doubling US territory." },
+    { "year": 1861, "event": "Civil War begins", "detail": "Union vs Confederacy over slavery and secession; ended 1865 with abolition." },
+    { "year": 1898, "event": "Spanish-American War", "detail": "US gained Puerto Rico, Guam, Philippines — start of overseas empire." },
+    { "year": 1913, "event": "Federal Reserve created", "detail": "Central banking system established as a public-private hybrid." },
+    { "year": 1917, "event": "Enters World War I", "detail": "Tipped the balance toward the Allies." },
+    { "year": 1929, "event": "Wall Street Crash", "detail": "Triggered the Great Depression." },
+    { "year": 1941, "event": "Pearl Harbor / enters WWII", "detail": "Japanese attack brought the US into the war." },
+    { "year": 1944, "event": "Bretton Woods", "detail": "USD pegged to gold; IMF and World Bank founded — dollar centrality begins." },
+    { "year": 1947, "event": "Cold War / Truman Doctrine", "detail": "Containment of the Soviet Union becomes grand strategy." },
+    { "year": 1971, "event": "Nixon ends gold standard", "detail": "USD becomes a pure fiat reserve currency." },
+    { "year": 1974, "event": "Petrodollar deal", "detail": "Saudi oil priced in USD, recycled into US Treasuries." },
+    { "year": 1991, "event": "Soviet collapse", "detail": "US emerges as sole superpower — the 'unipolar moment'." },
+    { "year": 2001, "event": "9/11 attacks", "detail": "Launched the War on Terror; invasions of Afghanistan and Iraq." },
+    { "year": 2008, "event": "Global financial crisis", "detail": "US subprime collapse spread worldwide; Fed launched QE." },
+    { "year": 2020, "event": "COVID-19 pandemic", "detail": "Massive fiscal/monetary stimulus; supply-chain rethink." }
+  ],
+  "geopolitics": {
+    "allies": ["UK", "Canada", "Japan", "Israel", "Saudi Arabia", "South Korea", "Australia", "Germany"],
+    "enemies_rivals": ["Russia", "China", "Iran", "North Korea"],
+    "alliances": ["NATO", "Five Eyes", "AUKUS", "QUAD"],
+    "military_bases_abroad": 750,
+    "key_doctrines": ["Monroe Doctrine", "Truman Doctrine", "Bush Doctrine"]
+  },
+  "finance": {
+    "currency_role": "USD = world reserve currency, petrodollar system",
+    "central_bank": "Federal Reserve (public-private hybrid, 1913)",
+    "national_debt_usd_trillions": 34,
+    "key_institutions": ["IMF (HQ in DC)", "World Bank", "BIS membership"],
+    "leverage_tools": ["SWIFT", "sanctions", "dollar dominance"]
+  },
+  "tech_startups": {
+    "hubs": ["Silicon Valley", "Seattle", "Austin", "NYC", "Boston"],
+    "big_tech": ["Apple", "Google", "Microsoft", "Meta", "Amazon", "Nvidia"],
+    "vc_ecosystem": "Largest in world, ~$170B/yr deployed",
+    "gov_tech_links": ["DARPA → internet, GPS", "In-Q-Tel (CIA VC arm)", "NSA partnerships"],
+    "ai_leaders": ["OpenAI", "Anthropic", "Google DeepMind US"]
+  },
+  "resources": {
+    "oil_gas": "Largest producer globally since 2018 (shale revolution)",
+    "rare_earths": "Limited domestic, dependent on China",
+    "lithium": "Nevada deposits, scaling up",
+    "water": "Abundant but Colorado River crisis",
+    "agriculture": "Corn, soy, wheat dominance — food as leverage"
+  },
+  "follow_the_money": [
+    { "flow": "Petrodollar recycling", "detail": "Saudi oil → USD → US Treasuries" },
+    { "flow": "IMF loans", "detail": "US-influenced, conditions favour Western capital" },
+    { "flow": "Tax havens", "detail": "Delaware, Wyoming are global secrecy hubs" },
+    { "flow": "Defense spending", "detail": "~$850B/yr, large flows to defense contractors" }
+  ],
+  "theories_disputed": [
+    { "topic": "JFK assassination", "status": "DISPUTED", "detail": "Officially Lee Harvey Oswald acted alone; widely contested.", "tags": ["CIA", "deep state"] },
+    { "topic": "9/11", "status": "DISPUTED", "detail": "Official 9/11 Commission report; alternative theories exist.", "tags": ["intelligence", "Middle East"] },
+    { "topic": "MKUltra", "status": "CONFIRMED", "detail": "CIA mind-control program, declassified 1975 via Church Committee.", "tags": ["CIA", "confirmed"] },
+    { "topic": "UFO / UAP programs", "status": "PARTIALLY CONFIRMED", "detail": "2023 Congressional hearings confirmed govt UAP investigation programs.", "tags": ["military", "classified"] }
+  ],
+  "connections": [
+    { "to": "Canada", "type": "trade", "detail": "USMCA, largest trade partner", "year": 1994 },
+    { "to": "Mexico", "type": "trade", "detail": "USMCA, deep supply-chain integration", "year": 1994 },
+    { "to": "UK", "type": "intelligence", "detail": "Five Eyes founding member", "year": 1946 },
+    { "to": "Saudi Arabia", "type": "finance", "detail": "Petrodollar deal since 1974", "year": 1974 },
+    { "to": "Russia", "type": "rivalry", "detail": "Cold War legacy, ongoing tensions", "year": 1947 },
+    { "to": "China", "type": "rivalry", "detail": "Trade + tech + strategic competition", "year": 2018 }
+  ]
+}

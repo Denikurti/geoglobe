@@ -1,0 +1,55 @@
+{
+  "country": "Syria",
+  "summary": "A country shattered by a civil war (2011–present) that killed 500,000+ people and displaced half its pre-war population of 22 million, becoming the arena for a proxy conflict involving Russia, Iran, Turkey, the US, Israel, and Gulf states.",
+  "history": [
+    { "year": 1920, "event": "French Mandate", "detail": "France takes Syria after WWI; draws borders including diverse ethnic/religious communities." },
+    { "year": 1946, "event": "Independence", "detail": "French leave; series of coups follow." },
+    { "year": 1970, "event": "Hafez al-Assad seizes power", "detail": "Military coup; Assad family (Alawite minority) begins 50-year dynasty." },
+    { "year": 1982, "event": "Hama massacre", "detail": "Assad crushes Muslim Brotherhood uprising; 10,000-40,000 civilians killed." },
+    { "year": 2000, "event": "Bashar al-Assad inherits power", "detail": "'Damascus Spring' of reforms quickly suppressed." },
+    { "year": 2011, "event": "Civil war begins", "detail": "Arab Spring protests met with brutal crackdown; armed uprising; foreign intervention." },
+    { "year": 2013, "event": "Chemical weapons attacks", "detail": "Ghouta sarin attack kills 1,400+ civilians; Assad crosses Obama's 'red line'; no military response." },
+    { "year": 2015, "event": "Russia intervenes militarily", "detail": "Russian airstrikes save Assad; war enters new phase." },
+    { "year": 2024, "event": "Assad regime falls", "detail": "HTS-led rebel offensive captures Damascus in days; Assad flees to Russia after 24 years." }
+  ],
+  "geopolitics": {
+    "allies": ["Russia", "Iran", "Hezbollah (former Assad support)"],
+    "enemies_rivals": ["Israel", "Turkey (complex)", "ISIS", "USA"],
+    "alliances": ["Arab League (suspended 2011-2023)"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Resistance axis (former)", "Post-Assad transition (2024)"]
+  },
+  "finance": {
+    "currency_role": "Syrian Pound (SYP) — hyperinflation; lost 99% of pre-war value",
+    "central_bank": "Central Bank of Syria (heavily sanctioned)",
+    "national_debt_usd_trillions": 0.022,
+    "key_institutions": ["Syrian Arab Airlines", "General Petroleum Corporation"],
+    "leverage_tools": ["Refugee flows as pressure on Europe", "Strategic Golan position vs Israel", "Drug production (Captagon)"]
+  },
+  "tech_startups": {
+    "hubs": [],
+    "big_tech": [],
+    "vc_ecosystem": "Non-existent; war destroyed economy",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Pre-war: modest oil production; now mostly in US/Kurdish-controlled zone",
+    "water": "Euphrates (increasingly controlled by Turkey dams)",
+    "agriculture": "Fertile crescent degraded; major pre-war grain producer"
+  },
+  "follow_the_money": [
+    { "flow": "Captagon drug trade", "detail": "Assad regime industrialised production of Captagon amphetamine; $5B+/yr — largest export" },
+    { "flow": "Russian military spending", "detail": "Russia spent $6-10B/yr to maintain Assad; secured Tartus naval base in exchange" }
+  ],
+  "theories_disputed": [
+    { "topic": "Chemical weapons (Ghouta 2013)", "status": "CONFIRMED", "detail": "OPCW confirmed Syrian government forces used sarin in multiple attacks.", "tags": ["Assad", "chemical weapons", "OPCW"] },
+    { "topic": "White Helmets", "status": "DISPUTED", "detail": "Russian and Syrian government claim White Helmets staged rescues; Western govts and independent investigators reject this.", "tags": ["propaganda", "Russia"] }
+  ],
+  "connections": [
+    { "to": "Russia", "type": "military", "detail": "Russia kept Assad in power 2015-2024; Tartus naval base", "year": 2015 },
+    { "to": "Iran", "type": "military", "detail": "IRGC troops and Hezbollah fought for Assad", "year": 2012 },
+    { "to": "Israel", "type": "rivalry", "detail": "Israel struck Iranian positions in Syria hundreds of times", "year": 2013 },
+    { "to": "Turkey", "type": "rivalry", "detail": "Turkey controls northern Syria; backs anti-Assad rebels", "year": 2016 }
+  ]
+}

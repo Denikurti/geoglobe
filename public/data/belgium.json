@@ -1,0 +1,48 @@
+{
+  "country": "Belgium",
+  "summary": "A small but strategically pivotal state hosting NATO HQ and EU institutions in Brussels, with deep linguistic and political divisions between Dutch-speaking Flanders and French-speaking Wallonia.",
+  "history": [
+    { "year": 1830, "event": "Independence from Netherlands", "detail": "Revolution; constitutional monarchy established." },
+    { "year": 1885, "event": "Congo Free State", "detail": "King Leopold II personally owns Congo; brutal exploitation kills millions." },
+    { "year": 1914, "event": "WWI — 'Brave little Belgium'", "detail": "Germany invades; Belgium's resistance brings UK into war." },
+    { "year": 1957, "event": "EEC founding member", "detail": "Co-founds European Economic Community; Brussels becomes EU capital." },
+    { "year": 1999, "event": "NATO HQ moves to Brussels permanently", "detail": "Alliance fully headquartered in Belgium." }
+  ],
+  "geopolitics": {
+    "allies": ["France", "Germany", "Netherlands", "USA"],
+    "enemies_rivals": [],
+    "alliances": ["NATO (HQ)", "EU (HQ)", "G7 host"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["European integration", "Multilateralism", "Small state diplomacy"]
+  },
+  "finance": {
+    "currency_role": "EUR",
+    "central_bank": "National Bank of Belgium (1850)",
+    "national_debt_usd_trillions": 0.58,
+    "key_institutions": ["KBC", "BNP Paribas Fortis", "AB InBev (world's largest brewer)"],
+    "leverage_tools": ["EU/NATO HQ hosting leverage", "Diamond trade hub (Antwerp — 80% of world diamonds)"]
+  },
+  "tech_startups": {
+    "hubs": ["Brussels", "Ghent", "Leuven"],
+    "big_tech": ["UCB pharma", "Bekaert", "Proximus"],
+    "vc_ecosystem": "Small; strong biotech around KU Leuven",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "None",
+    "nuclear": "50% of electricity from nuclear; major political debate on extension",
+    "water": "Sufficient; Scheldt and Meuse rivers",
+    "agriculture": "Specialty foods: chocolate, beer, endive, fries"
+  },
+  "follow_the_money": [
+    { "flow": "Antwerp diamond hub", "detail": "80% of world's rough diamonds traded through Antwerp; also historically used for sanctions evasion" },
+    { "flow": "EU budget flows through Brussels", "detail": "€200B+/yr EU budget administered from Brussels institutions" }
+  ],
+  "theories_disputed": [],
+  "connections": [
+    { "to": "France", "type": "trade", "detail": "Largest trade partner", "year": 1957 },
+    { "to": "Netherlands", "type": "trade", "detail": "Benelux union; Rotterdam–Antwerp port corridor", "year": 1944 },
+    { "to": "USA", "type": "military", "detail": "NATO HQ in Brussels", "year": 1949 }
+  ]
+}

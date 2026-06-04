@@ -1,0 +1,46 @@
+{
+  "country": "Portugal",
+  "summary": "One of the world's oldest nation-states and first global maritime empire, now a smaller EU economy known for tourism, Atlantic ties, and its gateway role between Europe, Africa, and Latin America.",
+  "history": [
+    { "year": 1139, "event": "Kingdom of Portugal founded", "detail": "Afonso I first king; oldest European nation-state borders (from 1297)." },
+    { "year": 1415, "event": "Age of Discovery begins", "detail": "Ceuta captured; start of Portuguese global empire." },
+    { "year": 1494, "event": "Treaty of Tordesillas", "detail": "Divides world between Portugal and Spain." },
+    { "year": 1974, "event": "Carnation Revolution", "detail": "Military coup ends 48 years of Salazar/Caetano dictatorship; colonies freed." },
+    { "year": 1986, "event": "Joins EEC", "detail": "EU membership; economic modernisation." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "UK", "Spain", "Brazil"],
+    "enemies_rivals": [],
+    "alliances": ["NATO (founding member 1949)", "EU", "CPLP (Lusophone community)"],
+    "military_bases_abroad": 1,
+    "key_doctrines": ["Atlantic orientation", "Lusophony (Portuguese-speaking world)", "European solidarity"]
+  },
+  "finance": {
+    "currency_role": "EUR",
+    "central_bank": "Banco de Portugal (1846)",
+    "national_debt_usd_trillions": 0.28,
+    "key_institutions": ["EDP (energy)", "TAP Air Portugal", "Millennium BCP"],
+    "leverage_tools": ["Tourism", "Lusophone network (Brazil, Angola, Mozambique)", "Golden Visa programme (controversially ended)"]
+  },
+  "tech_startups": {
+    "hubs": ["Lisbon (Web Summit host)", "Porto"],
+    "big_tech": ["Farfetch", "Feedzai", "Outsystems"],
+    "vc_ecosystem": "Growing; Lisbon a rising European startup hub",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "None; wind and solar transition leader",
+    "water": "Drought stress increasing in south",
+    "agriculture": "Cork (50% of world supply), wine, olive oil"
+  },
+  "follow_the_money": [
+    { "flow": "Tourism", "detail": "~$25B/yr; post-2010 austerity pivot to tourism" },
+    { "flow": "Golden Visa (ended 2023)", "detail": "€5B attracted via residency-for-investment; mainly Chinese and Brazilian buyers" }
+  ],
+  "theories_disputed": [],
+  "connections": [
+    { "to": "UK", "type": "trade", "detail": "Oldest alliance in the world (Treaty of Windsor 1386)", "year": 1386 },
+    { "to": "USA", "type": "military", "detail": "Azores base — Lajes Field; NATO founding member", "year": 1949 }
+  ]
+}

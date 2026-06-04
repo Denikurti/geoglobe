@@ -1,0 +1,57 @@
+{
+  "country": "Turkey",
+  "summary": "A NATO member and G20 economy straddling Europe and Asia, leveraging its unique geography to play all sides — mediating between Russia and Ukraine while buying Russian gas and selling drones to Ukraine.",
+  "history": [
+    { "year": 1299, "event": "Ottoman Empire founded", "detail": "Osman I founds empire that will dominate Middle East, North Africa, Eastern Europe for 600 years." },
+    { "year": 1453, "event": "Fall of Constantinople", "detail": "Ottomans conquer Byzantine capital; renamed Istanbul." },
+    { "year": 1683, "event": "Siege of Vienna fails", "detail": "Ottoman westward expansion halted; slow decline begins." },
+    { "year": 1914, "event": "Joins WWI on German side", "detail": "Armenian Genocide 1915–1923: 600k–1.5M Armenians killed." },
+    { "year": 1923, "event": "Turkish Republic founded", "detail": "Atatürk's revolution; secular modernisation, alphabet reform." },
+    { "year": 1952, "event": "Joins NATO", "detail": "Key NATO member controlling Bosphorus Strait." },
+    { "year": 1974, "event": "Invades Cyprus", "detail": "Occupies northern Cyprus; still unresolved dispute." },
+    { "year": 2003, "event": "AKP/Erdoğan comes to power", "detail": "Islamist-rooted party begins reshaping secular Turkey." },
+    { "year": 2016, "event": "Failed coup attempt", "detail": "Erdoğan blames Gülen movement; massive purge of military, judiciary, media." }
+  ],
+  "geopolitics": {
+    "allies": ["NATO (formal)", "Russia (tactical)", "Qatar", "Pakistan"],
+    "enemies_rivals": ["Greece", "Armenia", "Kurds (PKK)"],
+    "alliances": ["NATO", "G20", "OIC"],
+    "military_bases_abroad": 12,
+    "key_doctrines": ["Strategic autonomy", "Neo-Ottoman foreign policy", "Drone power projection"]
+  },
+  "finance": {
+    "currency_role": "Lira (TRY); suffered extreme inflation/devaluation under Erdoğan's unorthodox monetary policy",
+    "central_bank": "Central Bank of the Republic of Turkey (1930)",
+    "national_debt_usd_trillions": 0.25,
+    "key_institutions": ["Ziraat Bank", "Halkbank (US sanctions disputes)", "BOTAŞ (gas pipeline operator)"],
+    "leverage_tools": ["Bosphorus Strait control", "NATO membership leverage", "Refugee deal with EU (€6B)"]
+  },
+  "tech_startups": {
+    "hubs": ["Istanbul", "Ankara"],
+    "big_tech": ["Baykar (Bayraktar drones)", "Trendyol", "Peak Games"],
+    "vc_ecosystem": "Growing; Trendyol is Turkey's first unicorn ($16B)",
+    "gov_tech_links": ["Baykar (Erdoğan family linked)", "ASELSAN (defence electronics)", "ROKETSAN"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "None domestic; major transit hub for Caspian gas to Europe",
+    "rare_earths": "Significant boron reserves (70% of world supply)",
+    "water": "Water stress; GAP dam project on Euphrates tensions with Syria/Iraq",
+    "agriculture": "Major hazelnut, cotton, wheat, tomato exporter"
+  },
+  "follow_the_money": [
+    { "flow": "Bosphorus control", "detail": "Montreux Convention gives Turkey control over strait; key leverage vs Russia" },
+    { "flow": "EU refugee deal", "detail": "Turkey hosts 3.6M Syrians; €6B EU deal for containment" },
+    { "flow": "Drone exports", "detail": "Bayraktar TB2 exported to 25+ countries; reshaping warfare economics" }
+  ],
+  "theories_disputed": [
+    { "topic": "Armenian Genocide recognition", "status": "DISPUTED", "detail": "32 countries officially recognise as genocide; Turkey officially denies using the term.", "tags": ["genocide", "Ottoman"] },
+    { "topic": "2016 coup — Erdoğan foreknowledge", "status": "DISPUTED", "detail": "Rapid response and beneficiary position led to widespread suspicion of staged or allowed coup.", "tags": ["Erdoğan", "deep state"] }
+  ],
+  "connections": [
+    { "to": "Russia", "type": "trade", "detail": "Buys Russian gas; Akkuyu nuclear plant; TurkStream pipeline", "year": 2000 },
+    { "to": "Ukraine", "type": "trade", "detail": "Sells Bayraktar drones; mediates Black Sea grain deal", "year": 2022 },
+    { "to": "USA", "type": "military", "detail": "NATO ally; hosts Incirlik Air Base (nuclear weapons)", "year": 1952 },
+    { "to": "Greece", "type": "rivalry", "detail": "Ongoing disputes over Aegean, Cyprus, gas exploration", "year": 1974 }
+  ]
+}

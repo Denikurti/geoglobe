@@ -1,0 +1,50 @@
+{
+  "country": "Norway",
+  "summary": "A small Nordic NATO member transformed by North Sea oil into one of the world's wealthiest per-capita nations, managing the world's largest sovereign wealth fund ($1.7T) for future generations.",
+  "history": [
+    { "year": 793, "event": "Viking Age begins", "detail": "Norse raids and exploration across Europe, Atlantic, reaching North America." },
+    { "year": 1397, "event": "Kalmar Union", "detail": "Norway joins Scandinavian union under Danish then Swedish crown." },
+    { "year": 1905, "event": "Independence from Sweden", "detail": "Peaceful dissolution of union; Haakon VII becomes king." },
+    { "year": 1940, "event": "Nazi occupation", "detail": "Germany invades; king and government flee to London." },
+    { "year": 1949, "event": "NATO founding member", "detail": "Abandons neutrality; joins Western alliance." },
+    { "year": 1969, "event": "North Sea oil discovered", "detail": "Ekofisk field found; transforms nation's economy." },
+    { "year": 1990, "event": "Oil Fund established", "detail": "Government Pension Fund Global created to save oil wealth for future." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "UK", "Sweden", "Denmark"],
+    "enemies_rivals": ["Russia (Arctic tension)"],
+    "alliances": ["NATO", "Nordic Council", "EEA (not full EU)"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Arctic sovereignty", "Oil-funded neutrality", "Atlanticism"]
+  },
+  "finance": {
+    "currency_role": "NOK; oil-backed but managed to avoid Dutch Disease",
+    "central_bank": "Norges Bank (1816)",
+    "national_debt_usd_trillions": 0.06,
+    "key_institutions": ["NBIM (Oil Fund)", "Equinor (state oil company)", "DNB"],
+    "leverage_tools": ["$1.7T sovereign wealth fund (owns ~1.5% of ALL listed global equities)", "Gas exports to Europe", "Arctic resources"]
+  },
+  "tech_startups": {
+    "hubs": ["Oslo"],
+    "big_tech": ["Equinor", "Opera Software", "Kahoot"],
+    "vc_ecosystem": "Small but growing; energy tech",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Major North Sea producer; pipeline to UK and Germany",
+    "water": "Massive hydroelectric capacity; nearly 100% renewable electricity",
+    "rare_earths": "Some deposits; Arctic exploration ongoing",
+    "agriculture": "Salmon aquaculture — world's largest farmed salmon exporter"
+  },
+  "follow_the_money": [
+    { "flow": "Government Pension Fund Global", "detail": "$1.7T fund owns stakes in 9,000+ companies globally; ethical investment guidelines" },
+    { "flow": "Gas exports to Europe", "detail": "Replaced Russian gas as Europe's top supplier post-2022" }
+  ],
+  "theories_disputed": [],
+  "connections": [
+    { "to": "UK", "type": "trade", "detail": "North Sea oil and gas pipeline exports", "year": 1980 },
+    { "to": "Russia", "type": "rivalry", "detail": "Arctic border; Svalbard sovereignty tension", "year": 1949 },
+    { "to": "USA", "type": "military", "detail": "NATO ally; US forces in Norway increased post-2022", "year": 1949 }
+  ]
+}

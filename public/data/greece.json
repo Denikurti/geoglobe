@@ -1,0 +1,52 @@
+{
+  "country": "Greece",
+  "summary": "The cradle of Western democracy and philosophy, a NATO and EU member that endured a devastating debt crisis (2010-2018) and remains strategically vital as a Mediterranean gateway between Europe, the Middle East, and North Africa.",
+  "history": [
+    { "year": -500, "event": "Classical Athens / Democracy", "detail": "Athenian democracy, philosophy (Socrates, Plato, Aristotle), mathematics foundation of Western thought." },
+    { "year": -336, "event": "Alexander the Great", "detail": "Conquers Persian Empire; Hellenistic culture spreads to India." },
+    { "year": 1453, "event": "Fall of Byzantine Empire", "detail": "Ottomans take Constantinople; Greece under Ottoman rule until 1821." },
+    { "year": 1821, "event": "Greek War of Independence", "detail": "Successful revolt; Kingdom of Greece established 1832." },
+    { "year": 1940, "event": "WWII — 'Oxi Day'", "detail": "Greece refuses Italian ultimatum; Axis occupation 1941-44; massive famine." },
+    { "year": 1967, "event": "Military junta (Colonels)", "detail": "US-backed coup; dictatorship 1967-1974." },
+    { "year": 1981, "event": "Joins EU (EEC)", "detail": "EU membership; structural funds drive growth." },
+    { "year": 2010, "event": "Debt crisis / bailout", "detail": "€300B debt; three EU/IMF bailouts; decade of austerity." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "France", "Israel (surprisingly strong ties)"],
+    "enemies_rivals": ["Turkey"],
+    "alliances": ["NATO", "EU"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Maritime sovereignty", "EEZ defence", "Cyprus solidarity"]
+  },
+  "finance": {
+    "currency_role": "EUR (nearly exited in 2015 — 'Grexit')",
+    "central_bank": "Bank of Greece (1927)",
+    "national_debt_usd_trillions": 0.38,
+    "key_institutions": ["National Bank of Greece", "Piraeus Bank", "Hellenic Petroleum"],
+    "leverage_tools": ["Piraeus port (COSCO-operated; China's EU gateway)", "Tourism", "Strategic location"]
+  },
+  "tech_startups": {
+    "hubs": ["Athens", "Thessaloniki"],
+    "big_tech": ["Skroutz", "Viva Wallet"],
+    "vc_ecosystem": "Small but recovering post-crisis",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Potential offshore reserves disputed with Turkey",
+    "water": "Islands water stress; drought increasing",
+    "agriculture": "Olive oil (world's 3rd largest), feta, wine"
+  },
+  "follow_the_money": [
+    { "flow": "Piraeus Port (COSCO)", "detail": "China's COSCO owns 67% of Piraeus; Greece is China's EU maritime entry point" },
+    { "flow": "Shipping industry", "detail": "Greeks own ~20% of global merchant fleet; world's largest shipping nation by tonnage" }
+  ],
+  "theories_disputed": [
+    { "topic": "CIA role in 1967 junta", "status": "DISPUTED", "detail": "Declassified documents show US knowledge; direct CIA orchestration not conclusively proven.", "tags": ["CIA", "coup"] }
+  ],
+  "connections": [
+    { "to": "Turkey", "type": "rivalry", "detail": "Aegean disputes, Cyprus, EEZ gas exploration conflict", "year": 1974 },
+    { "to": "China", "type": "trade", "detail": "COSCO Piraeus investment; Belt and Road entry point", "year": 2016 },
+    { "to": "Germany", "type": "finance", "detail": "Austerity creditor relationship post-2010 crisis", "year": 2010 }
+  ]
+}

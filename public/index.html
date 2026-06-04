@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoGlobe — North America</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dagre@0.8.5/dist/dagre.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cytoscape-dagre@2.5.0/cytoscape-dagre.min.js"></script>
+</head>
+<body>
+  <header id="topbar">
+    <h1>🌎 GeoGlobe <span class="sub">North America v1 · AI: local Ollama</span></h1>
+    <div id="modeTabs">
+      <button class="mode-tab active" data-mode="states">🌍 States</button>
+      <button class="mode-tab" data-mode="religion">✝ Religion & Ancient</button>
+    </div>
+    <div id="searchWrap">
+      <input id="searchInput" type="text" placeholder="🔍  Search country, city, topic…" autocomplete="off" />
+      <div id="searchResults" class="hidden"></div>
+    </div>
+    <div id="controls">
+      <label class="ctl">Year: <span id="yearLabel">2025</span>
+        <input type="range" id="timeline" min="1900" max="2025" value="2025" step="1" />
+      </label>
+      <label class="toggle"><input type="checkbox" id="tTheories" /> Theories</label>
+      <label class="toggle"><input type="checkbox" id="tMoney" /> Follow the Money</label>
+      <label class="toggle"><input type="checkbox" id="tConnections" /> Connections Web</label>
+      <label class="toggle"><input type="checkbox" id="tResources" /> Resources</label>
+    </div>
+  </header>
+
+  <main id="layout">
+    <!-- Agent sidebar -->
+    <div id="agentBar">
+      <div id="agentBarTitle">Lens</div>
+    </div>
+    <div id="agentDrawer" class="hidden">
+      <div id="agentDrawerHeader">
+        <span id="agentDrawerTitle"></span>
+        <button id="agentDrawerClose">×</button>
+      </div>
+      <div id="agentDrawerBody"></div>
+      <div id="agentDrawerDivider" title="Drag to resize"></div>
+      <!-- Suggestions panel -->
+      <div id="suggestSection">
+        <div id="suggestSectionHeader">
+          <span>💡 Suggestions</span>
+          <button id="suggestSectionToggle">▼</button>
+        </div>
+        <div id="suggestSectionChips"></div>
+      </div>
+      <div id="agentChatSlot"></div>
+      <div id="agentDrawerResizeHandle" title="Drag to resize width"></div>
+    </div>
+
+    <section id="mapPane">
+      <svg id="map"></svg>
+      <div id="legend"></div>
+    </section>
+
+    <!-- drag handle: resize map vs panel -->
+    <div id="hDivider" title="Drag to resize"></div>
+
+    <aside id="panel">
+      <div id="mobilePanelHandle"><div id="mobilePanelPill"></div></div>
+      <button id="mobilePanelClose" class="hidden">✕</button>
+      <div id="panelEmpty" class="empty">Tap a country on the map to begin.</div>
+
+      <div id="panelContent" class="hidden">
+        <div id="panelTitleRow">
+          <h2 id="countryName"></h2>
+          <button id="focusModeBtn" title="Focus mode">⛶ Focus</button>
+        </div>
+        <p id="countrySummary" class="summary"></p>
+
+        <!-- stat cards -->
+        <div id="statCards"></div>
+
+        <div id="mindmap"></div>
+
+        <!-- drag handle: resize mindmap vs chat -->
+        <div id="vDivider" title="Drag to resize"></div>
+
+        <div id="chat">
+          <div id="chatLogHeader">
+            <span id="chatLogLabel">Output <span id="queueBadge"></span></span>
+            <div id="chatHeaderBtns">
+              <button type="button" id="moveChatBtn" title="Move chat left/right">⇄ Left</button>
+              <button type="button" id="clearChat" title="Clear chat">Clear</button>
+              <button type="button" id="expandChatLog" title="Expand output">⤢ Expand</button>
+            </div>
+          </div>
+          <div id="chatLog"></div>
+          <form id="chatForm">
+            <textarea id="chatInput" autocomplete="off" rows="5"
+                      placeholder="Ask anything about this country…"></textarea>
+            <button type="submit">Ask</button>
+          </form>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- leaf-node detail popup -->
+  <div id="popup" class="hidden">
+    <button id="popupClose">×</button>
+    <div id="popupBody"></div>
+    <button id="popupAsk">Ask AI to explain more</button>
+  </div>
+
+  <script src="agents_data.js"></script>
+  <script src="ai.js"></script>
+  <script src="mindmap.js"></script>
+  <script src="map.js"></script>
+  <script src="religion_data.js"></script>
+  <script src="religion_panel.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

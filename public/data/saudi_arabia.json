@@ -1,0 +1,61 @@
+{
+  "country": "Saudi Arabia",
+  "summary": "An absolute monarchy and the world's largest oil exporter, custodian of Islam's holiest sites, and a key US security partner whose petrodollar deal underpins the dollar's global dominance.",
+  "history": [
+    { "year": 1744, "event": "Wahhabi-Saudi pact", "detail": "Muhammad ibn Saud and Muhammad ibn Abd al-Wahhab form alliance; ultra-conservative Islam + political power." },
+    { "year": 1902, "event": "Ibn Saud recaptures Riyadh", "detail": "Founding of modern Saudi state begins." },
+    { "year": 1932, "event": "Kingdom of Saudi Arabia proclaimed", "detail": "Unification of Hejaz and Nejd; Abdulaziz ibn Saud first king." },
+    { "year": 1938, "event": "Oil discovered", "detail": "Aramco (US company) strikes oil; world's largest reserves confirmed." },
+    { "year": 1945, "event": "FDR-Ibn Saud meeting", "detail": "USS Quincy meeting; security-for-oil deal established US-Saudi relationship." },
+    { "year": 1973, "event": "Oil embargo / OPEC crisis", "detail": "Saudi-led embargo punishes US for supporting Israel; oil price quadruples." },
+    { "year": 1974, "event": "Petrodollar deal", "detail": "Saudi oil priced exclusively in USD; recycled into US Treasuries. Dollar dominance cemented." },
+    { "year": 1979, "event": "Grand Mosque seizure", "detail": "Islamist extremists seize Mecca; Saudi government responds by hardening religious conservatism." },
+    { "year": 1991, "event": "Gulf War", "detail": "Iraq invades Kuwait; 500,000 US troops on Saudi soil — angers Bin Laden." },
+    { "year": 2001, "event": "9/11 — 15 of 19 hijackers Saudi", "detail": "Al-Qaeda attacks US; US-Saudi relationship strained." },
+    { "year": 2015, "event": "Yemen War begins", "detail": "Saudi-led coalition intervenes against Houthis; worst humanitarian crisis in world." },
+    { "year": 2017, "event": "MBS becomes Crown Prince", "detail": "Mohammed bin Salman consolidates power; Vision 2030 launched; Khashoggi murdered 2018." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "UAE", "Egypt", "Jordan", "Israel (covert)"],
+    "enemies_rivals": ["Iran", "Qatar (2017-2021)", "Houthis", "Muslim Brotherhood"],
+    "alliances": ["GCC", "Arab League", "OPEC+", "G20"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Custodian of Two Holy Mosques", "US security umbrella", "OPEC oil leverage", "Vision 2030"]
+  },
+  "finance": {
+    "currency_role": "Riyal (SAR) pegged to USD at 3.75 — the cornerstone of the petrodollar system",
+    "central_bank": "Saudi Arabian Monetary Authority (SAMA, 1952)",
+    "national_debt_usd_trillions": 0.3,
+    "key_institutions": ["Saudi Aramco (world's most profitable company)", "PIF (Public Investment Fund — $700B+)", "SABIC"],
+    "leverage_tools": ["Oil production decisions (OPEC+)", "USD peg / petrodollar", "PIF global investments (Newcastle, LIV Golf)", "Sovereign wealth fund leverage"]
+  },
+  "tech_startups": {
+    "hubs": ["Riyadh", "NEOM (planned $500B megacity)"],
+    "big_tech": ["Aramco Digital", "STC (telecom)"],
+    "vc_ecosystem": "PIF funding large-scale projects; NEOM, Red Sea tourism, gaming (Savvy Games bought Scopely, SNK)",
+    "gov_tech_links": ["NEOM — surveillance-integrated city", "PIF gaming/tech investments"],
+    "ai_leaders": ["SDAIA (AI authority)", "Aramco AI"]
+  },
+  "resources": {
+    "oil_gas": "World's 2nd largest oil reserves; ~12M barrels/day production capacity; Ghawar is world's largest oil field",
+    "rare_earths": "Significant untapped deposits",
+    "water": "Extreme water scarcity; world's largest desalination network",
+    "agriculture": "Minimal; imports most food"
+  },
+  "follow_the_money": [
+    { "flow": "Petrodollar recycling", "detail": "Saudi oil sold in USD → excess dollars → US Treasuries. Sustains dollar dominance." },
+    { "flow": "PIF global investments", "detail": "$700B+ fund buying stakes in tech, sports, gaming, real estate globally" },
+    { "flow": "Khashoggi murder financing of image repair", "detail": "Post-Khashoggi: $6B LIV Golf, $300M esports, Newcastle United — sportswashing" }
+  ],
+  "theories_disputed": [
+    { "topic": "Saudi 9/11 involvement", "status": "DISPUTED", "detail": "28 pages of 9/11 Commission report (declassified 2016) suggest Saudi government links to hijackers; no official finding of state sponsorship.", "tags": ["9/11", "CIA", "intelligence"] },
+    { "topic": "Khashoggi murder order", "status": "CONFIRMED", "detail": "CIA and UN assessment: MBS personally ordered murder of journalist Jamal Khashoggi in Istanbul consulate 2018.", "tags": ["MBS", "murder", "CIA"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "finance", "detail": "Petrodollar deal 1974; arms sales; security umbrella", "year": 1974 },
+    { "to": "Iran", "type": "rivalry", "detail": "Sunni-Shia proxy war across Middle East; Yemen, Iraq, Lebanon", "year": 1979 },
+    { "to": "Israel", "type": "intelligence", "detail": "Covert intelligence sharing on Iran; Abraham Accords normalisation talks", "year": 2020 },
+    { "to": "China", "type": "trade", "detail": "Largest oil customer; yuan oil pricing trials", "year": 2022 },
+    { "to": "Yemen", "type": "war", "detail": "Saudi-led military coalition vs Houthis since 2015", "year": 2015 }
+  ]
+}

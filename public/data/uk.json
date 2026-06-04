@@ -1,0 +1,69 @@
+{
+  "country": "UK",
+  "summary": "A permanent UN Security Council member, nuclear power, and former global empire whose influence now rests on finance (The City), intelligence (Five Eyes), and the 'special relationship' with the US.",
+  "history": [
+    { "year": 1215, "event": "Magna Carta", "detail": "First limits on royal power; foundation of constitutional governance." },
+    { "year": 1600, "event": "East India Company founded", "detail": "Began centuries of commercial empire-building." },
+    { "year": 1707, "event": "Acts of Union", "detail": "England and Scotland united as Great Britain." },
+    { "year": 1776, "event": "American Independence", "detail": "Thirteen colonies lost; empire pivots to Asia and Africa." },
+    { "year": 1815, "event": "Battle of Waterloo", "detail": "Napoleon defeated; Britain becomes dominant world power." },
+    { "year": 1837, "event": "Victorian Empire peaks", "detail": "Height of British Empire — one-quarter of world's land mass." },
+    { "year": 1914, "event": "World War I", "detail": "Over 700,000 British dead; empire begins to weaken." },
+    { "year": 1939, "event": "World War II", "detail": "Churchill's Britain stands alone in 1940 before US entry." },
+    { "year": 1944, "event": "Bretton Woods", "detail": "US replaces UK as anchor of the global financial system." },
+    { "year": 1945, "event": "Welfare state founded", "detail": "NHS, national insurance — Labour government reforms." },
+    { "year": 1947, "event": "Indian independence", "detail": "Empire begins rapid dissolution." },
+    { "year": 1956, "event": "Suez Crisis", "detail": "UK humiliated by US; signals end of independent great power status." },
+    { "year": 1973, "event": "Joins EEC", "detail": "Enters European Economic Community." },
+    { "year": 1979, "event": "Thatcher era", "detail": "Privatisation, financial deregulation, weakening of unions." },
+    { "year": 1982, "event": "Falklands War", "detail": "War with Argentina over Falkland Islands; UK wins." },
+    { "year": 1998, "event": "Good Friday Agreement", "detail": "Peace deal ends decades of violence in Northern Ireland." },
+    { "year": 2016, "event": "Brexit referendum", "detail": "52% vote to leave EU; years of political upheaval follow." },
+    { "year": 2020, "event": "Formally leaves EU", "detail": "UK exits single market and customs union." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "France", "Germany", "Australia", "Canada", "Israel", "Japan"],
+    "enemies_rivals": ["Russia", "China"],
+    "alliances": ["NATO", "Five Eyes", "AUKUS", "UN Security Council (P5)"],
+    "military_bases_abroad": 145,
+    "key_doctrines": ["Global Britain", "Special Relationship", "Nuclear deterrence (Trident)"]
+  },
+  "finance": {
+    "currency_role": "GBP — formerly world reserve currency, now major trading currency",
+    "central_bank": "Bank of England (1694) — world's second oldest central bank",
+    "national_debt_usd_trillions": 3.1,
+    "key_institutions": ["London Stock Exchange", "Lloyd's of London", "IMF co-founder"],
+    "leverage_tools": ["The City of London (global finance hub)", "Crown Dependencies as offshore tax havens", "Sterling clearing"]
+  },
+  "tech_startups": {
+    "hubs": ["London (Tech City / Silicon Roundabout)", "Cambridge", "Edinburgh", "Manchester"],
+    "big_tech": ["ARM Holdings", "DeepMind (Google)", "Revolut", "Wise"],
+    "vc_ecosystem": "Europe's largest; ~£15B/yr",
+    "gov_tech_links": ["GCHQ–NCSC", "Alan Turing Institute", "DARPA-equivalent ARIA"],
+    "ai_leaders": ["DeepMind", "Wayve", "Stability AI"]
+  },
+  "resources": {
+    "oil_gas": "North Sea oil (declining); still significant producer",
+    "rare_earths": "Limited domestic; import-dependent",
+    "nuclear": "Trident nuclear submarine fleet; civil nuclear programme",
+    "water": "Generally sufficient; regional stress",
+    "agriculture": "Self-sufficient ~60%; wheat, barley, dairy"
+  },
+  "follow_the_money": [
+    { "flow": "City of London offshore network", "detail": "Crown Dependencies (Jersey, Cayman) hold trillions in offshore wealth" },
+    { "flow": "Arms exports", "detail": "Major arms exporter — Saudi Arabia is top customer" },
+    { "flow": "Foreign aid leverage", "detail": "£12B/yr aid used as soft power and trade facilitation" }
+  ],
+  "theories_disputed": [
+    { "topic": "Princess Diana death", "status": "DISPUTED", "detail": "Official verdict: unlawful killing in car crash; conspiracy theories persist.", "tags": ["royal family", "MI6"] },
+    { "topic": "GCHQ mass surveillance", "status": "CONFIRMED", "detail": "Snowden revelations 2013 confirmed GCHQ bulk collection via Tempora.", "tags": ["surveillance", "Five Eyes"] },
+    { "topic": "Iraq WMD intelligence", "status": "CONFIRMED", "detail": "Chilcot Inquiry 2016 confirmed intelligence was manipulated for Iraq War.", "tags": ["intelligence", "Iraq"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "intelligence", "detail": "Five Eyes founder; 'special relationship' since WWII", "year": 1946 },
+    { "to": "France", "type": "military", "detail": "Joint nuclear cooperation; NATO partners", "year": 1995 },
+    { "to": "Germany", "type": "trade", "detail": "Major trade partners post-Brexit", "year": 1973 },
+    { "to": "Russia", "type": "rivalry", "detail": "Cold War legacy; Ukraine conflict sanctions", "year": 1947 },
+    { "to": "Saudi Arabia", "type": "trade", "detail": "Arms sales, oil imports, sovereign wealth investment in London", "year": 1970 }
+  ]
+}

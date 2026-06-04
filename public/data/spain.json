@@ -1,0 +1,52 @@
+{
+  "country": "Spain",
+  "summary": "A major EU economy and NATO member with historical global empire, now navigating regional separatism (Catalonia, Basque Country), a large tourism sector, and a strategic gateway between Europe, Africa, and Latin America.",
+  "history": [
+    { "year": 1492, "event": "Columbus reaches Americas", "detail": "Beginning of Spanish empire; vast territories in Americas and Pacific." },
+    { "year": 1588, "event": "Spanish Armada defeated", "detail": "Naval defeat to England; start of imperial decline." },
+    { "year": 1898, "event": "Spanish-American War", "detail": "Cuba, Puerto Rico, Philippines lost to USA; end of empire." },
+    { "year": 1936, "event": "Spanish Civil War", "detail": "Republicans vs Nationalists (Franco); dress rehearsal for WWII." },
+    { "year": 1939, "event": "Franco dictatorship", "detail": "Francisco Franco rules until death in 1975." },
+    { "year": 1975, "event": "Transition to democracy", "detail": "Constitutional monarchy established; rapid modernisation." },
+    { "year": 1982, "event": "Joins NATO", "detail": "Spain integrates into Western security structures." },
+    { "year": 1986, "event": "Joins EEC", "detail": "EU membership; economic boom follows." },
+    { "year": 2008, "event": "Financial crisis", "detail": "Property bubble collapse; 26% unemployment at peak." }
+  ],
+  "geopolitics": {
+    "allies": ["France", "Germany", "USA", "Morocco"],
+    "enemies_rivals": [],
+    "alliances": ["NATO", "EU", "G20"],
+    "military_bases_abroad": 2,
+    "key_doctrines": ["Mediterranean security", "Ibero-American community", "European solidarity"]
+  },
+  "finance": {
+    "currency_role": "EUR; fourth-largest eurozone economy",
+    "central_bank": "Banco de España (1782)",
+    "national_debt_usd_trillions": 1.6,
+    "key_institutions": ["Banco Santander", "BBVA", "Telefónica", "Inditex (Zara)"],
+    "leverage_tools": ["Tourism (world's 2nd most visited)", "Latin American market access", "Renewable energy leadership"]
+  },
+  "tech_startups": {
+    "hubs": ["Barcelona", "Madrid"],
+    "big_tech": ["Inditex", "Glovo", "Cabify"],
+    "vc_ecosystem": "Growing fintech hub; €2B/yr",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "None domestic; importer",
+    "water": "Severe stress; droughts worsening in south",
+    "agriculture": "Olive oil world leader; wine, tomatoes, citrus",
+    "rare_earths": "Some rare earth deposits in Extremadura"
+  },
+  "follow_the_money": [
+    { "flow": "Tourism", "detail": "85M visitors/yr; ~$80B revenue" },
+    { "flow": "Latin America investments", "detail": "Santander, BBVA, Telefónica dominate Latin American markets" }
+  ],
+  "theories_disputed": [],
+  "connections": [
+    { "to": "France", "type": "trade", "detail": "Largest bilateral trade; Pyrenean border", "year": 1986 },
+    { "to": "USA", "type": "military", "detail": "NATO ally; Morón and Rota US bases", "year": 1982 },
+    { "to": "Mexico", "type": "trade", "detail": "Historical and cultural ties; major investment", "year": 1994 }
+  ]
+}

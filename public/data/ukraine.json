@@ -1,0 +1,59 @@
+{
+  "country": "Ukraine",
+  "summary": "Europe's largest country by area (excluding Russia), at war with Russia since 2014 (full-scale invasion 2022), with strategic importance as the breadbasket of Europe and a front line in the contest between NATO and Russia.",
+  "history": [
+    { "year": 882, "event": "Kyivan Rus founded", "detail": "Medieval Slavic state centred on Kyiv; cultural ancestor of Ukraine, Russia and Belarus." },
+    { "year": 1240, "event": "Mongol invasion", "detail": "Kyiv sacked; Rus fragmented." },
+    { "year": 1654, "event": "Pereyaslav Agreement", "detail": "Cossack Hetmanate enters alliance with Russian Tsar — disputed historical meaning." },
+    { "year": 1917, "event": "Ukrainian People's Republic", "detail": "Brief independence during Russian Revolution; crushed by Bolsheviks." },
+    { "year": 1932, "event": "Holodomor", "detail": "Soviet-engineered famine kills 3.5–7M Ukrainians; recognised as genocide by many countries." },
+    { "year": 1941, "event": "Nazi occupation", "detail": "Ukraine suffered worst civilian casualties in Europe during WWII." },
+    { "year": 1986, "event": "Chernobyl disaster", "detail": "Nuclear reactor explosion; largest nuclear accident in history." },
+    { "year": 1991, "event": "Independence", "detail": "Ukraine votes to leave USSR; nuclear weapons relinquished under Budapest Memorandum 1994." },
+    { "year": 2004, "event": "Orange Revolution", "detail": "Pro-Western protests reverse rigged election." },
+    { "year": 2014, "event": "Maidan Revolution", "detail": "Pro-EU uprising; president flees; Russia annexes Crimea, war in Donbas begins." },
+    { "year": 2022, "event": "Full-scale Russian invasion", "detail": "Russia invades Feb 24; massive Western military and financial support begins." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "UK", "EU", "Poland", "Baltic states"],
+    "enemies_rivals": ["Russia", "Belarus"],
+    "alliances": ["EU candidate (2022)", "NATO partner (aspiring member)"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["European integration", "Territorial integrity", "Resistance to Russian aggression"]
+  },
+  "finance": {
+    "currency_role": "Hryvnia (UAH); heavily supported by IMF and G7 loans",
+    "central_bank": "National Bank of Ukraine (1991)",
+    "national_debt_usd_trillions": 0.15,
+    "key_institutions": ["IMF emergency lending", "World Bank reconstruction", "EBRD"],
+    "leverage_tools": ["Grain exports (wheat, sunflower oil)", "EU candidate status", "Western military aid dependency"]
+  },
+  "tech_startups": {
+    "hubs": ["Kyiv", "Lviv", "Kharkiv (pre-war)"],
+    "big_tech": ["EPAM Systems", "GlobalLogic", "Grammarly"],
+    "vc_ecosystem": "Pre-war: growing IT outsourcing hub; war disrupted but remote work continues",
+    "gov_tech_links": ["Diia (government app — e-governance model)", "IT Army of Ukraine (cyber operations)"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Some gas; heavily dependent on imports",
+    "rare_earths": "Significant titanium, lithium, manganese, neon gas (critical for chip manufacturing)",
+    "water": "Dnieper River basin; Crimea water conflict",
+    "agriculture": "World's largest sunflower oil exporter; major wheat and corn producer"
+  },
+  "follow_the_money": [
+    { "flow": "Western military aid", "detail": "Over $100B from US, EU, UK since 2022" },
+    { "flow": "IMF/World Bank loans", "detail": "Billions in emergency financing; future EU reconstruction funds" },
+    { "flow": "Grain exports", "detail": "Black Sea grain deal (suspended 2023); major food supply leverage" }
+  ],
+  "theories_disputed": [
+    { "topic": "MH17 / Russian involvement", "status": "CONFIRMED", "detail": "JIT confirmed Russian BUK missile (53rd Brigade) shot down MH17 over Donbas 2014.", "tags": ["Russia", "military"] },
+    { "topic": "Biolab claims", "status": "DISPUTED", "detail": "Russia claimed US biolabs in Ukraine; WHO and US deny offensive programs; defensive research labs confirmed.", "tags": ["Russia", "USA", "propaganda"] }
+  ],
+  "connections": [
+    { "to": "Russia", "type": "war", "detail": "Full-scale war since 2022", "year": 2022 },
+    { "to": "USA", "type": "military", "detail": "Largest single donor of military aid", "year": 2022 },
+    { "to": "Poland", "type": "trade", "detail": "Major refugee host and weapons transit route", "year": 2022 },
+    { "to": "Germany", "type": "trade", "detail": "Major reconstruction and aid partner", "year": 2014 }
+  ]
+}

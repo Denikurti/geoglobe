@@ -1,0 +1,51 @@
+{
+  "country": "Austria",
+  "summary": "A neutral Alpine state at the heart of Europe, former centre of the Habsburg Empire that ruled much of the continent for centuries, now an EU member and major trade hub between Western and Eastern Europe.",
+  "history": [
+    { "year": 1278, "event": "Habsburg dynasty begins", "detail": "Rudolf I wins Battle on Marchfeld; Habsburgs will rule for 640 years." },
+    { "year": 1683, "event": "Battle of Vienna", "detail": "Vienna besieged by Ottomans; relieved by Polish-Austrian force — turning point." },
+    { "year": 1814, "event": "Congress of Vienna", "detail": "Metternich hosts; Austria dominates European order post-Napoleon." },
+    { "year": 1867, "event": "Austro-Hungarian Empire", "detail": "Dual monarchy created; 50M people, 11 nationalities." },
+    { "year": 1914, "event": "WWI trigger", "detail": "Franz Ferdinand assassination in Sarajevo starts WWI; empire collapses 1918." },
+    { "year": 1938, "event": "Anschluss", "detail": "Nazi Germany annexes Austria; most Austrians initially supportive." },
+    { "year": 1955, "event": "State Treaty; permanent neutrality", "detail": "Occupation ends; Austria declares permanent neutrality (not NATO member)." },
+    { "year": 1995, "event": "Joins EU", "detail": "EU membership while retaining neutrality." }
+  ],
+  "geopolitics": {
+    "allies": ["Germany", "EU partners"],
+    "enemies_rivals": [],
+    "alliances": ["EU", "UN", "OSCE (Vienna HQ)"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Permanent neutrality", "Vienna as neutral diplomatic hub", "EU commitment"]
+  },
+  "finance": {
+    "currency_role": "EUR",
+    "central_bank": "Oesterreichische Nationalbank (1816)",
+    "national_debt_usd_trillions": 0.37,
+    "key_institutions": ["Erste Bank", "Raiffeisen (major Eastern Europe presence)", "OMV (energy)"],
+    "leverage_tools": ["Eastern European banking hub", "Neutral diplomatic platform", "Vienna as international organization HQ (UN, OSCE, OPEC, IAEA)"]
+  },
+  "tech_startups": {
+    "hubs": ["Vienna"],
+    "big_tech": ["Tricentis", "Bitpanda", "Runtastic (Adidas)"],
+    "vc_ecosystem": "Small but growing",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Small domestic production; gas transit hub",
+    "water": "Alpine water surplus; hydroelectric power",
+    "agriculture": "Timber, dairy, wine (Grüner Veltliner)"
+  },
+  "follow_the_money": [
+    { "flow": "Eastern Europe banking", "detail": "Raiffeisen and Erste have dominant positions in CEE banking markets" },
+    { "flow": "Russian gas transit", "detail": "OMV historically major Russian gas deal holder; ongoing despite sanctions controversy" }
+  ],
+  "theories_disputed": [
+    { "topic": "Austria as 'first victim' myth", "status": "DISPUTED", "detail": "Austria long portrayed itself as Hitler's first victim; historians document widespread Austrian enthusiasm for Anschluss.", "tags": ["WWII", "Nazi", "historical revision"] }
+  ],
+  "connections": [
+    { "to": "Germany", "type": "trade", "detail": "Largest trade partner; deep cultural and economic ties", "year": 1957 },
+    { "to": "Russia", "type": "trade", "detail": "Raiffeisen Bank major presence; OMV gas deals; ongoing controversy", "year": 1955 }
+  ]
+}

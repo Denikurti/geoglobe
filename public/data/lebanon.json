@@ -1,0 +1,53 @@
+{
+  "country": "Lebanon",
+  "summary": "A tiny Mediterranean country in total economic and political collapse, dominated by Hezbollah (an Iranian-backed militia with more weapons than the Lebanese army), devastated by the 2020 Beirut explosion and years of sectarian paralysis.",
+  "history": [
+    { "year": 1920, "event": "Greater Lebanon created by France", "detail": "France draws borders including Christian, Sunni, Shia, Druze communities." },
+    { "year": 1943, "event": "National Pact", "detail": "Power-sharing agreement along sectarian lines; President (Christian), PM (Sunni), Speaker (Shia)." },
+    { "year": 1975, "event": "Civil War begins", "detail": "15-year war involving Palestinian factions, Syria, Israel, militias; ~150,000 dead." },
+    { "year": 1982, "event": "Israeli invasion; Hezbollah founded", "detail": "Israel invades to expel PLO; Iran helps found Hezbollah in response." },
+    { "year": 2006, "event": "Second Lebanon War", "detail": "34-day war between Israel and Hezbollah; 1,200 Lebanese civilians killed." },
+    { "year": 2019, "event": "Economic collapse begins", "detail": "Currency loses 95% of value; banks freeze accounts." },
+    { "year": 2020, "event": "Beirut port explosion", "detail": "2,750 tonnes of ammonium nitrate explodes; 218 dead, 300,000 homeless. Negligence confirmed." },
+    { "year": 2024, "event": "Israeli strikes kill Hezbollah leadership", "detail": "Nasrallah and much of Hezbollah leadership killed; massive strikes on Beirut." }
+  ],
+  "geopolitics": {
+    "allies": ["Iran (Hezbollah)", "Syria (historically)"],
+    "enemies_rivals": ["Israel"],
+    "alliances": ["Arab League"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Sectarian consociationalism (power sharing)", "Hezbollah's 'Resistance' doctrine"]
+  },
+  "finance": {
+    "currency_role": "Lebanese Pound (LBP) — collapsed; multiple exchange rates",
+    "central_bank": "Banque du Liban (1964) — accused of Ponzi scheme",
+    "national_debt_usd_trillions": 0.097,
+    "key_institutions": ["Banque du Liban (insolvent)", "Riad Salamé (governor indicted)"],
+    "leverage_tools": ["Diaspora remittances", "Hezbollah financial network", "Geographic position"]
+  },
+  "tech_startups": {
+    "hubs": ["Beirut (pre-collapse)"],
+    "big_tech": [],
+    "vc_ecosystem": "Effectively destroyed by economic crisis and Beirut explosion",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Offshore gas blocks (Karish disputed with Israel); Block 9 with France/Italy/Russia consortium",
+    "water": "Mediterranean climate; water stress increasing",
+    "agriculture": "Bekaa Valley farming; wine production"
+  },
+  "follow_the_money": [
+    { "flow": "Diaspora remittances", "detail": "Lebanese diaspora (~16M vs 5M at home) sends $6-7B/yr — lifeline during collapse" },
+    { "flow": "Hezbollah financial network", "detail": "Iranian funding + drug trafficking + business empire; US-designated terror financing" }
+  ],
+  "theories_disputed": [
+    { "topic": "Beirut explosion — negligence vs sabotage", "status": "DISPUTED", "detail": "Official: criminal negligence storing ammonium nitrate. Some allege deliberate sabotage; investigation blocked by political interference.", "tags": ["Hezbollah", "corruption"] },
+    { "topic": "Hariri assassination 2005", "status": "PARTIALLY CONFIRMED", "detail": "UN Special Tribunal convicted Hezbollah member in absentia; Hezbollah denies; Syria also implicated.", "tags": ["Hezbollah", "Syria", "assassination"] }
+  ],
+  "connections": [
+    { "to": "Iran", "type": "military", "detail": "Hezbollah funded and armed by Iran's IRGC", "year": 1982 },
+    { "to": "Israel", "type": "war", "detail": "Multiple wars; ongoing border skirmishes; 2024 major strikes", "year": 1982 },
+    { "to": "France", "type": "ideology", "detail": "French cultural influence; France leads international mediation", "year": 1943 }
+  ]
+}

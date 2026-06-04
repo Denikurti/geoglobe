@@ -1,0 +1,47 @@
+{
+  "country": "Canada",
+  "summary": "A resource-rich G7 democracy and close US ally, balancing deep economic integration with the United States against a distinct foreign-policy identity.",
+  "history": [
+    { "year": 1867, "event": "Confederation", "detail": "British North America Act unites colonies into the Dominion of Canada." },
+    { "year": 1931, "event": "Statute of Westminster", "detail": "Effective legislative independence from Britain." },
+    { "year": 1949, "event": "Joins NATO", "detail": "Founding member of the alliance." },
+    { "year": 1982, "event": "Constitution patriated", "detail": "Charter of Rights and Freedoms adopted." },
+    { "year": 1994, "event": "NAFTA", "detail": "Free trade with US and Mexico, later USMCA." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "UK", "France", "Australia"],
+    "enemies_rivals": ["Russia"],
+    "alliances": ["NATO", "Five Eyes", "NORAD"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Multilateralism", "Peacekeeping tradition"]
+  },
+  "finance": {
+    "currency_role": "CAD, a commodity-linked currency",
+    "central_bank": "Bank of Canada (1934)",
+    "national_debt_usd_trillions": 1.5,
+    "key_institutions": ["IMF member", "G7", "World Bank"],
+    "leverage_tools": ["Energy exports", "stable banking system"]
+  },
+  "tech_startups": {
+    "hubs": ["Toronto-Waterloo", "Montreal", "Vancouver"],
+    "big_tech": ["Shopify", "OpenText"],
+    "vc_ecosystem": "Growing; strong AI research base",
+    "gov_tech_links": ["Vector Institute", "Mila (Montreal AI)"],
+    "ai_leaders": ["Cohere", "Mila", "Vector Institute"]
+  },
+  "resources": {
+    "oil_gas": "Huge oil sands (Alberta); major US supplier",
+    "rare_earths": "Significant untapped deposits",
+    "lithium": "Emerging projects",
+    "water": "Among the largest freshwater reserves on Earth",
+    "agriculture": "Wheat, canola exports"
+  },
+  "follow_the_money": [
+    { "flow": "Energy exports to US", "detail": "Most oil/gas flows south via pipelines" }
+  ],
+  "theories_disputed": [],
+  "connections": [
+    { "to": "USA", "type": "trade", "detail": "USMCA, largest trade partner", "year": 1994 },
+    { "to": "UK", "type": "intelligence", "detail": "Five Eyes member", "year": 1946 }
+  ]
+}

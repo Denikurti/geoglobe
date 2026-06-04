@@ -1,0 +1,62 @@
+{
+  "country": "Germany",
+  "summary": "Europe's largest economy and de facto leader of the EU, built on an export-driven industrial model and a post-WWII commitment to multilateralism — now reckoning with energy dependence on Russia and rising defence demands.",
+  "history": [
+    { "year": 1871, "event": "German unification", "detail": "Bismarck unifies German states into the German Empire under Prussia." },
+    { "year": 1914, "event": "World War I", "detail": "Germany leads the Central Powers; defeated 1918, punished by Versailles." },
+    { "year": 1933, "event": "Hitler seizes power", "detail": "NSDAP takes control; rapid militarisation begins." },
+    { "year": 1939, "event": "World War II begins", "detail": "Germany invades Poland; Holocaust kills ~6 million Jews." },
+    { "year": 1945, "event": "Divided into East/West", "detail": "Allied occupation splits Germany; Berlin Wall built 1961." },
+    { "year": 1955, "event": "Joins NATO (West Germany)", "detail": "West Germany rearmed and integrated into Western alliance." },
+    { "year": 1957, "event": "EEC founding member", "detail": "Co-founds European Economic Community with France." },
+    { "year": 1989, "event": "Berlin Wall falls", "detail": "Communist East Germany collapses; reunification follows 1990." },
+    { "year": 1999, "event": "Euro adopted", "detail": "Germany gives up the Deutschmark for the common European currency." },
+    { "year": 2008, "event": "Financial crisis", "detail": "Germany leads EU austerity response; tensions with southern Europe." },
+    { "year": 2015, "event": "Refugee crisis", "detail": "Merkel accepts ~1M refugees; political backlash fuels AfD rise." },
+    { "year": 2022, "event": "Zeitenwende", "detail": "Russia's Ukraine invasion triggers Germany's historic defence policy reversal." }
+  ],
+  "geopolitics": {
+    "allies": ["France", "USA", "UK", "Poland", "Netherlands"],
+    "enemies_rivals": ["Russia"],
+    "alliances": ["NATO", "EU", "G7", "G20"],
+    "military_bases_abroad": 20,
+    "key_doctrines": ["Ostpolitik (engagement with East)", "Civilian power doctrine", "European integration"]
+  },
+  "finance": {
+    "currency_role": "EUR — Germany is the euro-zone's anchor economy",
+    "central_bank": "Deutsche Bundesbank (1957) — most influential in ECB policy",
+    "national_debt_usd_trillions": 2.8,
+    "key_institutions": ["ECB (headquartered in Frankfurt)", "Deutsche Bank", "Allianz"],
+    "leverage_tools": ["Export surplus", "EU budget contributions", "Eurozone creditor"]
+  },
+  "tech_startups": {
+    "hubs": ["Berlin", "Munich", "Hamburg", "Frankfurt"],
+    "big_tech": ["SAP", "Volkswagen (mobility tech)", "Siemens", "BASF (chem-tech)"],
+    "vc_ecosystem": "Europe's third largest; strong industrial tech and fintech",
+    "gov_tech_links": ["Fraunhofer Society (applied research)", "Max Planck (pure research)"],
+    "ai_leaders": ["Aleph Alpha", "DeepL"]
+  },
+  "resources": {
+    "oil_gas": "Almost none; historically dependent on Russian gas (Nord Stream)",
+    "coal": "Large lignite (brown coal) reserves; phasing out by 2030",
+    "rare_earths": "None; import-dependent from China",
+    "water": "Sufficient; Rhine and Danube basin",
+    "agriculture": "Major producer; wheat, sugar beet, pork"
+  },
+  "follow_the_money": [
+    { "flow": "Export machine", "detail": "~$2T exports/yr; cars, machinery, chemicals dominate" },
+    { "flow": "EU budget net contributor", "detail": "Pays ~€26B/yr net into EU budget" },
+    { "flow": "Nord Stream (defunct)", "detail": "Billions invested in Russian gas infrastructure; sabotaged 2022" }
+  ],
+  "theories_disputed": [
+    { "topic": "Nord Stream pipeline sabotage", "status": "DISPUTED", "detail": "Pipelines blown up Sept 2022; US, Russia, and Ukraine all suspected by different investigations.", "tags": ["Russia", "USA", "Ukraine"] },
+    { "topic": "BND-NSA surveillance cooperation", "status": "CONFIRMED", "detail": "Bundestag inquiry confirmed BND shared intelligence with NSA illegally.", "tags": ["surveillance", "USA"] }
+  ],
+  "connections": [
+    { "to": "France", "type": "ideology", "detail": "Franco-German axis drives EU; Élysée Treaty since 1963", "year": 1963 },
+    { "to": "USA", "type": "military", "detail": "NATO member; 35,000 US troops stationed in Germany", "year": 1955 },
+    { "to": "Russia", "type": "rivalry", "detail": "Sanctions post-Ukraine; former major gas customer", "year": 2022 },
+    { "to": "China", "type": "trade", "detail": "Largest trading partner; Volkswagen, BMW have major China exposure", "year": 2000 },
+    { "to": "UK", "type": "trade", "detail": "Major bilateral trade despite Brexit", "year": 1957 }
+  ]
+}

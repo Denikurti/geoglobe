@@ -1,0 +1,53 @@
+{
+  "country": "Egypt",
+  "summary": "The Arab world's most populous country, guardian of the Suez Canal (through which 12% of global trade passes), and a US-backed military state that controls one of the world's most strategically critical waterways.",
+  "history": [
+    { "year": -3100, "event": "Ancient Egypt unified", "detail": "World's first nation-state; civilisation for 3,000 years." },
+    { "year": 1869, "event": "Suez Canal opens", "detail": "Transformative for global trade; Britain buys controlling stake 1875." },
+    { "year": 1952, "event": "Free Officers coup / Nasser", "detail": "Military overthrows monarchy; Nasser becomes Arab nationalist icon." },
+    { "year": 1956, "event": "Suez Crisis", "detail": "Nasser nationalises canal; UK/France/Israel invade; US forces withdrawal." },
+    { "year": 1967, "event": "Six-Day War defeat", "detail": "Egypt loses Sinai in 6 days; humiliating military defeat." },
+    { "year": 1979, "event": "Peace treaty with Israel", "detail": "Sadat signs Camp David; first Arab-Israeli peace; Sadat assassinated 1981." },
+    { "year": 2011, "event": "Arab Spring / Mubarak falls", "detail": "18-day Tahrir Square protests; Mubarak resigns after 30 years." },
+    { "year": 2013, "event": "Military coup — el-Sisi", "detail": "General el-Sisi overthrows elected Muslim Brotherhood president Morsi." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Saudi Arabia", "UAE", "Israel (formal peace)"],
+    "enemies_rivals": ["Ethiopia (Nile dam)", "Muslim Brotherhood"],
+    "alliances": ["Arab League", "African Union", "Non-NATO Major Ally"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Suez Canal control", "Arab leadership", "Military state stability"]
+  },
+  "finance": {
+    "currency_role": "Egyptian Pound (EGP) — devalued ~70% in 2022-23; IMF dependency",
+    "central_bank": "Central Bank of Egypt (1961)",
+    "national_debt_usd_trillions": 0.37,
+    "key_institutions": ["Suez Canal Authority ($9.4B/yr revenue)", "Military economic empire"],
+    "leverage_tools": ["Suez Canal tolls", "US military aid ($1.3B/yr)", "Gas exports to Israel/Jordan"]
+  },
+  "tech_startups": {
+    "hubs": ["Cairo", "New Administrative Capital"],
+    "big_tech": ["Fawry", "Instabug", "Swvl"],
+    "vc_ecosystem": "Africa's 2nd largest; growing fintech",
+    "gov_tech_links": ["Military-owned telecoms and construction"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Modest oil; significant Mediterranean gas (Zohr field)",
+    "water": "Nile River — existential dependency; Ethiopia's GERD dam threatens flow",
+    "agriculture": "Nile Delta farming; cotton, wheat, citrus"
+  },
+  "follow_the_money": [
+    { "flow": "Suez Canal", "detail": "$9.4B/yr in transit fees; critical global leverage point" },
+    { "flow": "US military aid", "detail": "$1.3B/yr since Camp David; conditions rarely enforced despite human rights abuses" },
+    { "flow": "Gulf sovereign wealth", "detail": "Saudi Arabia, UAE, Qatar pumped $20B+ to stabilise Egypt post-2013" }
+  ],
+  "theories_disputed": [
+    { "topic": "2013 coup classification", "status": "DISPUTED", "detail": "US officially never called it a 'coup' (would legally require cutting aid); widely described as a coup by analysts.", "tags": ["USA", "democracy", "Sisi"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "military", "detail": "$1.3B/yr military aid; Camp David legacy; Suez access", "year": 1979 },
+    { "to": "Israel", "type": "trade", "detail": "Cold peace; gas pipeline; security coordination on Gaza", "year": 1979 },
+    { "to": "Saudi Arabia", "type": "finance", "detail": "Gulf states major financial backers of Sisi government", "year": 2013 }
+  ]
+}

@@ -1,0 +1,456 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0d1117; --panel: #161b22; --line: #30363d;
+  --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff;
+  --land: #21304a; --land-hover: #2d4a73; --land-active: #3b6db5;
+  --war: #f85149; --trade: #3fb950; --intel: #58a6ff; --finance: #d29922; --ideology: #bc8cff;
+}
+html, body { height: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg); color: var(--text); overflow: hidden;
+}
+#topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; border-bottom: 1px solid var(--line); gap: 16px; flex-wrap: wrap;
+}
+#modeTabs { display: flex; gap: 4px; }
+.mode-tab {
+  padding: 5px 14px; border-radius: 20px; border: 1px solid var(--line);
+  background: transparent; color: var(--muted); font-size: 13px; cursor: pointer; transition: all .15s;
+}
+.mode-tab.active { background: var(--accent); color: #07101f; border-color: var(--accent); font-weight: 600; }
+.mode-tab:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+#topbar h1 { font-size: 18px; font-weight: 600; }
+.sub { font-size: 12px; color: var(--muted); font-weight: 400; }
+#controls { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px; }
+.ctl, .toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--muted); }
+.toggle input { cursor: pointer; }
+#timeline { width: 160px; }
+#yearLabel { color: var(--accent); font-variant-numeric: tabular-nums; min-width: 34px; }
+
+#layout { display: flex; height: calc(100% - 55px); overflow: hidden; position: relative; }
+
+/* ── Agent sidebar (left) ── */
+/* Suggestions panel — compact */
+#suggestSection { flex: 0 0 auto; display: flex; flex-direction: column; overflow: hidden; max-height: 180px; }
+#suggestSectionHeader {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 5px 12px; cursor: pointer; flex-shrink: 0;
+  font-size: 11px; color: var(--muted);
+  background: #0d1117; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+#suggestSectionHeader:hover { color: var(--accent); }
+#suggestSectionToggle { background: none; border: none; color: var(--muted); font-size: 11px; cursor: pointer; padding: 0; }
+#suggestSectionChips { display: none; flex-wrap: wrap; gap: 5px; padding: 8px 12px; overflow-y: auto; }
+#suggestSectionChips.open { display: flex; }
+#suggestSectionChips .chip { font-size: 11px; padding: 3px 10px; border-radius: 12px; }
+#suggestBtn { margin-top: auto; }
+
+#agentBar {
+  flex: 0 0 52px; background: #0d1117; border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; align-items: center; padding: 10px 0; gap: 6px; z-index: 20;
+}
+#agentBarTitle { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.agent-btn {
+  width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line);
+  background: #161b22; display: flex; align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer; transition: all .15s; position: relative;
+}
+.agent-btn:hover { border-color: var(--accent); background: #1f2937; transform: scale(1.08); }
+.agent-btn.active { border-width: 2px; background: #1f2937; }
+.agent-btn .agent-btn-tooltip {
+  position: absolute; left: 48px; top: 50%; transform: translateY(-50%);
+  background: #161b22; border: 1px solid var(--line); border-radius: 6px;
+  padding: 4px 10px; font-size: 12px; white-space: nowrap; color: var(--text);
+  pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 100;
+}
+.agent-btn:hover .agent-btn-tooltip { opacity: 1; }
+
+/* ── Agent drawer (slides in from left over the map) ── */
+#agentDrawer {
+  position: absolute; left: 52px; top: 0; width: 340px; min-width: 200px; max-width: 600px; height: 100%;
+  background: rgba(13,17,23,.97); border-right: 1px solid var(--line);
+  z-index: 15; display: flex; flex-direction: column; overflow: hidden;
+  animation: slideIn .2s ease;
+}
+#agentDrawerResizeHandle {
+  position: absolute; top: 0; right: -4px; width: 8px; height: 100%;
+  cursor: col-resize; z-index: 20; background: transparent;
+}
+#agentDrawerResizeHandle:hover { background: rgba(88,166,255,.3); }
+#agentDrawerResizeHandle.dragging { background: rgba(88,166,255,.5); }
+@keyframes slideIn { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+#agentDrawerHeader {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px 10px; border-bottom: 1px solid var(--line); flex-shrink: 0;
+}
+#agentDrawerTitle { font-size: 15px; font-weight: 700; }
+#agentDrawerClose { background: none; border: none; color: var(--muted); font-size: 22px; cursor: pointer; padding: 0 4px; }
+#agentDrawerClose:hover { color: var(--text); }
+#agentDrawerBody { flex: 1 1 auto; min-height: 60px; overflow-y: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 14px; }
+#agentDrawerDivider, #agentDrawerDivider2 {
+  flex: 0 0 6px; width: 100%; cursor: row-resize; background: var(--line);
+  border-radius: 3px; position: relative; transition: background .15s; flex-shrink: 0;
+}
+#agentDrawerDivider::before {
+  content: "⋯"; position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%); color: var(--muted);
+  font-size: 14px; letter-spacing: 2px; pointer-events: none;
+}
+#agentDrawerDivider:hover, #agentDrawerDivider.dragging,
+#agentDrawerDivider2:hover, #agentDrawerDivider2.dragging { background: var(--accent); }
+#agentChatSlot { display: none; flex-direction: column; padding: 0 16px 12px; flex: 0 0 auto; gap: 8px; overflow-y: auto; }
+.drawer-answer { background: #161b22; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; position: relative; min-height: 80px; }
+.drawer-answer-resize {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 6px;
+  cursor: row-resize; border-radius: 0 0 8px 8px;
+  background: var(--line); opacity: 0; transition: opacity .15s;
+}
+.drawer-answer:hover .drawer-answer-resize { opacity: 1; }
+.drawer-answer-resize:hover, .drawer-answer-resize.dragging { background: var(--accent); opacity: 1; }
+.drawer-answer-close { position: absolute; top: 6px; right: 8px; background: none; border: none; color: var(--muted); font-size: 16px; cursor: pointer; line-height: 1; padding: 0; }
+.drawer-answer-close:hover { color: #f85149; }
+.drawer-q { font-size: 12px; font-weight: 600; padding-right: 20px; }
+.drawer-a { font-size: 13px; color: var(--muted); line-height: 1.6; white-space: pre-wrap; flex: 1 1 auto; overflow-y: auto; min-height: 40px; }
+.drawer-a.collapsed { max-height: 60px; overflow: hidden; -webkit-mask-image: linear-gradient(180deg,#fff 50%,transparent); }
+.drawer-toggle-size { background: none; border: none; color: var(--accent); font-size: 11px; cursor: pointer; align-self: flex-start; padding: 0; }
+
+/* Chat on left — stack textarea above button so button is always visible */
+#chat.on-left { overflow: visible; }
+#chat.on-left #chatForm { flex-direction: column; }
+#chat.on-left #chatForm button { width: 100%; padding: 10px; font-size: 14px; margin-top: 2px; box-shadow: 0 0 12px #58a6ff66; }
+/* Chat on right — always horizontal */
+#chat.on-right #chatForm { flex-direction: row; align-items: flex-end; }
+#chat.on-right #chatForm button { width: auto; }
+#moveChatBtn { background: #21262d; color: var(--text); border: 1px solid var(--line); border-radius: 5px; padding: 3px 10px; font-size: 12px; cursor: pointer; }
+#moveChatBtn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Agent drawer sections */
+.agent-overview { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.agent-stat-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.agent-stat { background: #161b22; border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; flex: 1; min-width: 70px; }
+.agent-stat .asl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; }
+.agent-stat .asv { font-size: 13px; font-weight: 600; margin-top: 2px; }
+.agent-section-title { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.agent-timeline-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid #21262d; }
+.agent-timeline-year { font-size: 11px; font-weight: 700; color: var(--accent); min-width: 38px; flex-shrink: 0; }
+.agent-timeline-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.agent-timeline-text strong { color: var(--text); display: block; margin-bottom: 2px; }
+.agent-country-item { padding: 8px 0; border-bottom: 1px solid #21262d; cursor: pointer; }
+.agent-country-item:hover .agent-country-name { color: var(--accent); }
+.agent-country-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.agent-country-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.agent-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.agent-section-tabs { display: flex; gap: 4px; margin-bottom: 10px; flex-wrap: wrap; }
+.agent-tab { padding: 4px 12px; border-radius: 12px; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 12px; cursor: pointer; }
+.agent-tab.active { color: var(--text); border-color: currentColor; }
+
+#mapPane { position: relative; flex: 0 0 calc(70% - 52px); min-width: 200px; height: 100%; }
+#map { width: 100%; height: 100%; display: block; }
+
+/* ── Horizontal divider (map ↔ panel) ── */
+#hDivider {
+  flex: 0 0 6px; height: 100%; cursor: col-resize;
+  background: var(--line);
+  position: relative; z-index: 10;
+  transition: background .15s;
+}
+#hDivider:hover, #hDivider.dragging { background: var(--accent); }
+#legend {
+  position: absolute; bottom: 12px; left: 12px; background: rgba(22,27,34,.85);
+  border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px;
+  font-size: 11px; color: var(--muted); display: none;
+}
+#legend .row { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
+#legend .swatch { width: 14px; height: 3px; border-radius: 2px; }
+
+#panel {
+  flex: 1 1 0; min-width: 200px; height: 100%;
+  background: var(--panel); display: flex; flex-direction: column; overflow: hidden;
+}
+.empty { padding: 40px 20px; color: var(--muted); text-align: center; }
+#panelContent { display: flex; flex-direction: column; height: 100%; padding: 14px; gap: 6px; overflow: hidden; }
+#countryName { font-size: 20px; flex: 0 0 auto; }
+.summary { font-size: 13px; color: var(--muted); line-height: 1.4; flex: 0 0 auto; }
+#mindmap { flex: 1 1 auto; min-height: 80px; border: 1px solid var(--line); border-radius: 8px; background: #0d1117; overflow: hidden; }
+
+/* ── Vertical divider (mindmap ↔ chat) ── */
+#vDivider {
+  flex: 0 0 6px; width: 100%; cursor: row-resize;
+  background: var(--line); border-radius: 3px;
+  transition: background .15s; position: relative;
+}
+#vDivider::before {
+  content: "⋯"; position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%); color: var(--muted);
+  font-size: 14px; letter-spacing: 2px; pointer-events: none;
+}
+#vDivider:hover, #vDivider.dragging { background: var(--accent); }
+
+/* stat cards */
+#statCards { display: flex; gap: 8px; flex-wrap: wrap; flex: 0 0 auto; }
+.stat-card { background: #0d1117; border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; flex: 1; min-width: 80px; }
+.stat-card .stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; }
+.stat-card .stat-value { font-size: 14px; font-weight: 600; color: var(--text); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* chat */
+#chat { display: flex; flex-direction: column; gap: 8px; flex: 0 0 260px; min-height: 160px; overflow: hidden; }
+#chatLogHeader { display: flex; justify-content: space-between; align-items: center; }
+#chatLogLabel { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+#chatHeaderBtns { display: flex; gap: 6px; }
+#expandChatLog, #clearChat { background: #21262d; color: var(--text); border: 1px solid var(--line); border-radius: 5px; padding: 3px 10px; font-size: 12px; cursor: pointer; }
+#expandChatLog:hover, #clearChat:hover { background: var(--accent); color: #07101f; }
+#clearChat:hover { background: #f85149; color: #fff; }
+#queueBadge { display: none; background: #f0883e; color: #07101f; border-radius: 10px; padding: 1px 7px; font-size: 11px; font-weight: 700; margin-left: 6px; }
+.msg.queued { background: #21262d; color: var(--muted); font-style: italic; font-size: 12px; }
+
+/* suggested chips */
+#chatLog { flex: 1 1 auto; min-height: 60px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+.msg { padding: 8px 10px; border-radius: 8px; line-height: 1.4; white-space: pre-wrap; }
+.msg.user { background: #1f6feb33; align-self: flex-end; }
+.msg.ai { background: #21262d; }
+.msg.err { background: #f8514922; color: #ffa198; }
+.chip { background: #21262d; border: 1px solid var(--line); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--muted); cursor: pointer; white-space: nowrap; transition: all .15s; }
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+#chatForm { display: flex; gap: 6px; align-items: flex-end; flex-shrink: 0; }
+#chatInput {
+  flex: 1; padding: 10px; border-radius: 6px; border: 1px solid var(--line);
+  background: #0d1117; color: var(--text); font-size: 14px;
+  resize: vertical; min-height: 60px; max-height: 300px; height: 80px;
+  line-height: 1.5; font-family: inherit; overflow-y: auto;
+}
+#chatForm button {
+  padding: 12px 20px; border: none; border-radius: 8px; background: var(--accent);
+  color: #07101f; font-weight: 700; cursor: pointer; font-size: 15px;
+  min-width: 70px; flex-shrink: 0; box-shadow: 0 0 10px #58a6ff55;
+  transition: background .15s, box-shadow .15s;
+}
+#chatForm button:hover { background: #79c0ff; box-shadow: 0 0 16px #58a6ff99; }
+#popupAsk {
+  padding: 8px 12px; border: none; border-radius: 6px; background: var(--accent);
+  color: #07101f; font-weight: 600; cursor: pointer; font-size: 13px;
+}
+
+.hidden { display: none !important; }
+.country { stroke: #0d1117; stroke-width: .5; cursor: pointer; transition: fill .15s; }
+.country.na { fill: var(--land); }
+.country.na:hover { fill: var(--land-hover); }
+.country.active { fill: var(--land-active); }
+.country.other { fill: #161b22; cursor: default; }
+/* Special country tints */
+.country[data-name="Russia"] { fill: #2a1520; }
+.country[data-name="Russia"]:hover { fill: #4a2030; }
+.country[data-name="Israel"] { fill: #1a2a1a; }
+.country[data-name="Israel"]:hover { fill: #264026; }
+.country[data-name="Palestine"] { fill: #1a1f2a; }
+.country[data-name="Palestine"]:hover { fill: #263040; }
+.country[data-name="Iran"] { fill: #2a1f10; }
+.country[data-name="Iran"]:hover { fill: #3f2f18; }
+.clabel { fill: var(--text); pointer-events: none; text-anchor: middle; opacity: .8; }
+
+#popup {
+  position: fixed; top: 50%; left: 35%; transform: translate(-50%, -50%);
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  padding: 18px; max-width: 340px; z-index: 50; box-shadow: 0 8px 30px rgba(0,0,0,.5);
+}
+#popup h3 { margin-bottom: 6px; font-size: 15px; }
+#popup p { font-size: 13px; color: var(--muted); line-height: 1.4; margin-bottom: 12px; }
+#popupClose { position: absolute; top: 8px; right: 10px; background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; }
+.tag { display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: 4px; margin: 2px 4px 2px 0; }
+.tag.CONFIRMED { background: #3fb95033; color: #56d364; }
+.tag.DISPUTED { background: #f8514933; color: #ffa198; }
+.tag.PARTIALLY { background: #d2992233; color: #e3b341; }
+
+/* ── Ancient world map ─────────────────────────────────────────────────── */
+.ancient-country { stroke: #1a1000 !important; stroke-width: .8px; transition: fill .25s; }
+.ancient-unknown  { fill: #111820; }
+.anc-mesopotamia  { fill: #7a5a00; }  /* gold — cradle of civilization */
+.anc-persia       { fill: #7a3010; }  /* dark red — Achaemenid */
+.anc-judea        { fill: #8a7a00; }  /* amber — Holy Land */
+.anc-levant       { fill: #5a5a20; }  /* olive — Levant / Phoenicia */
+.anc-egypt        { fill: #9a7000; }  /* deep gold — Kemet */
+.anc-arabia       { fill: #5a4010; }  /* sandy brown — Arabia */
+.anc-rome         { fill: #7a2020; }  /* Roman red — Western Empire */
+.anc-greece       { fill: #6a6a00; }  /* olive gold — Ancient Greece */
+.anc-byzantine    { fill: #5a2060; }  /* purple — Byzantine */
+.anc-germanic     { fill: #2a4a2a; }  /* forest green — Germanic tribes */
+.anc-norse        { fill: #1a3a5a; }  /* dark ocean blue — Norse */
+.anc-rus          { fill: #2a2a4a; }  /* deep blue — Slavic/Rus */
+
+/* Ancient region text labels */
+.ancient-label {
+  fill: #d4a855; font-size: 13px; font-weight: 700;
+  text-anchor: middle; dominant-baseline: middle;
+  pointer-events: none; letter-spacing: .5px;
+  text-shadow: 0 1px 4px #000;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+/* City marker styles */
+.city-glow { fill: none; stroke-width: 1.5; opacity: .4; }
+.city-dot  { opacity: .95; }
+.city-glow-holy    { stroke: #ffd700; } .city-dot-holy    { fill: #ffd700; }
+.city-glow-church  { stroke: #c080ff; } .city-dot-church  { fill: #c080ff; }
+.city-glow-islam   { stroke: #40c040; } .city-dot-islam   { fill: #40c040; }
+.city-glow-byzantine { stroke: #8080ff; } .city-dot-byzantine { fill: #8080ff; }
+.city-glow-philosophy { stroke: #60d0ff; } .city-dot-philosophy { fill: #60d0ff; }
+.city-glow-ancient { stroke: #ff9040; } .city-dot-ancient { fill: #ff9040; }
+
+.city-name {
+  fill: #e8d5a0; font-size: 10px; font-weight: 600;
+  pointer-events: none;
+  font-family: Georgia, "Times New Roman", serif;
+  text-shadow: 0 1px 3px #000;
+}
+.city-marker:hover .city-dot { r: 6px; }
+
+/* Religion map colors */
+.country.rel-mode { transition: fill .3s ease; }
+.country.rel-catholic   { fill: #4a1a6b !important; }
+.country.rel-catholic:hover  { fill: #6b2a9b !important; }
+.country.rel-protestant { fill: #1a3a6b !important; }
+.country.rel-protestant:hover{ fill: #2a5a9b !important; }
+.country.rel-orthodox   { fill: #1a4a6b !important; }
+.country.rel-orthodox:hover  { fill: #2a6a9b !important; }
+.country.rel-sunni      { fill: #1a5a2a !important; }
+.country.rel-sunni:hover     { fill: #2a7a3a !important; }
+.country.rel-shia       { fill: #0a3a1a !important; }
+.country.rel-shia:hover      { fill: #1a5a2a !important; }
+.country.rel-jewish     { fill: #6b5a00 !important; }
+.country.rel-jewish:hover    { fill: #9b8a00 !important; }
+.country.rel-mixed      { fill: #4a3a1a !important; }
+.country.rel-mixed:hover     { fill: #6a5a2a !important; }
+
+/* animated money flow */
+.flow { stroke: var(--finance); stroke-width: 2; fill: none; stroke-dasharray: 6 6; animation: dash 1s linear infinite; opacity: .9; }
+@keyframes dash { to { stroke-dashoffset: -12; } }
+.conn { stroke-width: 2; fill: none; opacity: .8; }
+.resicon { font-size: 16px; pointer-events: none; }
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   Map fills screen. Panel = bottom sheet. Agent = left drawer.
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Top bar ── */
+  #topbar { padding: 8px 12px; gap: 8px; }
+  #topbar h1 { font-size: 15px; }
+  .sub { display: none; }
+  #modeTabs .mode-tab { padding: 4px 10px; font-size: 12px; }
+  /* Hide timeline + toggles on mobile — too crowded */
+  #controls { display: none; }
+
+  /* ── Layout: map fills full screen ── */
+  #layout { flex-direction: row; position: relative; }
+  #agentBar { flex: 0 0 44px; }
+  #mapPane { flex: 1 1 auto; height: 100%; min-width: 0; }
+  #hDivider { display: none; }
+
+  /* ── Panel = bottom sheet ── */
+  #panel {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    width: 100%; height: 75vh;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -4px 30px rgba(0,0,0,.6);
+    z-index: 50;
+    transform: translateY(100%);
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+    flex-direction: column;
+    display: flex;
+  }
+  #panel.mobile-open { transform: translateY(0); }
+
+  /* Pull handle at top of sheet */
+  #mobilePanelHandle {
+    display: flex; justify-content: center; padding: 10px 0 4px;
+    flex-shrink: 0; cursor: pointer;
+  }
+  #mobilePanelPill {
+    width: 40px; height: 4px; border-radius: 2px; background: var(--line);
+  }
+
+  /* Close button top-right of sheet */
+  #mobilePanelClose {
+    display: block !important; position: absolute; top: 10px; right: 14px;
+    background: #21262d; border: 1px solid var(--line); color: var(--text);
+    border-radius: 50%; width: 28px; height: 28px; font-size: 14px;
+    cursor: pointer; z-index: 5; line-height: 1;
+  }
+
+  #panelContent { padding: 8px 12px; gap: 4px; }
+  #countryName { font-size: 17px; }
+  .summary { font-size: 12px; }
+  #statCards .stat-card { padding: 5px 8px; }
+  #statCards .stat-value { font-size: 12px; }
+
+  /* Mindmap takes available space */
+  #mindmap { flex: 1 1 auto; min-height: 120px; }
+  #vDivider { display: none; }
+
+  /* Chat pinned at bottom of sheet */
+  #chat { flex: 0 0 auto; min-height: 0; }
+  #chatLog { height: 100px; }
+  #chatInput { height: 60px; min-height: 40px; font-size: 14px; }
+
+  /* Agent drawer full height on mobile */
+  #agentDrawer { width: 85vw; max-width: 360px; }
+
+  /* Bigger tap targets */
+  .agent-btn { width: 36px; height: 36px; font-size: 16px; }
+  .chip { font-size: 12px; padding: 5px 12px; }
+  #agentDrawerResizeHandle { display: none; }
+}
+
+/* ── Search ── */
+#searchWrap { position: relative; }
+#searchInput {
+  background: #161b22; border: 1px solid var(--line); border-radius: 20px;
+  color: var(--text); font-size: 13px; padding: 5px 14px; width: 220px;
+  outline: none; transition: border-color .15s, width .2s;
+}
+#searchInput:focus { border-color: var(--accent); width: 280px; }
+#searchResults {
+  position: absolute; top: calc(100% + 6px); left: 0; width: 300px;
+  background: #161b22; border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.5); z-index: 100; overflow: hidden;
+}
+.search-item {
+  padding: 9px 14px; cursor: pointer; display: flex; align-items: center; gap: 10px;
+  font-size: 13px; border-bottom: 1px solid #21262d;
+}
+.search-item:last-child { border-bottom: none; }
+.search-item:hover { background: #1f2937; }
+.search-item-icon { font-size: 15px; width: 20px; text-align: center; }
+.search-item-label { flex: 1; }
+.search-item-type { font-size: 10px; color: var(--muted); text-transform: uppercase; }
+
+/* ── Focus mode ── */
+#panelTitleRow { display: flex; align-items: center; justify-content: space-between; }
+#focusModeBtn {
+  background: #21262d; border: 1px solid var(--line); border-radius: 6px;
+  color: var(--muted); font-size: 12px; padding: 3px 10px; cursor: pointer;
+}
+#focusModeBtn:hover { border-color: var(--accent); color: var(--accent); }
+#layout.focus-mode #mapPane,
+#layout.focus-mode #hDivider,
+#layout.focus-mode #agentBar { display: none; }
+#layout.focus-mode #panel { flex: 1 1 100%; }
+#layout.focus-mode #focusModeBtn { background: var(--accent); color: #07101f; border-color: var(--accent); }
+
+/* ── Follow-up chips after AI answer ── */
+.msg-followups { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; padding: 0 2px; }
+.followup-chip {
+  background: #21262d; border: 1px solid var(--line); border-radius: 14px;
+  padding: 3px 11px; font-size: 11px; color: var(--muted); cursor: pointer;
+  transition: all .15s;
+}
+.followup-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── Agent country glow ── */
+.country.agent-glow { animation: agentPulse 2.5s ease-in-out infinite; }
+@keyframes agentPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .55; }
+}

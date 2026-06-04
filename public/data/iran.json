@@ -1,0 +1,62 @@
+{
+  "country": "Iran",
+  "summary": "A Shia Islamic Republic and regional power whose nuclear programme, proxy network (Hezbollah, Hamas, Houthis), and rivalry with Saudi Arabia and Israel make it the most destabilising force in the Middle East — and whose people have repeatedly protested against the theocratic government.",
+  "history": [
+    { "year": -550, "event": "Achaemenid Persian Empire", "detail": "Cyrus the Great founds history's first superpower; rules from Egypt to India." },
+    { "year": 1906, "event": "Constitutional Revolution", "detail": "First constitutional government in Asia; limits royal power." },
+    { "year": 1953, "event": "CIA/MI6 coup (Operation Ajax)", "detail": "Democratically elected PM Mossadegh overthrown for nationalising oil; Shah restored. CONFIRMED by CIA 2013." },
+    { "year": 1963, "event": "White Revolution", "detail": "Shah's modernisation programme; alienates clergy — particularly Khomeini." },
+    { "year": 1979, "event": "Islamic Revolution", "detail": "Shah overthrown; Ayatollah Khomeini returns; theocratic republic established." },
+    { "year": 1979, "event": "US Embassy hostage crisis", "detail": "444 days; 52 American diplomats held; break in US-Iran relations." },
+    { "year": 1980, "event": "Iran-Iraq War", "detail": "Iraq (with US support) invades; 8-year war kills ~1M; chemical weapons used against Iranians." },
+    { "year": 1988, "event": "USS Vincennes shoots down Iranian airliner", "detail": "290 civilians killed; US paid compensation but never apologised. CONFIRMED." },
+    { "year": 2002, "event": "Nuclear programme revealed", "detail": "Secret enrichment facilities disclosed; years of IAEA negotiations begin." },
+    { "year": 2015, "event": "JCPOA nuclear deal", "detail": "Iran limits enrichment for sanctions relief; US, EU, Russia, China co-sign." },
+    { "year": 2018, "event": "Trump withdraws from JCPOA", "detail": "Maximum pressure sanctions; Iran resumes enrichment." },
+    { "year": 2020, "event": "Soleimani assassination", "detail": "US drone strike kills General Qasem Soleimani in Baghdad." },
+    { "year": 2022, "event": "Mahsa Amini protests", "detail": "Woman dies in morality police custody; nationwide uprising — 'Woman, Life, Freedom'." }
+  ],
+  "geopolitics": {
+    "allies": ["Russia", "China", "Hezbollah", "Hamas", "Houthis", "Syrian government"],
+    "enemies_rivals": ["USA", "Israel", "Saudi Arabia", "UAE"],
+    "alliances": ["Axis of Resistance (informal)", "SCO member", "BRICS partner"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Velayat-e Faqih (Supreme Leader governance)", "Resistance economy", "Proxy network strategy", "Nuclear ambiguity"]
+  },
+  "finance": {
+    "currency_role": "Rial (IRR); one of world's most devalued currencies due to sanctions",
+    "central_bank": "Central Bank of Iran (1960)",
+    "national_debt_usd_trillions": 0.05,
+    "key_institutions": ["NIOC (National Iranian Oil Company)", "IRGC economic empire (40% of economy)"],
+    "leverage_tools": ["Oil exports (via sanctions-busting to China/India)", "IRGC business network", "Strait of Hormuz (30% of world oil passes through)"]
+  },
+  "tech_startups": {
+    "hubs": ["Tehran"],
+    "big_tech": ["Snapp (Uber of Iran)", "Digikala", "Tapsi"],
+    "vc_ecosystem": "Growing domestic ecosystem despite sanctions; isolated from global capital",
+    "gov_tech_links": ["IRGC cyber units", "APT33, APT34 (Iranian state hacking groups)", "Drone manufacturing for Russia"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "4th largest oil reserves, 2nd largest natural gas reserves globally",
+    "rare_earths": "Significant copper, zinc, chromite, uranium deposits",
+    "water": "Severe water crisis; Lake Urmia near extinction",
+    "agriculture": "Pistachios, saffron, dates — significant exports"
+  },
+  "follow_the_money": [
+    { "flow": "Sanctions-busting oil exports", "detail": "Ghost tankers ship oil to China, India, Venezuela; estimated $40-60B/yr revenue" },
+    { "flow": "IRGC economic empire", "detail": "Revolutionary Guards control construction, telecom, oil — estimated 40% of GDP" },
+    { "flow": "Strait of Hormuz leverage", "detail": "Can block 30% of global seaborne oil; existential leverage in any conflict" }
+  ],
+  "theories_disputed": [
+    { "topic": "1953 CIA coup — Operation Ajax", "status": "CONFIRMED", "detail": "CIA and MI6 overthrew democratically elected PM Mossadegh; CIA confirmed in 2013 declassified documents.", "tags": ["CIA", "MI6", "coup"] },
+    { "topic": "Nuclear weapons programme", "status": "DISPUTED", "detail": "IAEA reports enrichment to 84% (weapons-grade: 90%); Iran denies weapons intent; US/Israel say months from capability.", "tags": ["nuclear", "IAEA"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "rivalry", "detail": "No diplomatic relations since 1980; maximum pressure sanctions; proxy conflicts", "year": 1979 },
+    { "to": "Israel", "type": "rivalry", "detail": "Existential conflict; shadow war of assassinations, nuclear sabotage, proxy attacks", "year": 1979 },
+    { "to": "Russia", "type": "military", "detail": "Shaheed drones supplied to Russia for Ukraine war", "year": 2022 },
+    { "to": "Saudi Arabia", "type": "rivalry", "detail": "Sunni vs Shia proxy war across Yemen, Iraq, Lebanon, Syria", "year": 1979 },
+    { "to": "China", "type": "trade", "detail": "25-year strategic cooperation deal; main buyer of sanctioned Iranian oil", "year": 2021 }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "country": "Mexico",
+  "summary": "A major emerging economy and manufacturing hub tightly linked to the US, navigating cartel violence, migration pressures, and rising 'nearshoring' investment.",
+  "history": [
+    { "year": 1810, "event": "War of Independence begins", "detail": "Revolt against Spanish rule; independence achieved 1821." },
+    { "year": 1846, "event": "Mexican-American War", "detail": "Lost roughly half its territory to the US by 1848." },
+    { "year": 1910, "event": "Mexican Revolution", "detail": "Decade-long upheaval reshaping land and politics." },
+    { "year": 1994, "event": "NAFTA + Zapatista uprising", "detail": "Free trade with US/Canada; indigenous revolt in Chiapas." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Canada"],
+    "enemies_rivals": [],
+    "alliances": ["USMCA", "G20", "OECD"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Estrada Doctrine (non-intervention)"]
+  },
+  "finance": {
+    "currency_role": "MXN, a liquid emerging-market currency",
+    "central_bank": "Banco de México (1925)",
+    "national_debt_usd_trillions": 0.8,
+    "key_institutions": ["IMF member", "G20", "OECD"],
+    "leverage_tools": ["Manufacturing base", "remittances", "nearshoring"]
+  },
+  "tech_startups": {
+    "hubs": ["Mexico City", "Guadalajara ('Silicon Valley of Mexico')", "Monterrey"],
+    "big_tech": ["Kavak", "Bitso"],
+    "vc_ecosystem": "Fast-growing fintech and e-commerce scene",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "State oil firm Pemex; declining output",
+    "rare_earths": "Some reserves",
+    "lithium": "Nationalized 2022; Sonora deposits",
+    "water": "Stress in north and central regions",
+    "agriculture": "Avocados, corn, tomatoes — major US exporter"
+  },
+  "follow_the_money": [
+    { "flow": "Remittances", "detail": "Over $60B/yr sent home from workers in the US" },
+    { "flow": "Nearshoring FDI", "detail": "Factories relocating from Asia to Mexico" }
+  ],
+  "theories_disputed": [],
+  "connections": [
+    { "to": "USA", "type": "trade", "detail": "USMCA, deep supply-chain integration", "year": 1994 }
+  ]
+}

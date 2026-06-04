@@ -1,0 +1,53 @@
+{
+  "country": "Italy",
+  "summary": "A G7 economy, NATO founding member, and EU pillar with chronic political instability and high public debt, home to the world's largest cultural heritage sector and a powerful industrial north.",
+  "history": [
+    { "year": 1861, "event": "Italian unification (Risorgimento)", "detail": "Multiple kingdoms unified under the House of Savoy." },
+    { "year": 1915, "event": "Joins WWI on Allied side", "detail": "Promised territories; received less than expected (mutilated victory)." },
+    { "year": 1922, "event": "Mussolini's March on Rome", "detail": "Fascist takeover; Mussolini becomes PM, then Duce (dictator)." },
+    { "year": 1940, "event": "Enters WWII on Axis side", "detail": "Allied with Nazi Germany; disastrous military campaigns in Africa and Greece." },
+    { "year": 1943, "event": "Italy switches sides", "detail": "Allied invasion; Mussolini deposed, then reinstated by Germans in north." },
+    { "year": 1948, "event": "Republic established", "detail": "Christian Democrats dominate Cold War politics." },
+    { "year": 1957, "event": "EEC founding member", "detail": "Signs Treaty of Rome; European project co-founder." },
+    { "year": 1992, "event": "Mani Pulite (Clean Hands)", "detail": "Corruption investigations destroy traditional party system; Berlusconi era begins." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Germany", "France", "UK"],
+    "enemies_rivals": [],
+    "alliances": ["NATO", "EU", "G7", "G20"],
+    "military_bases_abroad": 4,
+    "key_doctrines": ["Atlanticism", "Mediterranean stability", "European integration"]
+  },
+  "finance": {
+    "currency_role": "EUR; Italy is third-largest eurozone economy",
+    "central_bank": "Banca d'Italia (1893)",
+    "national_debt_usd_trillions": 3.0,
+    "key_institutions": ["UniCredit", "Intesa Sanpaolo", "Mediobanca"],
+    "leverage_tools": ["Tourism economy", "Luxury goods (Ferrari, Armani, Prada)", "Agri-food exports"]
+  },
+  "tech_startups": {
+    "hubs": ["Milan", "Rome", "Turin"],
+    "big_tech": ["Leonardo (aerospace/defence)", "STMicroelectronics"],
+    "vc_ecosystem": "Smaller than France/Germany; growing",
+    "gov_tech_links": ["Leonardo (state-owned defence)"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Minimal domestic; major importer; was dependent on Russia",
+    "rare_earths": "None",
+    "water": "Po Valley water stress; Venice flooding",
+    "agriculture": "Olive oil, wine, tomatoes — major exporter"
+  },
+  "follow_the_money": [
+    { "flow": "Tourism", "detail": "~$50B/yr; largest cultural tourism sector in Europe" },
+    { "flow": "Mafia economy", "detail": "Estimated €100B underground economy linked to organised crime" }
+  ],
+  "theories_disputed": [
+    { "topic": "Gladio (Operation Gladio)", "status": "CONFIRMED", "detail": "CIA/NATO-backed stay-behind network in Italy; linked to political violence during 'Years of Lead'. Admitted by Italian PM Andreotti 1990.", "tags": ["CIA", "NATO", "confirmed"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "military", "detail": "NATO ally; US bases at Aviano, Sigonella", "year": 1949 },
+    { "to": "Germany", "type": "trade", "detail": "Major trade and investment partner", "year": 1957 },
+    { "to": "Libya", "type": "trade", "detail": "Major oil importer; Mattei formula energy agreements", "year": 1970 }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "country": "Israel",
+  "summary": "A nuclear-armed democracy founded in 1948 on contested land, backed militarily and financially by the United States, in ongoing conflict with Palestinians and surrounding Arab states, and a global tech powerhouse per capita.",
+  "history": [
+    { "year": 1897, "event": "First Zionist Congress", "detail": "Theodor Herzl convenes congress in Basel; political Zionism formalised." },
+    { "year": 1917, "event": "Balfour Declaration", "detail": "UK promises 'national home for Jewish people' in Palestine while it was home to Arab majority." },
+    { "year": 1933, "event": "Nazi rise / Jewish emigration to Palestine", "detail": "Holocaust (1933-45) kills 6M Jews; mass immigration to Mandatory Palestine." },
+    { "year": 1947, "event": "UN Partition Plan", "detail": "UN Resolution 181 proposes partition into Jewish and Arab states; Arabs reject it." },
+    { "year": 1948, "event": "State of Israel declared / Nakba", "detail": "Independence declared May 14; Arab armies invade. 700,000 Palestinians flee or expelled — the Nakba ('catastrophe')." },
+    { "year": 1956, "event": "Suez Crisis", "detail": "Israel joins UK/France attack on Egypt; forced back by US/USSR pressure." },
+    { "year": 1967, "event": "Six-Day War", "detail": "Israel captures West Bank, Gaza, Sinai, Golan Heights in 6 days; occupation begins." },
+    { "year": 1973, "event": "Yom Kippur War", "detail": "Egypt/Syria surprise attack; Israel survives; US emergency airlift decisive." },
+    { "year": 1979, "event": "Peace treaty with Egypt", "detail": "Camp David Accords; Sinai returned. First Arab-Israeli peace." },
+    { "year": 1982, "event": "Lebanon War", "detail": "Invasion to expel PLO; Sabra and Shatila massacre by Lebanese militias." },
+    { "year": 1993, "event": "Oslo Accords", "detail": "Secret talks; Rabin and Arafat shake hands; Palestinian Authority created." },
+    { "year": 1995, "event": "Rabin assassinated", "detail": "PM Yitzhak Rabin killed by Jewish extremist opposed to Oslo peace process." },
+    { "year": 2006, "event": "Second Lebanon War", "detail": "War with Hezbollah; inconclusive outcome." },
+    { "year": 2008, "event": "Gaza War (Cast Lead)", "detail": "First of multiple major military operations in Gaza." },
+    { "year": 2023, "event": "Hamas October 7 attack / Gaza War", "detail": "Hamas kills ~1,200 Israelis, kidnaps 250; Israel's response kills 40,000+ in Gaza." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "UK", "Germany", "UAE", "Bahrain", "Morocco", "Saudi Arabia (covert)"],
+    "enemies_rivals": ["Iran", "Hezbollah", "Hamas", "Syria (historically)", "Houthis"],
+    "alliances": ["Abraham Accords (2020)", "Informal US security guarantee"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Begin Doctrine (pre-emptive strike on nuclear threats)", "Dahiya Doctrine (disproportionate response)", "Samson Option (nuclear last resort)", "Qualitative Military Edge (US-maintained)"]
+  },
+  "finance": {
+    "currency_role": "New Shekel (ILS); high-tech export economy",
+    "central_bank": "Bank of Israel (1954)",
+    "national_debt_usd_trillions": 0.34,
+    "key_institutions": ["Bank Hapoalim", "Bank Leumi", "Mossad investment arms"],
+    "leverage_tools": ["US military aid ($3.8B/yr)", "Tech sector exports", "Diamond trade (Tel Aviv-Antwerp)", "Intelligence exports (cyber tools)"]
+  },
+  "tech_startups": {
+    "hubs": ["Tel Aviv ('Silicon Wadi')", "Haifa", "Jerusalem", "Beer-Sheva (cyber hub)"],
+    "big_tech": ["Check Point", "Amdocs", "NICE", "Mobileye (Intel)", "Waze (Google)"],
+    "vc_ecosystem": "Highest R&D spend as % of GDP globally; 3rd most startups per capita",
+    "gov_tech_links": ["Unit 8200 (NSA equivalent) — feeds tech talent", "MOSSAD/Shin Bet cyber tools", "IAI (aerospace)", "Rafael (defence systems)"],
+    "ai_leaders": ["AI21 Labs", "Tabnine", "Cybereason"]
+  },
+  "resources": {
+    "oil_gas": "Leviathan gas field (offshore Med) — now major exporter to Egypt/Jordan",
+    "rare_earths": "Limited",
+    "water": "Water-scarce; world leader in desalination and drip irrigation technology",
+    "agriculture": "Desert agriculture innovation; major tech-agri exporter"
+  },
+  "follow_the_money": [
+    { "flow": "US military aid", "detail": "$3.8B/yr guaranteed; Iron Dome, F-35s, ammunition" },
+    { "flow": "NSO Group / Pegasus spyware", "detail": "Israeli cyber surveillance sold to authoritarian regimes globally; US sanctions on NSO" },
+    { "flow": "Diaspora investment", "detail": "Birthright, bonds, Jewish diaspora philanthropy drives billions into Israeli economy" }
+  ],
+  "theories_disputed": [
+    { "topic": "Nuclear weapons (Samson Option)", "status": "PARTIALLY CONFIRMED", "detail": "Israel has never confirmed nuclear weapons but is widely accepted to have 80-400 warheads; policy of nuclear ambiguity since 1960s.", "tags": ["nuclear", "ambiguity"] },
+    { "topic": "USS Liberty attack (1967)", "status": "DISPUTED", "detail": "Israel attacked US spy ship killing 34 Americans; official: mistaken identity; many survivors and analysts believe deliberate.", "tags": ["USA", "military"] },
+    { "topic": "Lavon Affair", "status": "CONFIRMED", "detail": "Israeli intelligence planted bombs in Egyptian cinemas to blame on Muslim Brotherhood 1954; Israel officially acknowledged 2005.", "tags": ["Mossad", "false flag"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "military", "detail": "$3.8B/yr military aid; Iron Dome co-development; strategic guarantor", "year": 1973 },
+    { "to": "Iran", "type": "rivalry", "detail": "Existential conflict; shadow war of assassinations, sabotage, proxy battles", "year": 1979 },
+    { "to": "Palestine", "type": "war", "detail": "Occupation of West Bank; blockade and war in Gaza", "year": 1967 },
+    { "to": "UAE", "type": "trade", "detail": "Abraham Accords normalisation 2020; growing tech and intelligence ties", "year": 2020 },
+    { "to": "Saudi Arabia", "type": "intelligence", "detail": "Covert intelligence sharing on Iran; normalisation negotiations ongoing", "year": 2020 }
+  ]
+}

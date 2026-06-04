@@ -1,0 +1,60 @@
+{
+  "country": "Palestine",
+  "summary": "A stateless nation under Israeli military occupation seeking internationally-recognised statehood. The West Bank is governed by the Palestinian Authority; Gaza was governed by Hamas until the 2023-2024 war. Over 5 million Palestinians live in refugee camps across the region.",
+  "history": [
+    { "year": 1917, "event": "Balfour Declaration", "detail": "Britain promises a Jewish homeland in Palestine without consulting the Arab majority already living there." },
+    { "year": 1936, "event": "Arab Revolt", "detail": "Palestinians revolt against British rule and Jewish immigration; brutally suppressed." },
+    { "year": 1947, "event": "UN Partition Plan rejected", "detail": "UN proposes 56% of land to Jewish state (one-third of population); Arabs reject as unjust." },
+    { "year": 1948, "event": "Nakba ('The Catastrophe')", "detail": "700,000+ Palestinians flee or expelled during creation of Israel; 500+ villages destroyed." },
+    { "year": 1964, "event": "PLO founded", "detail": "Palestine Liberation Organisation founded in Cairo; Yasser Arafat takes control 1969." },
+    { "year": 1967, "event": "Israeli occupation begins", "detail": "Israel occupies West Bank, Gaza, East Jerusalem in Six-Day War. Occupation continues." },
+    { "year": 1987, "event": "First Intifada", "detail": "Palestinian uprising against occupation; rocks vs. soldiers; lasting political impact." },
+    { "year": 1993, "event": "Oslo Accords", "detail": "PLO recognises Israel; Israel recognises PLO; Palestinian Authority created to govern parts of West Bank and Gaza." },
+    { "year": 2000, "event": "Camp David / Second Intifada", "detail": "Peace talks collapse; five years of violence kill ~3,000 Palestinians and ~1,000 Israelis." },
+    { "year": 2005, "event": "Israel disengages from Gaza", "detail": "Settlers removed; Gaza blockade begins." },
+    { "year": 2006, "event": "Hamas wins elections / blockade", "detail": "Hamas wins Palestinian legislative elections; US/Israel refuse to recognise; Gaza blockade imposed." },
+    { "year": 2007, "event": "Hamas-Fatah split", "detail": "Hamas seizes Gaza; West Bank run by PA (Fatah); Palestinian polity divided." },
+    { "year": 2023, "event": "October 7 Hamas attack / Gaza War", "detail": "Hamas kills ~1,200 Israelis; Israel's response kills 40,000+ Palestinians, displaces 2M, destroys most of Gaza's infrastructure." }
+  ],
+  "geopolitics": {
+    "allies": ["Qatar", "Turkey", "Iran (Hamas only)", "South Africa", "Global South broad support"],
+    "enemies_rivals": ["Israel"],
+    "alliances": ["Arab League (observer)", "OIC", "UN General Assembly recognition (139 countries)"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Right of return (UN Resolution 194)", "Two-state solution (internationally endorsed)", "Resistance (Hamas doctrine)"]
+  },
+  "finance": {
+    "currency_role": "No independent currency; uses Israeli Shekel, Jordanian Dinar, USD",
+    "central_bank": "Palestinian Monetary Authority (limited functions)",
+    "national_debt_usd_trillions": 0.004,
+    "key_institutions": ["Palestinian Authority budget (donor-dependent)", "UNRWA (UN refugee agency)"],
+    "leverage_tools": ["International solidarity", "BDS movement", "UNRWA dependency as pressure point"]
+  },
+  "tech_startups": {
+    "hubs": ["Ramallah", "Gaza (pre-war)", "East Jerusalem"],
+    "big_tech": [],
+    "vc_ecosystem": "Extremely limited due to occupation restrictions on movement, imports, and finance",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Gaza offshore gas field (discovered; blocked from development by Israel)",
+    "water": "Severe water crisis; Palestinians in West Bank have 20% of the per-capita water access of Israeli settlers",
+    "agriculture": "Olive groves (culturally central); Israeli restrictions limit farming in much of West Bank"
+  },
+  "follow_the_money": [
+    { "flow": "International donor funding", "detail": "PA almost entirely dependent on EU, US, Arab donor funding; periodically cut as political pressure" },
+    { "flow": "Remittances", "detail": "Palestinian diaspora (~13M globally) sends remittances" },
+    { "flow": "Israeli tax clearance revenue", "detail": "Israel collects taxes on behalf of PA, regularly withholds as punishment" }
+  ],
+  "theories_disputed": [
+    { "topic": "Gaza genocide (ICJ case)", "status": "DISPUTED", "detail": "South Africa filed ICJ case alleging Israel committing genocide in Gaza 2024; ICJ ordered provisional measures; final ruling pending.", "tags": ["ICJ", "genocide", "Gaza"] },
+    { "topic": "Oslo Accords as trap", "status": "DISPUTED", "detail": "Many Palestinian scholars argue Oslo legitimised occupation while fragmenting Palestinian governance without path to statehood.", "tags": ["Oslo", "PA", "occupation"] }
+  ],
+  "connections": [
+    { "to": "Israel", "type": "war", "detail": "Military occupation of West Bank; war in Gaza", "year": 1967 },
+    { "to": "Jordan", "type": "trade", "detail": "Historical relationship; many Palestinians are Jordanian citizens", "year": 1948 },
+    { "to": "Qatar", "type": "finance", "detail": "Qatar funds Hamas via UN-approved payments; major donor to Gaza", "year": 2012 },
+    { "to": "Iran", "type": "military", "detail": "Iran arms Hamas and Islamic Jihad", "year": 2000 }
+  ]
+}

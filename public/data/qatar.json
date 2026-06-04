@@ -1,0 +1,51 @@
+{
+  "country": "Qatar",
+  "summary": "A tiny gas-rich emirate that punches above its weight through Al Jazeera, massive sovereign wealth, hosting of the US airbase at Al-Udeid, and diplomacy that talks to everyone — including Hamas, the Taliban, and Iran — simultaneously.",
+  "history": [
+    { "year": 1916, "event": "British protectorate", "detail": "Qatar becomes British protectorate." },
+    { "year": 1971, "event": "Independence", "detail": "British withdraw; Qatar independent." },
+    { "year": 1995, "event": "Current Emir (Hamad) takes power in coup", "detail": "Son overthrows father; rapid modernisation begins." },
+    { "year": 1996, "event": "Al Jazeera founded", "detail": "Transforms Arab media; broadcasts voices previously suppressed." },
+    { "year": 2017, "event": "Saudi-led blockade", "detail": "Saudi Arabia, UAE, Bahrain, Egypt blockade Qatar for 3.5 years over Al Jazeera and Iran ties." },
+    { "year": 2022, "event": "FIFA World Cup", "detail": "First World Cup in Middle East; $200B+ spending; migrant worker deaths controversy." }
+  ],
+  "geopolitics": {
+    "allies": ["USA (Al-Udeid base)", "Turkey", "Iran (gas field sharing)"],
+    "enemies_rivals": ["Saudi Arabia (historically)"],
+    "alliances": ["GCC", "Arab League"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Omni-directional diplomacy", "Soft power via Al Jazeera and sports", "LNG leverage"]
+  },
+  "finance": {
+    "currency_role": "Riyal (QAR) pegged to USD",
+    "central_bank": "Qatar Central Bank (1993)",
+    "national_debt_usd_trillions": 0.18,
+    "key_institutions": ["Qatar Investment Authority ($475B)", "Qatar Airways", "Al Jazeera", "Qatar National Bank"],
+    "leverage_tools": ["LNG — world's 3rd largest exporter", "QIA investments globally (Heathrow, Harrods, PSG, Barclays)", "Hamas mediation"]
+  },
+  "tech_startups": {
+    "hubs": ["Doha (Qatar Science & Technology Park)"],
+    "big_tech": [],
+    "vc_ecosystem": "QIA-backed but limited organic ecosystem",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "World's 3rd largest natural gas reserves (North Dome — shared with Iran); major LNG exporter",
+    "water": "Extreme scarcity; fully desalination dependent"
+  },
+  "follow_the_money": [
+    { "flow": "QIA global investments", "detail": "$475B sovereign wealth in Heathrow, Harrods, PSG football, Barclays, Volkswagen" },
+    { "flow": "Hamas funding", "detail": "Qatar pays Hamas $30M/month through UN-approved mechanism; also funds Gaza reconstruction" },
+    { "flow": "LNG exports", "detail": "Europe scrambled for Qatari LNG after Russia cut gas 2022; huge leverage" }
+  ],
+  "theories_disputed": [
+    { "topic": "Qatar 2022 World Cup bribery", "status": "PARTIALLY CONFIRMED", "detail": "FBI/Swiss investigations confirmed bribes paid to FIFA officials; Qatar denies direct state involvement.", "tags": ["FIFA", "corruption"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "military", "detail": "Al-Udeid Air Base — largest US base in Middle East (10,000 troops)", "year": 1996 },
+    { "to": "Palestine", "type": "finance", "detail": "Qatar funds Hamas and Gaza reconstruction; key mediation role", "year": 2012 },
+    { "to": "Iran", "type": "trade", "detail": "Share North Dome gas field; maintained relations during blockade", "year": 1971 },
+    { "to": "Turkey", "type": "military", "detail": "Turkish troops deployed in Qatar during Saudi blockade", "year": 2017 }
+  ]
+}

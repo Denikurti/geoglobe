@@ -1,0 +1,54 @@
+{
+  "country": "Iraq",
+  "summary": "An oil-rich Arab state devastated by Saddam Hussein's dictatorship, the Iran-Iraq War, two US-led Gulf Wars, ISIS occupation, and chronic sectarian conflict — now a weak democracy caught between US and Iranian influence.",
+  "history": [
+    { "year": 1920, "event": "British Mandate created", "detail": "UK draws borders combining Sunni, Shia, Kurdish populations with no historical basis." },
+    { "year": 1958, "event": "Monarchy overthrown", "detail": "Military coup; King Faisal II killed; Republic proclaimed." },
+    { "year": 1979, "event": "Saddam Hussein takes power", "detail": "Purges rivals; absolute dictatorship begins." },
+    { "year": 1980, "event": "Iran-Iraq War", "detail": "Saddam invades Iran; 8-year war with ~1M dead; US backs Saddam." },
+    { "year": 1988, "event": "Halabja chemical attack", "detail": "Saddam's forces kill 5,000 Kurds with chemical weapons. CONFIRMED." },
+    { "year": 1990, "event": "Invades Kuwait", "detail": "Annexation triggers Gulf War; US-led coalition expels Iraq 1991." },
+    { "year": 2003, "event": "US invasion / fall of Saddam", "detail": "WMD claims proven false; Saddam captured; sectarian civil war erupts." },
+    { "year": 2006, "event": "Civil war peak", "detail": "100,000+ killed in sectarian violence; Al-Qaeda in Iraq rises." },
+    { "year": 2014, "event": "ISIS seizes Mosul", "detail": "Islamic State captures 1/3 of Iraq; Yazidi genocide; US returns with airstrikes." },
+    { "year": 2017, "event": "ISIS defeated", "detail": "Mosul liberated; ISIS territorial caliphate destroyed." }
+  ],
+  "geopolitics": {
+    "allies": ["Iran (Shia government ties)", "USA (security)", "Turkey"],
+    "enemies_rivals": ["ISIS remnants", "Kurdish separatism tension"],
+    "alliances": ["Arab League", "OPEC"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Balancing Iran vs USA", "Federal system (Kurds autonomous)"]
+  },
+  "finance": {
+    "currency_role": "Iraqi Dinar (IQD); oil-dependent economy",
+    "central_bank": "Central Bank of Iraq (1947)",
+    "national_debt_usd_trillions": 0.25,
+    "key_institutions": ["Iraq National Oil Company", "Trade Bank of Iraq"],
+    "leverage_tools": ["OPEC oil exports (~4M bpd)", "US dollar reserves"]
+  },
+  "tech_startups": {
+    "hubs": ["Baghdad", "Erbil (Kurdistan)"],
+    "big_tech": [],
+    "vc_ecosystem": "Nascent; Kurdistan more developed",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "5th largest oil reserves globally; OPEC member",
+    "water": "Tigris and Euphrates — cradle of civilisation; rivers threatened by Turkish dams and climate change",
+    "agriculture": "Dates; ancient Mesopotamian farmland degraded by war and water stress"
+  },
+  "follow_the_money": [
+    { "flow": "Oil exports", "detail": "90%+ of government revenue from oil; $100B+/yr" },
+    { "flow": "US reconstruction contracts", "detail": "Billions in US contracts post-2003 to Halliburton, KBR etc; massive corruption" }
+  ],
+  "theories_disputed": [
+    { "topic": "Iraq WMDs", "status": "CONFIRMED", "detail": "WMDs did not exist. Intelligence was manipulated or fabricated to justify 2003 invasion. Chilcot Inquiry and Senate Intelligence Committee confirmed.", "tags": ["USA", "UK", "intelligence failure"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "military", "detail": "US troops remain; ongoing security cooperation", "year": 2003 },
+    { "to": "Iran", "type": "ideology", "detail": "Shia-majority government with deep Iranian influence; Iranian-backed militias", "year": 2003 },
+    { "to": "Saudi Arabia", "type": "rivalry", "detail": "Sunni-Shia proxy dimension; Saudi relations improving", "year": 1980 }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "country": "Poland",
+  "summary": "Central Europe's largest economy, a key NATO eastern flank state, and now Europe's main conduit for military aid to Ukraine — building one of Europe's largest armies after centuries of being partitioned by neighbours.",
+  "history": [
+    { "year": 966, "event": "Kingdom of Poland founded", "detail": "Mieszko I accepts Christianity; Poland enters European civilisation." },
+    { "year": 1795, "event": "Third Partition of Poland", "detail": "Poland disappears from map, divided between Russia, Prussia, Austria for 123 years." },
+    { "year": 1918, "event": "Independence restored", "detail": "Poland re-emerges after WWI; fights Soviet Russia 1920 (Battle of Warsaw)." },
+    { "year": 1939, "event": "WWII — invaded by Germany and USSR", "detail": "First country invaded in WWII; 6 million Polish citizens killed (half Jewish)." },
+    { "year": 1944, "event": "Warsaw Uprising", "detail": "Heroic but failed 63-day uprising against Nazi occupation; city levelled." },
+    { "year": 1980, "event": "Solidarity movement", "detail": "Lech Wałęsa leads trade union that challenges Communist rule." },
+    { "year": 1989, "event": "Fall of Communism", "detail": "Roundtable Agreement; first free elections in Eastern Europe." },
+    { "year": 1999, "event": "Joins NATO", "detail": "Security anchor after Soviet withdrawal." },
+    { "year": 2004, "event": "Joins EU", "detail": "Economic transformation; largest single beneficiary of EU structural funds." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "UK", "Germany", "Ukraine", "Baltic states"],
+    "enemies_rivals": ["Russia", "Belarus"],
+    "alliances": ["NATO", "EU", "Bucharest Nine (eastern flank)"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Eastern flank defence", "Pro-Ukraine solidarity", "Atlanticism"]
+  },
+  "finance": {
+    "currency_role": "Złoty (PLN); retained own currency outside eurozone",
+    "central_bank": "Narodowy Bank Polski (1945)",
+    "national_debt_usd_trillions": 0.35,
+    "key_institutions": ["PKO Bank Polski", "PZU Insurance"],
+    "leverage_tools": ["EU structural funds recipient", "Manufacturing hub for Western Europe"]
+  },
+  "tech_startups": {
+    "hubs": ["Warsaw", "Kraków", "Wrocław"],
+    "big_tech": ["CD Projekt (Witcher/Cyberpunk)", "Allegro", "Docplanner"],
+    "vc_ecosystem": "CEE's largest; strong gaming and fintech",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Some domestic gas; coal-dependent economy transitioning",
+    "coal": "EU's largest coal producer; major political issue",
+    "water": "Water stress in central regions",
+    "agriculture": "Major apple, pork, grain exporter"
+  },
+  "follow_the_money": [
+    { "flow": "EU structural funds", "detail": "Largest recipient historically; ~€160B in 2021-2027 cycle" },
+    { "flow": "Defence spending surge", "detail": "4% of GDP — highest in NATO; major arms purchases" }
+  ],
+  "theories_disputed": [
+    { "topic": "Smolensk plane crash 2010", "status": "DISPUTED", "detail": "Polish president Kaczyński and 95 officials killed; official: pilot error in fog; some politicians allege Russian involvement.", "tags": ["Russia", "assassination"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "military", "detail": "Permanent US troops stationed; Patriot missiles deployed", "year": 1999 },
+    { "to": "Ukraine", "type": "military", "detail": "Main weapons transit and refugee host", "year": 2022 },
+    { "to": "Russia", "type": "rivalry", "detail": "Historical enmity; active sanctions regime", "year": 2022 },
+    { "to": "Germany", "type": "trade", "detail": "Largest trade partner", "year": 2004 }
+  ]
+}

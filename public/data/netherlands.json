@@ -1,0 +1,49 @@
+{
+  "country": "Netherlands",
+  "summary": "A small but globally punching trade nation — home of Shell, ASML (which makes chips the whole world needs), the world's largest port (Rotterdam), and a key node in global tax avoidance structures.",
+  "history": [
+    { "year": 1602, "event": "VOC (East India Company) founded", "detail": "World's first multinational; Amsterdam becomes global financial capital." },
+    { "year": 1648, "event": "Independence from Spain", "detail": "Dutch Republic after 80 Years' War." },
+    { "year": 1944, "event": "WWII liberation / hunger winter", "detail": "20,000 Dutch starved in winter 1944; country liberated 1945." },
+    { "year": 1949, "event": "NATO founding member", "detail": "Post-war integration into Western alliance." },
+    { "year": 1957, "event": "EEC founding member", "detail": "Co-founds European Economic Community." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Germany", "UK", "Belgium"],
+    "enemies_rivals": [],
+    "alliances": ["NATO", "EU", "G20"],
+    "military_bases_abroad": 2,
+    "key_doctrines": ["Free trade", "International law (ICC in The Hague)", "Multilateralism"]
+  },
+  "finance": {
+    "currency_role": "EUR",
+    "central_bank": "De Nederlandsche Bank (1814)",
+    "national_debt_usd_trillions": 0.5,
+    "key_institutions": ["Shell", "ASML", "ING", "ABN AMRO", "Unilever"],
+    "leverage_tools": ["Rotterdam port (EU's largest)", "Tax routing hub", "ASML monopoly on EUV lithography machines"]
+  },
+  "tech_startups": {
+    "hubs": ["Amsterdam", "Eindhoven (ASML/Philips cluster)", "Delft"],
+    "big_tech": ["ASML", "Booking.com", "Adyen", "TomTom"],
+    "vc_ecosystem": "Strong; fintech and deeptech",
+    "gov_tech_links": ["MIVD (military intelligence)", "AIVD (domestic intelligence — hacked Cozy Bear)"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Groningen gas field (now closing due to earthquakes from extraction)",
+    "water": "25% below sea level; world leader in water management",
+    "agriculture": "World's 2nd largest food exporter (after USA) despite tiny size; greenhouse tech"
+  },
+  "follow_the_money": [
+    { "flow": "Tax conduit", "detail": "Dutch Special Purpose Vehicles route ~$4T/yr in corporate profits; EU pressure forcing reform" },
+    { "flow": "ASML semiconductor monopoly", "detail": "Only company making EUV machines needed for advanced chips; US uses Dutch law to block China sales" }
+  ],
+  "theories_disputed": [
+    { "topic": "AIVD hacking of Cozy Bear", "status": "CONFIRMED", "detail": "Dutch intelligence AIVD confirmed to have infiltrated Russian Cozy Bear APT network 2014-2017 and warned FBI.", "tags": ["Russia", "intelligence", "cyber"] }
+  ],
+  "connections": [
+    { "to": "Germany", "type": "trade", "detail": "Largest trade partner; Rotterdam–Rhine corridor", "year": 1957 },
+    { "to": "USA", "type": "trade", "detail": "ASML export controls on China coordinated with US", "year": 2023 },
+    { "to": "China", "type": "rivalry", "detail": "ASML chip machine export restrictions flashpoint", "year": 2023 }
+  ]
+}

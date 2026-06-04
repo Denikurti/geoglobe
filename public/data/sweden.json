@@ -1,0 +1,52 @@
+{
+  "country": "Sweden",
+  "summary": "A Nordic welfare state with a globally outsized tech ecosystem (Spotify, IKEA, Ericsson, H&M) that broke 200 years of neutrality in 2022 by joining NATO in response to Russia's invasion of Ukraine.",
+  "history": [
+    { "year": 1397, "event": "Kalmar Union", "detail": "Union of Scandinavian kingdoms under Swedish-Danish crown." },
+    { "year": 1700, "event": "Great Northern War", "detail": "Charles XII vs Russia; Sweden loses Baltic empire to Peter the Great." },
+    { "year": 1809, "event": "Finland ceded to Russia", "detail": "Major territorial loss; Sweden begins long peace." },
+    { "year": 1814, "event": "Neutrality policy begins", "detail": "Last war fought; over 200 years of peace follow." },
+    { "year": 1945, "event": "Post-WWII welfare state", "detail": "Social Democrats build model welfare state; 'Swedish model' exported globally." },
+    { "year": 1994, "event": "Joins EU", "detail": "Joins European Union but retains own currency (SEK)." },
+    { "year": 2022, "event": "NATO membership applied", "detail": "Russia's Ukraine invasion ends neutrality; NATO membership confirmed 2024." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "UK", "Norway", "Finland", "Germany"],
+    "enemies_rivals": ["Russia"],
+    "alliances": ["NATO (since 2024)", "EU", "Nordic Council"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Former non-alignment (now NATO)", "Nordic solidarity", "Multilateralism"]
+  },
+  "finance": {
+    "currency_role": "SEK; retained own currency outside eurozone",
+    "central_bank": "Riksbank (1668) — world's oldest central bank",
+    "national_debt_usd_trillions": 0.22,
+    "key_institutions": ["Swedbank", "Handelsbanken", "Investor AB (Wallenberg family)"],
+    "leverage_tools": ["Tech exports", "Defence industry (Saab, BOFORS)", "Green energy technology"]
+  },
+  "tech_startups": {
+    "hubs": ["Stockholm (unicorn capital per capita)"],
+    "big_tech": ["Spotify", "Klarna", "King (Candy Crush)", "Mojang (Minecraft)", "Ericsson"],
+    "vc_ecosystem": "Highest unicorn density per capita globally",
+    "gov_tech_links": ["FMV (Defence Materiel Administration)", "Saab defence"],
+    "ai_leaders": ["Silo AI", "Peltarion"]
+  },
+  "resources": {
+    "oil_gas": "None; 100% renewable electricity target",
+    "rare_earths": "Europe's largest rare earth deposit found in Kiruna (2023)",
+    "water": "Abundant; hydroelectric power",
+    "agriculture": "Grain, dairy; high food self-sufficiency"
+  },
+  "follow_the_money": [
+    { "flow": "Tech unicorn exports", "detail": "Stockholm produces more unicorns per capita than any city outside Silicon Valley" },
+    { "flow": "Wallenberg industrial empire", "detail": "Investor AB controls 40% of Stockholm Stock Exchange market cap" }
+  ],
+  "theories_disputed": [
+    { "topic": "Olof Palme assassination 1986", "status": "DISPUTED", "detail": "Swedish PM shot in street; case officially closed 2020 citing deceased suspect Stig Engström, but controversially.", "tags": ["assassination", "cold case"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "military", "detail": "NATO ally since 2024; growing defence cooperation", "year": 2024 },
+    { "to": "Russia", "type": "rivalry", "detail": "NATO membership triggered by Russian aggression", "year": 2022 },
+    { "to": "Finland", "type": "military", "detail": "Joint Nordic defence posture", "year": 2022 }
+  ]
+}

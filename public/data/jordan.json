@@ -1,0 +1,47 @@
+{
+  "country": "Jordan",
+  "summary": "A small, resource-poor Hashemite monarchy that has survived by positioning itself as a stable US ally and mediator in the Middle East, hosting millions of Palestinian and Syrian refugees while maintaining a cold peace with Israel.",
+  "history": [
+    { "year": 1921, "event": "Transjordan created by UK", "detail": "Britain installs Emir Abdullah I; artificial state carved from Ottoman remains." },
+    { "year": 1948, "event": "First Arab-Israeli war / Palestinian refugees", "detail": "Jordan occupies West Bank; 700,000 Palestinian refugees flee to Jordan." },
+    { "year": 1967, "event": "Loses West Bank", "detail": "Six-Day War; Israel takes West Bank and East Jerusalem from Jordan." },
+    { "year": 1994, "event": "Peace treaty with Israel", "detail": "Second Arab country to normalise; King Hussein signs Wadi Araba treaty." },
+    { "year": 2011, "event": "Arab Spring protests", "detail": "Protests suppressed; limited reforms; King Abdullah retains control." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "UK", "Saudi Arabia", "Israel (formal peace)"],
+    "enemies_rivals": [],
+    "alliances": ["Arab League", "Non-NATO Major Ally (US designation)"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Strategic buffer state", "Hashemite custodianship of Jerusalem holy sites", "Refugee absorption"]
+  },
+  "finance": {
+    "currency_role": "Jordanian Dinar (JOD) pegged to USD",
+    "central_bank": "Central Bank of Jordan (1964)",
+    "national_debt_usd_trillions": 0.05,
+    "key_institutions": ["Arab Bank", "Jordan Phosphate Mines"],
+    "leverage_tools": ["Strategic location", "US and Gulf aid dependency", "Phosphate exports (world's 3rd largest)"]
+  },
+  "tech_startups": {
+    "hubs": ["Amman"],
+    "big_tech": ["Maktoob (acquired by Yahoo)", "Souq.com (Amazon)"],
+    "vc_ecosystem": "Regional hub; Endeavor Jordan presence",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "None; net importer",
+    "water": "One of world's most water-scarce countries; Dead Sea declining",
+    "agriculture": "Potash and phosphate mining; vegetables, olives"
+  },
+  "follow_the_money": [
+    { "flow": "US and Gulf aid", "detail": "Jordan receives ~$1.5B/yr US aid; largest per-capita recipient in region" },
+    { "flow": "Phosphate exports", "detail": "World's 3rd largest phosphate reserves; major export" }
+  ],
+  "theories_disputed": [],
+  "connections": [
+    { "to": "Israel", "type": "trade", "detail": "Peace treaty; water for electricity deals; security cooperation", "year": 1994 },
+    { "to": "Palestine", "type": "trade", "detail": "Custodianship of Jerusalem holy sites; many Palestinians hold Jordanian passports", "year": 1948 },
+    { "to": "USA", "type": "military", "detail": "Non-NATO major ally; US bases and training", "year": 1951 }
+  ]
+}

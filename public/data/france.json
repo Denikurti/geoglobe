@@ -1,0 +1,61 @@
+{
+  "country": "France",
+  "summary": "A nuclear power, UN Security Council permanent member, and Europe's second-largest economy with an independent foreign policy tradition (Gaullist), a global cultural footprint, and Africa's most influential former colonial power.",
+  "history": [
+    { "year": 1789, "event": "French Revolution", "detail": "Monarchy overthrown; ideals of liberty, equality, fraternity spread globally." },
+    { "year": 1804, "event": "Napoleon crowns himself Emperor", "detail": "Conquers most of Europe; reshapes law and borders." },
+    { "year": 1815, "event": "Napoleon defeated at Waterloo", "detail": "France diminished; Congress of Vienna redraws Europe." },
+    { "year": 1870, "event": "Franco-Prussian War", "detail": "France defeated; Alsace-Lorraine lost to Germany." },
+    { "year": 1914, "event": "World War I", "detail": "1.4 million French soldiers killed; northern France devastated." },
+    { "year": 1940, "event": "Nazi occupation", "detail": "France falls in 6 weeks; Vichy regime collaborates with Germany." },
+    { "year": 1944, "event": "Liberation", "detail": "Allied D-Day landings; de Gaulle leads Free France back to Paris." },
+    { "year": 1958, "event": "Fifth Republic founded", "detail": "De Gaulle creates strong presidency; current constitutional system." },
+    { "year": 1960, "event": "African decolonisation", "detail": "14 African colonies become independent; French influence persists (Françafrique)." },
+    { "year": 1966, "event": "Withdraws from NATO command", "detail": "De Gaulle asserts strategic autonomy; rejoins full command 2009." },
+    { "year": 1992, "event": "Maastricht Treaty", "detail": "France central to creating the European Union." },
+    { "year": 2015, "event": "Paris attacks", "detail": "ISIS attacks kill 130; Bataclan and November 13 tragedy." }
+  ],
+  "geopolitics": {
+    "allies": ["Germany", "UK", "USA", "Morocco", "UAE"],
+    "enemies_rivals": ["Russia", "Islamist militant groups in Sahel"],
+    "alliances": ["NATO", "EU", "UN Security Council (P5)", "Francophonie"],
+    "military_bases_abroad": 11,
+    "key_doctrines": ["Gaullism (strategic autonomy)", "Force de frappe (nuclear deterrence)", "Françafrique"]
+  },
+  "finance": {
+    "currency_role": "EUR; France is second-largest eurozone economy",
+    "central_bank": "Banque de France (1800); member of ECB system",
+    "national_debt_usd_trillions": 3.3,
+    "key_institutions": ["BNP Paribas", "AXA", "Total Energies"],
+    "leverage_tools": ["CFA franc (pegged to EUR) — used by 14 African nations", "Nuclear energy exports", "Luxury goods dominance (LVMH, Hermès)"]
+  },
+  "tech_startups": {
+    "hubs": ["Paris (Station F — world's largest startup campus)", "Lyon", "Bordeaux"],
+    "big_tech": ["Dassault Systèmes", "Capgemini", "OVHcloud"],
+    "vc_ecosystem": "Fastest-growing in Europe; €13B/yr",
+    "gov_tech_links": ["CEA (atomic energy)", "ONERA (aerospace)", "DGA (defence procurement)"],
+    "ai_leaders": ["Mistral AI", "Hugging Face (Paris-founded)"]
+  },
+  "resources": {
+    "oil_gas": "Minimal domestic; nuclear provides 70% of electricity",
+    "nuclear": "Largest nuclear share of electricity in world; EDF operates 56 reactors",
+    "rare_earths": "None domestically; EU-level dependency on China",
+    "water": "Good supply; Rhine, Loire, Seine basins",
+    "agriculture": "EU's largest agricultural producer; wine, wheat, dairy"
+  },
+  "follow_the_money": [
+    { "flow": "CFA franc zone", "detail": "14 African countries use franc pegged to EUR; France holds 50% of reserves" },
+    { "flow": "Nuclear energy exports", "detail": "EDF exports technology globally; key geopolitical leverage" },
+    { "flow": "Luxury goods dominance", "detail": "LVMH, Hermès, Kering — €100B+ sector" }
+  ],
+  "theories_disputed": [
+    { "topic": "Françafrique", "status": "PARTIALLY CONFIRMED", "detail": "Decades of covert French military and financial interference in Africa; some operations officially declassified.", "tags": ["Africa", "covert ops"] },
+    { "topic": "Rainbow Warrior bombing", "status": "CONFIRMED", "detail": "DGSE (French intelligence) bombed Greenpeace ship in 1985. France admitted responsibility.", "tags": ["DGSE", "Greenpeace"] }
+  ],
+  "connections": [
+    { "to": "Germany", "type": "ideology", "detail": "Franco-German motor of EU; Élysée Treaty", "year": 1963 },
+    { "to": "UK", "type": "military", "detail": "Lancaster House Treaties on nuclear cooperation", "year": 2010 },
+    { "to": "USA", "type": "military", "detail": "NATO ally; periodic tensions over autonomy", "year": 1949 },
+    { "to": "Russia", "type": "rivalry", "detail": "Sanctions post-Ukraine; historical Gaullist engagement now reversed", "year": 2022 }
+  ]
+}

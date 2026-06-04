@@ -1,0 +1,50 @@
+{
+  "country": "Romania",
+  "summary": "A NATO eastern flank state and EU member bordering Ukraine and the Black Sea, historically trapped between great power spheres — now a growing economy and key location for US and NATO military assets.",
+  "history": [
+    { "year": 1859, "event": "Unification of Wallachia and Moldavia", "detail": "Foundation of modern Romania." },
+    { "year": 1916, "event": "Enters WWI on Allied side", "detail": "Gained Transylvania from Hungary; doubled in size." },
+    { "year": 1939, "event": "WWII — switches sides", "detail": "Initially with Axis; switches to Allied side 1944 after Soviet pressure." },
+    { "year": 1947, "event": "Communist takeover", "detail": "Soviet-backed regime; Ceaușescu's brutal dictatorship 1965-1989." },
+    { "year": 1989, "event": "Romanian Revolution", "detail": "Ceaușescu executed on Christmas Day; most violent Eastern European transition." },
+    { "year": 2004, "event": "Joins NATO", "detail": "Full membership; US bases established." },
+    { "year": 2007, "event": "Joins EU", "detail": "EU membership despite corruption concerns." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Poland", "UK", "Ukraine (de facto)"],
+    "enemies_rivals": ["Russia"],
+    "alliances": ["NATO", "EU", "Bucharest Nine (eastern flank)"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Eastern flank defence", "Atlanticism", "Black Sea security"]
+  },
+  "finance": {
+    "currency_role": "Romanian Leu (RON); EU member outside eurozone",
+    "central_bank": "National Bank of Romania (1880)",
+    "national_debt_usd_trillions": 0.16,
+    "key_institutions": ["Banca Transilvania", "BCR (Erste subsidiary)"],
+    "leverage_tools": ["Black Sea access", "EU structural funds", "Growing IT outsourcing sector"]
+  },
+  "tech_startups": {
+    "hubs": ["Bucharest", "Cluj-Napoca"],
+    "big_tech": ["Bitdefender (cybersecurity)", "UiPath ($10B+ IPO — RPA software)"],
+    "vc_ecosystem": "Small but UiPath shows potential",
+    "gov_tech_links": ["SRI (intelligence) cyber operations"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Black Sea offshore gas (Neptune Deep — major discovery)",
+    "rare_earths": "Some deposits",
+    "water": "Danube Delta — largest wetland in Europe",
+    "agriculture": "Wheat, corn, sunflower — major exporter"
+  },
+  "follow_the_money": [
+    { "flow": "EU structural funds", "detail": "Major recipient; €80B+ in current cycle" },
+    { "flow": "IT outsourcing", "detail": "Growing tech export sector; UiPath most prominent product" }
+  ],
+  "theories_disputed": [],
+  "connections": [
+    { "to": "USA", "type": "military", "detail": "Deveselu missile defence base; growing troop presence", "year": 2004 },
+    { "to": "Russia", "type": "rivalry", "detail": "Black Sea flashpoint; NATO eastern flank front", "year": 2022 },
+    { "to": "Ukraine", "type": "trade", "detail": "Border state; grain transit and refugee support", "year": 2022 }
+  ]
+}

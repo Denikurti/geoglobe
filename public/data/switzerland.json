@@ -1,0 +1,50 @@
+{
+  "country": "Switzerland",
+  "summary": "A permanently neutral, non-EU alpine state that hosts global institutions and is the centre of private banking, pharmaceutical giants, and international diplomacy — all while being surrounded by the EU.",
+  "history": [
+    { "year": 1291, "event": "Federal Charter", "detail": "Three cantons form defensive alliance; considered Switzerland's founding." },
+    { "year": 1648, "event": "Recognised as independent", "detail": "Peace of Westphalia; Swiss independence from Holy Roman Empire confirmed." },
+    { "year": 1815, "event": "Permanent neutrality declared", "detail": "Congress of Vienna recognises and guarantees Swiss neutrality." },
+    { "year": 1863, "event": "Red Cross founded in Geneva", "detail": "Henri Dunant founds ICRC; Geneva becomes humanitarian capital." },
+    { "year": 1920, "event": "League of Nations HQ in Geneva", "detail": "Switzerland becomes centre of international diplomacy." },
+    { "year": 2002, "event": "Joins United Nations", "detail": "Last major country to join; maintained neutrality by delaying." }
+  ],
+  "geopolitics": {
+    "allies": ["EU neighbours (de facto)"],
+    "enemies_rivals": [],
+    "alliances": ["UN", "OSCE", "Permanent Neutrality (since 1815)"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Permanent neutrality", "Good offices diplomacy", "Armed neutrality (militia army)"]
+  },
+  "finance": {
+    "currency_role": "CHF — safe-haven currency; negative interest rates used to prevent overvaluation",
+    "central_bank": "Swiss National Bank (SNB, 1907)",
+    "national_debt_usd_trillions": 0.1,
+    "key_institutions": ["UBS", "Credit Suisse (collapsed 2023)", "BIS (headquartered in Basel)", "WEF (Davos)"],
+    "leverage_tools": ["Private banking secrecy (historically)", "Offshore wealth management", "International arbitration hub"]
+  },
+  "tech_startups": {
+    "hubs": ["Zurich", "Basel", "Geneva", "ETH Zurich (top 10 global)"],
+    "big_tech": ["Nestlé", "Roche", "Novartis", "ABB"],
+    "vc_ecosystem": "Strong biotech and medtech; ETH spin-offs",
+    "gov_tech_links": ["CERN (Geneva) — particle physics", "WHO (Geneva)"],
+    "ai_leaders": ["Sophia Genetics", "Scandit"]
+  },
+  "resources": {
+    "water": "Alpine freshwater — major hydroelectric power",
+    "rare_earths": "None",
+    "agriculture": "Dairy, cheese, chocolate; protected domestic market"
+  },
+  "follow_the_money": [
+    { "flow": "Private banking", "detail": "~$2.4T in managed offshore wealth; historical secrecy eroded by FATCA/OECD" },
+    { "flow": "BIS — Bank for International Settlements", "detail": "Central bank of central banks; coordinates global monetary policy in Basel" },
+    { "flow": "WEF / Davos", "detail": "Annual global elite gathering; shapes international policy agenda" }
+  ],
+  "theories_disputed": [
+    { "topic": "Nazi gold in Swiss banks", "status": "CONFIRMED", "detail": "Volcker Committee 1998 confirmed Swiss banks held looted WWII Jewish assets; $1.25B settlement paid.", "tags": ["WWII", "banking"] }
+  ],
+  "connections": [
+    { "to": "Germany", "type": "trade", "detail": "Largest trade partner; deeply integrated supply chains", "year": 1850 },
+    { "to": "USA", "type": "finance", "detail": "Swiss banks manage major US wealth; FATCA compliance forced disclosure", "year": 2010 }
+  ]
+}
