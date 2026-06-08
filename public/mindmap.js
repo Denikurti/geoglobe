@@ -125,7 +125,7 @@ const GeoMindmap = (() => {
   function renderRaw(container, rootLabel, elements, onLeafClick) {
     if (cy) cy.destroy();
     cy = cytoscape({
-      container,
+      container: container,
       elements,
       style: [
         // Root node
@@ -256,6 +256,7 @@ const GeoMindmap = (() => {
       cy.elements(":visible").layout(LAYOUT).run();
     }
     relayout();
+    container._cy = cy; // expose for mobile expand button
     return cy;
   }
 

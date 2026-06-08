@@ -532,54 +532,81 @@ $("chatForm").addEventListener("submit", (e) => {
   enqueue(q);
 });
 
-// ---- resizable panels ----
+// ---- resizable panels (mouse + touch) ----
 function makeDraggable(handle, onDrag) {
   let dragging = false, pendingX = 0, pendingY = 0, rafId = null;
-  handle.addEventListener("mousedown", (e) => {
-    dragging = true;
-    pendingX = 0; pendingY = 0;
+  let lastTX = 0, lastTY = 0;
+
+  function startDrag(e) {
+    dragging = true; pendingX = 0; pendingY = 0;
     handle.classList.add("dragging");
-    document.body.style.cursor = handle.id === "hDivider" ? "col-resize" : "row-resize";
     document.body.style.userSelect = "none";
-    e.preventDefault();
-  });
-  document.addEventListener("mousemove", (e) => {
-    if (!dragging) return;
-    pendingX += e.movementX;
-    pendingY += e.movementY;
-    if (!rafId) {
-      rafId = requestAnimationFrame(() => {
-        onDrag(pendingX, pendingY);
-        pendingX = 0; pendingY = 0;
-        rafId = null;
-      });
+    if (e.type === "mousedown") {
+      document.body.style.cursor = handle.id === "hDivider" ? "col-resize" : "row-resize";
     }
-  });
-  document.addEventListener("mouseup", () => {
+    e.preventDefault();
+  }
+
+  function applyDrag(dx, dy) {
+    pendingX += dx; pendingY += dy;
+    if (!rafId) rafId = requestAnimationFrame(() => {
+      onDrag(pendingX, pendingY);
+      pendingX = 0; pendingY = 0; rafId = null;
+    });
+  }
+
+  function endDrag() {
     if (!dragging) return;
     dragging = false;
     handle.classList.remove("dragging");
     document.body.style.cursor = "";
     document.body.style.userSelect = "";
-  });
+  }
+
+  // Mouse
+  handle.addEventListener("mousedown", startDrag);
+  document.addEventListener("mousemove", e => { if (dragging) applyDrag(e.movementX, e.movementY); });
+  document.addEventListener("mouseup", endDrag);
+
+  // Touch — mobile drag support
+  handle.addEventListener("touchstart", e => {
+    lastTX = e.touches[0].clientX;
+    lastTY = e.touches[0].clientY;
+    startDrag(e);
+  }, { passive: false });
+  document.addEventListener("touchmove", e => {
+    if (!dragging) return;
+    const dx = e.touches[0].clientX - lastTX;
+    const dy = e.touches[0].clientY - lastTY;
+    lastTX = e.touches[0].clientX;
+    lastTY = e.touches[0].clientY;
+    applyDrag(dx, dy);
+    e.preventDefault();
+  }, { passive: false });
+  document.addEventListener("touchend", endDrag);
 }
 
 // Cached sizes — read once on mousedown, update on drag (no reflow per frame)
 let _mapW = 0, _mmH = 0, _chatH = 0;
 
-$("hDivider").addEventListener("mousedown", () => {
-  _mapW = $("mapPane").getBoundingClientRect().width;
-});
-$("vDivider").addEventListener("mousedown", () => {
-  _mmH  = $("mindmap").getBoundingClientRect().height;
-  _chatH = $("chat").getBoundingClientRect().height;
+["mousedown","touchstart"].forEach(ev => {
+  $("hDivider").addEventListener(ev, () => { _mapW = $("mapPane").getBoundingClientRect().width; });
+  $("vDivider").addEventListener(ev, () => {
+    _mmH  = $("mindmap").getBoundingClientRect().height;
+    _chatH = $("chat").getBoundingClientRect().height;
+  });
 });
 
-// Horizontal: resize map ↔ panel
+// Horizontal: resize floating panel width
+let _panelW = 380;
+["mousedown","touchstart"].forEach(ev =>
+  $("hDivider").addEventListener(ev, () => { _panelW = $("panel").getBoundingClientRect().width; })
+);
 makeDraggable($("hDivider"), (dx) => {
   const totalW = $("layout").getBoundingClientRect().width;
-  _mapW = Math.max(200, Math.min(totalW - 240, _mapW + dx));
-  $("mapPane").style.flex = `0 0 ${_mapW}px`;
+  _panelW = Math.max(280, Math.min(totalW - 200, _panelW - dx));
+  $("panel").style.width = `${_panelW}px`;
+  $("hDivider").style.right = `${_panelW}px`;
 });
 
 // Vertical: resize mindmap ↔ chat
@@ -666,6 +693,18 @@ $("focusModeBtn").addEventListener("click", () => {
   $("focusModeBtn").textContent = focusMode ? "✕ Exit Focus" : "⛶ Focus";
 });
 
+// ── Mobile mindmap fullscreen ─────────────────────────────────────────────
+$("mindmapExpandBtn").addEventListener("click", () => {
+  const wrap = $("mindmapWrap");
+  const expanded = wrap.classList.toggle("fullscreen");
+  $("mindmapExpandBtn").textContent = expanded ? "⤡" : "⤢";
+  // re-fit the cytoscape graph after resize
+  setTimeout(() => {
+    const cy = document.querySelector("#mindmap")._cy;
+    if (cy) cy.fit(undefined, 20);
+  }, 50);
+});
+
 // ── Mobile bottom sheet ────────────────────────────────────────────────────
 const isMobile = () => window.innerWidth <= 768;
 
@@ -680,19 +719,21 @@ function closeMobilePanel() {
 // Close button
 $("mobilePanelClose").addEventListener("click", closeMobilePanel);
 
-// Tap the pill handle to toggle
-$("mobilePanelHandle").addEventListener("click", () => {
-  if ($("panel").classList.contains("mobile-open")) closeMobilePanel();
-});
-
-// Swipe down to close
+// Swipe down ONLY from the pill handle to close — never from the panel body
 (function() {
-  let startY = 0;
-  const panel = $("panel");
-  panel.addEventListener("touchstart", e => { startY = e.touches[0].clientY; }, { passive: true });
-  panel.addEventListener("touchend", e => {
+  let startY = 0, draggingHandle = false;
+  const handle = $("mobilePanelHandle");
+
+  handle.addEventListener("touchstart", e => {
+    startY = e.touches[0].clientY;
+    draggingHandle = true;
+  }, { passive: true });
+
+  document.addEventListener("touchend", e => {
+    if (!draggingHandle) return;
+    draggingHandle = false;
     const dy = e.changedTouches[0].clientY - startY;
-    if (dy > 60) closeMobilePanel();
+    if (dy > 50) closeMobilePanel();
   }, { passive: true });
 })();
 

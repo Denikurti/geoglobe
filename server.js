@@ -12,7 +12,7 @@ const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const USE_GROQ = !!GROQ_API_KEY;
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 const OLLAMA_URL = "http://localhost:11434/api/chat";
-const MODEL = USE_GROQ ? "mistral-saba-24b" : "mistral";
+const MODEL = USE_GROQ ? "llama-3.3-70b-versatile" : "mistral";
 
 const app = express();
 app.use(express.json());
