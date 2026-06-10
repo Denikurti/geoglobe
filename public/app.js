@@ -773,32 +773,80 @@ $("mindmapExpandBtn").addEventListener("click", () => {
 // ── Mobile bottom sheet ────────────────────────────────────────────────────
 const isMobile = () => window.innerWidth <= 768;
 
+// ── Mobile bottom sheet with snap points ──
+// Snaps: closed → peek (55%) → mid (25%) → full (0%)
+const SNAPS = ["mobile-open", "mobile-mid", "mobile-full"];
+let currentSnap = null;
+
+function setSnap(snap) {
+  const panel = $("panel");
+  panel.classList.remove(...SNAPS);
+  if (snap) panel.classList.add(snap);
+  currentSnap = snap;
+}
+
 function openMobilePanel() {
   if (!isMobile()) return;
-  $("panel").classList.add("mobile-open");
+  setSnap("mobile-open");
 }
 function closeMobilePanel() {
-  $("panel").classList.remove("mobile-open");
+  const panel = $("panel");
+  panel.style.transition = "transform .32s cubic-bezier(.4,0,.2,1)";
+  setSnap(null);
 }
 
-// Close button
 $("mobilePanelClose").addEventListener("click", closeMobilePanel);
 
-// Swipe down ONLY from the pill handle to close — never from the panel body
+// Drag handle — snap up/down
 (function() {
-  let startY = 0, draggingHandle = false;
   const handle = $("mobilePanelHandle");
+  const panel  = $("panel");
+  let startY = 0, startSnap = null, dragging = false, curTranslate = 0;
+
+  function snapIndexOf(s) { return s ? SNAPS.indexOf(s) : -1; }
+  function translateOf(s) {
+    if (!s) return 100;
+    if (s === "mobile-open") return 55;
+    if (s === "mobile-mid")  return 25;
+    return 0;
+  }
 
   handle.addEventListener("touchstart", e => {
-    startY = e.touches[0].clientY;
-    draggingHandle = true;
+    startY    = e.touches[0].clientY;
+    startSnap = currentSnap;
+    dragging  = true;
+    curTranslate = translateOf(startSnap);
+    panel.style.transition = "none";
   }, { passive: true });
 
-  document.addEventListener("touchend", e => {
-    if (!draggingHandle) return;
-    draggingHandle = false;
+  handle.addEventListener("touchmove", e => {
+    if (!dragging) return;
+    const dy = e.touches[0].clientY - startY;
+    const vh = window.innerHeight / 100;
+    const newT = Math.max(0, Math.min(100, curTranslate + dy / (window.innerHeight * 0.01)));
+    panel.style.transform = `translateY(${newT}%)`;
+  }, { passive: true });
+
+  handle.addEventListener("touchend", e => {
+    if (!dragging) return;
+    dragging = false;
+    panel.style.transition = "transform .32s cubic-bezier(.4,0,.2,1)";
+    panel.style.transform = "";
+
     const dy = e.changedTouches[0].clientY - startY;
-    if (dy > 50) closeMobilePanel();
+    const idx = snapIndexOf(startSnap);
+
+    if (dy < -50) {
+      // swiped up → next snap up
+      const next = Math.min(idx + 1, SNAPS.length - 1);
+      setSnap(SNAPS[next]);
+    } else if (dy > 60) {
+      // swiped down → snap down or close
+      if (idx <= 0) closeMobilePanel();
+      else setSnap(SNAPS[idx - 1]);
+    } else {
+      setSnap(startSnap); // bounce back
+    }
   }, { passive: true });
 })();
 
