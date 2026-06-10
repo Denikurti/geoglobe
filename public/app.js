@@ -283,6 +283,20 @@ document.querySelectorAll(".mode-tab").forEach(btn => {
     state.mode = btn.dataset.mode;
     const ancient = state.mode === "religion";
     GeoMap.setAncientMode(ancient, onCityClick);
+    // News only exists in States mode — hide dots, button, and drawer in Religion mode
+    GeoMap.showNewsDots(!ancient && newsDotsVisible);
+    $("newsToggleBtn").style.display = ancient ? "none" : "";
+    if (ancient) {
+      newsDrawer.classList.remove("open");
+      setTimeout(() => newsDrawer.classList.add("hidden"), 350);
+      conflictDrawer.classList.remove("open");
+      setTimeout(() => conflictDrawer.classList.add("hidden"), 350);
+      GeoMap.setConflictDots([], () => {});
+      GeoMap.clearTimelineColors();
+    } else {
+      GeoMap.setConflictDots(CURRENT_CONFLICTS, openConflictDrawer);
+      updateTimelineMap(state.year);
+    }
     if (state.country) renderPanel();
   });
 });
@@ -405,20 +419,33 @@ function renderChips() { /* chips now live in the suggest popup */ }
 async function loadCountry(name) {
   saveChatHistory(state.country);
   state.country = name;
-  const res = await fetch(`data/${name.toLowerCase()}.json`);
-  state.data = await res.json();
+
+  let hasData = true;
+  try {
+    const res = await fetch(`data/${name.toLowerCase().replace(/\s+/g,"_")}.json`);
+    if (!res.ok) throw new Error("no data");
+    state.data = await res.json();
+  } catch {
+    hasData = false;
+    state.data = { country: name, summary: "No detailed data yet for this country.", geopolitics:{}, finance:{}, resources:{}, history:[], connections:[], follow_the_money:[], theories_disputed:[] };
+  }
 
   GeoMap.setActive(name);
   $("panelEmpty").classList.add("hidden");
   $("panelContent").classList.remove("hidden");
-  $("countryName").textContent = state.data.country;
-  $("countrySummary").textContent = state.data.summary || "";
-  $("chatInput").placeholder = `Ask anything about ${state.data.country}…`;
+  $("countryName").textContent = name;
+  $("countrySummary").textContent = hasData ? (state.data.summary || "") : "Ask the AI anything about this country below.";
+  $("chatInput").placeholder = `Ask anything about ${name}…`;
 
   restoreChatHistory(name);
-  renderPanel();
+  if (hasData) renderPanel();
+  else {
+    $("statCards").innerHTML = "";
+    $("mindmap").innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:13px">No map data yet — use AI chat below</div>`;
+  }
   openMobilePanel();
 }
+
 
 function renderMindmap() {
   GeoMindmap.render(
@@ -454,11 +481,41 @@ $("popupAsk").onclick = () => {
 };
 
 // ---- timeline ----
+let timelineEventTimer = null;
 $("timeline").addEventListener("input", (e) => {
   state.year = +e.target.value;
   $("yearLabel").textContent = state.year;
   if (state.data) { renderMindmap(); refreshOverlays(); }
+  if (state.mode === "states") updateTimelineMap(state.year);
 });
+
+function updateTimelineMap(year) {
+  const colorMap = {};
+  const activeEvents = [];
+
+  TIMELINE_CONFLICTS.forEach(ev => {
+    if (year >= ev.years[0] && year <= ev.years[1]) {
+      activeEvents.push(ev.title);
+      (ev.at_war   || []).forEach(c => { colorMap[c] = "tl-at-war"; });
+      (ev.allied   || []).forEach(c => { if (!colorMap[c]) colorMap[c] = "tl-allied"; });
+      (ev.occupied || []).forEach(c => { colorMap[c] = "tl-occupied"; });
+      (ev.tensions || []).forEach(c => { if (!colorMap[c]) colorMap[c] = "tl-tension"; });
+    }
+  });
+
+  GeoMap.setTimelineColors(colorMap);
+
+  // show event bar
+  const bar = $("timelineEventBar");
+  if (activeEvents.length) {
+    bar.textContent = "⚔️ " + activeEvents.slice(0,3).join("  ·  ");
+    bar.classList.add("visible");
+  } else {
+    bar.classList.remove("visible");
+  }
+  clearTimeout(timelineEventTimer);
+  timelineEventTimer = setTimeout(() => bar.classList.remove("visible"), 2500);
+}
 
 // ---- toggles ----
 const toggleMap = { tTheories: "theories", tMoney: "money", tConnections: "connections", tResources: "resources" };
@@ -642,10 +699,18 @@ async function generateFollowUps(context, answer, msgEl) {
 const SEARCH_INDEX = [];
 function buildSearchIndex() {
   // Countries
-  const countries = ["USA","Canada","Mexico","UK","Germany","France","Russia","Italy","Spain",
-    "Ukraine","Poland","Netherlands","Switzerland","Sweden","Turkey","Norway","Belgium","Portugal",
-    "Austria","Greece","Romania","Israel","Palestine","Saudi Arabia","Iran","Iraq","Jordan",
-    "Lebanon","Syria","Egypt","UAE","Qatar","Yemen"];
+  const countries = [
+    "USA","Canada","Mexico",
+    "United Kingdom","Germany","France","Russia","Italy","Spain",
+    "Ukraine","Poland","Netherlands","Switzerland","Sweden","Norway","Belgium","Portugal",
+    "Austria","Ireland","Denmark","Finland","Hungary","Czech Republic","Slovakia",
+    "Greece","Romania","Bulgaria","Serbia","Croatia","Bosnia","Slovenia",
+    "North Macedonia","Albania","Montenegro","Kosovo","Turkey",
+    "Israel","Palestine","Saudi Arabia","Iran","Iraq","Jordan",
+    "Lebanon","Syria","UAE","Qatar","Yemen","Oman","Kuwait","Bahrain",
+    "Egypt","Libya","Tunisia","Algeria","Morocco","Sudan",
+    "Somalia","Ethiopia","Kenya","Nigeria","Angola","South Africa",
+  ];
   countries.forEach(c => SEARCH_INDEX.push({ label: c, type: "country", icon: "🌍", action: () => loadCountry(c) }));
   // Ancient cities
   ANCIENT_CITIES.forEach(c => SEARCH_INDEX.push({ label: c.name, type: "ancient city", icon: "🏛", action: () => { if (state.mode !== "religion") { document.querySelector('[data-mode="religion"]').click(); } setTimeout(() => onCityClick(c), 300); } }));
@@ -737,9 +802,370 @@ $("mobilePanelClose").addEventListener("click", closeMobilePanel);
   }, { passive: true });
 })();
 
+// ---- share card ----
+$("shareBtn").addEventListener("click", () => shareCountryCard());
+
+async function shareCountryCard() {
+  if (!state.data) return;
+  const country = state.data.country || state.country;
+  const flag = countryFlag(country);
+  const geo = state.data.geopolitics || {};
+  const fin = state.data.finance || {};
+  const articles = await fetchNews(country);
+  const headline = articles[0]?.title || "No recent news";
+
+  const W = 600, H = 340;
+  const canvas = document.createElement("canvas");
+  canvas.width = W * 2; canvas.height = H * 2;
+  const ctx = canvas.getContext("2d");
+  ctx.scale(2, 2);
+
+  // roundRect polyfill for older iOS/Android
+  function rr(x, y, w, h, r) {
+    if (ctx.roundRect) { ctx.roundRect(x, y, w, h, r); }
+    else {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+  }
+
+  // background
+  const bg = ctx.createLinearGradient(0, 0, W, H);
+  bg.addColorStop(0, "#0d1520"); bg.addColorStop(1, "#0a1830");
+  ctx.fillStyle = bg; rr(0, 0, W, H, 20); ctx.fill();
+
+  // accent bar top
+  ctx.fillStyle = "#0a84ff"; ctx.fillRect(0, 0, W, 3);
+
+  // GeoGlobe branding
+  ctx.fillStyle = "#0a84ff"; ctx.font = "bold 13px -apple-system,sans-serif";
+  ctx.fillText("🌍 GEOGLOBE", 24, 28);
+  ctx.fillStyle = "rgba(235,235,245,0.4)"; ctx.font = "11px -apple-system,sans-serif";
+  ctx.fillText("Geopolitical Intelligence", 24, 44);
+
+  // Country name + flag
+  ctx.font = "bold 38px -apple-system,sans-serif";
+  ctx.fillStyle = "#ffffff";
+  ctx.fillText(`${flag}  ${country}`, 24, 96);
+
+  // Stats row
+  const stats = [
+    { label: "ALLIES", val: (geo.allies||[]).length ? `${(geo.allies||[]).length} nations` : "—" },
+    { label: "DEBT",   val: fin.national_debt_usd_trillions ? `$${fin.national_debt_usd_trillions}T` : "—" },
+    { label: "MIL BASES", val: geo.military_bases_abroad ?? "—" },
+    { label: "CURRENCY", val: (fin.currency_role||"—").split(/[;,]/)[0].slice(0,12) },
+  ];
+  stats.forEach((s, i) => {
+    const x = 24 + i * 144, y = 128;
+    ctx.fillStyle = "rgba(255,255,255,0.06)";
+    rr(x, y, 132, 54, 10); ctx.fill();
+    ctx.fillStyle = "rgba(10,132,255,0.9)"; ctx.font = "bold 9px -apple-system,sans-serif";
+    ctx.fillText(s.label, x + 10, y + 17);
+    ctx.fillStyle = "#ffffff"; ctx.font = "bold 15px -apple-system,sans-serif";
+    ctx.fillText(String(s.val).slice(0,14), x + 10, y + 38);
+  });
+
+  // Divider
+  ctx.strokeStyle = "rgba(255,255,255,0.08)"; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(24, 198); ctx.lineTo(W - 24, 198); ctx.stroke();
+
+  // News headline
+  ctx.fillStyle = "#0a84ff"; ctx.font = "bold 10px -apple-system,sans-serif";
+  ctx.fillText("📰 LATEST NEWS", 24, 218);
+  ctx.fillStyle = "rgba(245,245,247,0.85)"; ctx.font = "13px -apple-system,sans-serif";
+  const words = headline.split(" ");
+  let line = "", y2 = 236;
+  words.forEach(w => {
+    const test = line + w + " ";
+    if (ctx.measureText(test).width > W - 48 && line) {
+      ctx.fillText(line, 24, y2); line = w + " "; y2 += 18;
+    } else line = test;
+  });
+  ctx.fillText(line, 24, y2);
+
+  // Footer
+  ctx.fillStyle = "rgba(235,235,245,0.3)"; ctx.font = "11px -apple-system,sans-serif";
+  ctx.fillText("geoglobe.onrender.com", 24, H - 14);
+  ctx.textAlign = "right";
+  ctx.fillText(new Date().toLocaleDateString("en-GB", { day:"numeric", month:"short", year:"numeric" }), W - 24, H - 14);
+  ctx.textAlign = "left";
+
+  canvas.toBlob(async (blob) => {
+    const file = new File([blob], `geoglobe-${country}.png`, { type: "image/png" });
+    if (navigator.share && navigator.canShare?.({ files: [file] })) {
+      await navigator.share({ title: `${country} — GeoGlobe`, text: `Geopolitical snapshot of ${country}`, files: [file] });
+    } else {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = `geoglobe-${country}.png`; a.click();
+      URL.revokeObjectURL(url);
+    }
+  }, "image/png");
+}
+
+// ---- subscribe ----
+$("subscribeBtnTop").addEventListener("click", () => $("subscribeOverlay").classList.remove("hidden"));
+$("subscribeClose").addEventListener("click", () => $("subscribeOverlay").classList.add("hidden"));
+$("subscribeOverlay").addEventListener("click", (e) => { if (e.target === $("subscribeOverlay")) $("subscribeOverlay").classList.add("hidden"); });
+
+$("subscribeSubmit").addEventListener("click", async () => {
+  const email = $("subscribeEmail").value.trim();
+  const msg = $("subscribeMsg");
+  if (!email || !email.includes("@")) {
+    msg.textContent = "Please enter a valid email.";
+    msg.className = "error"; msg.classList.remove("hidden"); return;
+  }
+  $("subscribeSubmit").textContent = "Subscribing…";
+  $("subscribeSubmit").disabled = true;
+  try {
+    const r = await fetch("/api/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email }) });
+    const d = await r.json();
+    msg.textContent = d.already ? "You're already subscribed! 🎉" : "You're in! Check your inbox Monday morning. 🌍";
+    msg.className = "success"; msg.classList.remove("hidden");
+    setTimeout(() => $("subscribeOverlay").classList.add("hidden"), 2800);
+  } catch {
+    msg.textContent = "Something went wrong. Try again.";
+    msg.className = "error"; msg.classList.remove("hidden");
+  }
+  $("subscribeSubmit").textContent = "Get Weekly Briefing";
+  $("subscribeSubmit").disabled = false;
+});
+
+// ---- conflict drawer ----
+const conflictDrawer = $("conflictDrawer");
+$("conflictDrawerClose").addEventListener("click", () => {
+  conflictDrawer.classList.remove("open");
+  setTimeout(() => conflictDrawer.classList.add("hidden"), 350);
+});
+
+function openConflictDrawer(conflict) {
+  const intensityLabel = { critical: "🔴 ACTIVE WAR", high: "🟠 HIGH TENSION", medium: "🟡 ONGOING CONFLICT", low: "🟡 FROZEN CONFLICT" };
+  $("conflictDrawerFlag").textContent = conflict.flag || "⚔️";
+  const typeEl = $("conflictDrawerType");
+  typeEl.textContent = conflict.type;
+  typeEl.className = `cd-intensity ${conflict.intensity}`;
+
+  const body = $("conflictDrawerBody");
+  body.innerHTML = `
+    <div>
+      <div class="cd-since">${intensityLabel[conflict.intensity] || ""} · Since ${conflict.since}</div>
+      <div class="cd-title">${conflict.title}</div>
+    </div>
+    <div class="cd-summary">${conflict.summary}</div>
+    <div class="cd-row"><div class="cd-row-label">Factions</div><div class="cd-row-val">${conflict.factions}</div></div>
+    <div class="cd-row"><div class="cd-row-label">What's at stake</div><div class="cd-row-val">${conflict.stakes}</div></div>
+    <div class="cd-row"><div class="cd-row-label">Casualties</div><div class="cd-row-val">${conflict.casualties}</div></div>
+    <div class="cd-row"><div class="cd-row-label">Latest</div><div class="cd-row-val">${conflict.latest}</div></div>
+    <button class="cd-ask-btn" id="conflictAskBtn">🤖 Ask AI — What happens next?</button>`;
+
+  conflictDrawer.classList.remove("hidden");
+  requestAnimationFrame(() => conflictDrawer.classList.add("open"));
+
+  $("conflictAskBtn").onclick = async () => {
+    $("conflictAskBtn").textContent = "Analyzing…";
+    $("conflictAskBtn").disabled = true;
+    const q = `Conflict: ${conflict.title}\nFactions: ${conflict.factions}\nStakes: ${conflict.stakes}\nLatest: ${conflict.latest}\n\nIn 3 sharp paragraphs: (1) What is really happening right now, (2) Who is winning and why, (3) What are the 2-3 most likely outcomes in the next 12 months?`;
+    const r = await fetch("/api/ask", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ country: conflict.countries[0] || "world", question: q }),
+    });
+    const d = await r.json();
+    const ans = document.createElement("div");
+    ans.className = "cd-ai-answer";
+    ans.textContent = d.answer || d.error || "No response.";
+    body.appendChild(ans);
+    $("conflictAskBtn").textContent = "🤖 Ask AI — What happens next?";
+    $("conflictAskBtn").disabled = false;
+  };
+}
+
+// ---- news ----
+const newsCache = {};
+const newsTooltip = $("newsTooltip");
+const newsDrawer  = $("newsDrawer");
+let newsTooltipTimer = null;
+
+async function fetchNews(country) {
+  if (newsCache[country]) return newsCache[country];
+  try {
+    const r = await fetch(`/api/news/${encodeURIComponent(country)}`);
+    const d = await r.json();
+    newsCache[country] = (d.articles || []);
+    // expire cache after 10 min
+    setTimeout(() => { delete newsCache[country]; }, 10 * 60 * 1000);
+  } catch { newsCache[country] = []; }
+  return newsCache[country];
+}
+
+function timeAgo(iso) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const h = Math.floor(diff / 3600000);
+  if (h < 1) return "just now";
+  if (h < 24) return `${h}h ago`;
+  return `${Math.floor(h/24)}d ago`;
+}
+
+function showNewsTooltip() { /* preview disabled — click opens left drawer */ }
+
+function hideNewsTooltip() {
+  clearTimeout(newsTooltipTimer);
+  newsTooltip.classList.add("hidden");
+}
+
+async function openNewsDrawer(country) {
+  hideNewsTooltip();
+  const articles = await fetchNews(country);
+  $("newsDrawerTitle").textContent = country + " — Latest News";
+  $("newsDrawerFlag").textContent = countryFlag(country);
+  const body = $("newsDrawerBody");
+  if (!articles.length) {
+    body.innerHTML = `<div style="color:var(--muted);font-size:13px;padding:20px;text-align:center">No recent news found.</div>`;
+  } else {
+    body.innerHTML = articles.map(a => `
+      <a class="news-card" href="${a.url}" target="_blank" rel="noopener">
+        <div class="news-card-source">${a.source?.name || "News"}</div>
+        <div class="news-card-title">${a.title}</div>
+        ${a.description ? `<div class="news-card-desc">${a.description.slice(0,120)}…</div>` : ""}
+        <div class="news-card-time">${timeAgo(a.publishedAt)}</div>
+      </a>`).join("");
+  }
+  newsDrawer.classList.remove("hidden");
+  requestAnimationFrame(() => newsDrawer.classList.add("open"));
+
+  $("newsSummarizeBtn").onclick = async () => {
+    // remove any previous summary
+    document.querySelectorAll(".news-summary-card").forEach(el => el.remove());
+    $("newsSummarizeBtn").textContent = "Analyzing…";
+    $("newsSummarizeBtn").disabled = true;
+    const headlines = articles.slice(0,6).map((a,i) => `${i+1}. ${a.title}`).join("\n");
+    const prompt =
+`You are a geopolitical analyst briefing a reader on ${country}. Based ONLY on these current headlines:
+${headlines}
+
+Write a clean briefing in this EXACT format (use these literal markers):
+TITLE: <a short punchy headline, max 8 words>
+SUMMARY: <2 sentence overview of what's happening>
+KEY: <point 1>
+KEY: <point 2>
+KEY: <point 3>
+WHY: <one sentence on why this matters geopolitically>
+
+Be sharp and factual. No preamble.`;
+    const r = await fetch("/api/ask", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ country, question: prompt }),
+    });
+    const d = await r.json();
+    renderNewsSummary(d.answer || d.error || "No response.", country);
+    $("newsSummarizeBtn").textContent = "🤖 AI Summarize";
+    $("newsSummarizeBtn").disabled = false;
+  };
+}
+
+function renderNewsSummary(text, country) {
+  // parse the structured markers
+  const get = (key) => {
+    const m = text.match(new RegExp(`${key}:\\s*(.+)`, "i"));
+    return m ? m[1].trim() : "";
+  };
+  const keys = [...text.matchAll(/KEY:\s*(.+)/gi)].map(m => m[1].trim());
+  const title = get("TITLE") || `${country} Briefing`;
+  const summary = get("SUMMARY");
+  const why = get("WHY");
+
+  // fallback if model didn't follow format
+  const hasStructure = summary || keys.length;
+
+  const card = document.createElement("div");
+  card.className = "news-summary-card";
+  card.innerHTML = hasStructure ? `
+    <div class="ns-head">
+      <div class="ns-eyebrow">${countryFlag(country)} AI BRIEFING</div>
+      <div class="ns-head-btns">
+        <button class="ns-toggle" title="Expand">⤢</button>
+        <button class="ns-close" title="Close">×</button>
+      </div>
+    </div>
+    <div class="ns-title">${title}</div>
+    ${summary ? `<div class="ns-summary">${summary}</div>` : ""}
+    ${keys.length ? `<div class="ns-keys">${keys.map(k => `<div class="ns-key"><span>›</span>${k}</div>`).join("")}</div>` : ""}
+    ${why ? `<div class="ns-why"><strong>Why it matters</strong>${why}</div>` : ""}
+  ` : `
+    <div class="ns-head">
+      <div class="ns-eyebrow">${countryFlag(country)} AI BRIEFING</div>
+      <div class="ns-head-btns">
+        <button class="ns-toggle" title="Expand">⤢</button>
+        <button class="ns-close" title="Close">×</button>
+      </div>
+    </div>
+    <div class="ns-summary">${text}</div>`;
+
+  $("newsDrawerFooter").insertBefore(card, $("newsSummarizeBtn"));
+
+  card.querySelector(".ns-toggle").addEventListener("click", () => {
+    const expanded = card.classList.toggle("expanded");
+    card.querySelector(".ns-toggle").textContent = expanded ? "⤡" : "⤢";
+    card.querySelector(".ns-toggle").title = expanded ? "Collapse" : "Expand";
+  });
+  card.querySelector(".ns-close").addEventListener("click", () => card.remove());
+}
+
+function countryFlag(name) {
+  const flags = {
+    "USA":"🇺🇸","United Kingdom":"🇬🇧","Germany":"🇩🇪","France":"🇫🇷","Russia":"🇷🇺",
+    "Italy":"🇮🇹","Spain":"🇪🇸","Ukraine":"🇺🇦","Poland":"🇵🇱","Sweden":"🇸🇪",
+    "Norway":"🇳🇴","Turkey":"🇹🇷","Israel":"🇮🇱","Saudi Arabia":"🇸🇦","Iran":"🇮🇷",
+    "Iraq":"🇮🇶","Egypt":"🇪🇬","Syria":"🇸🇾","Jordan":"🇯🇴","Lebanon":"🇱🇧",
+    "UAE":"🇦🇪","Qatar":"🇶🇦","Yemen":"🇾🇪","Libya":"🇱🇾","Tunisia":"🇹🇳",
+    "Algeria":"🇩🇿","Morocco":"🇲🇦","Nigeria":"🇳🇬","South Africa":"🇿🇦",
+    "Ethiopia":"🇪🇹","Kenya":"🇰🇪","Greece":"🇬🇷","Romania":"🇷🇴","Serbia":"🇷🇸",
+    "Croatia":"🇭🇷","Bulgaria":"🇧🇬","Hungary":"🇭🇺","Canada":"🇨🇦","Mexico":"🇲🇽",
+  };
+  return flags[name] || "🌍";
+}
+
+$("newsDrawerClose").addEventListener("click", () => {
+  newsDrawer.classList.remove("open");
+  setTimeout(() => newsDrawer.classList.add("hidden"), 350);
+});
+
+// ---- news drawer width resize ----
+let newsDrawerWidth = 340;
+makeDraggable($("newsDrawerResize"), (dx) => {
+  newsDrawerWidth = Math.max(280, Math.min(window.innerWidth * 0.7, newsDrawerWidth + dx));
+  newsDrawer.style.width = newsDrawerWidth + "px";
+});
+
+let newsDotsVisible = true;
+$("newsToggleBtn").addEventListener("click", () => {
+  newsDotsVisible = !newsDotsVisible;
+  GeoMap.showNewsDots(newsDotsVisible);
+  $("newsToggleBtn").classList.toggle("off", !newsDotsVisible);
+  $("newsToggleBtn").textContent = newsDotsVisible ? "📰 News" : "📰 News off";
+});
+
 // ---- boot ----
 buildAgentBar();
 buildSearchIndex();
-GeoMap.init($("map"), loadCountry).catch((e) =>
+GeoMap.init($("map"), loadCountry).then(() => {
+  const allCountries = Object.values({
+    840:"USA",124:"Canada",484:"Mexico",826:"United Kingdom",276:"Germany",
+    250:"France",643:"Russia",380:"Italy",724:"Spain",804:"Ukraine",616:"Poland",
+    752:"Sweden",578:"Norway",792:"Turkey",300:"Greece",642:"Romania",
+    100:"Bulgaria",688:"Serbia",191:"Croatia",70:"Bosnia",8:"Albania",
+    499:"Montenegro",383:"Kosovo",807:"North Macedonia",705:"Slovenia",
+    376:"Israel",682:"Saudi Arabia",364:"Iran",368:"Iraq",818:"Egypt",
+    760:"Syria",434:"Libya",788:"Tunisia",12:"Algeria",504:"Morocco",
+    729:"Sudan",566:"Nigeria",710:"South Africa",
+  });
+  GeoMap.setNewsDots(allCountries, showNewsTooltip, hideNewsTooltip, openNewsDrawer);
+  GeoMap.setConflictDots(CURRENT_CONFLICTS, openConflictDrawer);
+  updateTimelineMap(state.year);
+}).catch((e) =>
   ($("panelEmpty").textContent = "Map failed to load: " + e.message)
 );

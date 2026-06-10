@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GeoGlobe — North America</title>
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=12" />
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
@@ -14,6 +14,7 @@
 <body>
   <header id="topbar">
     <h1>🌎 GeoGlobe <span class="sub">North America v1 · AI: Groq cloud</span></h1>
+    <button id="subscribeBtnTop" title="Get weekly briefing">📧 Weekly</button>
     <div id="modeTabs">
       <button class="mode-tab active" data-mode="states">🌍 States</button>
       <button class="mode-tab" data-mode="religion">✝ Religion & Ancient</button>
@@ -22,6 +23,7 @@
       <input id="searchInput" type="text" placeholder="🔍  Search country, city, topic…" autocomplete="off" />
       <div id="searchResults" class="hidden"></div>
     </div>
+    <button id="newsToggleBtn" title="Toggle news dots">📰 News</button>
     <div id="controls">
       <label class="ctl">Year: <span id="yearLabel">2025</span>
         <input type="range" id="timeline" min="1900" max="2025" value="2025" step="1" />
@@ -60,6 +62,7 @@
     <section id="mapPane">
       <svg id="map"></svg>
       <div id="legend"></div>
+      <div id="timelineEventBar"></div>
     </section>
 
     <!-- drag handle: resize map vs panel -->
@@ -73,6 +76,7 @@
       <div id="panelContent" class="hidden">
         <div id="panelTitleRow">
           <h2 id="countryName"></h2>
+          <button id="shareBtn" title="Share this country">↑ Share</button>
           <button id="focusModeBtn" title="Focus mode">⛶ Focus</button>
         </div>
         <p id="countrySummary" class="summary"></p>
@@ -108,6 +112,48 @@
     </aside>
   </main>
 
+  <!-- subscribe modal -->
+  <div id="subscribeOverlay" class="hidden">
+    <div id="subscribeModal">
+      <button id="subscribeClose">×</button>
+      <div class="sub-icon">🌍</div>
+      <h2 class="sub-title">Weekly Geopolitical Briefing</h2>
+      <p class="sub-desc">Every Monday — AI-powered intelligence on wars, alliances, and power shifts. Free.</p>
+      <input id="subscribeEmail" type="email" placeholder="your@email.com" autocomplete="email" />
+      <button id="subscribeSubmit">Get Weekly Briefing</button>
+      <p id="subscribeMsg" class="hidden"></p>
+    </div>
+  </div>
+
+  <!-- conflict drawer -->
+  <div id="conflictDrawer" class="hidden">
+    <div id="conflictDrawerHeader">
+      <span id="conflictDrawerFlag" style="font-size:22px"></span>
+      <div style="flex:1">
+        <div id="conflictDrawerType" class="cd-intensity"></div>
+      </div>
+      <button id="conflictDrawerClose">×</button>
+    </div>
+    <div id="conflictDrawerBody"></div>
+  </div>
+
+  <!-- news hover tooltip -->
+  <div id="newsTooltip" class="hidden"></div>
+
+  <!-- news drawer (left side) -->
+  <div id="newsDrawer" class="hidden">
+    <div id="newsDrawerHeader">
+      <span id="newsDrawerFlag"></span>
+      <span id="newsDrawerTitle">Latest News</span>
+      <button id="newsDrawerClose">×</button>
+    </div>
+    <div id="newsDrawerBody"></div>
+    <div id="newsDrawerFooter">
+      <button id="newsSummarizeBtn">🤖 AI Summarize</button>
+    </div>
+    <div id="newsDrawerResize" title="Drag to resize width"></div>
+  </div>
+
   <!-- leaf-node detail popup -->
   <div id="popup" class="hidden">
     <button id="popupClose">×</button>
@@ -115,6 +161,7 @@
     <button id="popupAsk">Ask AI to explain more</button>
   </div>
 
+  <script src="conflict_data.js"></script>
   <script src="agents_data.js"></script>
   <script src="ai.js"></script>
   <script src="mindmap.js"></script>

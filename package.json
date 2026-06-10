@@ -8,6 +8,8 @@
     "start": "node --env-file=.env server.js"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "node-cron": "^4.2.1",
+    "resend": "^6.12.4"
   }
 }
