@@ -24,13 +24,31 @@ function buildAgentBar() {
     bar.appendChild(btn);
   });
 
+  // 💡 suggestions button — lives with the lens icons, opens a popup
+  const sBtn = document.createElement("button");
+  sBtn.className = "agent-btn";
+  sBtn.id = "suggestBtn";
+  sBtn.innerHTML = `💡<span class="agent-btn-tooltip">Suggestions</span>`;
+  sBtn.addEventListener("click", () => {
+    const p = $("suggestPopup");
+    const show = p.classList.contains("hidden");
+    if (show) {
+      renderSuggestChips();
+      // Place the popup beside the open drawer (not on top of its text)
+      const drawer = $("agentDrawer");
+      const open = !drawer.classList.contains("hidden");
+      p.style.left = open ? `${drawer.getBoundingClientRect().right + 10}px` : "76px";
+    }
+    p.classList.toggle("hidden", !show);
+  });
+  bar.appendChild(sBtn);
 }
 
 // ---- suggestions section in drawer ----
 let suggestOpen = false;
 
 function renderSuggestChips() {
-  const chips = $("suggestSectionChips");
+  const chips = $("suggestPopupChips");
   chips.innerHTML = "";
   let questions = [];
   if (activeAgent) questions = activeAgent.chips;
@@ -40,16 +58,13 @@ function renderSuggestChips() {
     const btn = document.createElement("button");
     btn.className = "chip";
     btn.textContent = q;
-    btn.addEventListener("click", () => enqueue(q));
+    btn.addEventListener("click", () => {
+      enqueue(q);
+      $("suggestPopup").classList.add("hidden");
+    });
     chips.appendChild(btn);
   });
 }
-
-$("suggestSectionHeader").addEventListener("click", () => {
-  suggestOpen = !suggestOpen;
-  $("suggestSectionChips").classList.toggle("open", suggestOpen);
-  $("suggestSectionToggle").textContent = suggestOpen ? "▼" : "▶";
-});
 
 
 // ---- agent drawer width resize ----
@@ -90,6 +105,9 @@ function toggleAgent(agent) {
 }
 
 function closeAgentDrawer() {
+  // If the chat lives in this drawer, send it back to the right panel
+  // first so it doesn't disappear with the drawer.
+  if (chatOnLeft) $("moveChatBtn").click();
   activeAgent = null;
   $("agentDrawer").classList.add("hidden");
   document.querySelectorAll(".agent-btn").forEach(b => {
@@ -255,6 +273,12 @@ $("moveChatBtn").addEventListener("click", () => {
     slot.style.display = "flex";
     slot.appendChild(vDiv);
     slot.appendChild(chat);
+    // Give the chat room: drawer body shrinks, slot fills the rest,
+    // so the input bar + send button stay visible.
+    $("agentDrawerBody").style.flex = "0 1 38%";
+    slot.style.flex = "1 1 auto";
+    chat.style.flex = "1 1 auto";
+    $("chatInput").placeholder = "";
     $("moveChatBtn").textContent = "⇄ Right";
     syncChatToAgent();
   } else {
@@ -263,6 +287,14 @@ $("moveChatBtn").addEventListener("click", () => {
     const panelContent = $("panelContent");
     panelContent.appendChild(vDiv);
     panelContent.appendChild(chat);
+    $("agentDrawerBody").style.flex = "";
+    $("agentChatSlot").style.flex = "";
+    // Restore the panel to its original state: mindmap back, chat at
+    // default size, expand button reset — same as a fresh load.
+    chatLogExpanded = false;
+    $("expandChatLog").textContent = "⤢ Expand";
+    $("mindmapWrap").style.flex = "";
+    tuckMindmap(false);
     $("moveChatBtn").textContent = "⇄ Left";
     if (state.data) { renderChips(); $("chatInput").placeholder = `Ask anything about ${state.data.country}…`; }
   }
@@ -270,7 +302,7 @@ $("moveChatBtn").addEventListener("click", () => {
 
 function syncChatToAgent() {
   if (!activeAgent) return;
-  $("chatInput").placeholder = `Ask anything about ${activeAgent.name}…`;
+  $("chatInput").placeholder = "";
   // Refresh suggest popup if open
   if (!$("suggestPopup").classList.contains("hidden")) renderSuggestChips();
 }
@@ -356,15 +388,14 @@ function renderPanel() {
 let chatLogExpanded = false;
 $("expandChatLog").addEventListener("click", () => {
   chatLogExpanded = !chatLogExpanded;
-  const panel = $("panelContent");
-  const totalH = panel.getBoundingClientRect().height;
   if (chatLogExpanded) {
-    const expandedChatH = Math.floor(totalH * 0.75);
-    $("mindmap").style.flex = `0 0 ${Math.max(60, totalH - expandedChatH - 20)}px`;
-    $("chat").style.flex = `0 0 ${expandedChatH}px`;
+    // Shrink the mindmap and let chat fill the rest — keeps the input
+    // bar fully visible instead of pushing it below the panel edge.
+    $("mindmapWrap").style.flex = "0 0 80px";
+    $("chat").style.flex = "1 1 auto";
     $("expandChatLog").textContent = "⤡ Collapse";
   } else {
-    $("mindmap").style.flex = "";
+    $("mindmapWrap").style.flex = "";
     $("chat").style.flex = "0 0 260px";
     $("expandChatLog").textContent = "⤢ Expand";
   }
@@ -522,7 +553,7 @@ function updateTimelineMap(year) {
 }
 
 // ---- toggles ----
-const toggleMap = { tTheories: "theories", tMoney: "money", tConnections: "connections", tResources: "resources" };
+const toggleMap = { tTheories: "theories", tConnections: "connections", tResources: "resources" };
 Object.entries(toggleMap).forEach(([id, key]) => {
   $(id).addEventListener("change", (e) => {
     state.toggles[key] = e.target.checked;
@@ -570,8 +601,35 @@ async function processQueue() {
   processQueue();
 }
 
+// ---- mindmap tuck: slide mindmap aside to give chat more room ----
+let mindmapTucked = false;
+function tuckMindmap(t) {
+  mindmapTucked = t;
+  $("mindmapWrap").classList.toggle("tucked", t);
+  $("mindmapTab").classList.toggle("off", t);
+  $("chat").style.flex = t ? "1 1 auto" : "0 0 260px";
+}
+$("mindmapTab").addEventListener("click", () => tuckMindmap(!mindmapTucked));
+
+// Horizontal swipe helper (mobile): swipe left on mindmap → tuck,
+// swipe right on chat → bring it back
+function onHorizSwipe(el, cb) {
+  let sx = 0, sy = 0;
+  el.addEventListener("touchstart", (e) => {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  el.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - sx;
+    const dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) cb(dx);
+  }, { passive: true });
+}
+onHorizSwipe($("mindmapWrap"), (dx) => { if (dx < 0) tuckMindmap(true); });
+onHorizSwipe($("chat"), (dx) => { if (dx > 0 && mindmapTucked) tuckMindmap(false); });
+
 function enqueue(q) {
   if (!q || !state.country) return;
+  if (!mindmapTucked) tuckMindmap(true);
   addMsg(q, "user");
   if (chatBusy) addMsg(`Queued (#${chatQueue.length + 1})`, "queued");
   chatQueue.push({ country: state.country, q });
@@ -1293,3 +1351,64 @@ function makeSwipeDismiss(el, closeBtn) {
 makeSwipeDismiss($("conflictDrawer"), "conflictDrawerClose");
 makeSwipeDismiss($("newsDrawer"), "newsDrawerClose");
 makeSwipeDismiss($("agentDrawer"), "agentDrawerClose");
+
+// ---- Esc closes whatever is open (drawers, popups) ----
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  $("newsDrawerClose").click();
+  $("conflictDrawerClose").click();
+  $("popup").classList.add("hidden");
+  $("suggestPopup").classList.add("hidden");
+  $("quickAskChips").classList.add("hidden");
+  $("quickAsk").classList.remove("open");
+});
+
+// ---- floating map controls: zoom + quick-ask ----
+$("zoomInBtn").addEventListener("click", () => GeoMap.zoomBy(1.5));
+$("zoomOutBtn").addEventListener("click", () => GeoMap.zoomBy(1 / 1.5));
+$("zoomResetBtn").addEventListener("click", () => GeoMap.resetZoom());
+
+// ✨ = floating suggestions about the current country / topic / map
+function quickAskSuggestions() {
+  const c = state.country;
+  if (c) return [
+    `Key alliances of ${c}?`,
+    `Main resources of ${c}?`,
+    `Biggest threats to ${c}?`,
+    `How strong is ${c}'s economy?`,
+    `Recent conflicts involving ${c}?`,
+  ];
+  if (state.mode === "religion") return ReligionPanel.CHIPS;
+  return null; // no country yet
+}
+
+$("quickAskBtn").addEventListener("click", () => {
+  const box = $("quickAskChips");
+  const show = box.classList.contains("hidden");
+  if (show) {
+    box.innerHTML = "";
+    const qs = quickAskSuggestions();
+    if (!qs) {
+      const hint = document.createElement("span");
+      hint.className = "chip";
+      hint.style.cursor = "default";
+      hint.textContent = "Tap a country on the map first 🌍";
+      box.appendChild(hint);
+    } else {
+      qs.forEach((q) => {
+        const chip = document.createElement("button");
+        chip.className = "chip";
+        chip.textContent = q;
+        chip.addEventListener("click", () => {
+          box.classList.add("hidden");
+          $("quickAsk").classList.remove("open");
+          $("panel").classList.remove("collapsed"); // make sure the answer is visible
+          enqueue(q);
+        });
+        box.appendChild(chip);
+      });
+    }
+  }
+  box.classList.toggle("hidden", !show);
+  $("quickAsk").classList.toggle("open", show);
+});
