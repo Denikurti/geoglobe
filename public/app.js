@@ -303,6 +303,7 @@ document.querySelectorAll(".mode-tab").forEach(btn => {
 
 function onCityClick(city) {
   // Show the city in the panel
+  $("panel").classList.remove("collapsed");
   $("panelEmpty").classList.add("hidden");
   $("panelContent").classList.remove("hidden");
   $("countryName").textContent = city.name;
@@ -422,7 +423,9 @@ async function loadCountry(name) {
 
   let hasData = true;
   try {
-    const res = await fetch(`data/${name.toLowerCase().replace(/\s+/g,"_")}.json`);
+    const FILE_ALIAS = { "United Kingdom": "uk", "North Macedonia": "north_macedonia", "Bosnia": "bosnia", "Kosovo": "kosovo", "Montenegro": "montenegro", "South Africa": "south_africa" };
+    const fname = FILE_ALIAS[name] || name.toLowerCase().replace(/\s+/g,"_");
+    const res = await fetch(`data/${fname}.json`);
     if (!res.ok) throw new Error("no data");
     state.data = await res.json();
   } catch {
@@ -431,6 +434,7 @@ async function loadCountry(name) {
   }
 
   GeoMap.setActive(name);
+  $("panel").classList.remove("collapsed");
   $("panelEmpty").classList.add("hidden");
   $("panelContent").classList.remove("hidden");
   $("countryName").textContent = name;
@@ -574,6 +578,13 @@ function enqueue(q) {
   updateQueueBadge();
   processQueue();
 }
+
+// Auto-grow textarea
+$("chatInput").addEventListener("input", () => {
+  const el = $("chatInput");
+  el.style.height = "auto";
+  el.style.height = Math.min(el.scrollHeight, 180) + "px";
+});
 
 $("chatInput").addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
@@ -762,12 +773,26 @@ $("focusModeBtn").addEventListener("click", () => {
 $("mindmapExpandBtn").addEventListener("click", () => {
   const wrap = $("mindmapWrap");
   const expanded = wrap.classList.toggle("fullscreen");
-  $("mindmapExpandBtn").textContent = expanded ? "⤡" : "⤢";
-  // re-fit the cytoscape graph after resize
+  $("mindmapExpandBtn").textContent = expanded ? "✕ Close" : "⤢ Expand";
+  const label = $("mindmapFullLabel");
+  if (expanded && state.country) {
+    label.innerHTML = `<span>🌍</span> ${state.country} — Mind Map`;
+    label.classList.remove("hidden");
+  } else {
+    label.classList.add("hidden");
+  }
+  // re-fit cytoscape after resize
   setTimeout(() => {
     const cy = document.querySelector("#mindmap")._cy;
-    if (cy) cy.fit(undefined, 20);
-  }, 50);
+    if (cy) cy.fit(undefined, 24);
+  }, 60);
+});
+
+// Also close fullscreen on Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && $("mindmapWrap").classList.contains("fullscreen")) {
+    $("mindmapExpandBtn").click();
+  }
 });
 
 // ── Mobile bottom sheet ────────────────────────────────────────────────────
@@ -795,7 +820,10 @@ function closeMobilePanel() {
   setSnap(null);
 }
 
-$("mobilePanelClose").addEventListener("click", closeMobilePanel);
+$("mobilePanelClose").addEventListener("click", () => {
+  if (isMobile()) { closeMobilePanel(); return; }
+  $("panel").classList.add("collapsed");
+});
 
 // Drag handle — snap up/down
 (function() {
@@ -1197,6 +1225,25 @@ $("newsToggleBtn").addEventListener("click", () => {
   $("newsToggleBtn").textContent = newsDotsVisible ? "📰 News" : "📰 News off";
 });
 
+// ── iOS-style touch press feedback ──────────────────────────────────────────
+(function addTouchFeedback() {
+  const SELECTOR = "button, .chip, .followup-chip, .agent-btn, .news-card, .stat-card, .search-item, .news-strip-item, .agent-country-item";
+  function onStart(e) {
+    const el = e.target.closest(SELECTOR);
+    if (el) { el.dataset.pressing = "1"; el.style.transition = "transform 0.08s ease, opacity 0.08s ease"; el.style.transform = "scale(0.96)"; el.style.opacity = "0.85"; }
+  }
+  function onEnd(e) {
+    const el = e.target.closest(SELECTOR) || document.querySelector("[data-pressing='1']");
+    document.querySelectorAll("[data-pressing='1']").forEach(el => {
+      el.style.transform = ""; el.style.opacity = ""; el.style.transition = "";
+      delete el.dataset.pressing;
+    });
+  }
+  document.addEventListener("touchstart", onStart, { passive: true });
+  document.addEventListener("touchend", onEnd, { passive: true });
+  document.addEventListener("touchcancel", onEnd, { passive: true });
+})();
+
 // ---- boot ----
 buildAgentBar();
 buildSearchIndex();
@@ -1217,3 +1264,32 @@ GeoMap.init($("map"), loadCountry).then(() => {
 }).catch((e) =>
   ($("panelEmpty").textContent = "Map failed to load: " + e.message)
 );
+
+// ---- swipe-to-dismiss for left drawers (mobile) ----
+// Swipe left on any slide-in drawer to close it, like iOS sheets.
+function makeSwipeDismiss(el, closeBtn) {
+  let startX = 0, startY = 0, dx = 0, active = false;
+  el.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    dx = 0; active = true;
+    el.style.transition = "none";
+  }, { passive: true });
+  el.addEventListener("touchmove", (e) => {
+    if (!active) return;
+    dx = e.touches[0].clientX - startX;
+    const dy = e.touches[0].clientY - startY;
+    if (Math.abs(dy) > Math.abs(dx)) return; // vertical scroll, ignore
+    if (dx < 0) el.style.transform = `translateX(${dx}px)`;
+  }, { passive: true });
+  el.addEventListener("touchend", () => {
+    if (!active) return;
+    active = false;
+    el.style.transition = "";
+    el.style.transform = "";
+    if (dx < -70) $(closeBtn).click();
+  }, { passive: true });
+}
+makeSwipeDismiss($("conflictDrawer"), "conflictDrawerClose");
+makeSwipeDismiss($("newsDrawer"), "newsDrawerClose");
+makeSwipeDismiss($("agentDrawer"), "agentDrawerClose");

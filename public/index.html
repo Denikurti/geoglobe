@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GeoGlobe — North America</title>
-  <link rel="stylesheet" href="styles.css?v=13" />
+  <link rel="stylesheet" href="styles.css?v=16" />
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
@@ -20,7 +20,7 @@
       <button class="mode-tab" data-mode="religion">✝ Religion & Ancient</button>
     </div>
     <div id="searchWrap">
-      <input id="searchInput" type="text" placeholder="🔍  Search country, city, topic…" autocomplete="off" />
+      <input id="searchInput" type="text" placeholder="🔍 Search…" autocomplete="off" />
       <div id="searchResults" class="hidden"></div>
     </div>
     <button id="newsToggleBtn" title="Toggle news dots">📰 News</button>
@@ -70,7 +70,7 @@
 
     <aside id="panel">
       <div id="mobilePanelHandle"><div id="mobilePanelPill"></div></div>
-      <button id="mobilePanelClose" class="hidden">✕</button>
+      <button id="mobilePanelClose">✕</button>
       <div id="panelEmpty" class="empty">Tap a country on the map to begin.</div>
 
       <div id="panelContent" class="hidden">
@@ -86,7 +86,8 @@
 
         <div id="mindmapWrap">
           <div id="mindmap"></div>
-          <button id="mindmapExpandBtn" title="Expand mindmap">⤢</button>
+          <div id="mindmapFullLabel" class="hidden"></div>
+          <button id="mindmapExpandBtn" title="Expand mindmap">⤢ Expand</button>
         </div>
 
         <!-- drag handle: resize mindmap vs chat -->
@@ -103,9 +104,9 @@
           </div>
           <div id="chatLog"></div>
           <form id="chatForm">
-            <textarea id="chatInput" autocomplete="off" rows="5"
+            <textarea id="chatInput" autocomplete="off" rows="1"
                       placeholder="Ask anything about this country…"></textarea>
-            <button type="submit">Ask</button>
+            <button type="submit" title="Send">↑</button>
           </form>
         </div>
       </div>

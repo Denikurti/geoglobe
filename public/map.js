@@ -96,10 +96,11 @@ const GeoMap = (() => {
         gOverlay.attr("transform", e.transform);
         gNews.attr("transform", e.transform);
         if (gAncient) gAncient.attr("transform", e.transform);
-        gNews.selectAll(".news-dot-pulse").attr("r", 9 / k);
-        gNews.selectAll(".news-dot-core").attr("r", 3.5 / k);
+        gNews.selectAll(".news-dot-pulse").attr("r", 7 / k);
+        gNews.selectAll(".news-dot-core").attr("r", 2.8 / k);
         gMap.selectAll("text.clabel").style("font-size", `${BASE_LABEL / k}px`);
         gOverlay.selectAll("text.clabel").style("font-size", `${BASE_LABEL / k}px`);
+        applyLabelLOD(k);
         gMap.selectAll("path.country").style("stroke-width", `${BASE_STROKE / k}px`);
         gOverlay.selectAll("path.conn, path.flow").style("stroke-width", `${2 / k}px`);
         gOverlay.selectAll("circle").attr("r", 3 / k);
@@ -150,9 +151,24 @@ const GeoMap = (() => {
       .data(clickable.filter((f) => labelSet.has(CLICKABLE[+f.id])))
       .join("text")
       .attr("class", "clabel")
+      .attr("data-mink", (d) => {
+        const a = path.area(d);
+        return a > 1500 ? 1 : a > 400 ? 1.8 : 3.2;
+      })
       .attr("x", (d) => { const n = CLICKABLE[+d.id]; const c = COORDS[n]; return c ? projection(c)[0] : path.centroid(d)[0]; })
       .attr("y", (d) => { const n = CLICKABLE[+d.id]; const c = COORDS[n]; return c ? projection(c)[1] : path.centroid(d)[1]; })
       .text((d) => CLICKABLE[+d.id]);
+    applyLabelLOD(1);
+  }
+
+  // Google-Maps-style LOD: small countries' labels only appear when zoomed in
+  let labelsOff = false, curK = 1;
+  function applyLabelLOD(k) {
+    curK = k;
+    gMap.selectAll("text.clabel").style("display", function () {
+      if (labelsOff) return "none";
+      return k >= +(this.dataset.mink || 1) ? null : "none";
+    });
   }
 
   function setActive(name) {
@@ -170,7 +186,8 @@ const GeoMap = (() => {
 
   // ── Ancient / Religion mode ──────────────────────────────────────────────
   function setAncientMode(on, onCityClick) {
-    gMap.selectAll("text.clabel").style("display", on ? "none" : null);
+    labelsOff = on;
+    applyLabelLOD(curK);
     if (gAncient) { gAncient.remove(); gAncient = null; }
 
     if (!on) {
@@ -314,8 +331,8 @@ const GeoMap = (() => {
       if (!c) return;
       const g = gNews.append("g").attr("class", "news-dot-grp")
         .attr("transform", `translate(${c[0]},${c[1]})`).style("cursor","pointer");
-      g.append("circle").attr("r", 9).attr("class", "news-dot-pulse");
-      g.append("circle").attr("r", 3.5).attr("class", "news-dot-core");
+      g.append("circle").attr("r", 7).attr("class", "news-dot-pulse");
+      g.append("circle").attr("r", 2.8).attr("class", "news-dot-core");
       g.on("mouseover", (e) => onHover(name, e.clientX, e.clientY))
        .on("mouseout",  ()  => onLeave())
        .on("click",     (e) => { e.stopPropagation(); onDotClick(name); });
