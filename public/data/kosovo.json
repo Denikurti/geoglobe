@@ -1,0 +1,54 @@
+{
+  "country": "Kosovo",
+  "summary": "Europe's youngest country, a majority-Albanian state that declared independence from Serbia in 2008 — recognised by the US and most of the EU but blocked from the UN by Serbia, Russia, and China.",
+  "history": [
+    { "year": 1389, "event": "Battle of Kosovo", "detail": "Site of the medieval Serbian-Ottoman battle central to Serb identity." },
+    { "year": 1989, "event": "Autonomy revoked", "detail": "Milošević strips Kosovo's autonomy, fuelling Albanian resistance." },
+    { "year": 1998, "event": "Kosovo War", "detail": "Serb forces and the KLA fight; mass displacement of Albanians." },
+    { "year": 1999, "event": "NATO intervention", "detail": "NATO bombing forces Serb withdrawal; UN administration begins." },
+    { "year": 2008, "event": "Independence declared", "detail": "Kosovo unilaterally declares statehood from Serbia." },
+    { "year": 2013, "event": "Brussels Agreement", "detail": "EU-brokered deal to normalise Serbia-Kosovo relations, only partly implemented." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Albania", "Germany", "UK", "Turkey"],
+    "enemies_rivals": ["Serbia"],
+    "alliances": ["aspires to EU and NATO", "Council of Europe applicant"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Pro-US, pro-Western alignment", "Euro-Atlantic integration", "State-building and recognition campaign"]
+  },
+  "finance": {
+    "currency_role": "Uses the euro unilaterally (not a eurozone member)",
+    "central_bank": "Central Bank of the Republic of Kosovo",
+    "national_debt_usd_trillions": 0.003,
+    "key_institutions": ["Trepca mining complex", "Post and Telecom of Kosovo"],
+    "leverage_tools": ["Young population", "Diaspora remittances", "US and EU political backing"]
+  },
+  "tech_startups": {
+    "hubs": ["Pristina"],
+    "big_tech": [],
+    "vc_ecosystem": "Early-stage; IT outsourcing and a young workforce",
+    "gov_tech_links": ["Innovation Centre Kosovo"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "None; reliant on coal-fired power",
+    "nuclear": "None",
+    "rare_earths": "Large lignite reserves; lead, zinc, nickel at Trepca",
+    "water": "Limited; energy and water infrastructure strained",
+    "agriculture": "Small-scale; fruit, vegetables, livestock"
+  },
+  "follow_the_money": [
+    { "flow": "Diaspora remittances", "detail": "Transfers from Kosovars in Germany and Switzerland are a top income source" },
+    { "flow": "Trepca mines", "detail": "Historic lead-zinc complex symbolic of the economy and Serb-Albanian dispute" },
+    { "flow": "Donor and EU funds", "detail": "Western aid underpins state institutions and infrastructure" }
+  ],
+  "theories_disputed": [
+    { "topic": "Independence legitimacy", "status": "DISPUTED", "detail": "Recognised by ~100 states and backed by an ICJ opinion; Serbia, Russia and China reject it.", "tags": ["Serbia", "recognition"] },
+    { "topic": "KLA organ-trafficking claims", "status": "DISPUTED", "detail": "A Council of Europe report alleged wartime crimes by KLA figures; a special court is trying some leaders.", "tags": ["KLA", "war crimes"] }
+  ],
+  "connections": [
+    { "to": "Serbia", "type": "rivalry", "detail": "Refuses recognition; tensions flare in the Serb-majority north", "year": 2023 },
+    { "to": "Albania", "type": "ideology", "detail": "Shared Albanian identity and deep cooperation", "year": 2008 },
+    { "to": "USA", "type": "military", "detail": "Key backer; hosts Camp Bondsteel, a major US base", "year": 1999 }
+  ]
+}

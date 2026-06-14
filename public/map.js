@@ -97,8 +97,8 @@ const GeoMap = (() => {
         gOverlay.attr("transform", e.transform);
         gNews.attr("transform", e.transform);
         if (gAncient) gAncient.attr("transform", e.transform);
-        gNews.selectAll(".news-dot-pulse").attr("r", 7 / k);
-        gNews.selectAll(".news-dot-core").attr("r", 2.8 / k);
+        gNews.selectAll(".news-dot-pulse").attr("r", 6 / k);
+        gNews.selectAll(".news-dot-core").attr("r", 2.3 / k);
         gMap.selectAll("text.clabel").style("font-size", `${BASE_LABEL / k}px`);
         gOverlay.selectAll("text.clabel").style("font-size", `${BASE_LABEL / k}px`);
         applyLabelLOD(k);
@@ -332,8 +332,8 @@ const GeoMap = (() => {
       if (!c) return;
       const g = gNews.append("g").attr("class", "news-dot-grp")
         .attr("transform", `translate(${c[0]},${c[1]})`).style("cursor","pointer");
-      g.append("circle").attr("r", 7).attr("class", "news-dot-pulse");
-      g.append("circle").attr("r", 2.8).attr("class", "news-dot-core");
+      g.append("circle").attr("r", 6).attr("class", "news-dot-pulse");
+      g.append("circle").attr("r", 2.3).attr("class", "news-dot-core");
       g.on("mouseover", (e) => onHover(name, e.clientX, e.clientY))
        .on("mouseout",  ()  => onLeave())
        .on("click",     (e) => { e.stopPropagation(); onDotClick(name); });

@@ -1,0 +1,54 @@
+{
+  "country": "Kenya",
+  "summary": "East Africa's commercial and tech hub, a stable democracy and Western security partner whose mobile-money revolution and Nairobi 'Silicon Savannah' coexist with heavy Chinese-built debt.",
+  "history": [
+    { "year": 1952, "event": "Mau Mau uprising", "detail": "Armed revolt against British colonial rule met with brutal suppression." },
+    { "year": 1963, "event": "Independence", "detail": "Jomo Kenyatta becomes the first leader of an independent Kenya." },
+    { "year": 2007, "event": "Post-election violence", "detail": "Disputed election sparks ethnic clashes killing over 1,000." },
+    { "year": 2007, "event": "M-Pesa launches", "detail": "Mobile money transforms finance and inspires the world." },
+    { "year": 2013, "event": "Westgate Mall attack", "detail": "Al-Shabaab kills 67; cross-border conflict with Somalia intensifies." },
+    { "year": 2024, "event": "Anti-tax 'Gen Z' protests", "detail": "Mass youth protests force the withdrawal of a finance bill." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "UK", "China", "EU"],
+    "enemies_rivals": ["Al-Shabaab"],
+    "alliances": ["East African Community", "African Union", "Commonwealth", "Major Non-NATO Ally (US)", "UN"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Regional economic hub strategy", "Counter-terror partnership with the West", "Multi-aligned diplomacy"]
+  },
+  "finance": {
+    "currency_role": "Kenyan shilling (KES); East Africa's reference currency",
+    "central_bank": "Central Bank of Kenya (1966)",
+    "national_debt_usd_trillions": 0.08,
+    "key_institutions": ["Safaricom (M-Pesa)", "Equity Bank", "Nairobi Securities Exchange"],
+    "leverage_tools": ["M-Pesa mobile-money network", "Mombasa port — gateway for East Africa", "Nairobi as a regional HQ for UN and multinationals"]
+  },
+  "tech_startups": {
+    "hubs": ["Nairobi ('Silicon Savannah')"],
+    "big_tech": ["Safaricom"],
+    "vc_ecosystem": "One of Africa's top startup markets; fintech and climate tech",
+    "gov_tech_links": ["Konza Technopolis", "Digital Economy Blueprint"],
+    "ai_leaders": ["M-Pesa", "Twiga Foods", "Cellulant"]
+  },
+  "resources": {
+    "oil_gas": "Discoveries in Turkana; not yet a major exporter",
+    "nuclear": "Planned long-term; none operational",
+    "rare_earths": "Titanium, soda ash, rare-earth deposits at Mrima Hill",
+    "water": "Variable; recurrent drought in the north and east",
+    "agriculture": "Tea, coffee, horticulture (cut flowers) — top exports"
+  },
+  "follow_the_money": [
+    { "flow": "M-Pesa ecosystem", "detail": "Mobile money handles a huge share of GDP and financial inclusion" },
+    { "flow": "SGR railway debt", "detail": "Chinese-financed Standard Gauge Railway is a major debt and political issue" },
+    { "flow": "Tea and flowers", "detail": "Agricultural exports to Europe and Asia are key FX earners" }
+  ],
+  "theories_disputed": [
+    { "topic": "SGR railway terms", "status": "DISPUTED", "detail": "Concerns the Mombasa–Nairobi railway loan risks Chinese seizure of the port; both governments deny it.", "tags": ["China", "debt"] },
+    { "topic": "ICC cases", "status": "CONFIRMED", "detail": "President Kenyatta and Ruto were charged over 2007 violence; cases later collapsed.", "tags": ["election violence", "ICC"] }
+  ],
+  "connections": [
+    { "to": "China", "type": "economic", "detail": "Built the SGR railway and major roads under Belt and Road", "year": 2017 },
+    { "to": "USA", "type": "military", "detail": "Major non-NATO ally; counter-terror cooperation in Somalia", "year": 2024 },
+    { "to": "Somalia", "type": "rivalry", "detail": "Maritime border dispute and conflict with Al-Shabaab", "year": 2021 }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "country": "Nigeria",
+  "summary": "Africa's most populous country and a top oil producer, a federal democracy split between a Muslim north and Christian south, with a vibrant tech and entertainment sector held back by insecurity and corruption.",
+  "history": [
+    { "year": 1960, "event": "Independence from Britain", "detail": "Nigeria becomes a federation of three regions." },
+    { "year": 1967, "event": "Biafran War begins", "detail": "Igbo southeast secedes; a brutal war and famine kill over a million." },
+    { "year": 1970, "event": "Civil war ends", "detail": "Biafra reintegrated; oil boom reshapes the economy." },
+    { "year": 1999, "event": "Return to democracy", "detail": "Decades of military rule end with elected civilian government." },
+    { "year": 2009, "event": "Boko Haram insurgency", "detail": "Islamist insurgency erupts in the northeast; tens of thousands killed." },
+    { "year": 2020, "event": "#EndSARS protests", "detail": "Mass youth protests against police brutality shake the country." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "UK", "China", "regional ECOWAS partners"],
+    "enemies_rivals": ["Boko Haram", "ISWAP", "armed banditry groups"],
+    "alliances": ["ECOWAS", "African Union", "OPEC", "Commonwealth", "UN"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Regional leadership in West Africa", "Non-alignment", "Resource-funded federalism"]
+  },
+  "finance": {
+    "currency_role": "Nigerian naira (NGN); repeatedly devalued amid FX shortages",
+    "central_bank": "Central Bank of Nigeria (1958)",
+    "national_debt_usd_trillions": 0.11,
+    "key_institutions": ["NNPC (national oil company)", "Dangote Group", "Nigerian Exchange"],
+    "leverage_tools": ["Largest economy and population in Africa", "Major oil and LNG exports", "Dangote Refinery — one of the world's largest"]
+  },
+  "tech_startups": {
+    "hubs": ["Lagos (Yaba 'Silicon Lagoon')", "Abuja"],
+    "big_tech": ["MTN Nigeria", "Interswitch"],
+    "vc_ecosystem": "Africa's largest startup funding market; home to fintech unicorns",
+    "gov_tech_links": ["National Digital Economy policy"],
+    "ai_leaders": ["Flutterwave", "Paystack", "Andela"]
+  },
+  "resources": {
+    "oil_gas": "Largest oil producer in Africa; major LNG exporter",
+    "nuclear": "None operational; research reactor only",
+    "rare_earths": "Underexploited tin, columbite, lithium",
+    "water": "Abundant in the south; Niger and Benue river systems",
+    "agriculture": "Cassava, yams, cocoa; large but underproductive sector"
+  },
+  "follow_the_money": [
+    { "flow": "Oil revenue", "detail": "Crude exports fund most government income but feed corruption and theft" },
+    { "flow": "Nollywood and music", "detail": "Film and Afrobeats are global cultural exports and soft power" },
+    { "flow": "Fintech boom", "detail": "Lagos startups attract the bulk of African venture capital" }
+  ],
+  "theories_disputed": [
+    { "topic": "Oil theft ('bunkering')", "status": "CONFIRMED", "detail": "Large-scale illegal crude tapping in the Niger Delta, sometimes with official complicity.", "tags": ["corruption", "oil"] },
+    { "topic": "Chibok kidnappings", "status": "CONFIRMED", "detail": "Boko Haram abducted 276 schoolgirls in 2014; many remain missing.", "tags": ["Boko Haram", "insurgency"] }
+  ],
+  "connections": [
+    { "to": "China", "type": "economic", "detail": "Major infrastructure lender and railway builder", "year": 2016 },
+    { "to": "USA", "type": "military", "detail": "Counter-terror cooperation against Boko Haram and ISWAP", "year": 2014 },
+    { "to": "South Africa", "type": "rivalry", "detail": "Competing for the title of Africa's leading power", "year": 2020 }
+  ]
+}

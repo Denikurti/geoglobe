@@ -1,0 +1,53 @@
+{
+  "country": "Serbia",
+  "summary": "The largest former-Yugoslav state, an EU candidate that still leans on Russia and China, refuses to recognise Kosovo, and plays a careful balancing act between East and West.",
+  "history": [
+    { "year": 1389, "event": "Battle of Kosovo", "detail": "Defeat by the Ottomans becomes the central myth of Serbian nationhood." },
+    { "year": 1914, "event": "WWI trigger", "detail": "The assassination of Archduke Franz Ferdinand in Sarajevo sparks world war." },
+    { "year": 1991, "event": "Yugoslavia breaks up", "detail": "Wars erupt as Slovenia, Croatia and others secede." },
+    { "year": 1999, "event": "NATO bombing", "detail": "NATO bombs Serbia over Kosovo; Milošević withdraws forces." },
+    { "year": 2000, "event": "Milošević overthrown", "detail": "Popular uprising ends his rule; he is later tried at The Hague." },
+    { "year": 2008, "event": "Kosovo declares independence", "detail": "Serbia rejects it and still claims the territory." }
+  ],
+  "geopolitics": {
+    "allies": ["Russia", "China", "Hungary", "EU (candidate)"],
+    "enemies_rivals": ["Kosovo", "historical tensions with NATO"],
+    "alliances": ["EU candidate", "UN", "CEFTA", "military neutrality"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Military neutrality", "Non-recognition of Kosovo", "Balancing between Russia/China and the EU"]
+  },
+  "finance": {
+    "currency_role": "Serbian dinar (RSD); managed float, EU accession pending",
+    "central_bank": "National Bank of Serbia (1884)",
+    "national_debt_usd_trillions": 0.04,
+    "key_institutions": ["Telekom Srbija", "NIS (oil, Russian-owned)"],
+    "leverage_tools": ["Regional Balkan economic weight", "Russian energy ties", "Chinese mining and infrastructure deals"]
+  },
+  "tech_startups": {
+    "hubs": ["Belgrade", "Novi Sad"],
+    "big_tech": ["Nordeus (gaming)"],
+    "vc_ecosystem": "Growing IT outsourcing and gaming sector",
+    "gov_tech_links": ["Science Technology Park Belgrade"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Modest; dependent on Russian gas via pipelines",
+    "nuclear": "None; constitutional ban on nuclear power",
+    "rare_earths": "Large Jadar lithium deposit (Rio Tinto project, contested)",
+    "water": "Adequate; Danube and Sava river basins",
+    "agriculture": "Strong; maize, wheat, fruit; a regional food exporter"
+  },
+  "follow_the_money": [
+    { "flow": "Chinese investment", "detail": "Smederevo steel and Bor copper mines bought by Chinese firms" },
+    { "flow": "Russian energy", "detail": "Gazprom owns oil firm NIS; Serbia relies on Russian gas" },
+    { "flow": "Jadar lithium", "detail": "Europe's largest lithium project, repeatedly stalled by protests" }
+  ],
+  "theories_disputed": [
+    { "topic": "Srebrenica genocide", "status": "CONFIRMED", "detail": "International courts ruled the 1995 massacre of 8,000 Bosniaks a genocide; some Serb officials still dispute the term.", "tags": ["Bosnia", "war crimes"] }
+  ],
+  "connections": [
+    { "to": "Russia", "type": "ideology", "detail": "Slavic-Orthodox ties; refuses to sanction Moscow", "year": 2022 },
+    { "to": "China", "type": "economic", "detail": "Strategic partner; major mining and infrastructure investor", "year": 2019 },
+    { "to": "Kosovo", "type": "rivalry", "detail": "Refuses recognition; periodic flashpoints in the north", "year": 2023 }
+  ]
+}

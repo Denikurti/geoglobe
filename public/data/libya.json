@@ -1,0 +1,54 @@
+{
+  "country": "Libya",
+  "summary": "An oil-rich North African state fractured by civil war since the 2011 fall of Gaddafi, split between rival governments in Tripoli and the east and a magnet for foreign powers and migration routes.",
+  "history": [
+    { "year": 1951, "event": "Independence", "detail": "Libya becomes a kingdom under Idris I after Italian colonial rule and WWII occupation." },
+    { "year": 1969, "event": "Gaddafi seizes power", "detail": "A young officer overthrows the monarchy in a bloodless coup." },
+    { "year": 1986, "event": "US airstrikes on Tripoli", "detail": "Reagan bombs Libya after the Berlin disco attack." },
+    { "year": 2003, "event": "Gaddafi abandons WMD program", "detail": "Libya gives up nuclear and chemical weapons; sanctions lifted." },
+    { "year": 2011, "event": "Revolution and NATO intervention", "detail": "Arab Spring uprising; NATO airstrikes; Gaddafi captured and killed." },
+    { "year": 2014, "event": "Second civil war", "detail": "Country splits between the Tripoli government and Haftar's eastern forces." }
+  ],
+  "geopolitics": {
+    "allies": ["Turkey (Tripoli govt)", "Russia (eastern forces)", "Egypt", "UAE", "Italy"],
+    "enemies_rivals": ["Rival domestic factions", "ISIS remnants"],
+    "alliances": ["Arab League", "African Union", "OPEC", "UN"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Resource nationalism (historical)", "Proxy battleground dynamics", "Control of oil terminals as leverage"]
+  },
+  "finance": {
+    "currency_role": "Libyan dinar (LYD); rival central banks have undermined it",
+    "central_bank": "Central Bank of Libya (contested between factions)",
+    "national_debt_usd_trillions": 0.01,
+    "key_institutions": ["National Oil Corporation", "Libyan Investment Authority (frozen assets)"],
+    "leverage_tools": ["Africa's largest proven oil reserves", "Control of Mediterranean migration routes", "Oil export blockades"]
+  },
+  "tech_startups": {
+    "hubs": ["Tripoli (limited)"],
+    "big_tech": ["Libyana (telecom)"],
+    "vc_ecosystem": "Negligible amid conflict",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Largest proven oil reserves in Africa; production disrupted by conflict",
+    "nuclear": "Program dismantled in 2003",
+    "rare_earths": "Underexplored",
+    "water": "Severely scarce; the Great Man-Made River taps fossil aquifers",
+    "agriculture": "Limited to the coastal strip; heavily import-dependent"
+  },
+  "follow_the_money": [
+    { "flow": "Oil revenue disputes", "detail": "Rival governments fight over National Oil Corporation income" },
+    { "flow": "Frozen sovereign assets", "detail": "Tens of billions of LIA funds frozen abroad since 2011" },
+    { "flow": "Migration economy", "detail": "Smuggling networks profit from Europe-bound migration through Libya" }
+  ],
+  "theories_disputed": [
+    { "topic": "Lockerbie bombing", "status": "CONFIRMED", "detail": "Libya accepted responsibility and paid compensation for the 1988 Pan Am 103 bombing.", "tags": ["terrorism", "Gaddafi"] },
+    { "topic": "Foreign mercenaries", "status": "CONFIRMED", "detail": "Russian Wagner and Syrian/Turkish-backed fighters confirmed on both sides.", "tags": ["proxy war", "mercenaries"] }
+  ],
+  "connections": [
+    { "to": "Turkey", "type": "military", "detail": "Backed the Tripoli government with drones and troops", "year": 2020 },
+    { "to": "Russia", "type": "military", "detail": "Wagner mercenaries supported Haftar's eastern forces", "year": 2019 },
+    { "to": "Italy", "type": "economic", "detail": "Former colonial ruler; key energy and migration partner", "year": 2017 }
+  ]
+}
