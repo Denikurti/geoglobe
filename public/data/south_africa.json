@@ -1,0 +1,54 @@
+{
+  "country": "South Africa",
+  "summary": "Africa's most industrialised economy and a moral heavyweight since the end of apartheid, a BRICS member balancing the West, China, and Russia while battling inequality, power cuts, and corruption.",
+  "history": [
+    { "year": 1910, "event": "Union of South Africa", "detail": "British colonies and Boer republics unite under white minority rule." },
+    { "year": 1948, "event": "Apartheid begins", "detail": "National Party institutionalises racial segregation." },
+    { "year": 1960, "event": "Sharpeville massacre", "detail": "Police kill 69 protesters; the ANC is banned and turns to armed struggle." },
+    { "year": 1990, "event": "Mandela freed", "detail": "Nelson Mandela released after 27 years; apartheid negotiations begin." },
+    { "year": 1994, "event": "First democratic election", "detail": "Mandela elected president; ANC begins decades in power." },
+    { "year": 2023, "event": "BRICS expansion summit", "detail": "Hosts the summit inviting new members, signalling Global South leadership." }
+  ],
+  "geopolitics": {
+    "allies": ["China", "Russia", "BRICS partners", "EU", "USA"],
+    "enemies_rivals": [],
+    "alliances": ["BRICS", "African Union", "G20", "SADC", "Commonwealth", "UN"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Non-alignment / 'active non-alignment'", "Leadership of the Global South", "Constitutional democracy"]
+  },
+  "finance": {
+    "currency_role": "South African rand (ZAR); a widely traded emerging-market currency",
+    "central_bank": "South African Reserve Bank (1921)",
+    "national_debt_usd_trillions": 0.27,
+    "key_institutions": ["JSE (largest African stock exchange)", "Anglo American", "Naspers/Prosus"],
+    "leverage_tools": ["World's largest platinum and manganese reserves", "Most developed financial markets in Africa", "BRICS and G20 membership"]
+  },
+  "tech_startups": {
+    "hubs": ["Cape Town", "Johannesburg"],
+    "big_tech": ["Naspers/Prosus", "MTN", "Vodacom"],
+    "vc_ecosystem": "Mature relative to the continent; fintech and e-commerce",
+    "gov_tech_links": ["CSIR research council"],
+    "ai_leaders": ["Yoco", "TymeBank"]
+  },
+  "resources": {
+    "oil_gas": "Minimal oil; reliant on coal and imports",
+    "nuclear": "Koeberg — the only nuclear plant in Africa",
+    "rare_earths": "World leader in platinum-group metals, gold, manganese, chromium",
+    "water": "Water-stressed; recurrent drought (Cape Town 'Day Zero')",
+    "agriculture": "Wine, citrus, maize; a net food exporter"
+  },
+  "follow_the_money": [
+    { "flow": "Mining exports", "detail": "Platinum, gold and coal remain the backbone of export earnings" },
+    { "flow": "State capture losses", "detail": "The Zondo Commission detailed billions lost to corruption under Zuma" },
+    { "flow": "Eskom debt", "detail": "The bankrupt power utility drives chronic blackouts and fiscal risk" }
+  ],
+  "theories_disputed": [
+    { "topic": "State capture", "status": "CONFIRMED", "detail": "Judicial commission confirmed systematic looting of state firms by the Gupta network.", "tags": ["corruption", "Zuma"] },
+    { "topic": "Arms-for-Russia ('Lady R')", "status": "DISPUTED", "detail": "US alleged weapons were loaded onto a sanctioned Russian ship in 2022; an inquiry found no proof.", "tags": ["Russia", "neutrality"] }
+  ],
+  "connections": [
+    { "to": "China", "type": "economic", "detail": "Largest trading partner and key BRICS ally", "year": 2010 },
+    { "to": "Russia", "type": "diplomacy", "detail": "Historic ANC ties; refused to condemn the Ukraine invasion", "year": 2022 },
+    { "to": "USA", "type": "economic", "detail": "AGOA trade access alongside political friction over neutrality", "year": 2000 }
+  ]
+}

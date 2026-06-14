@@ -1,0 +1,53 @@
+{
+  "country": "Bosnia",
+  "summary": "Bosnia and Herzegovina is a fragile post-war state held together by the 1995 Dayton Accords, divided between a Bosniak-Croat federation and a Serb republic, with the EU and NATO still overseeing stability.",
+  "history": [
+    { "year": 1463, "event": "Ottoman conquest", "detail": "Bosnia becomes Ottoman; many convert to Islam, shaping its mixed identity." },
+    { "year": 1878, "event": "Austro-Hungarian rule", "detail": "The empire occupies and later annexes Bosnia." },
+    { "year": 1992, "event": "War of independence", "detail": "Bosnia secedes from Yugoslavia; war and siege of Sarajevo begin." },
+    { "year": 1995, "event": "Srebrenica genocide", "detail": "Serb forces murder ~8,000 Bosniak men and boys — Europe's worst post-WWII atrocity." },
+    { "year": 1995, "event": "Dayton Accords", "detail": "US-brokered peace splits the country into two entities." },
+    { "year": 2022, "event": "EU candidate status", "detail": "Granted amid renewed Serb secession threats." }
+  ],
+  "geopolitics": {
+    "allies": ["EU", "USA", "Turkey", "Gulf states (investment)"],
+    "enemies_rivals": ["internal secessionist tensions"],
+    "alliances": ["EU candidate", "Council of Europe", "UN", "NATO partnership"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Dayton power-sharing", "EU/NATO aspiration", "International oversight (High Representative)"]
+  },
+  "finance": {
+    "currency_role": "Convertible mark (BAM); pegged to the euro",
+    "central_bank": "Central Bank of Bosnia and Herzegovina (currency board)",
+    "national_debt_usd_trillions": 0.01,
+    "key_institutions": ["BH Telecom", "Elektroprivreda (power)"],
+    "leverage_tools": ["Hydropower potential", "Strategic central-Balkan location", "Diaspora remittances"]
+  },
+  "tech_startups": {
+    "hubs": ["Sarajevo", "Banja Luka"],
+    "big_tech": [],
+    "vc_ecosystem": "Nascent; IT outsourcing growing",
+    "gov_tech_links": [],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Minimal; import dependent",
+    "nuclear": "None",
+    "rare_earths": "Coal, iron, bauxite; underdeveloped mining",
+    "water": "Abundant; strong hydropower rivers (Drina, Neretva)",
+    "agriculture": "Fruit, livestock; small-scale and fragmented"
+  },
+  "follow_the_money": [
+    { "flow": "Diaspora remittances", "detail": "Money from Bosnians abroad is a major share of household income" },
+    { "flow": "Gulf and Turkish investment", "detail": "Real estate and tourism funding, especially around Sarajevo" }
+  ],
+  "theories_disputed": [
+    { "topic": "Srebrenica genocide", "status": "CONFIRMED", "detail": "ICTY and ICJ ruled it genocide; some Republika Srpska leaders still deny it.", "tags": ["genocide", "Serbia"] },
+    { "topic": "Republika Srpska secession", "status": "DISPUTED", "detail": "Serb entity leader Dodik repeatedly threatens to split away, testing Dayton.", "tags": ["secession", "Dayton"] }
+  ],
+  "connections": [
+    { "to": "Serbia", "type": "ideology", "detail": "Backs the Bosnian Serb entity; war legacy unresolved", "year": 1995 },
+    { "to": "Turkey", "type": "economic", "detail": "Investment, cultural and religious ties with Bosniaks", "year": 2018 },
+    { "to": "Croatia", "type": "diplomacy", "detail": "Supports Bosnian Croats; EU neighbour", "year": 1995 }
+  ]
+}

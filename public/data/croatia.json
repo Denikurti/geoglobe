@@ -1,0 +1,53 @@
+{
+  "country": "Croatia",
+  "summary": "An Adriatic EU and NATO member that fought a war of independence in the 1990s, joined the eurozone and Schengen in 2023, and now thrives on tourism and shipping.",
+  "history": [
+    { "year": 1102, "event": "Union with Hungary", "detail": "Croatia enters a centuries-long dynastic union with Hungary." },
+    { "year": 1918, "event": "Joins Yugoslavia", "detail": "Becomes part of the new South Slav kingdom after WWI." },
+    { "year": 1991, "event": "Independence declared", "detail": "War with Serb forces and the Yugoslav army begins." },
+    { "year": 1995, "event": "Operation Storm", "detail": "Croatia retakes Serb-held territory, effectively ending the war." },
+    { "year": 2013, "event": "Joins the EU", "detail": "Becomes the 28th member of the European Union." },
+    { "year": 2023, "event": "Adopts the euro and joins Schengen", "detail": "Deep integration into Europe's core institutions." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Germany", "EU partners", "NATO members"],
+    "enemies_rivals": ["historical tensions with Serbia"],
+    "alliances": ["EU", "NATO", "Eurozone", "Schengen", "UN"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Euro-Atlantic integration", "Adriatic maritime focus", "Support for Western Balkans EU enlargement"]
+  },
+  "finance": {
+    "currency_role": "Euro (since 2023); previously the kuna",
+    "central_bank": "Croatian National Bank (within the ECB system)",
+    "national_debt_usd_trillions": 0.05,
+    "key_institutions": ["INA (energy)", "Zagreb Stock Exchange"],
+    "leverage_tools": ["Adriatic ports (Rijeka)", "Major Mediterranean tourism", "LNG terminal at Krk for EU energy security"]
+  },
+  "tech_startups": {
+    "hubs": ["Zagreb", "Split"],
+    "big_tech": ["Infobip", "Rimac Automobili (electric hypercars)"],
+    "vc_ecosystem": "Small but punches above its weight; produced unicorns",
+    "gov_tech_links": ["Rudjer Boskovic Institute"],
+    "ai_leaders": ["Rimac", "Infobip"]
+  },
+  "resources": {
+    "oil_gas": "Modest domestic output; Krk LNG terminal diversifies supply",
+    "nuclear": "Co-owns Slovenia's Krško plant",
+    "rare_earths": "Limited",
+    "water": "Abundant; long Adriatic coastline and rivers",
+    "agriculture": "Wine, olives, maize; strong food and tourism link"
+  },
+  "follow_the_money": [
+    { "flow": "Tourism", "detail": "The Adriatic coast drives ~20% of GDP, peaking each summer" },
+    { "flow": "Krk LNG terminal", "detail": "Floating terminal supplies LNG to Croatia and central Europe" },
+    { "flow": "EU funds", "detail": "Cohesion and recovery funds finance major infrastructure" }
+  ],
+  "theories_disputed": [
+    { "topic": "Operation Storm legality", "status": "DISPUTED", "detail": "Croatia hails it as liberation; Serbia calls it ethnic cleansing of Krajina Serbs. ICTY acquitted top generals.", "tags": ["Serbia", "war"] }
+  ],
+  "connections": [
+    { "to": "Germany", "type": "economic", "detail": "Key trade partner and source of tourists and investment", "year": 2013 },
+    { "to": "Serbia", "type": "rivalry", "detail": "Lingering war legacy and border and minority disputes", "year": 1995 },
+    { "to": "Slovenia", "type": "diplomacy", "detail": "Neighbour and fellow EU member; Piran Bay border dispute", "year": 2017 }
+  ]
+}

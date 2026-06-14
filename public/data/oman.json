@@ -1,0 +1,52 @@
+{
+  "country": "Oman",
+  "summary": "A strategically located Gulf sultanate guarding the Strait of Hormuz, known for quiet diplomacy and neutrality — often the back-channel mediator between Iran, the West, and Arab states.",
+  "history": [
+    { "year": 1650, "event": "Portuguese expelled from Muscat", "detail": "Oman becomes an independent maritime power with an East African empire." },
+    { "year": 1840, "event": "Capital moved to Zanzibar", "detail": "Omani empire stretches down the Swahili coast; controls the clove and slave trade." },
+    { "year": 1970, "event": "Sultan Qaboos seizes power", "detail": "Palace coup against his father; begins modernising an isolated, undeveloped country." },
+    { "year": 1975, "event": "Dhofar Rebellion ends", "detail": "British and Iranian-backed forces defeat a Marxist insurgency in the south." },
+    { "year": 2011, "event": "Arab Spring protests", "detail": "Limited unrest met with jobs and reforms rather than crackdown." },
+    { "year": 2020, "event": "Sultan Qaboos dies", "detail": "Haitham bin Tariq succeeds him after a 50-year reign; continuity maintained." }
+  ],
+  "geopolitics": {
+    "allies": ["UK", "USA", "Iran", "Saudi Arabia", "UAE"],
+    "enemies_rivals": [],
+    "alliances": ["GCC", "Arab League", "UN"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Neutrality and non-alignment", "Quiet mediation diplomacy", "Balancing Iran and the Gulf states"]
+  },
+  "finance": {
+    "currency_role": "Omani rial (OMR); pegged to the US dollar",
+    "central_bank": "Central Bank of Oman (1974)",
+    "national_debt_usd_trillions": 0.05,
+    "key_institutions": ["Petroleum Development Oman", "Oman Investment Authority (sovereign fund)"],
+    "leverage_tools": ["Control of the Strait of Hormuz approaches", "Port of Duqm logistics hub", "Diplomatic back-channels"]
+  },
+  "tech_startups": {
+    "hubs": ["Muscat", "Knowledge Oasis Muscat"],
+    "big_tech": ["Omantel"],
+    "vc_ecosystem": "Small but growing under Vision 2040 diversification",
+    "gov_tech_links": ["Oman Vision 2040", "Ministry of Transport, Communications and IT"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Oil and gas ~30% of GDP; not an OPEC member but coordinates with it",
+    "nuclear": "None",
+    "rare_earths": "Limited; copper and chromite mining",
+    "water": "Scarce; reliant on desalination and ancient falaj irrigation",
+    "agriculture": "Dates, limes, fishing along a long coastline"
+  },
+  "follow_the_money": [
+    { "flow": "Hydrocarbon exports", "detail": "Oil and LNG fund the state budget; vulnerable to price swings" },
+    { "flow": "Port of Duqm", "detail": "Major Chinese and Gulf investment in a deepwater logistics and refining hub" }
+  ],
+  "theories_disputed": [
+    { "topic": "Iran nuclear back-channel", "status": "CONFIRMED", "detail": "Oman secretly hosted early US-Iran talks that led to the 2015 JCPOA.", "tags": ["diplomacy", "Iran"] }
+  ],
+  "connections": [
+    { "to": "Iran", "type": "diplomacy", "detail": "Trusted mediator; shares control of the Strait of Hormuz", "year": 2013 },
+    { "to": "UK", "type": "military", "detail": "Long defence ties; UK base access at Duqm", "year": 2018 },
+    { "to": "Saudi Arabia", "type": "ideology", "detail": "GCC member but pursues an independent line", "year": 1981 }
+  ]
+}

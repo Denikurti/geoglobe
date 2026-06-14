@@ -1,0 +1,54 @@
+{
+  "country": "Morocco",
+  "summary": "A stable North African monarchy bridging Africa, Europe, and the Arab world, with a fast-growing manufacturing base, the disputed Western Sahara, and the world's largest phosphate reserves.",
+  "history": [
+    { "year": 1912, "event": "French and Spanish protectorates", "detail": "Morocco is partitioned into French and Spanish zones." },
+    { "year": 1956, "event": "Independence", "detail": "Sultan Mohammed V negotiates the end of colonial rule." },
+    { "year": 1975, "event": "Green March", "detail": "350,000 Moroccans march into Western Sahara as Spain withdraws." },
+    { "year": 1999, "event": "King Mohammed VI takes the throne", "detail": "Begins liberalising reforms and major infrastructure investment." },
+    { "year": 2011, "event": "Constitutional reform", "detail": "Arab Spring protests met with a new constitution devolving some power." },
+    { "year": 2020, "event": "US recognises Sahara claim", "detail": "Washington backs Morocco's sovereignty in exchange for ties with Israel." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "France", "Spain", "UAE", "Israel"],
+    "enemies_rivals": ["Algeria", "Polisario Front"],
+    "alliances": ["Arab League", "African Union", "UN", "Major Non-NATO Ally (US)"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Sovereignty over Western Sahara", "Strategic autonomy between West and Gulf", "Gateway to Africa investment"]
+  },
+  "finance": {
+    "currency_role": "Moroccan dirham (MAD); managed float",
+    "central_bank": "Bank Al-Maghrib (1959)",
+    "national_debt_usd_trillions": 0.1,
+    "key_institutions": ["OCP Group (phosphates)", "Attijariwafa Bank", "Tanger Med port"],
+    "leverage_tools": ["~70% of world phosphate reserves", "Tanger Med — Africa's largest port", "Auto and aerospace manufacturing"]
+  },
+  "tech_startups": {
+    "hubs": ["Casablanca", "Rabat", "Tangier"],
+    "big_tech": ["Maroc Telecom", "Inwi"],
+    "vc_ecosystem": "Among Africa's more active; fintech and mobility startups",
+    "gov_tech_links": ["Digital Morocco 2030", "Mohammed VI Polytechnic University"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Minimal; energy import dependent, pushing into solar",
+    "nuclear": "None; major solar (Noor Ouarzazate complex)",
+    "rare_earths": "World's largest phosphate reserves (~70%)",
+    "water": "Increasingly stressed; large desalination and dam programs",
+    "agriculture": "Citrus, olives, tomatoes; large exporter to the EU"
+  },
+  "follow_the_money": [
+    { "flow": "Phosphate exports", "detail": "OCP Group is a global fertiliser power, giving Morocco food-security leverage" },
+    { "flow": "Automotive manufacturing", "detail": "Renault and Stellantis plants make cars a top export, ahead of phosphates" },
+    { "flow": "Remittances and tourism", "detail": "Diaspora transfers and Mediterranean tourism are major FX sources" }
+  ],
+  "theories_disputed": [
+    { "topic": "Western Sahara sovereignty", "status": "DISPUTED", "detail": "Morocco controls most of the territory; the UN still lists it as non-self-governing.", "tags": ["Western Sahara", "Algeria"] },
+    { "topic": "Pegasus spyware", "status": "DISPUTED", "detail": "Reports allege Moroccan use of NSO Pegasus against journalists and foreign officials; Rabat denies it.", "tags": ["surveillance", "espionage"] }
+  ],
+  "connections": [
+    { "to": "Algeria", "type": "rivalry", "detail": "Closed border and proxy dispute over Western Sahara", "year": 2021 },
+    { "to": "Israel", "type": "diplomacy", "detail": "Normalised ties via the Abraham Accords", "year": 2020 },
+    { "to": "France", "type": "economic", "detail": "Former colonial power; largest foreign investor", "year": 1956 }
+  ]
+}

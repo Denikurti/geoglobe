@@ -60,6 +60,7 @@ const GeoMap = (() => {
   const RES_ICON = { oil_gas: "🛢️", rare_earths: "⛏️", lithium: "🔋", water: "💧", agriculture: "🌾", nuclear: "☢️", coal: "⚫" };
 
   let svg, gMap, gOverlay, gNews = null, gAncient = null, projection, path, centroids = {}, dims = { w: 0, h: 0 };
+  let zoomBehavior = null;
   let onClick = () => {};
 
   function colorFor(type) {
@@ -88,7 +89,7 @@ const GeoMap = (() => {
     const BASE_LABEL = 11;
     const BASE_STROKE = 0.5;
 
-    const zoom = d3.zoom()
+    const zoom = zoomBehavior = d3.zoom()
       .scaleExtent([0.5, 20])
       .on("zoom", (e) => {
         const k = e.transform.k;
@@ -96,8 +97,8 @@ const GeoMap = (() => {
         gOverlay.attr("transform", e.transform);
         gNews.attr("transform", e.transform);
         if (gAncient) gAncient.attr("transform", e.transform);
-        gNews.selectAll(".news-dot-pulse").attr("r", 7 / k);
-        gNews.selectAll(".news-dot-core").attr("r", 2.8 / k);
+        gNews.selectAll(".news-dot-pulse").attr("r", 6 / k);
+        gNews.selectAll(".news-dot-core").attr("r", 2.3 / k);
         gMap.selectAll("text.clabel").style("font-size", `${BASE_LABEL / k}px`);
         gOverlay.selectAll("text.clabel").style("font-size", `${BASE_LABEL / k}px`);
         applyLabelLOD(k);
@@ -331,8 +332,8 @@ const GeoMap = (() => {
       if (!c) return;
       const g = gNews.append("g").attr("class", "news-dot-grp")
         .attr("transform", `translate(${c[0]},${c[1]})`).style("cursor","pointer");
-      g.append("circle").attr("r", 7).attr("class", "news-dot-pulse");
-      g.append("circle").attr("r", 2.8).attr("class", "news-dot-core");
+      g.append("circle").attr("r", 6).attr("class", "news-dot-pulse");
+      g.append("circle").attr("r", 2.3).attr("class", "news-dot-core");
       g.on("mouseover", (e) => onHover(name, e.clientX, e.clientY))
        .on("mouseout",  ()  => onLeave())
        .on("click",     (e) => { e.stopPropagation(); onDotClick(name); });
@@ -350,5 +351,12 @@ const GeoMap = (() => {
     });
   }
 
-  return { init, setActive, centroidOf, updateOverlays, setAncientMode, highlightCountries, setNewsDots, showNewsDots, setConflictDots, setTimelineColors, clearTimelineColors };
+  function zoomBy(factor) {
+    if (svg && zoomBehavior) svg.transition().duration(250).call(zoomBehavior.scaleBy, factor);
+  }
+  function resetZoom() {
+    if (svg && zoomBehavior) svg.transition().duration(400).call(zoomBehavior.transform, d3.zoomIdentity);
+  }
+
+  return { init, setActive, centroidOf, updateOverlays, setAncientMode, highlightCountries, setNewsDots, showNewsDots, setConflictDots, setTimelineColors, clearTimelineColors, zoomBy, resetZoom };
 })();

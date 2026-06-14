@@ -1,0 +1,52 @@
+{
+  "country": "North Macedonia",
+  "summary": "A small landlocked Balkan NATO member that resolved a decades-long name dispute with Greece in 2018, opening its path toward the EU while balancing Albanian-minority politics.",
+  "history": [
+    { "year": 1913, "event": "Partition of Macedonia", "detail": "The Ottoman region is split among Greece, Serbia and Bulgaria." },
+    { "year": 1945, "event": "Yugoslav republic", "detail": "Becomes a constituent republic of socialist Yugoslavia." },
+    { "year": 1991, "event": "Peaceful independence", "detail": "Secedes from Yugoslavia without war." },
+    { "year": 2001, "event": "Albanian insurgency", "detail": "Brief conflict ends with the Ohrid Agreement expanding minority rights." },
+    { "year": 2018, "event": "Prespa Agreement", "detail": "Renames the country 'North Macedonia', ending the dispute with Greece." },
+    { "year": 2020, "event": "Joins NATO", "detail": "Becomes the alliance's 30th member." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Greece", "Bulgaria (uneasy)", "NATO and EU partners"],
+    "enemies_rivals": ["historical frictions with Bulgaria over identity"],
+    "alliances": ["NATO", "EU candidate", "Council of Europe", "UN"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Euro-Atlantic integration", "Multi-ethnic power-sharing (Ohrid)", "Reconciliation diplomacy"]
+  },
+  "finance": {
+    "currency_role": "Macedonian denar (MKD); de facto pegged to the euro",
+    "central_bank": "National Bank of the Republic of North Macedonia",
+    "national_debt_usd_trillions": 0.009,
+    "key_institutions": ["Makedonski Telekom", "ELEM (power)"],
+    "leverage_tools": ["Corridor 10 transit route", "Free economic zones for manufacturing", "Low-cost labour"]
+  },
+  "tech_startups": {
+    "hubs": ["Skopje"],
+    "big_tech": [],
+    "vc_ecosystem": "Small; IT outsourcing growing",
+    "gov_tech_links": ["Fund for Innovation and Technology Development"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "None; import dependent",
+    "nuclear": "None",
+    "rare_earths": "Lead, zinc, copper; some chromium",
+    "water": "Lake Ohrid and Vardar river; moderate supply",
+    "agriculture": "Tobacco, wine, vegetables; significant exports"
+  },
+  "follow_the_money": [
+    { "flow": "Foreign manufacturing zones", "detail": "Auto-parts firms in free zones drive exports and jobs" },
+    { "flow": "Remittances", "detail": "Diaspora transfers support household incomes" }
+  ],
+  "theories_disputed": [
+    { "topic": "Bulgaria identity dispute", "status": "DISPUTED", "detail": "Bulgaria blocks EU progress over language and history, claiming Macedonian identity is Bulgarian-derived.", "tags": ["Bulgaria", "EU"] }
+  ],
+  "connections": [
+    { "to": "Greece", "type": "diplomacy", "detail": "Name dispute resolved by the 2018 Prespa Agreement", "year": 2018 },
+    { "to": "Bulgaria", "type": "rivalry", "detail": "Identity and history disputes stall EU accession", "year": 2022 },
+    { "to": "Albania", "type": "ideology", "detail": "Large Albanian minority links the two via Ohrid power-sharing", "year": 2001 }
+  ]
+}

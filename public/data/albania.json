@@ -1,0 +1,53 @@
+{
+  "country": "Albania",
+  "summary": "A staunchly pro-American NATO member emerging from decades of brutal communist isolation, now an EU candidate banking on tourism, energy, and ties to the large ethnic-Albanian diaspora.",
+  "history": [
+    { "year": 1912, "event": "Independence from the Ottomans", "detail": "Albania becomes a state as Ottoman rule in Europe collapses." },
+    { "year": 1944, "event": "Communist takeover", "detail": "Enver Hoxha installs one of the world's most isolated regimes." },
+    { "year": 1991, "event": "Fall of communism", "detail": "The Hoxhaist regime collapses; chaotic transition begins." },
+    { "year": 1997, "event": "Pyramid-scheme collapse", "detail": "Mass financial fraud sparks near civil war and state breakdown." },
+    { "year": 2009, "event": "Joins NATO", "detail": "Albania becomes a full member of the alliance." },
+    { "year": 2022, "event": "EU accession talks open", "detail": "Formal negotiations to join the European Union begin." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Turkey", "Italy", "Kosovo", "NATO members"],
+    "enemies_rivals": ["Iran (cyber attacks)"],
+    "alliances": ["NATO", "EU candidate", "Council of Europe", "UN"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Strong pro-US alignment", "EU integration", "Support for Kosovo and Albanians abroad"]
+  },
+  "finance": {
+    "currency_role": "Albanian lek (ALL); managed float",
+    "central_bank": "Bank of Albania (1925)",
+    "national_debt_usd_trillions": 0.01,
+    "key_institutions": ["Albpetrol", "Tirana Stock Exchange (small)"],
+    "leverage_tools": ["Adriatic and Ionian tourism coastline", "Hydropower", "Strategic NATO location"]
+  },
+  "tech_startups": {
+    "hubs": ["Tirana"],
+    "big_tech": [],
+    "vc_ecosystem": "Small and emerging; outsourcing and tourism tech",
+    "gov_tech_links": ["e-Albania digital government platform"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Modest onshore oil; the TAP gas pipeline crosses the country",
+    "nuclear": "None",
+    "rare_earths": "Chromium, copper, nickel deposits",
+    "water": "Abundant; nearly all electricity from hydropower",
+    "agriculture": "Olives, citrus, livestock; small farms"
+  },
+  "follow_the_money": [
+    { "flow": "Tourism boom", "detail": "Rapidly growing Adriatic/Ionian tourism is a major FX earner" },
+    { "flow": "TAP pipeline", "detail": "The Trans Adriatic Pipeline brings transit revenue and EU energy relevance" },
+    { "flow": "Remittances", "detail": "The diaspora in Italy, Greece and the US sends home significant funds" }
+  ],
+  "theories_disputed": [
+    { "topic": "Iranian cyberattacks", "status": "CONFIRMED", "detail": "Albania cut ties with Iran in 2022 after attacks blamed on Tehran over the MEK exile group it hosts.", "tags": ["Iran", "cyber"] }
+  ],
+  "connections": [
+    { "to": "Kosovo", "type": "ideology", "detail": "Shared Albanian identity; close political and economic ties", "year": 2008 },
+    { "to": "USA", "type": "military", "detail": "Among the most pro-American states in Europe; hosts MEK exiles", "year": 2009 },
+    { "to": "Italy", "type": "economic", "detail": "Largest trade partner and migration destination", "year": 2020 }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "country": "Kuwait",
+  "summary": "A small, oil-rich Gulf emirate with one of the world's largest sovereign wealth funds and the most assertive elected parliament in the Gulf, defined by the 1990 Iraqi invasion and US-led liberation.",
+  "history": [
+    { "year": 1899, "event": "British protectorate", "detail": "Kuwait places itself under British protection against Ottoman claims." },
+    { "year": 1938, "event": "Burgan oil field discovered", "detail": "One of the largest oil fields on Earth; transforms the economy." },
+    { "year": 1961, "event": "Independence from Britain", "detail": "Iraq immediately claims Kuwait; British troops deter invasion." },
+    { "year": 1990, "event": "Iraqi invasion", "detail": "Saddam Hussein annexes Kuwait, triggering the Gulf War." },
+    { "year": 1991, "event": "Liberation", "detail": "US-led coalition expels Iraq; retreating forces set 700 oil wells ablaze." },
+    { "year": 2006, "event": "Women gain the vote", "detail": "Kuwaiti women vote and run for parliament for the first time." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Saudi Arabia", "UK", "UAE"],
+    "enemies_rivals": ["Iraq (historical)"],
+    "alliances": ["GCC", "Arab League", "OPEC", "UN"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Reliance on US security guarantee", "Mediation within the GCC", "Oil-funded welfare state"]
+  },
+  "finance": {
+    "currency_role": "Kuwaiti dinar (KWD); the world's highest-valued currency unit",
+    "central_bank": "Central Bank of Kuwait (1969)",
+    "national_debt_usd_trillions": 0.04,
+    "key_institutions": ["Kuwait Investment Authority (oldest sovereign fund, ~$900B)", "Kuwait Petroleum Corporation"],
+    "leverage_tools": ["Sovereign wealth investments worldwide", "~6% of global oil reserves", "Future Generations Fund"]
+  },
+  "tech_startups": {
+    "hubs": ["Kuwait City"],
+    "big_tech": ["Zain (telecom)"],
+    "vc_ecosystem": "Modest; family-conglomerate dominated economy",
+    "gov_tech_links": ["New Kuwait 2035 vision"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Oil ~90% of export revenue; ~6% of world reserves",
+    "nuclear": "None",
+    "rare_earths": "None significant",
+    "water": "Extremely scarce; among the world's largest desalination users",
+    "agriculture": "Minimal; almost entirely import-dependent for food"
+  },
+  "follow_the_money": [
+    { "flow": "Kuwait Investment Authority", "detail": "Sovereign fund channels oil surpluses into global equities and real estate" },
+    { "flow": "Future Generations Fund", "detail": "10%+ of state revenue saved each year for the post-oil era" }
+  ],
+  "theories_disputed": [
+    { "topic": "April Glaspie meeting", "status": "DISPUTED", "detail": "Debate over whether the US ambassador gave Saddam a 'green light' before the 1990 invasion.", "tags": ["Iraq", "diplomacy"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "military", "detail": "Major non-NATO ally; hosts US Army's Camp Arifjan", "year": 1991 },
+    { "to": "Iraq", "type": "rivalry", "detail": "1990 invasion; reparations and border disputes since resolved", "year": 1990 },
+    { "to": "Saudi Arabia", "type": "ideology", "detail": "Founding GCC partner; shared Neutral Zone oil fields", "year": 1981 }
+  ]
+}

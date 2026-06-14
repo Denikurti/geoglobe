@@ -1,0 +1,54 @@
+{
+  "country": "Ethiopia",
+  "summary": "Africa's second-most populous nation and oldest independent state, a federation of many ethnic groups whose fast growth and Nile mega-dam are shadowed by the devastating Tigray war.",
+  "history": [
+    { "year": 1896, "event": "Battle of Adwa", "detail": "Ethiopia defeats Italy, remaining the only African state to resist colonisation." },
+    { "year": 1936, "event": "Italian occupation", "detail": "Mussolini's forces occupy Ethiopia for five years before liberation." },
+    { "year": 1974, "event": "Derg overthrows the emperor", "detail": "A Marxist military junta deposes Haile Selassie; famine and repression follow." },
+    { "year": 1991, "event": "EPRDF takes power", "detail": "Rebels topple the Derg; ethnic federalism is adopted." },
+    { "year": 2018, "event": "Abiy Ahmed becomes PM", "detail": "Reforms and peace with Eritrea win him the 2019 Nobel Peace Prize." },
+    { "year": 2020, "event": "Tigray war erupts", "detail": "Conflict in the north kills hundreds of thousands before a 2022 truce." }
+  ],
+  "geopolitics": {
+    "allies": ["China", "USA", "Gulf states", "Russia"],
+    "enemies_rivals": ["Egypt (over the Nile)", "internal ethnic militias"],
+    "alliances": ["African Union (host)", "BRICS (2024)", "IGAD", "UN"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Ethnic federalism", "Nile water sovereignty", "Developmental state model"]
+  },
+  "finance": {
+    "currency_role": "Ethiopian birr (ETB); recently floated amid IMF reforms",
+    "central_bank": "National Bank of Ethiopia (1963)",
+    "national_debt_usd_trillions": 0.06,
+    "key_institutions": ["Ethiopian Airlines", "Commercial Bank of Ethiopia", "Ethiopian Electric Power"],
+    "leverage_tools": ["Grand Ethiopian Renaissance Dam (Nile leverage)", "Ethiopian Airlines — Africa's largest carrier", "Large young labour force"]
+  },
+  "tech_startups": {
+    "hubs": ["Addis Ababa"],
+    "big_tech": ["Ethio Telecom"],
+    "vc_ecosystem": "Early-stage; recently opened telecom and banking to foreigners",
+    "gov_tech_links": ["Digital Ethiopia 2025"],
+    "ai_leaders": []
+  },
+  "resources": {
+    "oil_gas": "Minimal; gas reserves in the Ogaden largely undeveloped",
+    "nuclear": "Planned cooperation with Russia; none operational",
+    "rare_earths": "Gold, tantalum, potash; largely underexplored",
+    "water": "Source of the Blue Nile; huge hydropower potential",
+    "agriculture": "Coffee (its birthplace), teff, livestock; ~70% of jobs"
+  },
+  "follow_the_money": [
+    { "flow": "GERD hydropower", "detail": "The Grand Ethiopian Renaissance Dam aims to export power across the region" },
+    { "flow": "Ethiopian Airlines", "detail": "A profitable state carrier and a major source of foreign exchange" },
+    { "flow": "Coffee exports", "detail": "Coffee remains a leading export and cultural symbol" }
+  ],
+  "theories_disputed": [
+    { "topic": "Nile dam dispute", "status": "DISPUTED", "detail": "Egypt and Sudan fear the GERD threatens their Nile water share; Ethiopia denies harm.", "tags": ["Nile", "Egypt"] },
+    { "topic": "Tigray war atrocities", "status": "CONFIRMED", "detail": "Investigations documented mass killings, sexual violence and famine by multiple parties.", "tags": ["Tigray", "war crimes"] }
+  ],
+  "connections": [
+    { "to": "Egypt", "type": "rivalry", "detail": "Standoff over Nile water and the GERD", "year": 2020 },
+    { "to": "China", "type": "economic", "detail": "Built railways, the AU headquarters and industrial parks", "year": 2016 },
+    { "to": "Eritrea", "type": "diplomacy", "detail": "2018 peace deal, then alignment during the Tigray war", "year": 2018 }
+  ]
+}

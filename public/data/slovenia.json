@@ -1,0 +1,53 @@
+{
+  "country": "Slovenia",
+  "summary": "The wealthiest and most stable former-Yugoslav state, an Alpine EU and eurozone member that broke from Yugoslavia in a ten-day war and now sits firmly in Europe's core.",
+  "history": [
+    { "year": 1918, "event": "Joins Yugoslavia", "detail": "Slovenes enter the new South Slav kingdom after Austria-Hungary's fall." },
+    { "year": 1945, "event": "Socialist Yugoslavia", "detail": "Becomes the most developed republic under Tito." },
+    { "year": 1991, "event": "Ten-Day War", "detail": "Slovenia wins independence after a brief conflict with the Yugoslav army." },
+    { "year": 2004, "event": "Joins EU and NATO", "detail": "First former-Yugoslav state to join both." },
+    { "year": 2007, "event": "Adopts the euro", "detail": "First new EU member from the east to join the eurozone." },
+    { "year": 2008, "event": "Holds EU presidency", "detail": "Signals full integration into Europe's institutions." }
+  ],
+  "geopolitics": {
+    "allies": ["Germany", "Austria", "Italy", "EU and NATO partners"],
+    "enemies_rivals": [],
+    "alliances": ["EU", "NATO", "Eurozone", "Schengen", "OECD", "UN"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Full Euro-Atlantic integration", "Central European economic alignment", "Support for Western Balkans enlargement"]
+  },
+  "finance": {
+    "currency_role": "Euro (since 2007)",
+    "central_bank": "Bank of Slovenia (within the ECB system)",
+    "national_debt_usd_trillions": 0.05,
+    "key_institutions": ["Krka (pharma)", "NLB bank", "Ljubljana Stock Exchange"],
+    "leverage_tools": ["Port of Koper — gateway for central Europe", "Advanced manufacturing", "Pharmaceutical exports"]
+  },
+  "tech_startups": {
+    "hubs": ["Ljubljana"],
+    "big_tech": ["Outfit7 (Talking Tom)", "Bitstamp (crypto exchange)"],
+    "vc_ecosystem": "Small but mature; gaming and fintech successes",
+    "gov_tech_links": ["Jožef Stefan Institute"],
+    "ai_leaders": ["Outfit7"]
+  },
+  "resources": {
+    "oil_gas": "Minimal; import dependent",
+    "nuclear": "Krško plant (shared with Croatia) provides much of its power",
+    "rare_earths": "Limited",
+    "water": "Abundant; Alpine rivers and strong hydropower",
+    "agriculture": "Wine, dairy, forestry; over half the country is forested"
+  },
+  "follow_the_money": [
+    { "flow": "Port of Koper", "detail": "Adriatic port serving Austria and central Europe drives trade revenue" },
+    { "flow": "Pharma exports", "detail": "Krka and Lek (Novartis) make pharmaceuticals a leading export" },
+    { "flow": "Manufacturing supply chains", "detail": "Auto and machinery parts tie Slovenia to German industry" }
+  ],
+  "theories_disputed": [
+    { "topic": "Piran Bay border", "status": "DISPUTED", "detail": "Slovenia and Croatia dispute their maritime border despite an arbitration ruling.", "tags": ["Croatia", "border"] }
+  ],
+  "connections": [
+    { "to": "Germany", "type": "economic", "detail": "Key export market and industrial partner", "year": 2004 },
+    { "to": "Croatia", "type": "diplomacy", "detail": "Neighbour and EU partner; ongoing Piran Bay dispute", "year": 2017 },
+    { "to": "Austria", "type": "economic", "detail": "Close trade and investment ties via Koper port", "year": 2004 }
+  ]
+}

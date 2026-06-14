@@ -29,7 +29,6 @@
         <input type="range" id="timeline" min="1900" max="2025" value="2025" step="1" />
       </label>
       <label class="toggle"><input type="checkbox" id="tTheories" /> Theories</label>
-      <label class="toggle"><input type="checkbox" id="tMoney" /> Follow the Money</label>
       <label class="toggle"><input type="checkbox" id="tConnections" /> Connections Web</label>
       <label class="toggle"><input type="checkbox" id="tResources" /> Resources</label>
     </div>
@@ -48,7 +47,7 @@
       <div id="agentDrawerBody"></div>
       <div id="agentDrawerDivider" title="Drag to resize"></div>
       <!-- Suggestions panel -->
-      <div id="suggestSection">
+      <div id="suggestSection" class="hidden">
         <div id="suggestSectionHeader">
           <span>💡 Suggestions</span>
           <button id="suggestSectionToggle">▼</button>
@@ -63,6 +62,19 @@
       <svg id="map"></svg>
       <div id="legend"></div>
       <div id="timelineEventBar"></div>
+
+      <!-- floating zoom control (Apple Maps style) -->
+      <div id="mapZoomCtl">
+        <button id="zoomInBtn" title="Zoom in">+</button>
+        <button id="zoomOutBtn" title="Zoom out">−</button>
+        <button id="zoomResetBtn" title="Reset view">⌖</button>
+      </div>
+
+      <!-- floating suggestions bubble -->
+      <div id="quickAsk">
+        <button id="quickAskBtn" title="Suggestions">✨</button>
+        <div id="quickAskChips" class="hidden"></div>
+      </div>
     </section>
 
     <!-- drag handle: resize map vs panel -->
@@ -97,6 +109,7 @@
           <div id="chatLogHeader">
             <span id="chatLogLabel">Output <span id="queueBadge"></span></span>
             <div id="chatHeaderBtns">
+              <button type="button" id="mindmapTab" title="Show / hide mindmap">🧠 Mindmap</button>
               <button type="button" id="moveChatBtn" title="Move chat left/right">⇄ Left</button>
               <button type="button" id="clearChat" title="Clear chat">Clear</button>
               <button type="button" id="expandChatLog" title="Expand output">⤢ Expand</button>
@@ -112,6 +125,12 @@
       </div>
     </aside>
   </main>
+
+  <!-- suggestions popup (next to lens bar) -->
+  <div id="suggestPopup" class="hidden">
+    <div id="suggestPopupTitle">💡 Suggestions</div>
+    <div id="suggestPopupChips"></div>
+  </div>
 
   <!-- subscribe modal -->
   <div id="subscribeOverlay" class="hidden">
