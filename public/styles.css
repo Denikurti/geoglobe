@@ -45,6 +45,67 @@
   --blur-light: blur(16px) saturate(160%);
 }
 
+/* ════════════════════════════════════════════════════
+   LIGHT THEME — overrides core vars so glass surfaces
+   re-tint to a bright background. Toggled via body.light
+   ════════════════════════════════════════════════════ */
+body.light {
+  --bg: #eef1f7;
+  --bg2: #e2e8f1;
+  --glass: rgba(0,0,0,0.045);
+  --glass-mid: rgba(0,0,0,0.065);
+  --glass-strong: rgba(0,0,0,0.10);
+  --glass-border: rgba(0,0,0,0.12);
+  --glass-border-strong: rgba(0,0,0,0.22);
+  --glass-shine: rgba(255,255,255,0.85);
+  --line: rgba(0,0,0,0.10);
+  --text: #1c1c2b;
+  --muted: rgba(60,60,80,0.62);
+  --land: #b3c4dc; --land-hover: #97aece; --land-active: #2f6fe0;
+}
+body.light {
+  background-image:
+    radial-gradient(ellipse 80% 60% at 15% 30%, rgba(10,90,210,0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 85% 70%, rgba(120,70,200,0.07) 0%, transparent 60%);
+}
+body.light #map { background: #cfdcec; }
+body.light .country { stroke: #ffffff; }
+body.light .country.other { fill: #c4cfdd; }
+body.light .country.other:hover { fill: #c4cfdd; }
+body.light #topbar {
+  background: linear-gradient(180deg, rgba(255,255,255,0.82) 0%, rgba(245,247,251,0.70) 100%);
+  box-shadow: 0 1px 0 var(--glass-shine), 0 10px 30px rgba(20,40,80,0.12), inset 0 1px 0 rgba(255,255,255,0.5);
+}
+body.light #topbar h1 {
+  background: linear-gradient(135deg, #1c1c2b 0%, rgba(40,40,70,0.7) 100%);
+  -webkit-background-clip: text; background-clip: text;
+}
+body.light .sub { -webkit-text-fill-color: var(--muted); }
+body.light ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.20); }
+body.light ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.32); }
+
+/* light theme — panel + floating glass surfaces */
+body.light #panel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.82) 0%, rgba(244,247,251,0.78) 100%);
+  box-shadow: -1px 0 0 rgba(0,0,0,0.04), -16px 0 60px rgba(20,40,80,0.12), inset 1px 0 0 rgba(255,255,255,0.5);
+}
+body.light #agentBar,
+body.light #agentDrawer {
+  background: linear-gradient(160deg, rgba(255,255,255,0.86), rgba(240,244,250,0.92));
+  box-shadow: 0 0 0 0.5px rgba(0,0,0,0.04), inset 0 1px 0 var(--glass-shine), 0 8px 40px rgba(20,40,80,0.14);
+}
+body.light #mapZoomCtl,
+body.light #quickAskBtn {
+  background: linear-gradient(160deg, rgba(255,255,255,0.86), rgba(240,244,250,0.92));
+  box-shadow: 0 8px 28px rgba(20,40,80,0.14), inset 0 1px 0 rgba(255,255,255,0.6);
+}
+body.light .agent-btn {
+  border-color: rgba(0,0,0,0.10);
+  background: rgba(0,0,0,0.04);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+body.light #mapZoomCtl button:hover { background: rgba(0,0,0,0.06); }
+
 /* ── Base ── */
 html, body { height: 100%; margin: 0; }
 body {
@@ -153,6 +214,16 @@ body {
 }
 #subscribeBtnTop:hover { background: rgba(10,132,255,0.22); }
 #subscribeBtnTop:active { transform: scale(0.95); }
+
+#themeToggleBtn {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill); color: var(--text); font-size: 12px; font-weight: 600;
+  padding: 5px 13px; cursor: pointer; transition: all var(--dur) var(--spring); white-space: nowrap;
+  box-shadow: inset 0 1px 0 var(--glass-shine);
+}
+#themeToggleBtn:hover { background: var(--glass-strong); border-color: var(--glass-border-strong); }
+#themeToggleBtn:active { transform: scale(0.95); }
 
 /* ── Layout ── */
 #layout { flex: 1; position: relative; overflow: hidden; display: flex; min-height: 0; }
@@ -1183,6 +1254,7 @@ body {
   #modeTabs .mode-tab { padding: 4px 12px; font-size: 12px; }
   #controls { display: none; }
   #subscribeBtnTop { font-size: 11px; padding: 4px 10px; }
+  #themeToggleBtn { font-size: 11px; padding: 4px 10px; }
   #newsToggleBtn { display: none; }
   #searchWrap { display: none; }
   #mapZoomCtl { right: 16px; bottom: 120px; }

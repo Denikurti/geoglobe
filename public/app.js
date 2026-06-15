@@ -1042,6 +1042,19 @@ async function shareCountryCard() {
   }, "image/png");
 }
 
+// ---- light / dark theme ----
+function applyTheme(mode) {
+  const light = mode === "light";
+  document.body.classList.toggle("light", light);
+  const btn = $("themeToggleBtn");
+  if (btn) btn.textContent = light ? "☀️ Light" : "🌙 Dark";
+  try { localStorage.setItem("geoglobe-theme", light ? "light" : "dark"); } catch (e) {}
+}
+applyTheme((() => { try { return localStorage.getItem("geoglobe-theme"); } catch (e) { return null; } })() || "dark");
+$("themeToggleBtn").addEventListener("click", () => {
+  applyTheme(document.body.classList.contains("light") ? "dark" : "light");
+});
+
 // ---- subscribe ----
 $("subscribeBtnTop").addEventListener("click", () => $("subscribeOverlay").classList.remove("hidden"));
 $("subscribeClose").addEventListener("click", () => $("subscribeOverlay").classList.add("hidden"));
