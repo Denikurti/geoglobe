@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GeoGlobe — North America</title>
-  <link rel="stylesheet" href="styles.css?v=19" />
+  <link rel="stylesheet" href="styles.css?v=20" />
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
@@ -29,9 +29,6 @@
       <label class="ctl">Year: <span id="yearLabel">2025</span>
         <input type="range" id="timeline" min="1900" max="2025" value="2025" step="1" />
       </label>
-      <label class="toggle"><input type="checkbox" id="tTheories" /> Theories</label>
-      <label class="toggle"><input type="checkbox" id="tConnections" /> Connections Web</label>
-      <label class="toggle"><input type="checkbox" id="tResources" /> Resources</label>
     </div>
   </header>
 
@@ -156,6 +153,7 @@
       <button id="conflictDrawerClose">×</button>
     </div>
     <div id="conflictDrawerBody"></div>
+    <div id="conflictDrawerResize" title="Drag to resize width"></div>
   </div>
 
   <!-- news hover tooltip -->
@@ -163,10 +161,11 @@
 
   <!-- news drawer (left side) -->
   <div id="newsDrawer" class="hidden">
+    <div id="newsDrawerSwipeHint">← swipe to close</div>
     <div id="newsDrawerHeader">
       <span id="newsDrawerFlag"></span>
       <span id="newsDrawerTitle">Latest News</span>
-      <button id="newsDrawerClose">×</button>
+      <button id="newsDrawerClose">✕</button>
     </div>
     <div id="newsDrawerBody"></div>
     <div id="newsDrawerFooter">

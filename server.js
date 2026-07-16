@@ -234,6 +234,92 @@ app.get("/api/news/:country", async (req, res) => {
   }
 });
 
+// ── Live country KPIs from the World Bank open API (free, no key) ──────────
+// Country name → ISO3 code used by the World Bank. Names match the map labels.
+const WB_ISO3 = {
+  "USA":"USA","Canada":"CAN","Mexico":"MEX","Brazil":"BRA","Argentina":"ARG",
+  "Chile":"CHL","Colombia":"COL","Peru":"PER","Venezuela":"VEN","Uruguay":"URY",
+  "Bolivia":"BOL","Paraguay":"PRY","Ecuador":"ECU",
+  "United Kingdom":"GBR","Germany":"DEU","France":"FRA","Russia":"RUS","Italy":"ITA",
+  "Spain":"ESP","Ukraine":"UKR","Poland":"POL","Netherlands":"NLD","Switzerland":"CHE",
+  "Sweden":"SWE","Norway":"NOR","Belgium":"BEL","Portugal":"PRT","Austria":"AUT",
+  "Denmark":"DNK","Finland":"FIN","Ireland":"IRL","Turkey":"TUR","Greece":"GRC",
+  "Romania":"ROU","Bulgaria":"BGR","Serbia":"SRB","Croatia":"HRV","Bosnia":"BIH",
+  "Albania":"ALB","Montenegro":"MNE","Kosovo":"XKX","North Macedonia":"MKD",
+  "Slovenia":"SVN","Hungary":"HUN","Czech Republic":"CZE","Slovakia":"SVK",
+  "Israel":"ISR","Saudi Arabia":"SAU","Iran":"IRN","Iraq":"IRQ","Egypt":"EGY",
+  "Syria":"SYR","UAE":"ARE","Qatar":"QAT","Yemen":"YEM","Oman":"OMN","Kuwait":"KWT",
+  "Jordan":"JOR","Lebanon":"LBN","Libya":"LBY","Tunisia":"TUN","Algeria":"DZA",
+  "Morocco":"MAR","Sudan":"SDN","Somalia":"SOM","Ethiopia":"ETH","Kenya":"KEN",
+  "Nigeria":"NGA","Angola":"AGO","South Africa":"ZAF","Uganda":"UGA","Rwanda":"RWA",
+  "DR Congo":"COD","Ghana":"GHA","Senegal":"SEN","Mali":"MLI","Cameroon":"CMR",
+  "Mozambique":"MOZ","Zimbabwe":"ZWE","Tanzania":"TZA",
+  "China":"CHN","Japan":"JPN","South Korea":"KOR","North Korea":"PRK","Mongolia":"MNG",
+  "India":"IND","Pakistan":"PAK","Bangladesh":"BGD","Nepal":"NPL","Bhutan":"BTN",
+  "Sri Lanka":"LKA","Thailand":"THA","Vietnam":"VNM","Indonesia":"IDN",
+  "Philippines":"PHL","Malaysia":"MYS","Singapore":"SGP","Cambodia":"KHM",
+  "Laos":"LAO","Myanmar":"MMR","Afghanistan":"AFG","Uzbekistan":"UZB",
+  "Kazakhstan":"KAZ","Tajikistan":"TJK","Kyrgyzstan":"KGZ","Turkmenistan":"TKM",
+  "Azerbaijan":"AZE","Georgia":"GEO","Armenia":"ARM","Australia":"AUS","New Zealand":"NZL",
+};
+
+const WB_INDICATORS = {
+  population:     "SP.POP.TOTL",
+  gdp:           "NY.GDP.MKTP.CD",
+  gdpPerCapita:  "NY.GDP.PCAP.CD",
+  gdpGrowth:     "NY.GDP.MKTP.KD.ZG",
+  inflation:     "FP.CPI.TOTL.ZG",
+  milSpendPctGdp:"MS.MIL.XPND.GD.ZS",
+};
+
+const kpiCache = new Map();            // iso3 → { data, ts }
+const KPI_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+async function fetchKPI(iso3) {
+  const cached = kpiCache.get(iso3);
+  if (cached && Date.now() - cached.ts < KPI_TTL) return cached.data;
+
+  const ids = Object.values(WB_INDICATORS).join(";");
+  const url = `https://api.worldbank.org/v2/country/${iso3}/indicator/${ids}` +
+              `?source=2&format=json&per_page=200&mrv=6`;
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`World Bank ${r.status}`);
+  const json = await r.json();
+  const rows = Array.isArray(json) ? json[1] || [] : [];
+
+  // For each indicator keep the most recent non-null value.
+  const best = {}; // indicatorId → { value, year }
+  for (const row of rows) {
+    const id = row.indicator && row.indicator.id;
+    if (!id || row.value == null) continue;
+    const year = +row.date;
+    if (!best[id] || year > best[id].year) best[id] = { value: row.value, year };
+  }
+
+  const out = { source: "World Bank" };
+  let asOf = 0;
+  for (const [key, id] of Object.entries(WB_INDICATORS)) {
+    const b = best[id];
+    out[key] = b ? b.value : null;
+    if (b && b.year > asOf) asOf = b.year;
+  }
+  out.asOf = asOf || null;
+
+  kpiCache.set(iso3, { data: out, ts: Date.now() });
+  return out;
+}
+
+app.get("/api/kpi/:country", async (req, res) => {
+  const iso3 = WB_ISO3[req.params.country];
+  if (!iso3) return res.json({ available: false });
+  try {
+    const data = await fetchKPI(iso3);
+    res.json({ available: true, iso3, ...data });
+  } catch (e) {
+    res.status(502).json({ available: false, error: e.message });
+  }
+});
+
 app.get("/api/health", (_req, res) => res.json({ ok: true, model: MODEL }));
 
 app.listen(PORT, () =>

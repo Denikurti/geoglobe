@@ -24,8 +24,33 @@ const GeoMap = (() => {
     // North Africa
     818: "Egypt", 434: "Libya", 788: "Tunisia", 12: "Algeria", 504: "Morocco",
     729: "Sudan", 706: "Somalia", 231: "Ethiopia", 404: "Kenya",
-    // Sub-Saharan
+    // Sub-Saharan Africa
     566: "Nigeria", 24: "Angola", 710: "South Africa",
+    800: "Uganda", 646: "Rwanda", 180: "DR Congo", 288: "Ghana",
+    686: "Senegal", 466: "Mali", 854: "Burkina Faso", 204: "Benin",
+    120: "Cameroon", 694: "Sierra Leone", 270: "Gambia",
+    508: "Mozambique", 716: "Zimbabwe", 454: "Malawi", 834: "Tanzania",
+    // East Asia
+    156: "China", 392: "Japan", 410: "South Korea", 408: "North Korea",
+    158: "Taiwan", 496: "Mongolia",
+    // South Asia
+    356: "India", 586: "Pakistan", 50: "Bangladesh", 524: "Nepal",
+    64: "Bhutan", 144: "Sri Lanka", 462: "Maldives",
+    // Southeast Asia
+    764: "Thailand", 704: "Vietnam", 360: "Indonesia", 608: "Philippines",
+    458: "Malaysia", 702: "Singapore", 116: "Cambodia", 418: "Laos",
+    104: "Myanmar", 96: "Brunei", 626: "Timor-Leste",
+    // Central Asia
+    4: "Afghanistan", 860: "Uzbekistan", 398: "Kazakhstan",
+    762: "Tajikistan", 417: "Kyrgyzstan", 795: "Turkmenistan",
+    // Caucasus
+    31: "Azerbaijan", 268: "Georgia", 51: "Armenia",
+    // Oceania
+    36: "Australia", 554: "New Zealand", 598: "Papua New Guinea",
+    // South America
+    76: "Brazil", 32: "Argentina", 152: "Chile", 170: "Colombia",
+    604: "Peru", 862: "Venezuela", 858: "Uruguay", 68: "Bolivia",
+    600: "Paraguay", 218: "Ecuador",
   };
 
   const COORDS = {
@@ -47,8 +72,34 @@ const GeoMap = (() => {
     Libya: [17, 27], Tunisia: [9, 34], Algeria: [3, 28], Morocco: [-6, 32],
     Sudan: [30, 16], Somalia: [46, 6], Ethiopia: [40, 9], Kenya: [38, 1],
     Nigeria: [8, 10], Angola: [18, -12], "South Africa": [25, -29],
+    // East Asia
     China: [104, 35], Japan: [138, 36], "South Korea": [128, 37],
-    Australia: [134, -25], "North Korea": [127, 40], India: [78, 22],
+    "North Korea": [127, 40], Taiwan: [121, 23.5], Mongolia: [103, 47],
+    // South Asia
+    India: [78, 22], Pakistan: [69, 30], Bangladesh: [90, 24],
+    Nepal: [84, 28], Bhutan: [90.5, 27.5], "Sri Lanka": [80.7, 7.8], Maldives: [73.2, 3.2],
+    // Southeast Asia
+    Thailand: [101, 15], Vietnam: [108, 16], Indonesia: [118, -2],
+    Philippines: [122, 12], Malaysia: [110, 3.5], Singapore: [103.8, 1.35],
+    Cambodia: [105, 12.5], Laos: [103, 18], Myanmar: [96, 19],
+    Brunei: [114.7, 4.5], "Timor-Leste": [125.7, -8.8],
+    // Central Asia
+    Afghanistan: [67, 33], Uzbekistan: [63, 41], Kazakhstan: [67, 48],
+    Tajikistan: [71, 39], Kyrgyzstan: [74.5, 41], Turkmenistan: [59, 40],
+    // Caucasus
+    Azerbaijan: [47.5, 40.5], Georgia: [43.5, 42], Armenia: [45, 40],
+    // Oceania
+    Australia: [134, -25], "New Zealand": [172, -42], "Papua New Guinea": [144, -6],
+    // Sub-Saharan Africa
+    Uganda: [32.4, 1.4], Rwanda: [29.9, -1.9], "DR Congo": [24, -3],
+    Ghana: [-1, 8], Senegal: [-14, 14], Mali: [-2, 17], "Burkina Faso": [-1.6, 12.4],
+    Benin: [2.3, 9.3], Cameroon: [12.4, 5.7], "Sierra Leone": [-11.8, 8.5],
+    Gambia: [-15.3, 13.4], Mozambique: [35, -18], Zimbabwe: [29.2, -20],
+    Malawi: [34.3, -13.5], Tanzania: [35, -6],
+    // South America
+    Brazil: [-51, -10], Argentina: [-64, -34], Chile: [-71, -35],
+    Colombia: [-74, 4], Peru: [-75, -10], Venezuela: [-66, 8],
+    Uruguay: [-56, -33], Bolivia: [-64, -17], Paraguay: [-58, -23], Ecuador: [-78, -2],
     NATO: [6, 48], "Five Eyes": [-30, 50],
   };
 
@@ -62,6 +113,22 @@ const GeoMap = (() => {
   let svg, gMap, gOverlay, gNews = null, gAncient = null, projection, path, centroids = {}, dims = { w: 0, h: 0 };
   let zoomBehavior = null;
   let onClick = () => {};
+  // Kept for re-layout on resize (fixes blank map when the pane had 0 width at init)
+  let _svgEl = null, _countries = [], _clickable = [];
+  let _lastOverlay = null, _ancient = null;
+
+  // Reliable size: fall back to the parent / window when the SVG measures 0
+  // (can happen on mobile before flex layout settles → projection fits to nothing).
+  function measure(el) {
+    let r = el.getBoundingClientRect();
+    let w = r.width, h = r.height;
+    if (w < 2 || h < 2) {
+      const pr = el.parentElement ? el.parentElement.getBoundingClientRect() : null;
+      w = (pr && pr.width) || window.innerWidth || 375;
+      h = (pr && pr.height) || window.innerHeight || 600;
+    }
+    return { w, h };
+  }
 
   function colorFor(type) {
     const key = (type || "").split(/[+\/\s]/)[0];
@@ -78,9 +145,9 @@ const GeoMap = (() => {
 
   async function init(svgEl, clickHandler) {
     onClick = clickHandler;
+    _svgEl = svgEl;
     svg = d3.select(svgEl);
-    const rect = svgEl.getBoundingClientRect();
-    dims = { w: rect.width, h: rect.height };
+    dims = measure(svgEl);
     svg.attr("viewBox", `0 0 ${dims.w} ${dims.h}`);
     gMap = svg.append("g");
     gOverlay = svg.append("g");
@@ -96,6 +163,7 @@ const GeoMap = (() => {
         gMap.attr("transform", e.transform);
         gOverlay.attr("transform", e.transform);
         gNews.attr("transform", e.transform);
+        if (!_newsVisible) { gNews.attr("visibility","hidden").style("display","none"); }
         if (gAncient) gAncient.attr("transform", e.transform);
         gNews.selectAll(".news-dot-pulse").attr("r", 6 / k);
         gNews.selectAll(".news-dot-core").attr("r", 2.3 / k);
@@ -119,6 +187,7 @@ const GeoMap = (() => {
     const topo = await d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json");
     const countries = topojson.feature(topo, topo.objects.countries).features;
     const clickable = countries.filter((f) => CLICKABLE[+f.id]);
+    _countries = countries; _clickable = clickable;
 
     projection = d3.geoNaturalEarth1()
       .rotate([-15, 0])
@@ -136,29 +205,35 @@ const GeoMap = (() => {
 
     clickable.forEach((f) => { centroids[CLICKABLE[+f.id]] = path.centroid(f); });
 
-    const labelSet = new Set([
-      "USA", "Canada", "Mexico",
-      "United Kingdom", "Germany", "France", "Russia", "Italy", "Spain",
-      "Ukraine", "Poland", "Sweden", "Norway", "Turkey",
-      "Greece", "Romania", "Bulgaria", "Serbia", "Croatia", "Hungary",
-      "Czech Republic", "Ireland", "Denmark", "Finland", "Turkey",
-      "Bosnia", "Albania", "Montenegro", "North Macedonia", "Kosovo", "Slovenia",
-      "Israel", "Saudi Arabia", "Iran", "Iraq", "Egypt", "Syria",
-      "Jordan", "Yemen", "Oman",
-      "Libya", "Tunisia", "Algeria", "Morocco", "Sudan",
-      "Ethiopia", "Nigeria", "South Africa", "Kenya",
-    ]);
+    // All clickable countries get a label; LOD controls zoom threshold
     gMap.selectAll("text.clabel")
-      .data(clickable.filter((f) => labelSet.has(CLICKABLE[+f.id])))
+      .data(clickable)
       .join("text")
       .attr("class", "clabel")
       .attr("data-mink", (d) => {
         const a = path.area(d);
-        return a > 1500 ? 1 : a > 400 ? 1.8 : 3.2;
+        // Larger area = visible sooner; tiny island-states need deep zoom
+        return a > 4000 ? 0.6 : a > 1200 ? 1 : a > 300 ? 1.8 : a > 80 ? 3 : 5;
       })
       .attr("x", (d) => { const n = CLICKABLE[+d.id]; const c = COORDS[n]; return c ? projection(c)[0] : path.centroid(d)[0]; })
       .attr("y", (d) => { const n = CLICKABLE[+d.id]; const c = COORDS[n]; return c ? projection(c)[1] : path.centroid(d)[1]; })
-      .text((d) => CLICKABLE[+d.id]);
+      .text((d) => {
+        // Shorten very long names so they fit at default zoom
+        const n = CLICKABLE[+d.id];
+        const a = path.area(d);
+        if (a < 300) return n; // tiny countries: full name only when zoomed, fits fine
+        const SHORT = {
+          "United Kingdom": "UK", "Saudi Arabia": "Saudi Arabia",
+          "South Africa": "S. Africa", "North Korea": "N. Korea",
+          "South Korea": "S. Korea", "North Macedonia": "N. Macedonia",
+          "Czech Republic": "Czech Rep.", "DR Congo": "DR Congo",
+          "New Zealand": "N. Zealand", "Papua New Guinea": "PNG",
+          "Sri Lanka": "Sri Lanka", "Timor-Leste": "Timor",
+          "Sierra Leone": "S. Leone", "Burkina Faso": "Burkina",
+          "Equatorial Guinea": "Eq. Guinea",
+        };
+        return SHORT[n] || n;
+      });
     applyLabelLOD(1);
   }
 
@@ -170,6 +245,29 @@ const GeoMap = (() => {
       if (labelsOff) return "none";
       return k >= +(this.dataset.mink || 1) ? null : "none";
     });
+  }
+
+  // Recompute the projection for the current pane size and re-place everything.
+  // Called on window/pane resize and once after init in case the pane was 0-width.
+  function resize() {
+    if (!_svgEl || !projection) return;
+    const next = measure(_svgEl);
+    if (Math.abs(next.w - dims.w) < 1 && Math.abs(next.h - dims.h) < 1) return;
+    dims = next;
+    svg.attr("viewBox", `0 0 ${dims.w} ${dims.h}`);
+    projection.fitExtent([[10, 10], [dims.w - 10, dims.h - 10]],
+      { type: "FeatureCollection", features: _clickable });
+    path = d3.geoPath(projection);
+
+    gMap.selectAll("path.country").attr("d", path);
+    gMap.selectAll("text.clabel")
+      .attr("x", (d) => { const n = CLICKABLE[+d.id]; const c = COORDS[n]; return c ? projection(c)[0] : path.centroid(d)[0]; })
+      .attr("y", (d) => { const n = CLICKABLE[+d.id]; const c = COORDS[n]; return c ? projection(c)[1] : path.centroid(d)[1]; });
+    _clickable.forEach((f) => { centroids[CLICKABLE[+f.id]] = path.centroid(f); });
+
+    // Re-place any active overlays / ancient layer against the new projection
+    if (_ancient && _ancient.on) setAncientMode(true, _ancient.onCityClick);
+    if (_lastOverlay) updateOverlays(_lastOverlay.data, _lastOverlay.opts);
   }
 
   function setActive(name) {
@@ -187,6 +285,7 @@ const GeoMap = (() => {
 
   // ── Ancient / Religion mode ──────────────────────────────────────────────
   function setAncientMode(on, onCityClick) {
+    _ancient = { on, onCityClick };
     labelsOff = on;
     applyLabelLOD(curK);
     if (gAncient) { gAncient.remove(); gAncient = null; }
@@ -244,6 +343,7 @@ const GeoMap = (() => {
   }
 
   function updateOverlays(data, opts) {
+    _lastOverlay = { data, opts };
     gOverlay.selectAll("*").remove();
     const legend = document.getElementById("legend");
     legend.style.display = opts.connections ? "block" : "none";
@@ -340,8 +440,13 @@ const GeoMap = (() => {
     });
   }
 
+  let _newsVisible = true;
   function showNewsDots(visible) {
-    if (gNews) gNews.style("display", visible ? null : "none");
+    _newsVisible = visible;
+    if (gNews) {
+      gNews.attr("visibility", visible ? "visible" : "hidden");
+      gNews.style("display", visible ? null : "none");
+    }
   }
 
   function highlightCountries(nameSet) {
@@ -358,5 +463,5 @@ const GeoMap = (() => {
     if (svg && zoomBehavior) svg.transition().duration(400).call(zoomBehavior.transform, d3.zoomIdentity);
   }
 
-  return { init, setActive, centroidOf, updateOverlays, setAncientMode, highlightCountries, setNewsDots, showNewsDots, setConflictDots, setTimelineColors, clearTimelineColors, zoomBy, resetZoom };
+  return { init, resize, setActive, centroidOf, updateOverlays, setAncientMode, highlightCountries, setNewsDots, showNewsDots, setConflictDots, setTimelineColors, clearTimelineColors, zoomBy, resetZoom };
 })();

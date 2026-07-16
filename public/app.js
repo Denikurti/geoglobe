@@ -422,19 +422,93 @@ function restoreChatHistory(country) {
 }
 
 // ---- stat cards ----
-function renderStatCards(data) {
-  const geo = data.geopolitics || {};
-  const fin = data.finance || {};
-  const res = data.resources || {};
-  const stats = [
+// ---- number formatting for KPIs ----
+function fmtCount(n) {
+  if (n == null) return "—";
+  const a = Math.abs(n);
+  if (a >= 1e9) return (n / 1e9).toFixed(a >= 1e10 ? 0 : 2) + "B";
+  if (a >= 1e6) return (n / 1e6).toFixed(a >= 1e8 ? 0 : 1) + "M";
+  if (a >= 1e3) return (n / 1e3).toFixed(0) + "K";
+  return Math.round(n).toString();
+}
+function fmtUSD(n) {
+  if (n == null) return "—";
+  const a = Math.abs(n);
+  if (a >= 1e12) return "$" + (n / 1e12).toFixed(2) + "T";
+  if (a >= 1e9)  return "$" + (n / 1e9).toFixed(a >= 1e11 ? 0 : 1) + "B";
+  if (a >= 1e6)  return "$" + (n / 1e6).toFixed(0) + "M";
+  if (a >= 1e3)  return "$" + (n / 1e3).toFixed(1) + "k";
+  return "$" + Math.round(n);
+}
+function fmtPct(n, signed) {
+  if (n == null) return "—";
+  const s = (signed && n > 0 ? "+" : "") + n.toFixed(1) + "%";
+  return s;
+}
+
+// Static fallback cards, used until live data lands or if it's unavailable.
+function staticStatCards(data) {
+  const geo = data.geopolitics || {}, fin = data.finance || {};
+  return [
     { label: "Allies", value: (geo.allies || []).length ? `${(geo.allies||[]).length} nations` : "—" },
     { label: "Debt", value: fin.national_debt_usd_trillions ? `$${fin.national_debt_usd_trillions}T` : "—" },
     { label: "Mil. Bases", value: geo.military_bases_abroad != null ? geo.military_bases_abroad : "—" },
     { label: "Currency", value: fin.currency_role ? fin.currency_role.split("=")[0].trim() : "—" },
   ];
-  $("statCards").innerHTML = stats.map(s =>
-    `<div class="stat-card"><div class="stat-label">${s.label}</div><div class="stat-value">${s.value}</div></div>`
-  ).join("");
+}
+
+function paintStatCards(cards, caption) {
+  const cardsHtml = cards.map(s => {
+    const trend = s.trend ? ` trend-${s.trend}` : "";
+    const loading = s.loading ? " is-loading" : "";
+    return `<div class="stat-card${loading}">
+      <div class="stat-label">${s.label}</div>
+      <div class="stat-value${trend}">${s.value}</div>
+    </div>`;
+  }).join("");
+  $("statCards").innerHTML = cardsHtml +
+    (caption ? `<div class="stat-caption">${caption}</div>` : "");
+}
+
+async function renderStatCards(data) {
+  const country = state.country;
+
+  // Show static cards immediately (with skeleton values for the live economic set)
+  const skeleton = [
+    { label: "Population", value: "···", loading: true },
+    { label: "GDP", value: "···", loading: true },
+    { label: "GDP / capita", value: "···", loading: true },
+    { label: "Growth", value: "···", loading: true },
+    { label: "Inflation", value: "···", loading: true },
+    { label: "Mil. % GDP", value: "···", loading: true },
+  ];
+  paintStatCards(skeleton, "Loading live indicators…");
+
+  let k;
+  try {
+    const res = await fetch(`/api/kpi/${encodeURIComponent(country)}`);
+    k = await res.json();
+  } catch { k = { available: false }; }
+
+  // Bail if the user switched countries while we were fetching.
+  if (state.country !== country) return;
+
+  if (!k || !k.available) {
+    paintStatCards(staticStatCards(data), null);
+    return;
+  }
+
+  const cards = [
+    { label: "Population",   value: fmtCount(k.population) },
+    { label: "GDP",          value: fmtUSD(k.gdp) },
+    { label: "GDP / capita", value: fmtUSD(k.gdpPerCapita) },
+    { label: "Growth",       value: fmtPct(k.gdpGrowth, true),
+      trend: k.gdpGrowth == null ? "" : k.gdpGrowth >= 0 ? "up" : "down" },
+    { label: "Inflation",    value: fmtPct(k.inflation, false),
+      trend: k.inflation == null ? "" : k.inflation <= 4 ? "up" : "down" },
+    { label: "Mil. % GDP",   value: fmtPct(k.milSpendPctGdp, false) },
+  ];
+  paintStatCards(cards, k.asOf ? `As of ${k.asOf} · World Bank` : "World Bank");
 }
 
 // ---- suggested chips ----
@@ -552,14 +626,6 @@ function updateTimelineMap(year) {
   timelineEventTimer = setTimeout(() => bar.classList.remove("visible"), 2500);
 }
 
-// ---- toggles ----
-const toggleMap = { tTheories: "theories", tConnections: "connections", tResources: "resources" };
-Object.entries(toggleMap).forEach(([id, key]) => {
-  $(id).addEventListener("change", (e) => {
-    state.toggles[key] = e.target.checked;
-    if (state.data) { if (key === "theories") renderMindmap(); refreshOverlays(); }
-  });
-});
 
 // ---- chat queue ----
 const chatQueue = [];
@@ -769,16 +835,35 @@ const SEARCH_INDEX = [];
 function buildSearchIndex() {
   // Countries
   const countries = [
-    "USA","Canada","Mexico",
+    // Americas
+    "USA","Canada","Mexico","Brazil","Argentina","Chile","Colombia","Peru",
+    "Venezuela","Uruguay","Bolivia","Paraguay","Ecuador",
+    // Europe
     "United Kingdom","Germany","France","Russia","Italy","Spain",
     "Ukraine","Poland","Netherlands","Switzerland","Sweden","Norway","Belgium","Portugal",
     "Austria","Ireland","Denmark","Finland","Hungary","Czech Republic","Slovakia",
     "Greece","Romania","Bulgaria","Serbia","Croatia","Bosnia","Slovenia",
     "North Macedonia","Albania","Montenegro","Kosovo","Turkey",
+    // Middle East
     "Israel","Palestine","Saudi Arabia","Iran","Iraq","Jordan",
     "Lebanon","Syria","UAE","Qatar","Yemen","Oman","Kuwait","Bahrain",
+    // Africa
     "Egypt","Libya","Tunisia","Algeria","Morocco","Sudan",
     "Somalia","Ethiopia","Kenya","Nigeria","Angola","South Africa",
+    "Uganda","Rwanda","DR Congo","Ghana","Senegal","Mali","Cameroon",
+    "Mozambique","Zimbabwe","Tanzania",
+    // East Asia
+    "China","Japan","South Korea","North Korea","Taiwan","Mongolia",
+    // South Asia
+    "India","Pakistan","Bangladesh","Nepal","Bhutan","Sri Lanka",
+    // Southeast Asia
+    "Thailand","Vietnam","Indonesia","Philippines","Malaysia","Singapore",
+    "Cambodia","Laos","Myanmar",
+    // Central Asia & Caucasus
+    "Afghanistan","Uzbekistan","Kazakhstan","Tajikistan","Kyrgyzstan","Turkmenistan",
+    "Azerbaijan","Georgia","Armenia",
+    // Oceania
+    "Australia","New Zealand",
   ];
   countries.forEach(c => SEARCH_INDEX.push({ label: c, type: "country", icon: "🌍", action: () => loadCountry(c) }));
   // Ancient cities
@@ -1288,6 +1373,13 @@ makeDraggable($("newsDrawerResize"), (dx) => {
   newsDrawer.style.width = newsDrawerWidth + "px";
 });
 
+// ---- conflict drawer width resize ----
+let conflictDrawerWidth = 360;
+makeDraggable($("conflictDrawerResize"), (dx) => {
+  conflictDrawerWidth = Math.max(280, Math.min(window.innerWidth * 0.85, conflictDrawerWidth + dx));
+  conflictDrawer.style.width = conflictDrawerWidth + "px";
+});
+
 let newsDotsVisible = true;
 $("newsToggleBtn").addEventListener("click", () => {
   newsDotsVisible = !newsDotsVisible;
@@ -1320,18 +1412,56 @@ buildAgentBar();
 buildSearchIndex();
 GeoMap.init($("map"), loadCountry).then(() => {
   const allCountries = Object.values({
-    840:"USA",124:"Canada",484:"Mexico",826:"United Kingdom",276:"Germany",
-    250:"France",643:"Russia",380:"Italy",724:"Spain",804:"Ukraine",616:"Poland",
-    752:"Sweden",578:"Norway",792:"Turkey",300:"Greece",642:"Romania",
-    100:"Bulgaria",688:"Serbia",191:"Croatia",70:"Bosnia",8:"Albania",
-    499:"Montenegro",383:"Kosovo",807:"North Macedonia",705:"Slovenia",
+    // Americas
+    840:"USA",124:"Canada",484:"Mexico",
+    76:"Brazil",32:"Argentina",152:"Chile",170:"Colombia",604:"Peru",
+    862:"Venezuela",858:"Uruguay",68:"Bolivia",600:"Paraguay",218:"Ecuador",
+    // Europe
+    826:"United Kingdom",276:"Germany",250:"France",643:"Russia",380:"Italy",
+    724:"Spain",804:"Ukraine",616:"Poland",528:"Netherlands",756:"Switzerland",
+    752:"Sweden",578:"Norway",56:"Belgium",620:"Portugal",40:"Austria",
+    208:"Denmark",246:"Finland",372:"Ireland",792:"Turkey",
+    300:"Greece",642:"Romania",100:"Bulgaria",688:"Serbia",191:"Croatia",
+    70:"Bosnia",8:"Albania",499:"Montenegro",383:"Kosovo",807:"North Macedonia",
+    705:"Slovenia",348:"Hungary",203:"Czech Republic",703:"Slovakia",
+    // Middle East
     376:"Israel",682:"Saudi Arabia",364:"Iran",368:"Iraq",818:"Egypt",
-    760:"Syria",434:"Libya",788:"Tunisia",12:"Algeria",504:"Morocco",
-    729:"Sudan",566:"Nigeria",710:"South Africa",
+    760:"Syria",784:"UAE",634:"Qatar",887:"Yemen",512:"Oman",414:"Kuwait",
+    // Africa
+    434:"Libya",788:"Tunisia",12:"Algeria",504:"Morocco",729:"Sudan",
+    706:"Somalia",231:"Ethiopia",404:"Kenya",566:"Nigeria",24:"Angola",
+    710:"South Africa",800:"Uganda",646:"Rwanda",180:"DR Congo",288:"Ghana",
+    686:"Senegal",466:"Mali",120:"Cameroon",508:"Mozambique",716:"Zimbabwe",834:"Tanzania",
+    // East Asia
+    156:"China",392:"Japan",410:"South Korea",408:"North Korea",158:"Taiwan",496:"Mongolia",
+    // South Asia
+    356:"India",586:"Pakistan",50:"Bangladesh",524:"Nepal",64:"Bhutan",144:"Sri Lanka",
+    // Southeast Asia
+    764:"Thailand",704:"Vietnam",360:"Indonesia",608:"Philippines",
+    458:"Malaysia",702:"Singapore",116:"Cambodia",418:"Laos",104:"Myanmar",
+    // Central Asia
+    4:"Afghanistan",860:"Uzbekistan",398:"Kazakhstan",762:"Tajikistan",417:"Kyrgyzstan",795:"Turkmenistan",
+    // Caucasus
+    31:"Azerbaijan",268:"Georgia",51:"Armenia",
+    // Oceania
+    36:"Australia",554:"New Zealand",
   });
   GeoMap.setNewsDots(allCountries, showNewsTooltip, hideNewsTooltip, openNewsDrawer);
   GeoMap.setConflictDots(CURRENT_CONFLICTS, openConflictDrawer);
   updateTimelineMap(state.year);
+
+  // If the map pane had no width at init (common on mobile before layout
+  // settles), re-fit once it does — and keep it fitted on any resize/rotate.
+  requestAnimationFrame(() => GeoMap.resize());
+  const mapPane = $("mapPane");
+  if (mapPane && window.ResizeObserver) {
+    let raf = 0;
+    new ResizeObserver(() => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => GeoMap.resize());
+    }).observe(mapPane);
+  }
+  window.addEventListener("orientationchange", () => setTimeout(() => GeoMap.resize(), 250));
 }).catch((e) =>
   ($("panelEmpty").textContent = "Map failed to load: " + e.message)
 );

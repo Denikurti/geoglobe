@@ -520,6 +520,24 @@ body {
 .stat-card:active { transform: scale(0.96); }
 .stat-card .stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .9px; }
 .stat-card .stat-value { font-size: 14px; font-weight: 700; color: var(--text); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -.01em; }
+.stat-card .stat-value.trend-up   { color: #3fb950; }
+.stat-card .stat-value.trend-down { color: #ff6b5e; }
+
+/* "As of YEAR · World Bank" line under the KPI strip */
+.stat-caption {
+  flex-basis: 100%; font-size: 9.5px; color: var(--muted);
+  letter-spacing: .3px; margin-top: -1px; opacity: .75;
+}
+
+/* Live-data skeleton shimmer */
+.stat-card.is-loading .stat-value {
+  color: transparent; border-radius: 5px;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.14) 37%, rgba(255,255,255,0.06) 63%);
+  background-size: 400% 100%;
+  animation: kpiShimmer 1.2s ease-in-out infinite;
+}
+@keyframes kpiShimmer { 0% { background-position: 100% 0; } 100% { background-position: 0 0; } }
 
 /* ── Mindmap ── */
 #mindmap {
@@ -954,21 +972,33 @@ body {
 #newsDrawerResize:hover::after { background: var(--accent); }
 
 #newsDrawerHeader {
-  display: flex; align-items: center; gap: 8px; padding: 14px 48px 12px 16px;
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 14px;
   border-bottom: 1px solid var(--line); flex-shrink: 0;
 }
-#newsDrawerFlag { font-size: 20px; }
+#newsDrawerFlag { font-size: 20px; flex-shrink: 0; }
 #newsDrawerTitle { flex: 1; font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -.2px; }
 #newsDrawerClose {
-  position: absolute; top: 10px; right: 12px; z-index: 10;
+  flex-shrink: 0;
   background: rgba(255,255,255,0.12); border: 1px solid var(--glass-border-strong);
-  color: var(--text); font-size: 16px; cursor: pointer;
-  width: 32px; height: 32px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; transition: all var(--dur);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  color: var(--text); font-size: 17px; cursor: pointer;
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--dur);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.12);
 }
-#newsDrawerClose:hover { background: rgba(255,69,58,0.18); color: #ff453a; }
-#newsDrawerClose:active { transform: scale(0.88); }
+#newsDrawerClose:hover { background: rgba(255,69,58,0.22); border-color: rgba(255,69,58,0.4); color: #ff453a; }
+#newsDrawerClose:active { transform: scale(0.86); }
+
+/* Swipe hint — mobile only */
+#newsDrawerSwipeHint {
+  display: none;
+  text-align: center; font-size: 11px; color: var(--muted); padding: 6px 0 2px;
+  letter-spacing: .04em;
+}
+@media (max-width: 768px) {
+  #newsDrawerSwipeHint { display: block; }
+}
 
 #newsDrawerBody { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
 
@@ -1095,18 +1125,34 @@ body {
 #conflictDrawer.hidden { display: none; }
 
 #conflictDrawerHeader {
-  display: flex; align-items: center; gap: 10px; padding: 14px 16px 12px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px;
   border-bottom: 1px solid rgba(255,45,45,0.18); flex-shrink: 0;
 }
 #conflictDrawerClose {
-  background: rgba(255,255,255,0.07); border: 1px solid var(--glass-border);
-  color: var(--muted); font-size: 16px; cursor: pointer;
-  width: 28px; height: 28px; border-radius: 50%; margin-left: auto;
-  display: flex; align-items: center; justify-content: center; transition: all var(--dur);
+  flex-shrink: 0; margin-left: auto;
+  background: rgba(255,255,255,0.10); border: 1px solid var(--glass-border-strong);
+  color: var(--text); font-size: 17px; cursor: pointer;
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--dur);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.10);
 }
-#conflictDrawerClose:hover { background: rgba(255,69,58,0.18); color: #ff453a; }
-#conflictDrawerClose:active { transform: scale(0.88); }
+#conflictDrawerClose:hover { background: rgba(255,69,58,0.22); border-color: rgba(255,69,58,0.4); color: #ff453a; }
+#conflictDrawerClose:active { transform: scale(0.86); }
 #conflictDrawerBody { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+#conflictDrawerResize {
+  position: absolute; top: 0; right: -4px; width: 9px; height: 100%;
+  cursor: col-resize; z-index: 40;
+}
+#conflictDrawerResize::after {
+  content: ""; position: absolute; top: 50%; right: 3px; transform: translateY(-50%);
+  width: 3px; height: 44px; border-radius: 2px;
+  background: rgba(255,69,58,0.35);
+  transition: background var(--dur);
+}
+#conflictDrawerResize:hover::after { background: var(--war); }
+#conflictDrawerResize.dragging::after { background: var(--war); width: 4px; }
 
 .cd-intensity { font-size: 10px; font-weight: 800; letter-spacing: .08em; padding: 3px 10px; border-radius: 10px; }
 .cd-intensity.critical { background: rgba(255,45,45,.18); color: #ff453a; }
@@ -1219,27 +1265,24 @@ body {
 .conflict-critical.conflict-core,   circle.conflict-core.conflict-critical  { fill: #ff2d2d; }
 .conflict-high.conflict-pulse,      circle.conflict-pulse.conflict-high     { fill: #ff7a00; }
 .conflict-high.conflict-core,       circle.conflict-core.conflict-high      { fill: #ff7a00; }
-.conflict-medium.conflict-pulse,    circle.conflict-pulse.conflict-medium   { fill: #ffd60a; }
-.conflict-medium.conflict-core,     circle.conflict-core.conflict-medium    { fill: #ffd60a; }
+.conflict-medium.conflict-pulse,    circle.conflict-pulse.conflict-medium   { fill: #ff9500; }
+.conflict-medium.conflict-core,     circle.conflict-core.conflict-medium    { fill: #ff9500; }
 @keyframes conflictPulse {
   0%, 100% { r: 10px; fill-opacity: .20; }
   50%       { r: 16px; fill-opacity: .07; }
 }
 
 /* ══════════════════════════════════════════════════
-   NEWS DOTS
+   NEWS DOTS — blue so they're distinct from conflict dots
 ══════════════════════════════════════════════════ */
 .news-dot-pulse {
-  fill: rgba(255,200,0,0.10); stroke: none;
+  fill: rgba(10,132,255,0.12); stroke: none;
   animation: newsPulse 3s ease-in-out infinite;
 }
-.news-dot-core {
-  fill: rgba(255,214,10,0.92);
-  stroke: rgba(0,0,0,0.35); stroke-width: 0.5px;
-}
+.news-dot-core { fill: rgba(48,167,255,0.88); }
 @keyframes newsPulse {
-  0%, 100% { r: 4px; opacity: .30; }
-  50%       { r: 7px; opacity: .06; }
+  0%, 100% { r: 4px; opacity: .40; }
+  50%       { r: 7px; opacity: .10; }
 }
 
 /* ══════════════════════════════════════════════════
@@ -1255,7 +1298,7 @@ body {
   #controls { display: none; }
   #subscribeBtnTop { font-size: 11px; padding: 4px 10px; }
   #themeToggleBtn { font-size: 11px; padding: 4px 10px; }
-  #newsToggleBtn { display: none; }
+  #newsToggleBtn { font-size: 11px; padding: 4px 9px; }
   #searchWrap { display: none; }
   #mapZoomCtl { right: 16px; bottom: 120px; }
   #quickAsk { display: none; }
@@ -1325,8 +1368,21 @@ body {
   #panelContent { padding: 8px 14px; gap: 6px; }
   #countryName { font-size: 18px; letter-spacing: -.4px; }
   .summary { font-size: 12px; }
-  #statCards .stat-card { padding: 5px 8px; }
-  #statCards .stat-value { font-size: 12px; }
+  /* KPI strip → single horizontal-scroll row (no cramped 3-per-line wrap) */
+  #statCards {
+    flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden;
+    gap: 6px; padding-bottom: 2px; scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  #statCards::-webkit-scrollbar { display: none; }
+  #statCards .stat-card {
+    flex: 0 0 auto; min-width: 84px; padding: 6px 11px; scroll-snap-align: start;
+  }
+  #statCards .stat-value { font-size: 13px; }
+  .stat-caption {
+    flex: 0 0 auto; white-space: nowrap; align-self: center;
+    padding: 0 4px; margin: 0;
+  }
   #mindmap { flex: 1 1 auto; min-height: 120px; }
   #vDivider { display: none; }
   #chat { flex: 0 0 auto; min-height: 0; }
