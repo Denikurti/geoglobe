@@ -154,43 +154,6 @@ body {
 }
 .sub { font-size: 11px; font-weight: 400; opacity: 0.5; -webkit-text-fill-color: rgba(235,235,245,0.5); }
 
-/* ── Segmented control (mode tabs) ── */
-#modeTabs {
-  display: flex; gap: 2px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-pill);
-  padding: 3px;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), inset 0 0 0 0.5px rgba(255,255,255,0.05);
-}
-.mode-tab {
-  padding: 5px 15px; border-radius: var(--radius-pill); border: none;
-  background: transparent; color: var(--muted); font-size: 13px; font-weight: 500;
-  cursor: pointer; transition: all var(--dur) var(--spring);
-  position: relative; white-space: nowrap;
-  letter-spacing: -.01em;
-}
-.mode-tab.active {
-  background: linear-gradient(145deg, rgba(30,140,255,0.9), rgba(10,110,240,0.95));
-  color: #fff; font-weight: 600;
-  box-shadow:
-    0 2px 18px rgba(10,132,255,0.45),
-    0 1px 0 rgba(255,255,255,0.25) inset,
-    0 -1px 0 rgba(0,0,0,0.2) inset;
-}
-.mode-tab:hover:not(.active) { color: var(--text); background: rgba(255,255,255,0.09); }
-.mode-tab:active { transform: scale(0.95); }
-
-#controls { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 13px; }
-.ctl, .toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--muted); transition: color var(--dur-fast); }
-.ctl:hover, .toggle:hover { color: var(--text); }
-.toggle input { cursor: pointer; accent-color: var(--accent); }
-#timeline { width: 120px; accent-color: var(--accent); cursor: pointer; }
-#yearLabel {
-  color: var(--accent); font-variant-numeric: tabular-nums; min-width: 36px;
-  font-weight: 700; font-size: 14px; letter-spacing: -.01em;
-}
-
 /* ── Topbar buttons (News / Subscribe) ── */
 #newsToggleBtn {
   background: rgba(255,214,10,0.10);
@@ -204,6 +167,16 @@ body {
 #newsToggleBtn.off {
   background: rgba(255,255,255,0.05); border-color: var(--glass-border); color: var(--muted);
 }
+
+#briefingBtnTop {
+  background: rgba(191,90,242,0.12);
+  border: 1px solid rgba(191,90,242,0.32);
+  border-radius: var(--radius-pill); color: #d9a8ff; font-size: 12px; font-weight: 600;
+  padding: 5px 13px; cursor: pointer; transition: all var(--dur) var(--spring); white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+#briefingBtnTop:hover { background: rgba(191,90,242,0.22); border-color: rgba(191,90,242,0.5); }
+#briefingBtnTop:active { transform: scale(0.95); }
 
 #subscribeBtnTop {
   background: var(--accent-glass);
@@ -393,10 +366,6 @@ body {
 .agent-stat .asl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; }
 .agent-stat .asv { font-size: 13px; font-weight: 700; margin-top: 3px; }
 .agent-section-title { font-size: 10px; color: rgba(235,235,245,.30); text-transform: uppercase; letter-spacing: 1.4px; margin-bottom: 8px; font-weight: 600; }
-.agent-timeline-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
-.agent-timeline-year { font-size: 11px; font-weight: 700; color: var(--accent); min-width: 42px; flex-shrink: 0; }
-.agent-timeline-text { font-size: 12px; color: var(--muted); line-height: 1.55; }
-.agent-timeline-text strong { color: var(--text); display: block; margin-bottom: 3px; font-weight: 600; }
 .agent-country-item { padding: 10px 0; border-bottom: 1px solid var(--line); cursor: pointer; transition: padding var(--dur) var(--spring); }
 .agent-country-item:hover { padding-left: 6px; }
 .agent-country-item:hover .agent-country-name { color: var(--accent); }
@@ -741,52 +710,6 @@ body {
 .country[data-name="Palestine"] { fill: #1a1f2a; } .country[data-name="Palestine"]:hover { fill: #263040; }
 .country[data-name="Iran"]      { fill: #2a1f10; } .country[data-name="Iran"]:hover      { fill: #3f2f18; }
 .clabel { fill: var(--text); pointer-events: none; text-anchor: middle; opacity: .75; }
-
-/* ══════════════════════════════════════════════════
-   ANCIENT / RELIGION MAP
-══════════════════════════════════════════════════ */
-.ancient-country { stroke: #1a1000 !important; stroke-width: .8px; transition: fill .25s; }
-.ancient-unknown  { fill: #0e141c; }
-.anc-mesopotamia  { fill: #7a5a00; }
-.anc-persia       { fill: #7a3010; }
-.anc-judea        { fill: #8a7a00; }
-.anc-levant       { fill: #5a5a20; }
-.anc-egypt        { fill: #9a7000; }
-.anc-arabia       { fill: #5a4010; }
-.anc-rome         { fill: #7a2020; }
-.anc-greece       { fill: #6a6a00; }
-.anc-byzantine    { fill: #5a2060; }
-.anc-germanic     { fill: #2a4a2a; }
-.anc-norse        { fill: #1a3a5a; }
-.anc-rus          { fill: #2a2a4a; }
-.ancient-label {
-  fill: #d4a855; font-size: 13px; font-weight: 700;
-  text-anchor: middle; dominant-baseline: middle;
-  pointer-events: none; letter-spacing: .5px;
-  font-family: Georgia, "Times New Roman", serif;
-}
-.city-glow { fill: none; stroke-width: 1.5; opacity: .4; }
-.city-dot  { opacity: .95; }
-.city-glow-holy       { stroke: #ffd700; } .city-dot-holy       { fill: #ffd700; }
-.city-glow-church     { stroke: #c080ff; } .city-dot-church     { fill: #c080ff; }
-.city-glow-islam      { stroke: #40c040; } .city-dot-islam      { fill: #40c040; }
-.city-glow-byzantine  { stroke: #8080ff; } .city-dot-byzantine  { fill: #8080ff; }
-.city-glow-philosophy { stroke: #60d0ff; } .city-dot-philosophy { fill: #60d0ff; }
-.city-glow-ancient    { stroke: #ff9040; } .city-dot-ancient    { fill: #ff9040; }
-.city-name {
-  fill: #e8d5a0; font-size: 10px; font-weight: 600; pointer-events: none;
-  font-family: Georgia, "Times New Roman", serif;
-}
-.city-marker:hover .city-dot { r: 6px; }
-
-.country.rel-mode { transition: fill .3s ease; }
-.country.rel-catholic   { fill: #4a1a6b !important; } .country.rel-catholic:hover   { fill: #6b2a9b !important; }
-.country.rel-protestant { fill: #1a3a6b !important; } .country.rel-protestant:hover { fill: #2a5a9b !important; }
-.country.rel-orthodox   { fill: #1a4a6b !important; } .country.rel-orthodox:hover   { fill: #2a6a9b !important; }
-.country.rel-sunni      { fill: #1a5a2a !important; } .country.rel-sunni:hover      { fill: #2a7a3a !important; }
-.country.rel-shia       { fill: #0a3a1a !important; } .country.rel-shia:hover       { fill: #1a5a2a !important; }
-.country.rel-jewish     { fill: #6b5a00 !important; } .country.rel-jewish:hover     { fill: #9b8a00 !important; }
-.country.rel-mixed      { fill: #4a3a1a !important; } .country.rel-mixed:hover      { fill: #6a5a2a !important; }
 
 /* ── Flows ── */
 .flow { stroke: var(--finance); stroke-width: 2; fill: none; stroke-dasharray: 6 6; animation: dash 1s linear infinite; opacity: .9; }
@@ -1234,24 +1157,81 @@ body {
 #subscribeMsg.error   { background: rgba(255,69,58,.12); color: #ff453a; border: 1px solid rgba(255,69,58,.25); }
 
 /* ══════════════════════════════════════════════════
-   TIMELINE COLORS
+   DAILY BRIEFING
 ══════════════════════════════════════════════════ */
-.country.tl-at-war   { fill: #8b1a1a !important; } .country.tl-at-war:hover   { fill: #b52020 !important; }
-.country.tl-tension  { fill: #7a3a00 !important; } .country.tl-tension:hover  { fill: #9a4a00 !important; }
-.country.tl-occupied { fill: #4a3500 !important; }
-.country.tl-allied   { fill: #1a4a1a !important; }
-
-#timelineEventBar {
-  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
-  background: linear-gradient(160deg, rgba(12,14,28,0.92), rgba(8,10,20,0.96));
-  backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
-  border: 1px solid var(--glass-border-strong); border-radius: var(--radius-pill);
-  padding: 7px 22px; font-size: 13px; font-weight: 700; color: var(--text);
-  z-index: 25; pointer-events: none; white-space: nowrap;
-  opacity: 0; transition: opacity .3s;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+#briefingOverlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
 }
-#timelineEventBar.visible { opacity: 1; }
+#briefingOverlay.hidden { display: none; }
+#briefingModal {
+  background: linear-gradient(160deg, rgba(14,20,40,0.98), rgba(8,12,24,0.99));
+  border: 1px solid var(--glass-border-strong);
+  border-radius: 28px; padding: 30px; width: min(880px, 96vw); max-height: 90vh;
+  overflow-y: auto; position: relative;
+  box-shadow: 0 28px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.10);
+  animation: modalIn var(--dur-slow) var(--spring);
+}
+#briefingHeader { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
+#briefingEyebrow { font-size: 10px; font-weight: 800; letter-spacing: .1em; color: #d9a8ff; margin-bottom: 4px; }
+#briefingTitle { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -.03em; }
+#briefingClose {
+  background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border);
+  color: var(--muted); font-size: 18px; cursor: pointer;
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; transition: all var(--dur);
+}
+#briefingClose:hover { background: rgba(255,69,58,0.18); color: #ff453a; }
+#briefingClose:active { transform: scale(0.88); }
+#briefingGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.briefing-card {
+  grid-column: span 1;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm); padding: 16px; cursor: pointer;
+  transition: all var(--dur) var(--spring);
+}
+.briefing-card:hover { background: rgba(255,255,255,0.07); border-color: var(--glass-border-strong); }
+.briefing-card.open { grid-column: 1 / -1; background: rgba(191,90,242,0.06); border-color: rgba(191,90,242,0.3); }
+.briefing-card-top { display: flex; align-items: center; gap: 12px; }
+.briefing-card-icon { font-size: 26px; line-height: 1; }
+.briefing-card-label { font-size: 14px; font-weight: 700; color: var(--text); }
+.briefing-card-count { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.briefing-card-body { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--glass-border); }
+.briefing-empty { font-size: 12.5px; color: var(--muted); }
+.briefing-situations { display: flex; flex-direction: column; gap: 12px; }
+.briefing-situation {
+  background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xs); padding: 14px 16px;
+}
+.briefing-situation-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 7px; letter-spacing: -.01em; }
+.briefing-situation-summary { font-size: 12.5px; line-height: 1.65; color: rgba(245,245,247,0.82); margin-bottom: 9px; }
+.briefing-situation-why {
+  font-size: 11.5px; line-height: 1.55; color: var(--muted);
+  border-top: 1px solid var(--glass-border); padding-top: 8px;
+}
+.briefing-situation-why strong {
+  display: block; color: #d9a8ff; font-size: 10px; letter-spacing: .06em;
+  text-transform: uppercase; margin-bottom: 3px;
+}
+
+#briefingToast {
+  position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(16px);
+  display: flex; align-items: center; gap: 10px;
+  background: linear-gradient(160deg, rgba(20,10,30,0.96), rgba(10,6,18,0.98));
+  border: 1px solid rgba(191,90,242,0.35); border-radius: var(--radius-pill);
+  padding: 11px 12px 11px 18px; font-size: 13px; font-weight: 600; color: var(--text);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+  z-index: 150; cursor: pointer; opacity: 0; transition: all .35s var(--spring);
+}
+#briefingToast.hidden { display: none; }
+#briefingToast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+#briefingToastClose {
+  background: rgba(255,255,255,0.08); border: none; color: var(--muted);
+  width: 22px; height: 22px; border-radius: 50%; cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+#briefingToastClose:hover { background: rgba(255,69,58,0.2); color: #ff453a; }
 
 /* ══════════════════════════════════════════════════
    CONFLICT DOTS
@@ -1294,8 +1274,7 @@ body {
   #topbar { padding: 8px 14px; gap: 8px; }
   #topbar h1 { font-size: 16px; }
   .sub { display: none; }
-  #modeTabs .mode-tab { padding: 4px 12px; font-size: 12px; }
-  #controls { display: none; }
+  #briefingBtnTop { font-size: 11px; padding: 4px 10px; }
   #subscribeBtnTop { font-size: 11px; padding: 4px 10px; }
   #themeToggleBtn { font-size: 11px; padding: 4px 10px; }
   #newsToggleBtn { font-size: 11px; padding: 4px 9px; }
@@ -1304,6 +1283,9 @@ body {
   #quickAsk { display: none; }
   #shareBtn { font-size: 11px; padding: 4px 10px; }
   #subscribeModal { padding: 28px 20px; }
+  #briefingModal { padding: 20px; }
+  #briefingGrid { grid-template-columns: 1fr; }
+  #briefingToast { bottom: 16px; width: calc(100vw - 32px); font-size: 12px; }
 
   /* ── Layout ── */
   #layout { flex-direction: row; position: relative; }

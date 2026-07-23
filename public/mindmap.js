@@ -28,12 +28,11 @@ const GeoMindmap = (() => {
     animationEasing: "ease-out-cubic",
   };
 
-  function buildBranches(d, year, showTheories) {
+  function buildBranches(d, showTheories) {
     const B = [];
     B.push({
       name: "History",
       leaves: (d.history || [])
-        .filter(h => h.year <= year)
         .map(h => ({ label: `${h.year} · ${h.event}`, title: `${h.year} — ${h.event}`, detail: h.detail })),
     });
     const g = d.geopolitics || {};
@@ -90,15 +89,14 @@ const GeoMindmap = (() => {
     B.push({
       name: "Connections",
       leaves: (d.connections||[])
-        .filter(c => !c.year || c.year <= year)
         .map(c => ({ label: `${c.to} · ${c.type}`, title: `→ ${c.to}`, detail: c.detail })),
     });
     return B.filter(b => b.leaves.length);
   }
 
   function render(container, data, opts, onLeafClick) {
-    const { year, showTheories } = opts;
-    const branches = buildBranches(data, year, showTheories);
+    const { showTheories } = opts;
+    const branches = buildBranches(data, showTheories);
     const elements = [];
 
     elements.push({ data: { id: "root", label: data.country, kind: "root" } });

@@ -1,9 +1,7 @@
-// Coordinator: wires the map, mind map, overlays, timeline, toggles and chat.
+// Coordinator: wires the map, mind map, overlays, toggles and chat.
 const state = {
   country: null,
   data: null,
-  year: 2025,
-  mode: "states", // "states" | "religion"
   toggles: { theories: false, money: false, connections: false, resources: false },
 };
 
@@ -52,7 +50,6 @@ function renderSuggestChips() {
   chips.innerHTML = "";
   let questions = [];
   if (activeAgent) questions = activeAgent.chips;
-  else if (state.mode === "religion") questions = ReligionPanel.CHIPS;
   else questions = ["Key alliances?", "Main resources?", "Biggest threats?", "Economic power?", "Recent conflicts?"];
   questions.forEach(q => {
     const btn = document.createElement("button");
@@ -132,7 +129,7 @@ function openAgentDrawer(agent) {
 
 function renderAgentDrawer(agent, tab) {
   const body = $("agentDrawerBody");
-  const tabs = ["overview", "timeline", "countries", "ask AI"];
+  const tabs = ["overview", "countries", "ask AI"];
 
   body.innerHTML = `
     <div class="agent-section-tabs">
@@ -169,14 +166,6 @@ function renderAgentDrawer(agent, tab) {
         <div class="agent-section-title">Key facts</div>
         <div class="agent-stat-row">${agent.stats.map(s=>`<div class="agent-stat"><div class="asl">${s.label}</div><div class="asv">${s.value}</div></div>`).join("")}</div>
       </div>`;
-
-  } else if (tab === "timeline") {
-    content.innerHTML = `<div class="agent-section-title">Timeline</div>` +
-      agent.timeline.map(t => `
-        <div class="agent-timeline-item">
-          <div class="agent-timeline-year" style="color:${agent.color}">${t.year < 0 ? Math.abs(t.year)+"BC" : t.year+"AD"}</div>
-          <div class="agent-timeline-text"><strong>${t.event}</strong>${t.detail}</div>
-        </div>`).join("");
 
   } else if (tab === "countries") {
     content.innerHTML = `<div class="agent-section-title">Country connections — click to load on map</div>`;
@@ -307,82 +296,11 @@ function syncChatToAgent() {
   if (!$("suggestPopup").classList.contains("hidden")) renderSuggestChips();
 }
 
-// ---- mode tabs ----
-document.querySelectorAll(".mode-tab").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".mode-tab").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    state.mode = btn.dataset.mode;
-    const ancient = state.mode === "religion";
-    GeoMap.setAncientMode(ancient, onCityClick);
-    // News only exists in States mode — hide dots, button, and drawer in Religion mode
-    GeoMap.showNewsDots(!ancient && newsDotsVisible);
-    $("newsToggleBtn").style.display = ancient ? "none" : "";
-    if (ancient) {
-      newsDrawer.classList.remove("open");
-      setTimeout(() => newsDrawer.classList.add("hidden"), 350);
-      conflictDrawer.classList.remove("open");
-      setTimeout(() => conflictDrawer.classList.add("hidden"), 350);
-      GeoMap.setConflictDots([], () => {});
-      GeoMap.clearTimelineColors();
-    } else {
-      GeoMap.setConflictDots(CURRENT_CONFLICTS, openConflictDrawer);
-      updateTimelineMap(state.year);
-    }
-    if (state.country) renderPanel();
-  });
-});
-
-function onCityClick(city) {
-  // Show the city in the panel
-  $("panel").classList.remove("collapsed");
-  $("panelEmpty").classList.add("hidden");
-  $("panelContent").classList.remove("hidden");
-  $("countryName").textContent = city.name;
-  $("countrySummary").textContent = city.summary;
-  $("statCards").innerHTML = `
-    <div class="stat-card"><div class="stat-label">Type</div><div class="stat-value">${city.type}</div></div>
-    <div class="stat-card"><div class="stat-label">Location</div><div class="stat-value">${city.lon.toFixed(1)}°E, ${city.lat.toFixed(1)}°N</div></div>
-  `;
-  // Build a simple mindmap for the city using religion panel's raw renderer
-  const elements = [];
-  elements.push({ data: { id: "root", label: city.name, kind: "root" } });
-  const detail = city.detail;
-  const sentences = detail.split(". ").filter(s => s.length > 10);
-  const colors = { holy: "#ffd700", church: "#c080ff", islam: "#40c040", byzantine: "#8080ff", philosophy: "#60d0ff", ancient: "#ff9040" };
-  const col = colors[city.type] || "#8b949e";
-  elements.push({ data: { id: "b0", label: "✦  History & Significance", kind: "branch", color: col, bg: "#1a1a2a" } });
-  elements.push({ data: { source: "root", target: "b0", edgeKind: "root-branch", color: col } });
-  sentences.slice(0, 6).forEach((s, i) => {
-    elements.push({
-      data: { id: `b0_${i}`, label: s.slice(0, 42) + (s.length > 42 ? "…" : ""), kind: "leaf", color: col, statusColor: col,
-        payload: { title: city.name, detail: s + "." }, branch: "History & Significance" },
-      classes: "leaf hidden-node",
-    });
-    elements.push({ data: { source: "b0", target: `b0_${i}`, edgeKind: "branch-leaf", color: col }, classes: "hidden-node" });
-  });
-  GeoMindmap.renderRaw($("mindmap"), city.name, elements, showPopup);
-  $("chatInput").placeholder = `Ask anything about ${city.name}…`;
-  state.country = city.name;
-}
-
 function renderPanel() {
-  if (state.mode === "religion") {
-    const profile = RELIGION_DATA.countries[state.country];
-    $("countrySummary").textContent = profile
-      ? profile.dominant + (profile.secondary?.length ? " · " + profile.secondary.join(", ") : "")
-      : state.data?.summary || "";
-    const cards = ReligionPanel.statCards(state.country);
-    $("statCards").innerHTML = cards.map(s =>
-      `<div class="stat-card"><div class="stat-label">${s.label}</div><div class="stat-value">${s.value}</div></div>`
-    ).join("");
-    ReligionPanel.renderMindmap($("mindmap"), state.country, showPopup);
-  } else {
-    renderStatCards(state.data);
-    renderChips();
-    renderMindmap();
-    refreshOverlays();
-  }
+  renderStatCards(state.data);
+  renderChips();
+  renderMindmap();
+  refreshOverlays();
 }
 
 let chatLogExpanded = false;
@@ -560,13 +478,13 @@ function renderMindmap() {
   GeoMindmap.render(
     $("mindmap"),
     state.data,
-    { year: state.year, showTheories: state.toggles.theories },
+    { showTheories: state.toggles.theories },
     showPopup
   );
 }
 
 function refreshOverlays() {
-  GeoMap.updateOverlays(state.data, { year: state.year, ...state.toggles });
+  GeoMap.updateOverlays(state.data, state.toggles);
 }
 
 // ---- leaf popup ----
@@ -588,44 +506,6 @@ $("popupAsk").onclick = () => {
   $("popup").classList.add("hidden");
   enqueue(`Explain more: ${popupContext}`);
 };
-
-// ---- timeline ----
-let timelineEventTimer = null;
-$("timeline").addEventListener("input", (e) => {
-  state.year = +e.target.value;
-  $("yearLabel").textContent = state.year;
-  if (state.data) { renderMindmap(); refreshOverlays(); }
-  if (state.mode === "states") updateTimelineMap(state.year);
-});
-
-function updateTimelineMap(year) {
-  const colorMap = {};
-  const activeEvents = [];
-
-  TIMELINE_CONFLICTS.forEach(ev => {
-    if (year >= ev.years[0] && year <= ev.years[1]) {
-      activeEvents.push(ev.title);
-      (ev.at_war   || []).forEach(c => { colorMap[c] = "tl-at-war"; });
-      (ev.allied   || []).forEach(c => { if (!colorMap[c]) colorMap[c] = "tl-allied"; });
-      (ev.occupied || []).forEach(c => { colorMap[c] = "tl-occupied"; });
-      (ev.tensions || []).forEach(c => { if (!colorMap[c]) colorMap[c] = "tl-tension"; });
-    }
-  });
-
-  GeoMap.setTimelineColors(colorMap);
-
-  // show event bar
-  const bar = $("timelineEventBar");
-  if (activeEvents.length) {
-    bar.textContent = "⚔️ " + activeEvents.slice(0,3).join("  ·  ");
-    bar.classList.add("visible");
-  } else {
-    bar.classList.remove("visible");
-  }
-  clearTimeout(timelineEventTimer);
-  timelineEventTimer = setTimeout(() => bar.classList.remove("visible"), 2500);
-}
-
 
 // ---- chat queue ----
 const chatQueue = [];
@@ -866,8 +746,6 @@ function buildSearchIndex() {
     "Australia","New Zealand",
   ];
   countries.forEach(c => SEARCH_INDEX.push({ label: c, type: "country", icon: "🌍", action: () => loadCountry(c) }));
-  // Ancient cities
-  ANCIENT_CITIES.forEach(c => SEARCH_INDEX.push({ label: c.name, type: "ancient city", icon: "🏛", action: () => { if (state.mode !== "religion") { document.querySelector('[data-mode="religion"]').click(); } setTimeout(() => onCityClick(c), 300); } }));
   // Agents
   AGENTS.forEach(a => SEARCH_INDEX.push({ label: a.name, type: "lens", icon: a.icon, action: () => toggleAgent(a) }));
 }
@@ -1126,6 +1004,101 @@ async function shareCountryCard() {
     }
   }, "image/png");
 }
+
+// ---- daily briefing: last-24h flash cards (news + YouTube-informed AI summary) ----
+const briefingOverlay = $("briefingOverlay");
+let briefingData = null;
+
+// Splits the AI's multi-situation text into individual { situation, summary, why } blocks.
+function parseBriefingSituations(text) {
+  const blocks = text.split(/(?=SITUATION:)/i).map(b => b.trim()).filter(Boolean);
+  return blocks.map(b => {
+    const get = (key) => {
+      const m = b.match(new RegExp(`${key}:\\s*([\\s\\S]*?)(?=\\n[A-Z]+:|$)`, "i"));
+      return m ? m[1].trim() : "";
+    };
+    return { situation: get("SITUATION"), summary: get("SUMMARY"), why: get("WHY") };
+  }).filter(s => s.situation);
+}
+
+function renderBriefingGrid() {
+  const grid = $("briefingGrid");
+  if (!briefingData?.categories) { grid.innerHTML = ""; return; }
+  grid.innerHTML = briefingData.categories.map(c => `
+    <div class="briefing-card" data-id="${c.id}">
+      <div class="briefing-card-top">
+        <div class="briefing-card-icon">${c.icon}</div>
+        <div>
+          <div class="briefing-card-label">${c.label}</div>
+          <div class="briefing-card-count">${c.articleCount} updates · 24h</div>
+        </div>
+      </div>
+      <div class="briefing-card-body hidden"></div>
+    </div>`).join("");
+
+  grid.querySelectorAll(".briefing-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const wasOpen = card.classList.contains("open");
+      grid.querySelectorAll(".briefing-card").forEach(c => c.classList.remove("open"));
+      grid.querySelectorAll(".briefing-card-body").forEach(b => b.classList.add("hidden"));
+      if (wasOpen) return;
+      card.classList.add("open");
+      const cat = briefingData.categories.find(c => c.id === card.dataset.id);
+      const situations = parseBriefingSituations(cat.summaryText || "");
+      const body = card.querySelector(".briefing-card-body");
+      body.innerHTML = situations.length ? `
+        <div class="briefing-situations">
+          ${situations.map(s => `
+            <div class="briefing-situation">
+              <div class="briefing-situation-title">${s.situation}</div>
+              ${s.summary ? `<div class="briefing-situation-summary">${s.summary}</div>` : ""}
+              ${s.why ? `<div class="briefing-situation-why"><strong>Why it matters</strong>${s.why}</div>` : ""}
+            </div>`).join("")}
+        </div>
+      ` : `<div class="briefing-empty">No AI summary available right now.</div>`;
+      body.classList.remove("hidden");
+    });
+  });
+}
+
+function maybeShowBriefingToast() {
+  const today = new Date().toISOString().split("T")[0];
+  const seen = (() => { try { return localStorage.getItem("geoglobe-briefing-seen"); } catch { return null; } })();
+  if (seen === today) return;
+  const total = briefingData.categories.reduce((s, c) => s + c.articleCount, 0);
+  $("briefingToastText").textContent = `🌍 ${total} updates in the last 24h — tap for your daily briefing`;
+  $("briefingToast").classList.remove("hidden");
+  requestAnimationFrame(() => $("briefingToast").classList.add("show"));
+}
+
+function dismissBriefingToast() {
+  $("briefingToast").classList.remove("show");
+  setTimeout(() => $("briefingToast").classList.add("hidden"), 300);
+  try { localStorage.setItem("geoglobe-briefing-seen", new Date().toISOString().split("T")[0]); } catch {}
+}
+
+function openBriefing() {
+  dismissBriefingToast();
+  briefingOverlay.classList.remove("hidden");
+}
+
+async function loadBriefing() {
+  try {
+    const r = await fetch("/api/briefing/today");
+    briefingData = await r.json();
+    if (!briefingData?.categories) return;
+    renderBriefingGrid();
+    maybeShowBriefingToast();
+  } catch { /* daily briefing is optional — fail silently */ }
+}
+
+$("briefingBtnTop").addEventListener("click", openBriefing);
+$("briefingClose").addEventListener("click", () => briefingOverlay.classList.add("hidden"));
+briefingOverlay.addEventListener("click", (e) => { if (e.target === briefingOverlay) briefingOverlay.classList.add("hidden"); });
+$("briefingToast").addEventListener("click", (e) => { if (e.target.id !== "briefingToastClose") openBriefing(); });
+$("briefingToastClose").addEventListener("click", (e) => { e.stopPropagation(); dismissBriefingToast(); });
+
+loadBriefing();
 
 // ---- light / dark theme ----
 function applyTheme(mode) {
@@ -1448,7 +1421,6 @@ GeoMap.init($("map"), loadCountry).then(() => {
   });
   GeoMap.setNewsDots(allCountries, showNewsTooltip, hideNewsTooltip, openNewsDrawer);
   GeoMap.setConflictDots(CURRENT_CONFLICTS, openConflictDrawer);
-  updateTimelineMap(state.year);
 
   // If the map pane had no width at init (common on mobile before layout
   // settles), re-fit once it does — and keep it fitted on any resize/rotate.
@@ -1521,7 +1493,6 @@ function quickAskSuggestions() {
     `How strong is ${c}'s economy?`,
     `Recent conflicts involving ${c}?`,
   ];
-  if (state.mode === "religion") return ReligionPanel.CHIPS;
   return null; // no country yet
 }
 

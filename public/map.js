@@ -110,12 +110,12 @@ const GeoMap = (() => {
   };
   const RES_ICON = { oil_gas: "🛢️", rare_earths: "⛏️", lithium: "🔋", water: "💧", agriculture: "🌾", nuclear: "☢️", coal: "⚫" };
 
-  let svg, gMap, gOverlay, gNews = null, gAncient = null, projection, path, centroids = {}, dims = { w: 0, h: 0 };
+  let svg, gMap, gOverlay, gNews = null, projection, path, centroids = {}, dims = { w: 0, h: 0 };
   let zoomBehavior = null;
   let onClick = () => {};
   // Kept for re-layout on resize (fixes blank map when the pane had 0 width at init)
   let _svgEl = null, _countries = [], _clickable = [];
-  let _lastOverlay = null, _ancient = null;
+  let _lastOverlay = null;
 
   // Reliable size: fall back to the parent / window when the SVG measures 0
   // (can happen on mobile before flex layout settles → projection fits to nothing).
@@ -164,7 +164,6 @@ const GeoMap = (() => {
         gOverlay.attr("transform", e.transform);
         gNews.attr("transform", e.transform);
         if (!_newsVisible) { gNews.attr("visibility","hidden").style("display","none"); }
-        if (gAncient) gAncient.attr("transform", e.transform);
         gNews.selectAll(".news-dot-pulse").attr("r", 6 / k);
         gNews.selectAll(".news-dot-core").attr("r", 2.3 / k);
         gMap.selectAll("text.clabel").style("font-size", `${BASE_LABEL / k}px`);
@@ -173,12 +172,6 @@ const GeoMap = (() => {
         gMap.selectAll("path.country").style("stroke-width", `${BASE_STROKE / k}px`);
         gOverlay.selectAll("path.conn, path.flow").style("stroke-width", `${2 / k}px`);
         gOverlay.selectAll("circle").attr("r", 3 / k);
-        if (gAncient) {
-          gAncient.selectAll("text.ancient-label").style("font-size", `${13 / k}px`);
-          gAncient.selectAll("text.city-name").style("font-size", `${10 / k}px`);
-          gAncient.selectAll(".city-glow").attr("r", 9 / k);
-          gAncient.selectAll(".city-dot").attr("r", 4 / k);
-        }
       });
     svg.call(zoom).style("cursor", "grab");
     svg.on("mousedown.cursor", () => svg.style("cursor", "grabbing"))
@@ -238,11 +231,8 @@ const GeoMap = (() => {
   }
 
   // Google-Maps-style LOD: small countries' labels only appear when zoomed in
-  let labelsOff = false, curK = 1;
   function applyLabelLOD(k) {
-    curK = k;
     gMap.selectAll("text.clabel").style("display", function () {
-      if (labelsOff) return "none";
       return k >= +(this.dataset.mink || 1) ? null : "none";
     });
   }
@@ -265,8 +255,7 @@ const GeoMap = (() => {
       .attr("y", (d) => { const n = CLICKABLE[+d.id]; const c = COORDS[n]; return c ? projection(c)[1] : path.centroid(d)[1]; });
     _clickable.forEach((f) => { centroids[CLICKABLE[+f.id]] = path.centroid(f); });
 
-    // Re-place any active overlays / ancient layer against the new projection
-    if (_ancient && _ancient.on) setAncientMode(true, _ancient.onCityClick);
+    // Re-place any active overlays against the new projection
     if (_lastOverlay) updateOverlays(_lastOverlay.data, _lastOverlay.opts);
   }
 
@@ -283,65 +272,6 @@ const GeoMap = (() => {
     return [dims.w / 2, dims.h / 2];
   }
 
-  // ── Ancient / Religion mode ──────────────────────────────────────────────
-  function setAncientMode(on, onCityClick) {
-    _ancient = { on, onCityClick };
-    labelsOff = on;
-    applyLabelLOD(curK);
-    if (gAncient) { gAncient.remove(); gAncient = null; }
-
-    if (!on) {
-      // Restore modern country colors AND click handlers
-      gMap.selectAll("path.country")
-        .attr("class", d => "country " + (CLICKABLE[+d.id] ? "na" : "other"))
-        .on("click", (e, d) => { const n = CLICKABLE[+d.id]; if (n) onClick(n); });
-      return;
-    }
-
-    // Disable country clicks in ancient mode — only city markers are interactive
-    gMap.selectAll("path.country").on("click", null);
-
-    // Color by ancient region
-    gMap.selectAll("path.country").attr("class", function(d) {
-      const reg = ANCIENT_MAP[+d.id];
-      return "country ancient-country " + (reg ? reg.cls : "ancient-unknown");
-    });
-
-    // Ancient overlay group (sits above gOverlay)
-    gAncient = svg.append("g");
-
-    // Region name labels — one per unique region, at centroid of first matching country
-    const drawnRegions = new Set();
-    gMap.selectAll("path.country").each(function(d) {
-      const reg = ANCIENT_MAP[+d.id];
-      if (!reg || drawnRegions.has(reg.name)) return;
-      drawnRegions.add(reg.name);
-      const c = path.centroid(d);
-      if (!c || isNaN(c[0])) return;
-      gAncient.append("text")
-        .attr("class", "ancient-label")
-        .attr("x", c[0]).attr("y", c[1])
-        .text(reg.name);
-    });
-
-    // City markers
-    ANCIENT_CITIES.forEach(city => {
-      const pt = projection([city.lon, city.lat]);
-      if (!pt) return;
-      const g = gAncient.append("g")
-        .attr("class", "city-marker")
-        .attr("transform", `translate(${pt[0]},${pt[1]})`)
-        .style("cursor", "pointer")
-        .on("click", (e) => { e.stopPropagation(); onCityClick(city); });
-
-      g.append("circle").attr("r", 9).attr("class", `city-glow city-glow-${city.type}`);
-      g.append("circle").attr("r", 4).attr("class", `city-dot city-dot-${city.type}`);
-      g.append("text").attr("class", "city-name")
-        .attr("x", 7).attr("y", 4)
-        .text(city.name);
-    });
-  }
-
   function updateOverlays(data, opts) {
     _lastOverlay = { data, opts };
     gOverlay.selectAll("*").remove();
@@ -351,7 +281,7 @@ const GeoMap = (() => {
     const src = centroidOf(data.country);
 
     if (opts.connections) {
-      const conns = (data.connections || []).filter((c) => !c.year || c.year <= opts.year);
+      const conns = data.connections || [];
       conns.forEach((c) => {
         const end = endpointFor(c.to, src);
         const col = colorFor(c.type);
@@ -409,22 +339,6 @@ const GeoMap = (() => {
     });
   }
 
-  function setTimelineColors(colorMap) {
-    gMap.selectAll("path.country").each(function(d) {
-      const name = CLICKABLE[+d.id];
-      if (!name) return;
-      const cls = colorMap[name];
-      this.classList.remove("tl-at-war", "tl-tension", "tl-occupied", "tl-allied");
-      if (cls) this.classList.add(cls);
-    });
-  }
-
-  function clearTimelineColors() {
-    gMap.selectAll("path.country")
-      .classed("tl-at-war", false).classed("tl-tension", false)
-      .classed("tl-occupied", false).classed("tl-allied", false);
-  }
-
   function setNewsDots(names, onHover, onLeave, onDotClick) {
     gNews.selectAll("g.news-dot-grp").remove();
     names.forEach(name => {
@@ -463,5 +377,5 @@ const GeoMap = (() => {
     if (svg && zoomBehavior) svg.transition().duration(400).call(zoomBehavior.transform, d3.zoomIdentity);
   }
 
-  return { init, resize, setActive, centroidOf, updateOverlays, setAncientMode, highlightCountries, setNewsDots, showNewsDots, setConflictDots, setTimelineColors, clearTimelineColors, zoomBy, resetZoom };
+  return { init, resize, setActive, centroidOf, updateOverlays, highlightCountries, setNewsDots, showNewsDots, setConflictDots, zoomBy, resetZoom };
 })();
