@@ -234,6 +234,245 @@ app.get("/api/news/:country", async (req, res) => {
   }
 });
 
+// ── Daily briefing: categorized last-24h news + YouTube coverage ───────────
+// Each category's query explicitly names conflicts/regions/economies across
+// the Americas, Europe, Middle East, Africa and Asia-Pacific — a generic
+// query tends to get swamped by whichever single story is biggest that day
+// (e.g. one Middle East war crowding out everything else), so the region
+// names are baked into the query itself to keep results geographically wide.
+const BRIEFING_CATEGORIES = [
+  { id: "war",     label: "War & Conflict",   icon: "⚔️",
+    newsQuery: '"war" OR "conflict" OR "military strike" OR "offensive" OR "ceasefire" OR "insurgency" OR "civil war" OR Ukraine OR Russia OR Gaza OR Israel OR Sudan OR Yemen OR Syria OR Myanmar OR Taiwan OR Congo OR Ethiopia OR Kashmir OR Somalia OR Haiti',
+    ytQuery: "war conflict news today world" },
+  { id: "geo",     label: "Geopolitics",      icon: "🌍",
+    newsQuery: '"sanctions" OR "diplomacy" OR "summit" OR "alliance" OR "election" OR "coup" OR "protests" OR "United Nations" OR NATO OR "European Union" OR "African Union" OR "South China Sea" OR ASEAN',
+    ytQuery: "geopolitics news today world analysis" },
+  { id: "finance", label: "Finance & Markets", icon: "💰",
+    newsQuery: '"inflation" OR "central bank" OR "stock market" OR "interest rates" OR currency OR "trade deal" OR "emerging markets" OR "Federal Reserve" OR "European Central Bank" OR "China economy" OR "Wall Street" OR yuan OR yen OR rupee OR peso',
+    ytQuery: "global markets economy news today" },
+  { id: "tech",    label: "Technology",       icon: "💻",
+    newsQuery: '"artificial intelligence" OR chips OR "tech regulation" OR cybersecurity OR "big tech" OR "startup funding" OR "China tech" OR "EU tech" OR semiconductor OR "data center"',
+    ytQuery: "global tech news today AI" },
+  { id: "cyber",   label: "Cyber & Espionage", icon: "🕵️",
+    newsQuery: '"hack" OR "data breach" OR "cyberattack" OR "spy" OR espionage OR leaked OR ransomware OR "intelligence agency" OR surveillance OR "state-sponsored"',
+    ytQuery: "cyber attack espionage news today" },
+];
+
+async function fetchCategoryNews(query) {
+  if (!NEWS_API_KEY) return [];
+  // NewsAPI's free plan delays articles by ~24h, so a strict last-24h
+  // window returns nothing — widen it to still surface the freshest
+  // news the plan actually has access to.
+  const from = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
+  const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&sortBy=publishedAt&pageSize=80&from=${from}&apiKey=${NEWS_API_KEY}`;
+  try {
+    const r = await fetch(url);
+    const d = await r.json();
+    return (d.articles || [])
+      .filter(a => a.title && a.title !== "[Removed]" && !NOISE.test(a.title))
+      .filter((a, i, arr) => arr.findIndex(x => x.title === a.title) === i)
+      .slice(0, 30);
+  } catch { return []; }
+}
+
+// Best-effort scrape of YouTube search results — no API key required.
+// YouTube's markup can change or block scripted requests at any time, so
+// this must never break the briefing: any failure just yields no videos,
+// and the AI summary falls back to news headlines alone.
+async function fetchYouTubeSnippets(query) {
+  try {
+    const r = await fetch(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, {
+      headers: { "User-Agent": "Mozilla/5.0", "Accept-Language": "en-US,en;q=0.9" },
+    });
+    const html = await r.text();
+    const m = html.match(/var ytInitialData = (\{.*?\});<\/script>/s);
+    if (!m) return [];
+    const data = JSON.parse(m[1]);
+    const sections =
+      data?.contents?.twoColumnSearchResultsRenderer?.primaryContents
+        ?.sectionListRenderer?.contents || [];
+    const videos = [];
+    outer:
+    for (const sec of sections) {
+      for (const item of sec?.itemSectionRenderer?.contents || []) {
+        const v = item.videoRenderer;
+        if (!v) continue;
+        const title = (v.title?.runs || []).map(r => r.text).join("");
+        const channel = v.ownerText?.runs?.[0]?.text || "";
+        const snippet = (v.detailedMetadataSnippets?.[0]?.snippetText?.runs || []).map(r => r.text).join("");
+        if (title) videos.push({ title, channel, snippet });
+        if (videos.length >= 8) break outer;
+      }
+    }
+    return videos;
+  } catch { return []; }
+}
+
+async function summarizeCategory(cat, articles, videos) {
+  const headlineList = articles.map((a, i) => `${i + 1}. ${a.title}`).join("\n") || "(no fresh headlines)";
+  const videoList = videos.map((v, i) => `${i + 1}. "${v.title}" (${v.channel})${v.snippet ? " — " + v.snippet : ""}`).join("\n") || "(no video coverage found)";
+
+  const prompt =
+`You are a geopolitical intelligence analyst producing a "last 24 hours" briefing for the category: ${cat.label}.
+
+News headlines from the last 24 hours:
+${headlineList}
+
+YouTube video coverage from the last 24 hours (titles/snippets only):
+${videoList}
+
+Cover 6 to 9 DIFFERENT situations happening right now around the world in this category — this must read like a real world tour, not a deep dive on one story. Actively scan the headlines for distinct countries/regions and make sure you include separate situations from AT LEAST 4 of these regions if the material supports it: Americas, Europe, Middle East, Africa, Asia-Pacific. Do not let one dominant story (e.g. a single US-Iran conflict, or one Wall Street story) crowd out the others — if the headlines contain multiple wars/economies/disputes, each gets its own entry. Only include a situation if it's actually supported by the headlines or videos above — never invent one. If, after genuinely checking, a region truly has nothing in the material, skip it rather than inventing filler.
+
+For EACH situation, output this EXACT block, one after another with no extra text between them:
+SITUATION: <region/country + short topic, max 6 words>
+SUMMARY: <2-3 sentence summary of what's happening right now, with enough specifics (who, what, numbers) that someone reading only this understands the situation>
+WHY: <one sentence on why it matters>
+
+Order them so a reader gets the full spread of what's happening globally, most significant first. Be sharp and factual. No preamble, no numbering, no markdown, no commentary outside the blocks.`;
+
+  if (!USE_GROQ) return "";
+  try {
+    const r = await fetch(GROQ_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${GROQ_API_KEY}` },
+      body: JSON.stringify({ model: MODEL, messages: [
+        { role: "system", content: "You are a sharp, factual geopolitical/financial/tech intelligence analyst with a global, not US-centric, view." },
+        { role: "user", content: prompt },
+      ]}),
+    });
+    const d = await r.json();
+    return d.choices?.[0]?.message?.content || "";
+  } catch { return ""; }
+}
+
+async function buildCategoryBriefing(cat) {
+  const [articles, videos] = await Promise.all([
+    fetchCategoryNews(cat.newsQuery),
+    fetchYouTubeSnippets(cat.ytQuery),
+  ]);
+  const summaryText = await summarizeCategory(cat, articles, videos);
+  return {
+    id: cat.id, label: cat.label, icon: cat.icon,
+    articleCount: articles.length,
+    summaryText,
+  };
+}
+
+const briefingCache = { date: null, ts: 0, data: null };
+const BRIEFING_TTL = 3 * 60 * 60 * 1000; // 3h — also force-refreshed every morning at 7am
+
+async function refreshBriefing() {
+  const today = new Date().toISOString().split("T")[0];
+  const categories = await Promise.all(BRIEFING_CATEGORIES.map(buildCategoryBriefing));
+  const data = { date: today, generatedAt: new Date().toISOString(), categories };
+  briefingCache.date = today;
+  briefingCache.data = data;
+  briefingCache.ts = Date.now();
+  return data;
+}
+
+app.get("/api/briefing/today", async (req, res) => {
+  const today = new Date().toISOString().split("T")[0];
+  if (briefingCache.date === today && Date.now() - briefingCache.ts < BRIEFING_TTL) {
+    return res.json(briefingCache.data);
+  }
+  try {
+    res.json(await refreshBriefing());
+  } catch (e) {
+    res.status(502).json({ error: e.message });
+  }
+});
+
+// 7am every day — pre-warm so it's already fresh (not yesterday's stories)
+// by the time the phone/browser is opened in the morning.
+cron.schedule("0 7 * * *", () => refreshBriefing().catch(() => {}));
+
+// ── Live country KPIs from the World Bank open API (free, no key) ──────────
+// Country name → ISO3 code used by the World Bank. Names match the map labels.
+const WB_ISO3 = {
+  "USA":"USA","Canada":"CAN","Mexico":"MEX","Brazil":"BRA","Argentina":"ARG",
+  "Chile":"CHL","Colombia":"COL","Peru":"PER","Venezuela":"VEN","Uruguay":"URY",
+  "Bolivia":"BOL","Paraguay":"PRY","Ecuador":"ECU",
+  "United Kingdom":"GBR","Germany":"DEU","France":"FRA","Russia":"RUS","Italy":"ITA",
+  "Spain":"ESP","Ukraine":"UKR","Poland":"POL","Netherlands":"NLD","Switzerland":"CHE",
+  "Sweden":"SWE","Norway":"NOR","Belgium":"BEL","Portugal":"PRT","Austria":"AUT",
+  "Denmark":"DNK","Finland":"FIN","Ireland":"IRL","Turkey":"TUR","Greece":"GRC",
+  "Romania":"ROU","Bulgaria":"BGR","Serbia":"SRB","Croatia":"HRV","Bosnia":"BIH",
+  "Albania":"ALB","Montenegro":"MNE","Kosovo":"XKX","North Macedonia":"MKD",
+  "Slovenia":"SVN","Hungary":"HUN","Czech Republic":"CZE","Slovakia":"SVK",
+  "Israel":"ISR","Saudi Arabia":"SAU","Iran":"IRN","Iraq":"IRQ","Egypt":"EGY",
+  "Syria":"SYR","UAE":"ARE","Qatar":"QAT","Yemen":"YEM","Oman":"OMN","Kuwait":"KWT",
+  "Jordan":"JOR","Lebanon":"LBN","Libya":"LBY","Tunisia":"TUN","Algeria":"DZA",
+  "Morocco":"MAR","Sudan":"SDN","Somalia":"SOM","Ethiopia":"ETH","Kenya":"KEN",
+  "Nigeria":"NGA","Angola":"AGO","South Africa":"ZAF","Uganda":"UGA","Rwanda":"RWA",
+  "DR Congo":"COD","Ghana":"GHA","Senegal":"SEN","Mali":"MLI","Cameroon":"CMR",
+  "Mozambique":"MOZ","Zimbabwe":"ZWE","Tanzania":"TZA",
+  "China":"CHN","Japan":"JPN","South Korea":"KOR","North Korea":"PRK","Mongolia":"MNG",
+  "India":"IND","Pakistan":"PAK","Bangladesh":"BGD","Nepal":"NPL","Bhutan":"BTN",
+  "Sri Lanka":"LKA","Thailand":"THA","Vietnam":"VNM","Indonesia":"IDN",
+  "Philippines":"PHL","Malaysia":"MYS","Singapore":"SGP","Cambodia":"KHM",
+  "Laos":"LAO","Myanmar":"MMR","Afghanistan":"AFG","Uzbekistan":"UZB",
+  "Kazakhstan":"KAZ","Tajikistan":"TJK","Kyrgyzstan":"KGZ","Turkmenistan":"TKM",
+  "Azerbaijan":"AZE","Georgia":"GEO","Armenia":"ARM","Australia":"AUS","New Zealand":"NZL",
+};
+
+const WB_INDICATORS = {
+  population:     "SP.POP.TOTL",
+  gdp:           "NY.GDP.MKTP.CD",
+  gdpPerCapita:  "NY.GDP.PCAP.CD",
+  gdpGrowth:     "NY.GDP.MKTP.KD.ZG",
+  inflation:     "FP.CPI.TOTL.ZG",
+  milSpendPctGdp:"MS.MIL.XPND.GD.ZS",
+};
+
+const kpiCache = new Map();            // iso3 → { data, ts }
+const KPI_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+async function fetchKPI(iso3) {
+  const cached = kpiCache.get(iso3);
+  if (cached && Date.now() - cached.ts < KPI_TTL) return cached.data;
+
+  const ids = Object.values(WB_INDICATORS).join(";");
+  const url = `https://api.worldbank.org/v2/country/${iso3}/indicator/${ids}` +
+              `?source=2&format=json&per_page=200&mrv=6`;
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`World Bank ${r.status}`);
+  const json = await r.json();
+  const rows = Array.isArray(json) ? json[1] || [] : [];
+
+  // For each indicator keep the most recent non-null value.
+  const best = {}; // indicatorId → { value, year }
+  for (const row of rows) {
+    const id = row.indicator && row.indicator.id;
+    if (!id || row.value == null) continue;
+    const year = +row.date;
+    if (!best[id] || year > best[id].year) best[id] = { value: row.value, year };
+  }
+
+  const out = { source: "World Bank" };
+  let asOf = 0;
+  for (const [key, id] of Object.entries(WB_INDICATORS)) {
+    const b = best[id];
+    out[key] = b ? b.value : null;
+    if (b && b.year > asOf) asOf = b.year;
+  }
+  out.asOf = asOf || null;
+
+  kpiCache.set(iso3, { data: out, ts: Date.now() });
+  return out;
+}
+
+app.get("/api/kpi/:country", async (req, res) => {
+  const iso3 = WB_ISO3[req.params.country];
+  if (!iso3) return res.json({ available: false });
+  try {
+    const data = await fetchKPI(iso3);
+    res.json({ available: true, iso3, ...data });
+  } catch (e) {
+    res.status(502).json({ available: false, error: e.message });
+  }
+});
+
 app.get("/api/health", (_req, res) => res.json({ ok: true, model: MODEL }));
 
 app.listen(PORT, () =>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GeoGlobe — North America</title>
-  <link rel="stylesheet" href="styles.css?v=19" />
+  <link rel="stylesheet" href="styles.css?v=20" />
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
@@ -14,25 +14,14 @@
 <body>
   <header id="topbar">
     <h1>🌎 GeoGlobe <span class="sub">North America v1 · AI: Groq cloud</span></h1>
+    <button id="briefingBtnTop" title="Daily briefing — last 24 hours">🗞 Today</button>
     <button id="subscribeBtnTop" title="Get weekly briefing">📧 Weekly</button>
     <button id="themeToggleBtn" title="Toggle light / dark background">🌙 Dark</button>
-    <div id="modeTabs">
-      <button class="mode-tab active" data-mode="states">🌍 States</button>
-      <button class="mode-tab" data-mode="religion">✝ Religion & Ancient</button>
-    </div>
     <div id="searchWrap">
       <input id="searchInput" type="text" placeholder="🔍 Search…" autocomplete="off" />
       <div id="searchResults" class="hidden"></div>
     </div>
     <button id="newsToggleBtn" title="Toggle news dots">📰 News</button>
-    <div id="controls">
-      <label class="ctl">Year: <span id="yearLabel">2025</span>
-        <input type="range" id="timeline" min="1900" max="2025" value="2025" step="1" />
-      </label>
-      <label class="toggle"><input type="checkbox" id="tTheories" /> Theories</label>
-      <label class="toggle"><input type="checkbox" id="tConnections" /> Connections Web</label>
-      <label class="toggle"><input type="checkbox" id="tResources" /> Resources</label>
-    </div>
   </header>
 
   <main id="layout">
@@ -62,7 +51,6 @@
     <section id="mapPane">
       <svg id="map"></svg>
       <div id="legend"></div>
-      <div id="timelineEventBar"></div>
 
       <!-- floating zoom control (Apple Maps style) -->
       <div id="mapZoomCtl">
@@ -127,6 +115,26 @@
     </aside>
   </main>
 
+  <!-- daily briefing: flash-card overlay -->
+  <div id="briefingOverlay" class="hidden">
+    <div id="briefingModal">
+      <div id="briefingHeader">
+        <div>
+          <div id="briefingEyebrow">LAST 24 HOURS</div>
+          <h2 id="briefingTitle">🌍 Daily Briefing</h2>
+        </div>
+        <button id="briefingClose">×</button>
+      </div>
+      <div id="briefingGrid"></div>
+    </div>
+  </div>
+
+  <!-- daily briefing: floating notification -->
+  <div id="briefingToast" class="hidden">
+    <span id="briefingToastText"></span>
+    <button id="briefingToastClose">×</button>
+  </div>
+
   <!-- suggestions popup (next to lens bar) -->
   <div id="suggestPopup" class="hidden">
     <div id="suggestPopupTitle">💡 Suggestions</div>
@@ -156,6 +164,7 @@
       <button id="conflictDrawerClose">×</button>
     </div>
     <div id="conflictDrawerBody"></div>
+    <div id="conflictDrawerResize" title="Drag to resize width"></div>
   </div>
 
   <!-- news hover tooltip -->
@@ -163,10 +172,11 @@
 
   <!-- news drawer (left side) -->
   <div id="newsDrawer" class="hidden">
+    <div id="newsDrawerSwipeHint">← swipe to close</div>
     <div id="newsDrawerHeader">
       <span id="newsDrawerFlag"></span>
       <span id="newsDrawerTitle">Latest News</span>
-      <button id="newsDrawerClose">×</button>
+      <button id="newsDrawerClose">✕</button>
     </div>
     <div id="newsDrawerBody"></div>
     <div id="newsDrawerFooter">
@@ -187,8 +197,6 @@
   <script src="ai.js"></script>
   <script src="mindmap.js"></script>
   <script src="map.js"></script>
-  <script src="religion_data.js"></script>
-  <script src="religion_panel.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -1,9 +1,7 @@
-// Coordinator: wires the map, mind map, overlays, timeline, toggles and chat.
+// Coordinator: wires the map, mind map, overlays, toggles and chat.
 const state = {
   country: null,
   data: null,
-  year: 2025,
-  mode: "states", // "states" | "religion"
   toggles: { theories: false, money: false, connections: false, resources: false },
 };
 
@@ -52,7 +50,6 @@ function renderSuggestChips() {
   chips.innerHTML = "";
   let questions = [];
   if (activeAgent) questions = activeAgent.chips;
-  else if (state.mode === "religion") questions = ReligionPanel.CHIPS;
   else questions = ["Key alliances?", "Main resources?", "Biggest threats?", "Economic power?", "Recent conflicts?"];
   questions.forEach(q => {
     const btn = document.createElement("button");
@@ -132,7 +129,7 @@ function openAgentDrawer(agent) {
 
 function renderAgentDrawer(agent, tab) {
   const body = $("agentDrawerBody");
-  const tabs = ["overview", "timeline", "countries", "ask AI"];
+  const tabs = ["overview", "countries", "ask AI"];
 
   body.innerHTML = `
     <div class="agent-section-tabs">
@@ -169,14 +166,6 @@ function renderAgentDrawer(agent, tab) {
         <div class="agent-section-title">Key facts</div>
         <div class="agent-stat-row">${agent.stats.map(s=>`<div class="agent-stat"><div class="asl">${s.label}</div><div class="asv">${s.value}</div></div>`).join("")}</div>
       </div>`;
-
-  } else if (tab === "timeline") {
-    content.innerHTML = `<div class="agent-section-title">Timeline</div>` +
-      agent.timeline.map(t => `
-        <div class="agent-timeline-item">
-          <div class="agent-timeline-year" style="color:${agent.color}">${t.year < 0 ? Math.abs(t.year)+"BC" : t.year+"AD"}</div>
-          <div class="agent-timeline-text"><strong>${t.event}</strong>${t.detail}</div>
-        </div>`).join("");
 
   } else if (tab === "countries") {
     content.innerHTML = `<div class="agent-section-title">Country connections — click to load on map</div>`;
@@ -307,82 +296,11 @@ function syncChatToAgent() {
   if (!$("suggestPopup").classList.contains("hidden")) renderSuggestChips();
 }
 
-// ---- mode tabs ----
-document.querySelectorAll(".mode-tab").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".mode-tab").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    state.mode = btn.dataset.mode;
-    const ancient = state.mode === "religion";
-    GeoMap.setAncientMode(ancient, onCityClick);
-    // News only exists in States mode — hide dots, button, and drawer in Religion mode
-    GeoMap.showNewsDots(!ancient && newsDotsVisible);
-    $("newsToggleBtn").style.display = ancient ? "none" : "";
-    if (ancient) {
-      newsDrawer.classList.remove("open");
-      setTimeout(() => newsDrawer.classList.add("hidden"), 350);
-      conflictDrawer.classList.remove("open");
-      setTimeout(() => conflictDrawer.classList.add("hidden"), 350);
-      GeoMap.setConflictDots([], () => {});
-      GeoMap.clearTimelineColors();
-    } else {
-      GeoMap.setConflictDots(CURRENT_CONFLICTS, openConflictDrawer);
-      updateTimelineMap(state.year);
-    }
-    if (state.country) renderPanel();
-  });
-});
-
-function onCityClick(city) {
-  // Show the city in the panel
-  $("panel").classList.remove("collapsed");
-  $("panelEmpty").classList.add("hidden");
-  $("panelContent").classList.remove("hidden");
-  $("countryName").textContent = city.name;
-  $("countrySummary").textContent = city.summary;
-  $("statCards").innerHTML = `
-    <div class="stat-card"><div class="stat-label">Type</div><div class="stat-value">${city.type}</div></div>
-    <div class="stat-card"><div class="stat-label">Location</div><div class="stat-value">${city.lon.toFixed(1)}°E, ${city.lat.toFixed(1)}°N</div></div>
-  `;
-  // Build a simple mindmap for the city using religion panel's raw renderer
-  const elements = [];
-  elements.push({ data: { id: "root", label: city.name, kind: "root" } });
-  const detail = city.detail;
-  const sentences = detail.split(". ").filter(s => s.length > 10);
-  const colors = { holy: "#ffd700", church: "#c080ff", islam: "#40c040", byzantine: "#8080ff", philosophy: "#60d0ff", ancient: "#ff9040" };
-  const col = colors[city.type] || "#8b949e";
-  elements.push({ data: { id: "b0", label: "✦  History & Significance", kind: "branch", color: col, bg: "#1a1a2a" } });
-  elements.push({ data: { source: "root", target: "b0", edgeKind: "root-branch", color: col } });
-  sentences.slice(0, 6).forEach((s, i) => {
-    elements.push({
-      data: { id: `b0_${i}`, label: s.slice(0, 42) + (s.length > 42 ? "…" : ""), kind: "leaf", color: col, statusColor: col,
-        payload: { title: city.name, detail: s + "." }, branch: "History & Significance" },
-      classes: "leaf hidden-node",
-    });
-    elements.push({ data: { source: "b0", target: `b0_${i}`, edgeKind: "branch-leaf", color: col }, classes: "hidden-node" });
-  });
-  GeoMindmap.renderRaw($("mindmap"), city.name, elements, showPopup);
-  $("chatInput").placeholder = `Ask anything about ${city.name}…`;
-  state.country = city.name;
-}
-
 function renderPanel() {
-  if (state.mode === "religion") {
-    const profile = RELIGION_DATA.countries[state.country];
-    $("countrySummary").textContent = profile
-      ? profile.dominant + (profile.secondary?.length ? " · " + profile.secondary.join(", ") : "")
-      : state.data?.summary || "";
-    const cards = ReligionPanel.statCards(state.country);
-    $("statCards").innerHTML = cards.map(s =>
-      `<div class="stat-card"><div class="stat-label">${s.label}</div><div class="stat-value">${s.value}</div></div>`
-    ).join("");
-    ReligionPanel.renderMindmap($("mindmap"), state.country, showPopup);
-  } else {
-    renderStatCards(state.data);
-    renderChips();
-    renderMindmap();
-    refreshOverlays();
-  }
+  renderStatCards(state.data);
+  renderChips();
+  renderMindmap();
+  refreshOverlays();
 }
 
 let chatLogExpanded = false;
@@ -422,19 +340,93 @@ function restoreChatHistory(country) {
 }
 
 // ---- stat cards ----
-function renderStatCards(data) {
-  const geo = data.geopolitics || {};
-  const fin = data.finance || {};
-  const res = data.resources || {};
-  const stats = [
+// ---- number formatting for KPIs ----
+function fmtCount(n) {
+  if (n == null) return "—";
+  const a = Math.abs(n);
+  if (a >= 1e9) return (n / 1e9).toFixed(a >= 1e10 ? 0 : 2) + "B";
+  if (a >= 1e6) return (n / 1e6).toFixed(a >= 1e8 ? 0 : 1) + "M";
+  if (a >= 1e3) return (n / 1e3).toFixed(0) + "K";
+  return Math.round(n).toString();
+}
+function fmtUSD(n) {
+  if (n == null) return "—";
+  const a = Math.abs(n);
+  if (a >= 1e12) return "$" + (n / 1e12).toFixed(2) + "T";
+  if (a >= 1e9)  return "$" + (n / 1e9).toFixed(a >= 1e11 ? 0 : 1) + "B";
+  if (a >= 1e6)  return "$" + (n / 1e6).toFixed(0) + "M";
+  if (a >= 1e3)  return "$" + (n / 1e3).toFixed(1) + "k";
+  return "$" + Math.round(n);
+}
+function fmtPct(n, signed) {
+  if (n == null) return "—";
+  const s = (signed && n > 0 ? "+" : "") + n.toFixed(1) + "%";
+  return s;
+}
+
+// Static fallback cards, used until live data lands or if it's unavailable.
+function staticStatCards(data) {
+  const geo = data.geopolitics || {}, fin = data.finance || {};
+  return [
     { label: "Allies", value: (geo.allies || []).length ? `${(geo.allies||[]).length} nations` : "—" },
     { label: "Debt", value: fin.national_debt_usd_trillions ? `$${fin.national_debt_usd_trillions}T` : "—" },
     { label: "Mil. Bases", value: geo.military_bases_abroad != null ? geo.military_bases_abroad : "—" },
     { label: "Currency", value: fin.currency_role ? fin.currency_role.split("=")[0].trim() : "—" },
   ];
-  $("statCards").innerHTML = stats.map(s =>
-    `<div class="stat-card"><div class="stat-label">${s.label}</div><div class="stat-value">${s.value}</div></div>`
-  ).join("");
+}
+
+function paintStatCards(cards, caption) {
+  const cardsHtml = cards.map(s => {
+    const trend = s.trend ? ` trend-${s.trend}` : "";
+    const loading = s.loading ? " is-loading" : "";
+    return `<div class="stat-card${loading}">
+      <div class="stat-label">${s.label}</div>
+      <div class="stat-value${trend}">${s.value}</div>
+    </div>`;
+  }).join("");
+  $("statCards").innerHTML = cardsHtml +
+    (caption ? `<div class="stat-caption">${caption}</div>` : "");
+}
+
+async function renderStatCards(data) {
+  const country = state.country;
+
+  // Show static cards immediately (with skeleton values for the live economic set)
+  const skeleton = [
+    { label: "Population", value: "···", loading: true },
+    { label: "GDP", value: "···", loading: true },
+    { label: "GDP / capita", value: "···", loading: true },
+    { label: "Growth", value: "···", loading: true },
+    { label: "Inflation", value: "···", loading: true },
+    { label: "Mil. % GDP", value: "···", loading: true },
+  ];
+  paintStatCards(skeleton, "Loading live indicators…");
+
+  let k;
+  try {
+    const res = await fetch(`/api/kpi/${encodeURIComponent(country)}`);
+    k = await res.json();
+  } catch { k = { available: false }; }
+
+  // Bail if the user switched countries while we were fetching.
+  if (state.country !== country) return;
+
+  if (!k || !k.available) {
+    paintStatCards(staticStatCards(data), null);
+    return;
+  }
+
+  const cards = [
+    { label: "Population",   value: fmtCount(k.population) },
+    { label: "GDP",          value: fmtUSD(k.gdp) },
+    { label: "GDP / capita", value: fmtUSD(k.gdpPerCapita) },
+    { label: "Growth",       value: fmtPct(k.gdpGrowth, true),
+      trend: k.gdpGrowth == null ? "" : k.gdpGrowth >= 0 ? "up" : "down" },
+    { label: "Inflation",    value: fmtPct(k.inflation, false),
+      trend: k.inflation == null ? "" : k.inflation <= 4 ? "up" : "down" },
+    { label: "Mil. % GDP",   value: fmtPct(k.milSpendPctGdp, false) },
+  ];
+  paintStatCards(cards, k.asOf ? `As of ${k.asOf} · World Bank` : "World Bank");
 }
 
 // ---- suggested chips ----
@@ -486,13 +478,13 @@ function renderMindmap() {
   GeoMindmap.render(
     $("mindmap"),
     state.data,
-    { year: state.year, showTheories: state.toggles.theories },
+    { showTheories: state.toggles.theories },
     showPopup
   );
 }
 
 function refreshOverlays() {
-  GeoMap.updateOverlays(state.data, { year: state.year, ...state.toggles });
+  GeoMap.updateOverlays(state.data, state.toggles);
 }
 
 // ---- leaf popup ----
@@ -514,52 +506,6 @@ $("popupAsk").onclick = () => {
   $("popup").classList.add("hidden");
   enqueue(`Explain more: ${popupContext}`);
 };
-
-// ---- timeline ----
-let timelineEventTimer = null;
-$("timeline").addEventListener("input", (e) => {
-  state.year = +e.target.value;
-  $("yearLabel").textContent = state.year;
-  if (state.data) { renderMindmap(); refreshOverlays(); }
-  if (state.mode === "states") updateTimelineMap(state.year);
-});
-
-function updateTimelineMap(year) {
-  const colorMap = {};
-  const activeEvents = [];
-
-  TIMELINE_CONFLICTS.forEach(ev => {
-    if (year >= ev.years[0] && year <= ev.years[1]) {
-      activeEvents.push(ev.title);
-      (ev.at_war   || []).forEach(c => { colorMap[c] = "tl-at-war"; });
-      (ev.allied   || []).forEach(c => { if (!colorMap[c]) colorMap[c] = "tl-allied"; });
-      (ev.occupied || []).forEach(c => { colorMap[c] = "tl-occupied"; });
-      (ev.tensions || []).forEach(c => { if (!colorMap[c]) colorMap[c] = "tl-tension"; });
-    }
-  });
-
-  GeoMap.setTimelineColors(colorMap);
-
-  // show event bar
-  const bar = $("timelineEventBar");
-  if (activeEvents.length) {
-    bar.textContent = "⚔️ " + activeEvents.slice(0,3).join("  ·  ");
-    bar.classList.add("visible");
-  } else {
-    bar.classList.remove("visible");
-  }
-  clearTimeout(timelineEventTimer);
-  timelineEventTimer = setTimeout(() => bar.classList.remove("visible"), 2500);
-}
-
-// ---- toggles ----
-const toggleMap = { tTheories: "theories", tConnections: "connections", tResources: "resources" };
-Object.entries(toggleMap).forEach(([id, key]) => {
-  $(id).addEventListener("change", (e) => {
-    state.toggles[key] = e.target.checked;
-    if (state.data) { if (key === "theories") renderMindmap(); refreshOverlays(); }
-  });
-});
 
 // ---- chat queue ----
 const chatQueue = [];
@@ -769,20 +715,37 @@ const SEARCH_INDEX = [];
 function buildSearchIndex() {
   // Countries
   const countries = [
-    "USA","Canada","Mexico",
+    // Americas
+    "USA","Canada","Mexico","Brazil","Argentina","Chile","Colombia","Peru",
+    "Venezuela","Uruguay","Bolivia","Paraguay","Ecuador",
+    // Europe
     "United Kingdom","Germany","France","Russia","Italy","Spain",
     "Ukraine","Poland","Netherlands","Switzerland","Sweden","Norway","Belgium","Portugal",
     "Austria","Ireland","Denmark","Finland","Hungary","Czech Republic","Slovakia",
     "Greece","Romania","Bulgaria","Serbia","Croatia","Bosnia","Slovenia",
     "North Macedonia","Albania","Montenegro","Kosovo","Turkey",
+    // Middle East
     "Israel","Palestine","Saudi Arabia","Iran","Iraq","Jordan",
     "Lebanon","Syria","UAE","Qatar","Yemen","Oman","Kuwait","Bahrain",
+    // Africa
     "Egypt","Libya","Tunisia","Algeria","Morocco","Sudan",
     "Somalia","Ethiopia","Kenya","Nigeria","Angola","South Africa",
+    "Uganda","Rwanda","DR Congo","Ghana","Senegal","Mali","Cameroon",
+    "Mozambique","Zimbabwe","Tanzania",
+    // East Asia
+    "China","Japan","South Korea","North Korea","Taiwan","Mongolia",
+    // South Asia
+    "India","Pakistan","Bangladesh","Nepal","Bhutan","Sri Lanka",
+    // Southeast Asia
+    "Thailand","Vietnam","Indonesia","Philippines","Malaysia","Singapore",
+    "Cambodia","Laos","Myanmar",
+    // Central Asia & Caucasus
+    "Afghanistan","Uzbekistan","Kazakhstan","Tajikistan","Kyrgyzstan","Turkmenistan",
+    "Azerbaijan","Georgia","Armenia",
+    // Oceania
+    "Australia","New Zealand",
   ];
   countries.forEach(c => SEARCH_INDEX.push({ label: c, type: "country", icon: "🌍", action: () => loadCountry(c) }));
-  // Ancient cities
-  ANCIENT_CITIES.forEach(c => SEARCH_INDEX.push({ label: c.name, type: "ancient city", icon: "🏛", action: () => { if (state.mode !== "religion") { document.querySelector('[data-mode="religion"]').click(); } setTimeout(() => onCityClick(c), 300); } }));
   // Agents
   AGENTS.forEach(a => SEARCH_INDEX.push({ label: a.name, type: "lens", icon: a.icon, action: () => toggleAgent(a) }));
 }
@@ -1042,6 +1005,101 @@ async function shareCountryCard() {
   }, "image/png");
 }
 
+// ---- daily briefing: last-24h flash cards (news + YouTube-informed AI summary) ----
+const briefingOverlay = $("briefingOverlay");
+let briefingData = null;
+
+// Splits the AI's multi-situation text into individual { situation, summary, why } blocks.
+function parseBriefingSituations(text) {
+  const blocks = text.split(/(?=SITUATION:)/i).map(b => b.trim()).filter(Boolean);
+  return blocks.map(b => {
+    const get = (key) => {
+      const m = b.match(new RegExp(`${key}:\\s*([\\s\\S]*?)(?=\\n[A-Z]+:|$)`, "i"));
+      return m ? m[1].trim() : "";
+    };
+    return { situation: get("SITUATION"), summary: get("SUMMARY"), why: get("WHY") };
+  }).filter(s => s.situation);
+}
+
+function renderBriefingGrid() {
+  const grid = $("briefingGrid");
+  if (!briefingData?.categories) { grid.innerHTML = ""; return; }
+  grid.innerHTML = briefingData.categories.map(c => `
+    <div class="briefing-card" data-id="${c.id}">
+      <div class="briefing-card-top">
+        <div class="briefing-card-icon">${c.icon}</div>
+        <div>
+          <div class="briefing-card-label">${c.label}</div>
+          <div class="briefing-card-count">${c.articleCount} updates · 24h</div>
+        </div>
+      </div>
+      <div class="briefing-card-body hidden"></div>
+    </div>`).join("");
+
+  grid.querySelectorAll(".briefing-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const wasOpen = card.classList.contains("open");
+      grid.querySelectorAll(".briefing-card").forEach(c => c.classList.remove("open"));
+      grid.querySelectorAll(".briefing-card-body").forEach(b => b.classList.add("hidden"));
+      if (wasOpen) return;
+      card.classList.add("open");
+      const cat = briefingData.categories.find(c => c.id === card.dataset.id);
+      const situations = parseBriefingSituations(cat.summaryText || "");
+      const body = card.querySelector(".briefing-card-body");
+      body.innerHTML = situations.length ? `
+        <div class="briefing-situations">
+          ${situations.map(s => `
+            <div class="briefing-situation">
+              <div class="briefing-situation-title">${s.situation}</div>
+              ${s.summary ? `<div class="briefing-situation-summary">${s.summary}</div>` : ""}
+              ${s.why ? `<div class="briefing-situation-why"><strong>Why it matters</strong>${s.why}</div>` : ""}
+            </div>`).join("")}
+        </div>
+      ` : `<div class="briefing-empty">No AI summary available right now.</div>`;
+      body.classList.remove("hidden");
+    });
+  });
+}
+
+function maybeShowBriefingToast() {
+  const today = new Date().toISOString().split("T")[0];
+  const seen = (() => { try { return localStorage.getItem("geoglobe-briefing-seen"); } catch { return null; } })();
+  if (seen === today) return;
+  const total = briefingData.categories.reduce((s, c) => s + c.articleCount, 0);
+  $("briefingToastText").textContent = `🌍 ${total} updates in the last 24h — tap for your daily briefing`;
+  $("briefingToast").classList.remove("hidden");
+  requestAnimationFrame(() => $("briefingToast").classList.add("show"));
+}
+
+function dismissBriefingToast() {
+  $("briefingToast").classList.remove("show");
+  setTimeout(() => $("briefingToast").classList.add("hidden"), 300);
+  try { localStorage.setItem("geoglobe-briefing-seen", new Date().toISOString().split("T")[0]); } catch {}
+}
+
+function openBriefing() {
+  dismissBriefingToast();
+  briefingOverlay.classList.remove("hidden");
+}
+
+async function loadBriefing() {
+  try {
+    const r = await fetch("/api/briefing/today");
+    briefingData = await r.json();
+    if (!briefingData?.categories) return;
+    renderBriefingGrid();
+    maybeShowBriefingToast();
+  } catch { /* daily briefing is optional — fail silently */ }
+}
+
+$("briefingBtnTop").addEventListener("click", openBriefing);
+$("briefingClose").addEventListener("click", () => briefingOverlay.classList.add("hidden"));
+briefingOverlay.addEventListener("click", (e) => { if (e.target === briefingOverlay) briefingOverlay.classList.add("hidden"); });
+$("briefingToast").addEventListener("click", (e) => { if (e.target.id !== "briefingToastClose") openBriefing(); });
+$("briefingToastClose").addEventListener("click", (e) => { e.stopPropagation(); dismissBriefingToast(); });
+
+loadBriefing();
+
 // ---- light / dark theme ----
 function applyTheme(mode) {
   const light = mode === "light";
@@ -1288,6 +1346,13 @@ makeDraggable($("newsDrawerResize"), (dx) => {
   newsDrawer.style.width = newsDrawerWidth + "px";
 });
 
+// ---- conflict drawer width resize ----
+let conflictDrawerWidth = 360;
+makeDraggable($("conflictDrawerResize"), (dx) => {
+  conflictDrawerWidth = Math.max(280, Math.min(window.innerWidth * 0.85, conflictDrawerWidth + dx));
+  conflictDrawer.style.width = conflictDrawerWidth + "px";
+});
+
 let newsDotsVisible = true;
 $("newsToggleBtn").addEventListener("click", () => {
   newsDotsVisible = !newsDotsVisible;
@@ -1320,18 +1385,55 @@ buildAgentBar();
 buildSearchIndex();
 GeoMap.init($("map"), loadCountry).then(() => {
   const allCountries = Object.values({
-    840:"USA",124:"Canada",484:"Mexico",826:"United Kingdom",276:"Germany",
-    250:"France",643:"Russia",380:"Italy",724:"Spain",804:"Ukraine",616:"Poland",
-    752:"Sweden",578:"Norway",792:"Turkey",300:"Greece",642:"Romania",
-    100:"Bulgaria",688:"Serbia",191:"Croatia",70:"Bosnia",8:"Albania",
-    499:"Montenegro",383:"Kosovo",807:"North Macedonia",705:"Slovenia",
+    // Americas
+    840:"USA",124:"Canada",484:"Mexico",
+    76:"Brazil",32:"Argentina",152:"Chile",170:"Colombia",604:"Peru",
+    862:"Venezuela",858:"Uruguay",68:"Bolivia",600:"Paraguay",218:"Ecuador",
+    // Europe
+    826:"United Kingdom",276:"Germany",250:"France",643:"Russia",380:"Italy",
+    724:"Spain",804:"Ukraine",616:"Poland",528:"Netherlands",756:"Switzerland",
+    752:"Sweden",578:"Norway",56:"Belgium",620:"Portugal",40:"Austria",
+    208:"Denmark",246:"Finland",372:"Ireland",792:"Turkey",
+    300:"Greece",642:"Romania",100:"Bulgaria",688:"Serbia",191:"Croatia",
+    70:"Bosnia",8:"Albania",499:"Montenegro",383:"Kosovo",807:"North Macedonia",
+    705:"Slovenia",348:"Hungary",203:"Czech Republic",703:"Slovakia",
+    // Middle East
     376:"Israel",682:"Saudi Arabia",364:"Iran",368:"Iraq",818:"Egypt",
-    760:"Syria",434:"Libya",788:"Tunisia",12:"Algeria",504:"Morocco",
-    729:"Sudan",566:"Nigeria",710:"South Africa",
+    760:"Syria",784:"UAE",634:"Qatar",887:"Yemen",512:"Oman",414:"Kuwait",
+    // Africa
+    434:"Libya",788:"Tunisia",12:"Algeria",504:"Morocco",729:"Sudan",
+    706:"Somalia",231:"Ethiopia",404:"Kenya",566:"Nigeria",24:"Angola",
+    710:"South Africa",800:"Uganda",646:"Rwanda",180:"DR Congo",288:"Ghana",
+    686:"Senegal",466:"Mali",120:"Cameroon",508:"Mozambique",716:"Zimbabwe",834:"Tanzania",
+    // East Asia
+    156:"China",392:"Japan",410:"South Korea",408:"North Korea",158:"Taiwan",496:"Mongolia",
+    // South Asia
+    356:"India",586:"Pakistan",50:"Bangladesh",524:"Nepal",64:"Bhutan",144:"Sri Lanka",
+    // Southeast Asia
+    764:"Thailand",704:"Vietnam",360:"Indonesia",608:"Philippines",
+    458:"Malaysia",702:"Singapore",116:"Cambodia",418:"Laos",104:"Myanmar",
+    // Central Asia
+    4:"Afghanistan",860:"Uzbekistan",398:"Kazakhstan",762:"Tajikistan",417:"Kyrgyzstan",795:"Turkmenistan",
+    // Caucasus
+    31:"Azerbaijan",268:"Georgia",51:"Armenia",
+    // Oceania
+    36:"Australia",554:"New Zealand",
   });
   GeoMap.setNewsDots(allCountries, showNewsTooltip, hideNewsTooltip, openNewsDrawer);
   GeoMap.setConflictDots(CURRENT_CONFLICTS, openConflictDrawer);
-  updateTimelineMap(state.year);
+
+  // If the map pane had no width at init (common on mobile before layout
+  // settles), re-fit once it does — and keep it fitted on any resize/rotate.
+  requestAnimationFrame(() => GeoMap.resize());
+  const mapPane = $("mapPane");
+  if (mapPane && window.ResizeObserver) {
+    let raf = 0;
+    new ResizeObserver(() => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => GeoMap.resize());
+    }).observe(mapPane);
+  }
+  window.addEventListener("orientationchange", () => setTimeout(() => GeoMap.resize(), 250));
 }).catch((e) =>
   ($("panelEmpty").textContent = "Map failed to load: " + e.message)
 );
@@ -1391,7 +1493,6 @@ function quickAskSuggestions() {
     `How strong is ${c}'s economy?`,
     `Recent conflicts involving ${c}?`,
   ];
-  if (state.mode === "religion") return ReligionPanel.CHIPS;
   return null; // no country yet
 }
 
