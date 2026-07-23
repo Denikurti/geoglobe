@@ -66,6 +66,34 @@
       </div>
     </section>
 
+    <!-- conflict drawer -->
+    <div id="conflictDrawer" class="hidden">
+      <div id="conflictDrawerHeader">
+        <span id="conflictDrawerFlag" style="font-size:22px"></span>
+        <div style="flex:1">
+          <div id="conflictDrawerType" class="cd-intensity"></div>
+        </div>
+        <button id="conflictDrawerClose">×</button>
+      </div>
+      <div id="conflictDrawerBody"></div>
+      <div id="conflictDrawerResize" title="Drag to resize width"></div>
+    </div>
+
+    <!-- news drawer (left side) -->
+    <div id="newsDrawer" class="hidden">
+      <div id="newsDrawerSwipeHint">← swipe to close</div>
+      <div id="newsDrawerHeader">
+        <span id="newsDrawerFlag"></span>
+        <span id="newsDrawerTitle">Latest News</span>
+        <button id="newsDrawerClose">✕</button>
+      </div>
+      <div id="newsDrawerBody"></div>
+      <div id="newsDrawerFooter">
+        <button id="newsSummarizeBtn">🤖 AI Summarize</button>
+      </div>
+      <div id="newsDrawerResize" title="Drag to resize width"></div>
+    </div>
+
     <!-- drag handle: resize map vs panel -->
     <div id="hDivider" title="Drag to resize"></div>
 
@@ -154,36 +182,8 @@
     </div>
   </div>
 
-  <!-- conflict drawer -->
-  <div id="conflictDrawer" class="hidden">
-    <div id="conflictDrawerHeader">
-      <span id="conflictDrawerFlag" style="font-size:22px"></span>
-      <div style="flex:1">
-        <div id="conflictDrawerType" class="cd-intensity"></div>
-      </div>
-      <button id="conflictDrawerClose">×</button>
-    </div>
-    <div id="conflictDrawerBody"></div>
-    <div id="conflictDrawerResize" title="Drag to resize width"></div>
-  </div>
-
   <!-- news hover tooltip -->
   <div id="newsTooltip" class="hidden"></div>
-
-  <!-- news drawer (left side) -->
-  <div id="newsDrawer" class="hidden">
-    <div id="newsDrawerSwipeHint">← swipe to close</div>
-    <div id="newsDrawerHeader">
-      <span id="newsDrawerFlag"></span>
-      <span id="newsDrawerTitle">Latest News</span>
-      <button id="newsDrawerClose">✕</button>
-    </div>
-    <div id="newsDrawerBody"></div>
-    <div id="newsDrawerFooter">
-      <button id="newsSummarizeBtn">🤖 AI Summarize</button>
-    </div>
-    <div id="newsDrawerResize" title="Drag to resize width"></div>
-  </div>
 
   <!-- leaf-node detail popup -->
   <div id="popup" class="hidden">
