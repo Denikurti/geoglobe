@@ -1,0 +1,61 @@
+{
+  "country": "India",
+  "summary": "The world's most populous nation and largest democracy, a nuclear power and fast-rising economy. A leader of the Global South pursuing 'strategic autonomy' — balancing between the US, Russia and China rather than joining any bloc.",
+  "history": [
+    { "year": 1858, "event": "British Raj begins", "detail": "Crown rule replaces the East India Company after the 1857 rebellion." },
+    { "year": 1947, "event": "Independence and Partition", "detail": "Britain leaves; India and Pakistan split amid mass violence and displacement of ~15 million." },
+    { "year": 1948, "event": "Gandhi assassinated", "detail": "Independence leader killed by a Hindu nationalist." },
+    { "year": 1962, "event": "Sino-Indian War", "detail": "China defeats India in a Himalayan border war; distrust endures." },
+    { "year": 1971, "event": "Bangladesh Liberation War", "detail": "India intervenes; East Pakistan becomes independent Bangladesh." },
+    { "year": 1974, "event": "First nuclear test", "detail": "'Smiling Buddha' — India joins the nuclear club." },
+    { "year": 1991, "event": "Economic liberalisation", "detail": "Balance-of-payments crisis triggers market reforms and rapid growth." },
+    { "year": 1998, "event": "Nuclear tests and sanctions", "detail": "Pokhran-II tests; India declares itself a nuclear-weapons state." },
+    { "year": 2014, "event": "Modi elected", "detail": "Narendra Modi's BJP wins power; Hindu-nationalist, pro-business agenda." },
+    { "year": 2020, "event": "Galwan Valley clash", "detail": "Deadly hand-to-hand fighting with China; first combat deaths on the border in decades." },
+    { "year": 2023, "event": "World's most populous", "detail": "India overtakes China in population; hosts the G20 summit." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Russia", "France", "Japan", "Israel"],
+    "enemies_rivals": ["Pakistan", "China"],
+    "alliances": ["BRICS", "Quad", "Shanghai Cooperation Organisation", "G20", "Non-Aligned Movement"],
+    "military_bases_abroad": 3,
+    "key_doctrines": ["Strategic autonomy", "No first use (nuclear)", "Neighbourhood First", "Act East policy"]
+  },
+  "finance": {
+    "currency_role": "Indian rupee; capital controls; pushing rupee trade settlement",
+    "central_bank": "Reserve Bank of India (1935)",
+    "national_debt_usd_trillions": 3.1,
+    "key_institutions": ["State Bank of India", "Reliance Industries", "Tata Group"],
+    "leverage_tools": ["Huge domestic market", "IT services and outsourcing", "Digital public infrastructure (UPI, Aadhaar)", "Diaspora remittances (world's largest)"]
+  },
+  "tech_startups": {
+    "hubs": ["Bengaluru", "Hyderabad", "Pune", "Gurugram"],
+    "big_tech": ["Infosys", "TCS", "Reliance Jio", "Wipro"],
+    "vc_ecosystem": "Third-largest startup ecosystem; 100+ unicorns",
+    "gov_tech_links": ["ISRO (space programme)", "Digital India", "Semiconductor mission"],
+    "ai_leaders": ["Sarvam AI", "Krutrim", "strong global AI talent pool"]
+  },
+  "resources": {
+    "oil_gas": "Major importer; buys discounted Russian oil since 2022",
+    "coal": "World's second-largest producer and consumer",
+    "rare_earths": "Sizeable reserves; developing processing to reduce China reliance",
+    "water": "Monsoon-dependent; water stress a growing risk",
+    "agriculture": "Largest producer of milk, pulses and spices; huge farm workforce"
+  },
+  "follow_the_money": [
+    { "flow": "Discounted Russian oil", "detail": "India became a top buyer of sanctioned Russian crude, reselling refined products globally." },
+    { "flow": "Remittances", "detail": "World's largest recipient (~$120bn/yr) from its global diaspora." },
+    { "flow": "UPI digital payments", "detail": "Homegrown instant-payment rails now being exported to other countries." }
+  ],
+  "theories_disputed": [
+    { "topic": "Assassination plots abroad", "status": "PARTIALLY CONFIRMED", "detail": "Canada and the US accused Indian agents of targeting Sikh separatists on their soil; India denies but a US case led to charges.", "tags": ["intelligence", "Sikh separatism"] },
+    { "topic": "Pegasus spyware use", "status": "DISPUTED", "detail": "Reports alleged the government used Israeli Pegasus spyware against journalists and opposition; official inquiry inconclusive.", "tags": ["surveillance", "Pegasus"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "military", "detail": "Quad partner; defence and tech ties deepening", "year": 2007 },
+    { "to": "Russia", "type": "military", "detail": "Legacy arms supplier; oil trade despite Western pressure", "year": 1971 },
+    { "to": "Pakistan", "type": "war", "detail": "Four wars; Kashmir dispute; nuclear rivals", "year": 1947 },
+    { "to": "China", "type": "rivalry", "detail": "Border clashes and Indo-Pacific competition", "year": 1962 },
+    { "to": "Israel", "type": "military", "detail": "Major defence and technology partner", "year": 1992 }
+  ]
+}

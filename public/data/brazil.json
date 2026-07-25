@@ -1,0 +1,60 @@
+{
+  "country": "Brazil",
+  "summary": "South America's largest country and economy, an agricultural and resource superpower, and a leading voice of the Global South. A founding BRICS member pursuing non-alignment and multipolarity while stewarding the Amazon rainforest.",
+  "history": [
+    { "year": 1500, "event": "Portuguese arrival", "detail": "Pedro Álvares Cabral claims Brazil; three centuries of colonial rule and slavery follow." },
+    { "year": 1822, "event": "Independence", "detail": "Dom Pedro I declares independence from Portugal, founding an empire." },
+    { "year": 1888, "event": "Slavery abolished", "detail": "Brazil is the last country in the Americas to end slavery." },
+    { "year": 1889, "event": "Republic proclaimed", "detail": "Military coup ends the monarchy; the 'Old Republic' begins." },
+    { "year": 1964, "event": "Military coup", "detail": "US-backed generals seize power; 21 years of dictatorship and repression." },
+    { "year": 1985, "event": "Return to democracy", "detail": "Civilian rule restored; new constitution follows in 1988." },
+    { "year": 1994, "event": "Real Plan", "detail": "New currency tames hyperinflation and stabilises the economy." },
+    { "year": 2003, "event": "Lula's first presidency", "detail": "Social programmes lift tens of millions out of poverty during a commodity boom." },
+    { "year": 2016, "event": "Rousseff impeached", "detail": "Political crisis amid the Car Wash corruption scandal." },
+    { "year": 2023, "event": "Lula returns", "detail": "Defeats Bolsonaro; days later, supporters storm government buildings in Brasília." }
+  ],
+  "geopolitics": {
+    "allies": ["Argentina", "China", "USA", "Portugal", "India"],
+    "enemies_rivals": ["Venezuela (border tensions)"],
+    "alliances": ["BRICS", "Mercosur", "G20", "Community of Latin American and Caribbean States"],
+    "military_bases_abroad": 0,
+    "key_doctrines": ["Non-alignment / active neutrality", "South-South cooperation", "Amazon sovereignty"]
+  },
+  "finance": {
+    "currency_role": "Brazilian real; largest economy in Latin America",
+    "central_bank": "Banco Central do Brasil (1964); known for high interest rates",
+    "national_debt_usd_trillions": 1.9,
+    "key_institutions": ["Itaú Unibanco", "Petrobras", "Vale", "BNDES development bank"],
+    "leverage_tools": ["Global food-export dominance", "Iron ore and mining", "Offshore oil (pre-salt)", "BRICS de-dollarisation push"]
+  },
+  "tech_startups": {
+    "hubs": ["São Paulo", "Florianópolis", "Belo Horizonte"],
+    "big_tech": ["Nubank", "Mercado Livre", "Stone", "Embraer (aerospace)"],
+    "vc_ecosystem": "Largest in Latin America; fintech-led boom",
+    "gov_tech_links": ["Pix instant-payment system", "Brazilian Space Agency", "Embrapa (agri-research)"],
+    "ai_leaders": ["growing AI scene", "strong fintech and agritech applications"]
+  },
+  "resources": {
+    "oil_gas": "Major producer; vast offshore pre-salt oil fields; Petrobras state champion",
+    "agriculture": "World's top exporter of soy, beef, coffee, sugar and orange juice",
+    "rare_earths": "Holds among the largest reserves globally; developing extraction",
+    "water": "~12% of the world's fresh water; Amazon and Guarani aquifer",
+    "lithium": "Growing 'Lithium Valley' in Minas Gerais"
+  },
+  "follow_the_money": [
+    { "flow": "China trade dependence", "detail": "China is Brazil's top trading partner, buying huge volumes of soy, iron ore and oil." },
+    { "flow": "Pix payments", "detail": "Central-bank instant-payment system used by most adults, disrupting card networks." },
+    { "flow": "BRICS de-dollarisation", "detail": "Lula pushes for trade in local currencies to reduce dollar reliance." }
+  ],
+  "theories_disputed": [
+    { "topic": "US role in 1964 coup", "status": "CONFIRMED", "detail": "Declassified files show Washington backed the military coup (Operation Brother Sam) against a leftist government.", "tags": ["Cold War", "coup"] },
+    { "topic": "Amazon deforestation drivers", "status": "PARTIALLY CONFIRMED", "detail": "Cattle ranching and agribusiness are documented drivers; the scale of illegal versus legal clearing is contested.", "tags": ["Amazon", "environment"] }
+  ],
+  "connections": [
+    { "to": "China", "type": "trade", "detail": "Largest trading partner; commodities for investment", "year": 2009 },
+    { "to": "Argentina", "type": "trade", "detail": "Mercosur partner; regional integration", "year": 1991 },
+    { "to": "USA", "type": "ideology", "detail": "Democratic partner but independent foreign policy", "year": 1824 },
+    { "to": "Venezuela", "type": "rivalry", "detail": "Migration crisis and Essequibo border tensions on its frontier", "year": 2023 },
+    { "to": "India", "type": "ideology", "detail": "Fellow BRICS voice of the Global South", "year": 2006 }
+  ]
+}

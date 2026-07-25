@@ -115,7 +115,7 @@ const GeoMap = (() => {
   let onClick = () => {};
   // Kept for re-layout on resize (fixes blank map when the pane had 0 width at init)
   let _svgEl = null, _countries = [], _clickable = [];
-  let _lastOverlay = null;
+  let _lastOverlay = null, _lastNews = null, _lastConflicts = null;
 
   // Reliable size: fall back to the parent / window when the SVG measures 0
   // (can happen on mobile before flex layout settles → projection fits to nothing).
@@ -257,6 +257,10 @@ const GeoMap = (() => {
 
     // Re-place any active overlays against the new projection
     if (_lastOverlay) updateOverlays(_lastOverlay.data, _lastOverlay.opts);
+    // News + conflict dots are positioned with the projection too, so they
+    // must be redrawn on resize or they stay stuck at their init coordinates.
+    if (_lastNews) setNewsDots(_lastNews.names, _lastNews.onHover, _lastNews.onLeave, _lastNews.onDotClick);
+    if (_lastConflicts) setConflictDots(_lastConflicts.conflicts, _lastConflicts.onClick);
   }
 
   function setActive(name) {
@@ -323,6 +327,7 @@ const GeoMap = (() => {
   }
 
   function setConflictDots(conflicts, onClick) {
+    _lastConflicts = { conflicts, onClick };
     gOverlay.selectAll("g.conflict-dot-grp").remove();
     conflicts.forEach(c => {
       c.countries.forEach(name => {
@@ -340,6 +345,7 @@ const GeoMap = (() => {
   }
 
   function setNewsDots(names, onHover, onLeave, onDotClick) {
+    _lastNews = { names, onHover, onLeave, onDotClick };
     gNews.selectAll("g.news-dot-grp").remove();
     names.forEach(name => {
       const c = centroidOf(name);
