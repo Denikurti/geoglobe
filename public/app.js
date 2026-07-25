@@ -1174,7 +1174,7 @@ function openConflictDrawer(conflict) {
   $("conflictAskBtn").onclick = async () => {
     $("conflictAskBtn").textContent = "Analyzing…";
     $("conflictAskBtn").disabled = true;
-    const q = `Conflict: ${conflict.title}\nFactions: ${conflict.factions}\nStakes: ${conflict.stakes}\nLatest: ${conflict.latest}\n\nIn 3 sharp paragraphs: (1) What is really happening right now, (2) Who is winning and why, (3) What are the 2-3 most likely outcomes in the next 12 months?`;
+    const q = `Conflict: ${conflict.title}\nFactions: ${conflict.factions}\nStakes: ${conflict.stakes}\nLatest: ${conflict.latest}\n\nExplain this simply, like to a smart teenager. Reply ONLY as short bullet points — each line starts with "- " and is max 15 words, plain English, no jargon, no intro or conclusion. Cover: what's happening now, who's ahead, and the 2-3 most likely outcomes next year. Aim for 6-8 bullets total.`;
     const r = await fetch("/api/ask", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ country: conflict.countries[0] || "world", question: q }),
@@ -1182,7 +1182,20 @@ function openConflictDrawer(conflict) {
     const d = await r.json();
     const ans = document.createElement("div");
     ans.className = "cd-ai-answer";
-    ans.textContent = d.answer || d.error || "No response.";
+    const text = d.answer || d.error || "No response.";
+    // Turn the AI's bullet lines into a real list; fall back to plain text.
+    const bullets = text.split("\n").map(l => l.trim())
+      .filter(l => l)
+      .map(l => l.replace(/^[-*•]\s*/, "").trim())
+      .filter(l => l);
+    if (bullets.length > 1) {
+      const ul = document.createElement("ul");
+      ul.className = "cd-ai-bullets";
+      bullets.forEach(b => { const li = document.createElement("li"); li.textContent = b; ul.appendChild(li); });
+      ans.appendChild(ul);
+    } else {
+      ans.textContent = text;
+    }
     body.appendChild(ans);
     $("conflictAskBtn").textContent = "🤖 Ask AI — What happens next?";
     $("conflictAskBtn").disabled = false;

@@ -1105,6 +1105,9 @@ body {
   background: rgba(255,45,45,.06); border-radius: var(--radius-xs);
   border: 1px solid rgba(255,45,45,.16);
 }
+.cd-ai-bullets { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 7px; }
+.cd-ai-bullets li { line-height: 1.5; }
+.cd-ai-bullets li::marker { color: rgba(255,90,90,.9); }
 
 /* ══════════════════════════════════════════════════
    SUBSCRIBE MODAL
@@ -1370,7 +1373,12 @@ body {
   #chat { flex: 0 0 auto; min-height: 0; }
   #chatLog { height: 100px; }
   #chatInput { min-height: 20px; font-size: 14px; }
-  #agentDrawer { width: 85vw; max-width: 360px; }
+  #agentDrawer { left: 44px; width: 85vw; max-width: 360px; }
+  /* Conflict/news side drawers were still full desktop width (340-360px)
+     with a 72px left offset — off the right edge of any phone screen.
+     Go full-width on mobile like the bottom sheet does. */
+  #conflictDrawer, #newsDrawer { left: 0; width: 100%; }
+  #conflictDrawerResize, #newsDrawerResize { display: none; }
   .agent-btn { width: 36px; height: 36px; font-size: 16px; }
   .chip { font-size: 12px; padding: 5px 12px; }
   #agentDrawerResizeHandle { display: none; }

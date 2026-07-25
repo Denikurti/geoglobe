@@ -1,0 +1,62 @@
+{
+  "country": "China",
+  "summary": "The world's second-largest economy and most populous state until recently, a nuclear power and UN Security Council permanent member, ruled by the Communist Party since 1949. The primary strategic rival to the US, with global reach via trade, manufacturing dominance, and the Belt and Road Initiative.",
+  "history": [
+    { "year": 1839, "event": "First Opium War", "detail": "Britain forces open Chinese ports; start of the 'Century of Humiliation'." },
+    { "year": 1912, "event": "Fall of the Qing dynasty", "detail": "Last emperor abdicates; Republic of China founded." },
+    { "year": 1937, "event": "Japanese invasion", "detail": "Second Sino-Japanese War; millions killed, including the Nanjing Massacre." },
+    { "year": 1949, "event": "People's Republic founded", "detail": "Mao Zedong's Communists win the civil war; Nationalists flee to Taiwan." },
+    { "year": 1958, "event": "Great Leap Forward", "detail": "Forced collectivisation causes famine killing tens of millions." },
+    { "year": 1966, "event": "Cultural Revolution", "detail": "Decade of political purges and social upheaval under Mao." },
+    { "year": 1978, "event": "Deng Xiaoping's reforms", "detail": "'Reform and opening'; market liberalisation launches decades of rapid growth." },
+    { "year": 1989, "event": "Tiananmen Square", "detail": "Pro-democracy protests crushed by the military." },
+    { "year": 2001, "event": "Joins the WTO", "detail": "Integration into global trade turbocharges China's rise as 'the world's factory'." },
+    { "year": 2013, "event": "Belt and Road launched", "detail": "Xi Jinping's trillion-dollar global infrastructure and influence programme." },
+    { "year": 2020, "event": "Hong Kong security law", "detail": "Beijing imposes sweeping control, ending 'one country, two systems' autonomy." }
+  ],
+  "geopolitics": {
+    "allies": ["Russia", "Pakistan", "North Korea", "Iran", "Cambodia"],
+    "enemies_rivals": ["USA", "India", "Japan", "Taiwan", "Philippines"],
+    "alliances": ["UN Security Council (P5)", "BRICS", "Shanghai Cooperation Organisation", "RCEP"],
+    "military_bases_abroad": 1,
+    "key_doctrines": ["One China principle", "String of Pearls (maritime reach)", "Anti-access/area denial (A2/AD)", "Belt and Road Initiative"]
+  },
+  "finance": {
+    "currency_role": "Renminbi (yuan); pushing internationalisation but capital controls limit it",
+    "central_bank": "People's Bank of China (1948); state-directed",
+    "national_debt_usd_trillions": 14.7,
+    "key_institutions": ["ICBC (world's largest bank)", "China Investment Corporation", "Asian Infrastructure Investment Bank"],
+    "leverage_tools": ["Largest holder of US Treasuries", "Rare-earth export dominance", "Belt and Road lending to 140+ nations", "Manufacturing supply-chain control"]
+  },
+  "tech_startups": {
+    "hubs": ["Shenzhen", "Beijing (Zhongguancun)", "Hangzhou", "Shanghai"],
+    "big_tech": ["Alibaba", "Tencent", "Huawei", "ByteDance (TikTok)", "BYD"],
+    "vc_ecosystem": "Second-largest globally; heavy state guidance and funding",
+    "gov_tech_links": ["Made in China 2025 strategy", "Military-civil fusion", "National surveillance ecosystem"],
+    "ai_leaders": ["Baidu", "SenseTime", "DeepSeek", "Alibaba (Qwen)"]
+  },
+  "resources": {
+    "oil_gas": "Large coal reserves; world's biggest energy consumer and importer of oil",
+    "rare_earths": "Controls ~60% of mining and ~90% of processing globally — key strategic leverage",
+    "coal": "World's largest producer and consumer of coal",
+    "lithium": "Dominates global battery supply chain and lithium refining",
+    "agriculture": "Feeds 1.4bn people; largest importer of soybeans"
+  },
+  "follow_the_money": [
+    { "flow": "Belt and Road lending", "detail": "Over $1 trillion committed; critics call it 'debt-trap diplomacy' in Sri Lanka, Zambia and others." },
+    { "flow": "US Treasury holdings", "detail": "Holds ~$800bn in US debt; a diminishing but symbolic lever." },
+    { "flow": "Rare-earth chokehold", "detail": "Export curbs used as retaliation in trade and tech disputes." }
+  ],
+  "theories_disputed": [
+    { "topic": "COVID-19 lab-leak origin", "status": "DISPUTED", "detail": "Debate over whether the pandemic originated at the Wuhan Institute of Virology; no consensus, investigations obstructed.", "tags": ["pandemic", "Wuhan"] },
+    { "topic": "Xinjiang mass detention", "status": "CONFIRMED", "detail": "Extensive detention of Uyghurs documented by satellite imagery, leaked files and testimony; China calls them 're-education centres'.", "tags": ["Xinjiang", "human rights"] },
+    { "topic": "Debt-trap diplomacy", "status": "PARTIALLY CONFIRMED", "detail": "Sri Lanka's Hambantota port was leased to China for 99 years after default; scholars debate how deliberate the strategy is.", "tags": ["Belt and Road", "debt"] }
+  ],
+  "connections": [
+    { "to": "Russia", "type": "ideology", "detail": "'No limits' partnership; aligned against US-led order", "year": 2022 },
+    { "to": "USA", "type": "rivalry", "detail": "Trade war, tech export bans, Taiwan tensions", "year": 2018 },
+    { "to": "Taiwan", "type": "war", "detail": "Claims Taiwan; frequent military pressure and drills", "year": 1949 },
+    { "to": "Pakistan", "type": "finance", "detail": "China-Pakistan Economic Corridor; all-weather ally", "year": 2015 },
+    { "to": "India", "type": "rivalry", "detail": "Deadly Himalayan border clashes; regional competition", "year": 2020 }
+  ]
+}

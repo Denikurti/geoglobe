@@ -1,0 +1,60 @@
+{
+  "country": "Japan",
+  "summary": "A top-five global economy and technological powerhouse, pacifist by constitution since 1947 but rearming amid regional threats. The cornerstone of the US alliance system in Asia and a leading donor and investor across the Indo-Pacific.",
+  "history": [
+    { "year": 1853, "event": "Perry's Black Ships", "detail": "US warships force Japan to open after centuries of isolation." },
+    { "year": 1868, "event": "Meiji Restoration", "detail": "Rapid modernisation and industrialisation transform Japan into a great power." },
+    { "year": 1905, "event": "Defeats Russia", "detail": "Russo-Japanese War; first modern Asian victory over a European power." },
+    { "year": 1941, "event": "Pearl Harbor", "detail": "Attack on the US brings America into World War II." },
+    { "year": 1945, "event": "Atomic bombings and surrender", "detail": "Hiroshima and Nagasaki destroyed; Japan surrenders, US occupation begins." },
+    { "year": 1947, "event": "Pacifist constitution", "detail": "Article 9 renounces war; US drafts the postwar democratic order." },
+    { "year": 1964, "event": "Tokyo Olympics", "detail": "Symbol of Japan's postwar 'economic miracle' recovery." },
+    { "year": 1991, "event": "Asset bubble bursts", "detail": "Start of the 'Lost Decades' of stagnation and deflation." },
+    { "year": 2011, "event": "Fukushima disaster", "detail": "Earthquake and tsunami trigger a nuclear meltdown; energy policy upended." },
+    { "year": 2022, "event": "Defence build-up", "detail": "Japan pledges to double defence spending to 2% of GDP, its biggest shift since 1945." }
+  ],
+  "geopolitics": {
+    "allies": ["USA", "Australia", "South Korea", "Philippines", "UK"],
+    "enemies_rivals": ["China", "North Korea", "Russia"],
+    "alliances": ["US-Japan Security Treaty", "Quad", "G7", "CPTPP"],
+    "military_bases_abroad": 1,
+    "key_doctrines": ["Article 9 pacifism (reinterpreted)", "Free and Open Indo-Pacific", "Counterstrike capability (2022)"]
+  },
+  "finance": {
+    "currency_role": "Japanese yen; a major global reserve and safe-haven currency",
+    "central_bank": "Bank of Japan (1882); pioneer of zero/negative rates and QE",
+    "national_debt_usd_trillions": 9.2,
+    "key_institutions": ["Mitsubishi UFJ", "Japan Post Bank", "Government Pension Investment Fund (world's largest)"],
+    "leverage_tools": ["World's largest net creditor nation", "Overseas development aid", "Semiconductor materials and equipment dominance"]
+  },
+  "tech_startups": {
+    "hubs": ["Tokyo", "Osaka", "Fukuoka"],
+    "big_tech": ["Sony", "Toyota", "SoftBank", "Nintendo", "Keyence"],
+    "vc_ecosystem": "Growing but conservative; SoftBank's Vision Fund a global force",
+    "gov_tech_links": ["JAXA (space)", "Rapidus (advanced chip venture)", "Society 5.0 strategy"],
+    "ai_leaders": ["Preferred Networks", "SoftBank AI investments", "robotics leadership"]
+  },
+  "resources": {
+    "oil_gas": "Almost entirely import-dependent for energy; major LNG buyer",
+    "nuclear": "Restarting reactors post-Fukushima to cut fossil imports",
+    "rare_earths": "Reliant on imports; invested in Australian supply to bypass China",
+    "agriculture": "Low self-sufficiency; heavily protected rice sector",
+    "water": "Abundant; mountainous terrain limits arable land"
+  },
+  "follow_the_money": [
+    { "flow": "World's largest creditor", "detail": "Decades of trade surpluses make Japan the biggest net holder of overseas assets." },
+    { "flow": "The yen carry trade", "detail": "Ultra-low rates let investors borrow yen to buy higher-yielding assets worldwide — a global market force." },
+    { "flow": "Overseas development aid", "detail": "Major infrastructure financier across Southeast Asia, competing with China's Belt and Road." }
+  ],
+  "theories_disputed": [
+    { "topic": "Unit 731 cover-up", "status": "CONFIRMED", "detail": "Imperial Japan's biological-warfare unit conducted lethal human experiments; the US granted immunity to researchers for their data after WWII.", "tags": ["WWII", "war crimes"] },
+    { "topic": "Yasukuni Shrine visits", "status": "DISPUTED", "detail": "Politicians' visits to a shrine honouring war criminals repeatedly inflame China and South Korea; framed as remembrance vs. revisionism.", "tags": ["history", "diplomacy"] }
+  ],
+  "connections": [
+    { "to": "USA", "type": "military", "detail": "Security treaty; ~50,000 US troops based in Japan", "year": 1951 },
+    { "to": "China", "type": "rivalry", "detail": "Senkaku Islands dispute; economic interdependence with tension", "year": 2012 },
+    { "to": "South Korea", "type": "trade", "detail": "Rocky history but thawing security cooperation vs. shared threats", "year": 2023 },
+    { "to": "North Korea", "type": "war", "detail": "Missile overflights and abduction issue keep tensions high", "year": 1998 },
+    { "to": "Australia", "type": "military", "detail": "Quasi-ally; reciprocal access and Quad partner", "year": 2022 }
+  ]
+}
